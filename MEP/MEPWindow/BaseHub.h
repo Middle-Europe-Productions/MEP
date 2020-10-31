@@ -22,13 +22,15 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-
-#include "BaseManager.h"
 #pragma once
+#include "BaseTemplate.h"
+#include "BaseManager.h"
+
+
 namespace MEP {
 	namespace Window {
 		namespace Template {
-			class BaseHub : public BaseWindow {
+			class BaseHub : public BaseTemplate, public BaseWindow {
 				std::shared_ptr<MEP::TextureObject> textures[4];
 				std::shared_ptr<MEP::Button> buttons[2];
 			public:
@@ -159,10 +161,6 @@ namespace MEP {
 					}
 					additionalEvents(Window, event);
 				}
-				//Method handling additional events defined by the user.
-				virtual void additionalEvents(sf::RenderWindow& Window, sf::Event& Event) {}
-				//Method handling initialization of the objects defined by the user.
-				virtual void additionalInit() {};
 			};
 		}
 	}

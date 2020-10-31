@@ -75,6 +75,7 @@ namespace MEP {
 			virtual void render(sf::RenderWindow& Window);
 			//all update functions
 			virtual void update(sf::Time& currentTime);
+			virtual void beforeUpdate(sf::Time& currentTime) {}
 			virtual void updateRunning(sf::Time& currentTime);
 			virtual void updateEntrance(sf::Time& currentTime);
 			virtual void updateExit(sf::Time& currentTime);
@@ -114,6 +115,7 @@ namespace MEP {
 
 		inline void BaseWindow::update(sf::Time& currentTime)
 		{
+			beforeUpdate(currentTime);
 			if (m_status == Status::InProgress or m_status == Status::Main) {
 				updateRunning(currentTime);
 			}

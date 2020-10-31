@@ -1,7 +1,7 @@
 
 ////////////////////////////////////////////////////////////
 //
-//	MEPWindow.h created with the use of SFML
+//	BaseTemplate.h created with the use of SFML
 //	MEP - Middle Europe Productions
 //  Work in progress. 
 //
@@ -22,31 +22,22 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#include"Base.h"
 
 #pragma once
-/*
-Deffinition of a base MEP Window
-*/
-#include "Base.h"
-/*
-Deffinition of a base window HUB with a exit minimalize and MEP trademark buttons.
-*/
-#include "BaseHub.h"
-/*
-Inharitance: Resources <MEP/MEPGraphics/ResourcesManager.h> , WindowStats
-Manager of an application provides virtual definition af a base sf::Window functionallities.
-*/
-#include "BaseManager.h"
-/*
-Provides definitions of a cross plaftorm functions not included in the SFML 2 lib.
-Namespace PLATFORM
-*/
-#include "WindowCrossPlatform.h"
-/*
-Base window functionalities time and FPS handler.
-*/
-#include "WindowsStat.h"
-/*
-Deffinition of a loading Window which handles given methods on a different thread.
-*/
-#include "BaseLoading.h"
+namespace MEP {
+	namespace Window {
+		namespace Template {
+			class BaseTemplate {
+			public:
+				BaseTemplate() = default;				
+				//It is recommenced not to override Update() in template classes.
+				//Method handling additional events defined by the user.
+				virtual void additionalEvents(sf::RenderWindow& Window, sf::Event& Event) {}
+				//Method handling initialization of the objects defined by the user.
+				virtual void additionalInit() {};
+			};
+		}
+	}
+}
+				

@@ -36,32 +36,29 @@ namespace MEP {
             BaseWindow* GetWindow(unsigned int ID) {
                 for (auto& x : m_windows)
                     if (*x == ID)
-                        return x;
+                        return &(*x);
                 return nullptr;
             }
-            BaseWindow* NewestWindow() {
+            //Outputs the window at the front
+            BaseWindow* WindowFront() {
+                return m_windows.front();
+            }
+            //Outputs the window at the back
+            BaseWindow* WindowBack() {
                 return m_windows.back();
             }
-            void AddWindow(BaseWindow* window) {
+            //Adds a new window to back of the windows list.
+            void AddWindowBack(BaseWindow* window) {
                 m_windows.push_back(window);
+            }
+            //Adds a new window to front of the windows list.
+            void AddWindowFront(BaseWindow* window) {
+                m_windows.push_front(window);
             }
             sf::RenderWindow Window;
             sf::View m_view;
             sf::Vector2u m_resolution;
             sf::ContextSettings m_settings;
-            //////////////////////////////////////////////////////////
-            //Virtual Method
-            //function creating windows with a BaseWindow base
-            virtual void createWindows() {};
-            //Virtual Method
-            //function creating windows after loading with a BaseWindow base window has been lunched 
-            virtual void runtimeCreateWindows() {};
-            //Virtual Method
-            //function loading resources
-            virtual void loadResorces() {  };
-            //Virtual Method
-            //function loading resources while loading window is active
-            virtual void runtimeloadResources() {};
             //initialization of a window
             void init(const char* title, 
                 const sf::Vector2u& Resolution = { 1280, 720 },
@@ -149,9 +146,19 @@ namespace MEP {
             }
             //Initialization of the textures and windows
             void init() {
-                loadResorces();
+                try {
+                    loadResorces();
+                }
+                catch (const MEP::ResourceException& x) {
+                    throw MEP::Window::WindowException(-1, x);
+                }
+                try{
+                    createWindows();
+                }
+                catch (const MEP::Window::WindowException& x) {
+                    throw x;
+                }
                 isLoaded = true;
-                createWindows();
             }
             //Method closing the main window.
             void close() {
@@ -173,6 +180,19 @@ namespace MEP {
                 }
                 return false;
             }
+            //////////////////////////////////////////////////////////
+            //Virtual Method
+            //function creating windows with a BaseWindow base
+            virtual void createWindows() {};
+            //Virtual Method
+            //function creating windows after loading with a BaseWindow base window has been lunched 
+            virtual void runtimeCreateWindows() {};
+            //Virtual Method
+            //function loading resources
+            virtual void loadResorces() {  };
+            //Virtual Method
+            //function loading resources while loading window is active
+            virtual void runtimeloadResources() {};
         };
     }
 }
