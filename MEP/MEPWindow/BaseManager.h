@@ -36,7 +36,7 @@ namespace MEP {
             BaseWindow* GetWindow(unsigned int ID) {
                 for (auto& x : m_windows)
                     if (*x == ID)
-                        return &(*x);
+                        return x;
                 return nullptr;
             }
             //Outputs the window at the front

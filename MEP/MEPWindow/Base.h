@@ -79,6 +79,7 @@ namespace MEP {
 			virtual void updateRunning(sf::Time& currentTime);
 			virtual void updateEntrance(sf::Time& currentTime);
 			virtual void updateExit(sf::Time& currentTime);
+			virtual void afterUpdate(sf::Time& currentTime) {}
 			//handling events function
 			virtual void handleEvent(sf::RenderWindow& Window, sf::Event& event);
 			const Status& GetStatus() { return m_status; }
@@ -125,6 +126,7 @@ namespace MEP {
 			else if (m_status == Status::Exit) {
 				updateExit(currentTime);
 			}
+			afterUpdate(currentTime);
 		}
 
 		inline void BaseWindow::updateRunning(sf::Time& currentTime)

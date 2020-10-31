@@ -35,8 +35,8 @@ namespace MEP {
 				inline static std::exception_ptr exception;
 
 				std::list<std::function<void()>> m_todo;
-				std::thread m_executionThread;
-				bool execution = false;
+				std::thread* m_executionThread;
+				inline static bool execution;
 			private:
 				void addMethod() {}
 				template<typename Fun>
@@ -66,23 +66,33 @@ namespace MEP {
 			public:
 				template<typename ... ToDo>
 				BaseLoading(unsigned int ID, MEP::Window::BaseManager& base, ToDo&& ... todo) :
-					BaseWindow(ID),
-					m_executionThread(&BaseLoading::MainMethod, this)
+					BaseWindow(ID)
 				{
 					addMethod(std::forward<ToDo>(todo) ...);
 					exception = nullptr;
+					execution = false;
 				}
-				virtual void beforeUpdate(sf::Time& currentTime)
+				virtual void afterUpdate(sf::Time& currentTime)
 				{
-					if (exception != nullptr)
+					if (exception != nullptr) {
+						this->ChangeStatus(MEP::Window::BaseWindow::Status::NullAction);
 						std::rethrow_exception(exception);
-					if (execution)
-						this->ChangeStatus(MEP::Window::BaseWindow::Status::Exit);
+					}
+					if (execution == false and GetStatus() == MEP::Window::BaseWindow::Status::Main) {
+						if (!m_executionThread) {
+							m_executionThread = new std::thread(&BaseLoading::MainMethod, this);
+						}
+						else {
+							this->ChangeStatus(MEP::Window::BaseWindow::Status::Exit);
+						}
+					}	
 				}
 				~BaseLoading() 
 				{
-					if (m_executionThread.joinable()) {
-						m_executionThread.join();
+					if (m_executionThread) {
+						if (m_executionThread->joinable()) {
+							m_executionThread->join();
+						}
 					}
 				}
 			};
