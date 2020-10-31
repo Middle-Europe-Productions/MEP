@@ -35,5 +35,6 @@ namespace MEP {
 		virtual void entryUpdate(sf::Time& currentTime) { update(currentTime); };
 		virtual void exitUpdate(sf::Time & currentTime) { update(currentTime); };
 		virtual bool IsActive() const { return false; };
+		virtual ~Drawable() {};
 	};
 };

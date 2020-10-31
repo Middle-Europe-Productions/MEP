@@ -66,7 +66,7 @@ namespace MEP {
 			sf::Vector2i m_windowPossChange;
 			bool m_grabbedWindow = false;
 			//List of all drawable objects
-			std::list<MEP::Drawable*> m_objects;
+			std::list<std::unique_ptr<MEP::Drawable>> m_objects;
 			//Connections to different windows around the scope
 			std::list<BaseWindow*> m_connections;
 			BaseWindow* GetWindow(unsigned int ID);
@@ -87,8 +87,8 @@ namespace MEP {
 			//checking if the connection is extablished
 			bool IsConnected(unsigned int ID) const;
 			//adds a new object to the scope
-			void newObject(MEP::Drawable* object) { m_objects.push_back(object); };
-			void newObject(MEP::Drawable& object) { m_objects.push_back(&object); }
+			void newObject(MEP::Drawable* object) { m_objects.push_back(std::unique_ptr<MEP::Drawable>(object)); };
+			void newObject(MEP::Drawable& object) { m_objects.push_back(std::unique_ptr<MEP::Drawable>(&object)); }
 			template<typename ... Values>
 			void newObjects(Values&& ... values);
 			//Returns window ID
