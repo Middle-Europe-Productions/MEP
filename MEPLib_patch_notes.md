@@ -1,5 +1,7 @@
-## 28.10.2020
-# MEP Lib version alpha 1.0
+# Patch notes
+
+### 28.10.2020
+## MEP Lib version alpha 1.0
 	-Initial implementation.
 
 #### Commits in the release:
@@ -9,8 +11,8 @@
  	-Author: Piotr Skibinski: License and readme
  	-Author: Piotr Skibinski: MEP Lib 1.0
 
-## 12.11.2020
-# MEP Lib version alpha 1.1:
+### 12.11.2020
+## MEP Lib version alpha 1.1:
 	-Added documentation.
 	-Added memory management.
 	-Added view functionality for the BaseWindow.

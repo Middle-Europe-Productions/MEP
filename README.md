@@ -5,7 +5,7 @@ The only requirement is linking the MEP file to the environment in which you wor
 ### For the library to function, the installation of SFML 2.0 is required.
 
 ## MEP Documentation
-The documentation is available here: 
+The documentation is available here: [Middle Europe Productions Documentation] - https://middle-europe-productions.github.io/MEP/
 
 ## MEP Library
 
