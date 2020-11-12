@@ -29,8 +29,14 @@
 #include"AnimationObject.h"
 #include"TextureObject.h"
 namespace MEP {
-	//Structor of an exceptions
+	/**
+	* \brief Resource exception structure.
+	*/
 	struct ResourceException {
+		/**
+		* @enum MEP::ExceptionType
+		* Provides quick definition of an exceptions.
+		*/
 		enum class ExceptionType {
 			WrongResourceConstructor,
 			ObjectNotFound,
@@ -39,59 +45,91 @@ namespace MEP {
 		const ExceptionType exceptionType;
 		const std::string ResourceName;
 		const std::string Message;
-
+		/**
+		* explicit contructor
+		* @param[in] name : Name of the MEP::Object.
+		* @param[in] msg : Description of an error.
+		* @param[in] type : MEP::ResourceException::ExceptionType
+		*/
 		explicit ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type) :
 			ResourceName(name),
 			Message(msg),
 			exceptionType(type)
 		{}
+		/**
+		* explicit contructor
+		* @param[in] name : Name of the MEP::Object.
+		* @param[in] msg : Description of an error.
+		* @param[in] type : MEP::ResourceException::ExceptionType
+		*/
 		explicit ResourceException(const char* name, const char* msg, const ExceptionType& type) :
 			ResourceName(name),
 			Message(msg),
 			exceptionType(type)
 		{}
+		/**
+		* Overloading the << operator.
+		*/
 		friend std::ostream& operator<<(std::ostream& out, const ResourceException& x) {
 			out << "ResourceException ResourceName: " << x.ResourceName << ", Message: " << x.Message << std::endl;
 			return out;
 		}
 	};
-	//Main resources cointainer.
+	/**
+	* Resources class is a utility which is meant to be working with all of the MEP::Drawable objects.
+	* \brief A main MEP::Drawable cointainer.
+	*/
 	class Resources {
 	public:
-		//type of the resource
+		/**
+		* @enum MEP::ExceptionType
+		* Provides a types of a Resource.
+		*/
 		enum class ResourceType {
+			/** When image of arrays is provided to constuct a MEP::Object*/
 			ImageArray = 2,
+			/** When there is only a single texture to create a MEP::Object*/
 			Single = 1,
+			/** When there is a set of texture on an input to create a MEP::Object*/
 			Multi = 0
 		};
-		//resource 
+		/**
+		* \brief A deffinitio of a individual resource.
+		*/
 		struct Resource {
 			const std::string m_name;
 			Resources::ResourceType m_type;
-			int m_nofFrames = 0;
+			unsigned int m_nofFrames = 0;
 			bool m_transparency = false;
 			std::list<sf::Image>* m_array = nullptr;
-			explicit Resource(const std::string& name, Resources::ResourceType type, bool transparency = false, unsigned int nofFrames = 1) :
+			/**
+			* Resource contructor. It is capable of creating Single and Multi resource.
+			* @param[in] name : Name of a resource.
+			* @param[in] nofFrames : Number of textures. 1 by default.
+			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+			*/
+			explicit Resource(const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
 				m_name(name), 
-				m_type(type), 
-				m_transparency(transparency) {
-				if (m_type == Resources::ResourceType::Multi)
-					m_nofFrames = nofFrames;
-				if(type == Resources::ResourceType::ImageArray)
-					throw ResourceException(name, "Wrong type of a resource!", ResourceException::ExceptionType::WrongResourceConstructor);
+				m_transparency(transparency), 
+				m_type(Resources::ResourceType::Single){
+				if (nofFrames == 0)
+					throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
+				if (nofFrames > 1)
+					m_type = Resources::ResourceType::Multi;
+				m_nofFrames = nofFrames;
 			}
-			explicit Resource(std::list<sf::Image>& images, const std::string& name, Resources::ResourceType type, bool transparency = false, unsigned int nofFrames = 1) :
-				m_name(name), 
-				m_type(type), 
+			/**
+			* Resource contructor. It is capable of creating ImageArray resource.
+			* @param[in] name : Name of a resource.
+			* @param[in] nofFrames : Number of textures. 1 by default.
+			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+			*/
+			explicit Resource(std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+				m_name(name),
 				m_transparency(transparency),
-				m_array(&images) {
-				if (m_type == Resources::ResourceType::Multi) {
-					m_nofFrames = nofFrames;
-				}
-				if (nofFrames != images.size())
-					throw ResourceException(name, "Number of images doesnt match the number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
-				if (type != Resources::ResourceType::ImageArray)
-					throw ResourceException(name, "Wrong type of a resource!", ResourceException::ExceptionType::WrongResourceConstructor);
+				m_array(&images) 
+			{
+				m_type = Resources::ResourceType::ImageArray;
 			}
 		};
 	private:
@@ -101,24 +139,51 @@ namespace MEP {
 		std::list<std::unique_ptr<Object>> objects;
 		//Method loading individual resource
 		void load(const Resource& data);
-		void loadResources() { isInit = true; };
+		void loadResources() { 
+			isInit = true; 
+		};
 		//Forwarding method
 		template <typename First, typename ... Rest>
 		void loadResources(First&& first, Rest&& ... rest);
 	protected:
 		bool isLoaded = false;
 	public:
-		//Constructor with a resources path.
+		/**
+		* Constructor of the resources.
+		* @param[in] path : Path of the resource folder.
+		*/
 		Resources(const std::string& path) : m_path(path) {};
-		//Method initializeing resources
+		/**
+		* Initialization of the resources.
+		* @param[in] values : Inputs ... number of MEP::Resources::Resource. 
+		*/
 		template<typename ... Values>
 		void initResources(Values&& ... values);
-		//Checks the status of the resources. 
-		//Status parameter can be accessed from the inherited class. 
+		/**
+		* Outputs the status of the resources.
+		*/
 		bool IsLoaded() const { return isLoaded; }
-		//Returns the reference to the object according to its name
-		Object& getObject(const std::string name);
-		virtual ~Resources() {};
+		/**
+		* Outputs created MEP::Object
+		* @param[in] name : Name of a MEP::Object.
+		* @return Reference to MEP::Object.
+		*/
+		Object& getObject(const std::string& name);
+		/**
+		* Deletes MEP::Object with agiven name.
+		* @param[in] name : Name of a MEP::Object.
+		*/
+		void deleteObject(const std::string& name);
+		/**
+		* Deletes all MEP::Object.
+		* @param[in] name : Name of a MEP::Object.
+		*/
+		void deleteObjects() {
+			objects.clear();
+		}
+		virtual ~Resources() {
+			objects.clear();
+		};
 	};
 
 	template<typename First, typename ...Rest>
@@ -134,12 +199,12 @@ namespace MEP {
 		loadResources(std::forward<Values>(values) ...);
 	}
 
-	inline void Resources::load(const Resource& data)
+	inline void Resources::load(const MEP::Resources::Resource& data)
 	{
-		std::cout << data.m_name << " " << data.m_nofFrames << " " << std::endl;
+		std::cout << data.m_name << " " << data.m_nofFrames << " " << (int)data.m_type << std::endl;
 		if (data.m_type == ResourceType::Multi) {
 			try {
-				objects.push_back(std::make_unique<Object>(m_path, data.m_name, data.m_nofFrames, data.m_transparency));
+				objects.push_back(std::make_unique<MEP::Object>(m_path, data.m_name, data.m_nofFrames, data.m_transparency));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -147,7 +212,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::Single) {
 			try {
-				objects.push_back(std::make_unique<Object>(m_path, data.m_name, data.m_transparency));
+				objects.push_back(std::make_unique<MEP::Object>( m_path, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -155,7 +220,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::ImageArray) {
 			try {
-				objects.push_back(std::make_unique<Object>(*data.m_array, data.m_name, data.m_nofFrames, data.m_transparency));
+				objects.push_back(std::make_unique<MEP::Object>(*data.m_array, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -163,13 +228,29 @@ namespace MEP {
 		}
 	}
 
-	inline Object& Resources::getObject(const std::string name)
+	inline Object& Resources::getObject(const std::string& name)
 	{
 		for (auto& x : objects) {
-			if ((*x).GetName() == name) {
-				return (*x).GetObjectRef();
+			if (x->GetName() == name) {
+				return x->GetObjectRef();
 			}
 		}
 		throw ResourceException(name, "Could not find the object!", ResourceException::ExceptionType::ObjectNotFound);
+	}
+
+	inline void Resources::deleteObject(const std::string& name)
+	{
+		std::list<std::unique_ptr<Object>>::iterator it = objects.begin();
+		while (it != objects.end()) {
+			if (it->get()->GetName() == name)
+				break;
+			it++;
+		}
+		if (it != objects.end()) {
+			objects.remove(*it);
+		}
+		else {
+			throw ResourceException(name, "Could not find the object!", ResourceException::ExceptionType::ObjectNotFound);
+		}
 	}
 }

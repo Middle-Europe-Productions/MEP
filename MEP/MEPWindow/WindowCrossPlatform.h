@@ -30,8 +30,10 @@
 #include <Dwmapi.h>
 #pragma comment (lib, "Dwmapi.lib")
 namespace PLATFORM {
-    //Makes the window open in transparent mode.
-    //Background of a window is now transparent.
+    /**
+    * Makes the window open in transparent mode.
+    * Background of a window is now transparent.
+    */
     inline bool transparent(HWND hWnd) {
         MARGINS margins;
         margins.cxLeftWidth = -1;
@@ -40,17 +42,20 @@ namespace PLATFORM {
         DwmExtendFrameIntoClientArea(hWnd, &margins);
         return true;
     }
-
-    //Provides an ability to manipulate general transparency of a window.
+    /**
+    * Provides an ability to manipulate general transparency of a window.
+    * @param[in] aplha : Value of a alpha channel.
+    */
     inline bool transparency(HWND hWnd, unsigned char alpha)
     {
         SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
         SetLayeredWindowAttributes(hWnd, 0, alpha, LWA_ALPHA);
         return true;
     }
-
-    //Gives an abillity to minimalize a window on a call.
-    //Usefull with the use of mep HUB
+    /**
+    * Gives an abillity to minimalize a window on a call.
+    * Usefull with the use of mep HUB
+    */
     inline bool minimalize(HWND hWnd) {
         return ShowWindow(hWnd, SW_MINIMIZE);
     }

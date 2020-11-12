@@ -25,18 +25,18 @@
 
 #pragma once
 /*
-Deffinition of a base MEP Window
-*/
-#include "Base.h"
-/*
 Deffinition of a base window HUB with a exit minimalize and MEP trademark buttons.
 */
-#include "BaseHub.h"
+#include "Hub.h"
 /*
 Inharitance: Resources <MEP/MEPGraphics/ResourcesManager.h> , WindowStats
 Manager of an application provides virtual definition af a base sf::Window functionallities.
 */
 #include "BaseManager.h"
+/*
+Deffinition of a base MEP Window
+*/
+#include "Base.h"
 /*
 Provides definitions of a cross plaftorm functions not included in the SFML 2 lib.
 Namespace PLATFORM
@@ -49,4 +49,5 @@ Base window functionalities time and FPS handler.
 /*
 Deffinition of a loading Window which handles given methods on a different thread.
 */
-#include "BaseLoading.h"
+#include "Loading.h"
+#include "Application.h"

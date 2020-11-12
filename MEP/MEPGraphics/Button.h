@@ -26,12 +26,20 @@
 #pragma once
 #include"AnimationObject.h"
 namespace MEP {
+	/**
+	* \brief MEP::Button provides a basic implementation of an object with the ability of display it on a screen.
+	*/
 	class Button : public AnimationObject {
 	public:
-		//status of a button
+		/**
+		* @enum MEP::Button::ButtonStatus
+		*/
 		enum class ButtonStatus {
+			/** Mouse is away.*/
 			Base = (int)0,
+			/** Mouse is pointing.*/
 			Active = (int)1,
+			/** Mouse is pointing and left mouse button is pressed.*/
 			Pressed = (int)2
 		};
 	private:
@@ -40,34 +48,68 @@ namespace MEP {
 		unsigned int m_pressed;
 		ButtonStatus m_status = ButtonStatus::Base;
 	public:
+		/**
+		* Constructor of a Button
+		* @param[in] x : MEP::Object
+		* @param[in] active_breakpoint : State in which button is fully activeated (mouse is pointing).
+		* @param[in] pos : position of a button.
+		* @param[in] scale : scale of a button
+		*/
 		Button(const Object& x,
 			unsigned int active_breakpoint,
-			sf::Vector2f poss = { 0, 0 },
+			sf::Vector2f pos = { 0, 0 },
 			sf::Vector2f scale = { 1, 1 });
+		/**
+		* Constructor of a Button
+		* @param[in] x : frame rate of an animation.
+		* @param[in] x : MEP::Object
+		* @param[in] active_breakpoint : State in which button is fully activeated (mouse is pointing).
+		* @param[in] pos : position of a button.
+		* @param[in] scale : scale of a button
+		*/
 		Button(const float frameRate,
 			const Object& x,
 			unsigned int active_breakpoint,
-			sf::Vector2f poss = { 0, 0 },
+			sf::Vector2f pos = { 0, 0 },
 			sf::Vector2f scale = { 1, 1 });
+		/**
+		* Constructor of a Button
+		* @param[in] x : frame rate of an animation.
+		* @param[in] x : MEP::Object
+		* @param[in] base_breakpoint : Base State when mouse is away.
+		* @param[in] active_breakpoint : Activeted state when mouse is pointing.
+		* @param[in] pressed_breakpoint : Pressed state when mouse is poining and left button is pressed.
+		* @param[in] pos : position of a button.
+		* @param[in] scale : scale of a button
+		*/
 		Button(const float frameRate,
 			const Object& x,
 			unsigned int base_breakpoint,
 			unsigned int active_breakpoint,
 			unsigned int pressed_breakpoint,
-			sf::Vector2f poss = { 0, 0 },
+			sf::Vector2f pos = { 0, 0 },
 			sf::Vector2f scale = { 1, 1 });
-		//update function
 		void update(sf::Time& currentTime) override;
-		//handle events by changing button status and returns true if button is pressed and has beed released
 		bool handleEvent(sf::Event& event, sf::Vector2i& pos);
-		//checks the transparency of an object
+		/**
+		* Checks if a given position is Transparent.
+		* MEP::Objects of a button needs to have transparency initialized.
+		* @return true - position is transparent, false - there is a pixel witout alpha channel > 200
+		*/
 		bool isTansparent(unsigned int x, unsigned int y) override;
-		//changes the status of the button
+		/**
+		* Changes the status of a button.
+		* @param[in] status : A MEP::Button::ButtonStatus object
+		*/
 		void ChangeStatus(const ButtonStatus& status) { m_status = status; }
+		/**
+		* Outputs current status of a button.
+		* @return Current status
+		*/
 		const ButtonStatus& GetStatus() const { return  m_status; }
 	};
-	MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f poss, sf::Vector2f scale) :
-		AnimationObject(1, x, poss, scale),
+	MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+		AnimationObject(1, x, pos, scale),
 		m_base(0)
 	{
 		if (x.GetNufTextures() < 3)
@@ -82,8 +124,8 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	MEP::Button::Button(const float frameRate, const Object& x, unsigned int active_breakpoint, sf::Vector2f poss, sf::Vector2f scale) :
-		AnimationObject(frameRate, x, poss, scale),
+	MEP::Button::Button(const float frameRate, const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
 		if (x.GetNufTextures() < 3)
@@ -98,8 +140,8 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	MEP::Button::Button(const float frameRate, const Object& x, unsigned int base_breakpoint, unsigned int active_breakpoint, unsigned int pressed_breakpoint, sf::Vector2f poss, sf::Vector2f scale) :
-		AnimationObject(frameRate, x, poss, scale),
+	MEP::Button::Button(const float frameRate, const Object& x, unsigned int base_breakpoint, unsigned int active_breakpoint, unsigned int pressed_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
 		if (x.GetNufTextures() < 3)
@@ -196,8 +238,8 @@ namespace MEP {
 
 	bool MEP::Button::isTansparent(unsigned int x, unsigned int y)
 	{
-		int fixed_x = (x - m_possFixed.x) / m_scaleFixed.x;
-		int fixed_y = (y - m_possFixed.y) / m_scaleFixed.y;
+		int fixed_x = (x - m_posFixed.x) / m_scaleFixed.x;
+		int fixed_y = (y - m_posFixed.y) / m_scaleFixed.y;
 		if ((fixed_x >= 0 and fixed_x < m_size.x) and (fixed_y >= 0 and fixed_y < m_size.y)) {
 			if (transparency)
 				return table[fixed_x][fixed_y];

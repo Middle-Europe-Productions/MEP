@@ -1,8 +1,8 @@
 
 ////////////////////////////////////////////////////////////
 //
-//	Object.h created with the use of SFML
-//	MEP - Middle Europe Productions
+//	Object.h created with the use of SFML.
+//	MEP - Middle Europe Productions.
 //  Work in progress. 
 //
 //	Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,18 +30,28 @@
 #include<string>
 #include<iostream>
 namespace MEP {
+	/**
+	* MEP::Object keeps a track of all of the shared instances of itself. In will only be possible to delete a MEP::Object when all of the 
+	* instances are deleted and MEP::Resources deleteObject() method is called.
+	* \brief MEP::Object is a container of a sf::Texture it also have built in memory management.
+	*/
 	class Object: public Drawable {
 	public:
-		//types on an object
+		/**
+		* @enum MEP::Object::ObjectType
+		* Type of an MEP::Object
+		*/
 		enum class ObjectType {
+			/** Object not initialized.*/
 			NotInit,
+			/** Object is a single texture.*/
 			Single,
-			Multi,
-			Text
+			/** Object is a list of textures.*/
+			Multi
 		};
 	private:
 		//number of copies 
-		int nufC = 0;
+		int* nufC = nullptr;
 		//name of an object
 		const std::string m_name;
 		//function creats transparency table
@@ -58,37 +68,146 @@ namespace MEP {
 		std::list<sf::Texture*> texture;
 		//type on an object
 		ObjectType m_type = Object::ObjectType::NotInit;
+		//deletes the MEP::Object
+		void deleteObject();
 	public:
+		/**
+		* Default constructor.
+		*/
 		Object() = default;
-		Object(const Object& x) : m_name(x.m_name), transparency(x.transparency), table(x.table), m_size(x.m_size), texture(x.texture), m_type(x.m_type) { nufC++; }
-		Object(const std::string& path, const std::string& filename, bool transparencyM = false);
-		Object(const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM = false);
-		Object(std::list<sf::Image>& images, const std::string& filename, unsigned int frames, bool transparencyM = false);
-		//returning size of an object
-		const sf::Vector2u& getSize() const { return m_size; };
-		//number of frames in the array 
-		unsigned long GetNufTextures() const { return texture.size(); }
-		//virtual draw function
-		void draw(sf::RenderWindow& window);
-		//virtual update functions
-		void update(sf::Time& currentTime) {};
-		void entryUpdate(sf::Time& currentTime) { update(currentTime); };
-		void exitUpdate(sf::Time& currentTime) { update(currentTime);  };
-		//new copy of the element
-		Object* GetObjectPoint() { nufC++;  return this; }
-		//reference to an object
+		/**
+		* Copy constructor.
+		*/
+		Object(const Object& x) : 
+			m_name(x.m_name), 
+			transparency(x.transparency), 
+			table(x.table), 
+			m_size(x.m_size), 
+			texture(x.texture), 
+			m_type(x.m_type) 
+		{ 
+			std::cout << "Copy constructor: Name: " <<x.m_name;
+			nufC = x.nufC;
+			*nufC += 1;
+			std::cout << ", copy: " << *nufC << std::endl;
+		}
+		/**
+		* Constructor of an object.
+		* @param[in] path : Path to the resources.
+		* @param[in] name : Name of a resource.
+		* @param[in] transparencyM : Transparency of a resource.
+		*/
+		Object(const std::string& path, 
+			const std::string& filename, 
+			bool transparencyM = false);
+		/**
+		* Constructor of an object.
+		* @param[in] path : Path to the resources.
+		* @param[in] name : Name of a resource.
+		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1. 
+		* @param[in] transparencyM : Transparency of a resource.
+		*/
+		Object(const std::string& path, 
+			const std::string& filename, 
+			unsigned int frames, 
+			bool transparencyM = false);
+		/**
+		* Constructor of an object.
+		* @param[in] path : Path to the resources.
+		* @param[in] name : Name of a resource.
+		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1.
+		* @param[in] transparencyM : Transparency of a resource.
+		*/
+		Object(std::list<sf::Image>& images, 
+			const std::string& filename,
+			bool transparencyM = false);
+		/**
+		* Outputs the size of a master MEP::Object
+		* @return sf:Vector2u size.
+		*/
+		const sf::Vector2u& getSize() const { 
+			return m_size; 
+		};
+		/**
+		* Outputs the number of frames of a MEP::Object
+		* @return sf:Vector2u size.
+		*/
+		unsigned long GetNufTextures() const {
+			return texture.size(); 
+		}
+		/**
+		* Override of a MEP::Drawable draw.
+		*/
+		bool draw(sf::RenderWindow& window) override;
+		/**
+		* Override of a MEP::Drawable update.
+		*/
+		void update(sf::Time& currentTime) override {};
+		/**
+		* Override of a MEP::Drawable entryUpdate.
+		*/
+		void entryUpdate(sf::Time& currentTime) override { 
+			update(currentTime); 
+		};
+		/**
+		* Override of a MEP::Drawable exitUpdate.
+		*/
+		void exitUpdate(sf::Time& currentTime) override { 
+			update(currentTime);  
+		};
+		/**
+		* Outputs the pointer to the MEP::Object
+		* @return MEP::Object
+		*/
+		Object* GetObjectPoint() { *nufC += 1;  return this; }
+		/**
+		* Outputs the reference to the MEP::Object
+		* @return MEP::Object
+		*/
 		Object& GetObjectRef() { return *this; }
-		//id verification and processing
+		/**
+		* Outputs the name of the MEP::Object
+		* @return MEP::Object
+		*/
 		const std::string& GetName() const { return m_name; }
-		//checks the transparency of an object  for the default SDL_Rect
+		/**
+		* Checks the transparency of an object for the default SDL_Rect
+		* @return true - position has an alpha channel > 100, false - position has an alpha chanel < 100 
+		*/
 		virtual bool isTansparent(unsigned int x, unsigned int y);
-		//returns activity of an object it is mainly related to the associated animations
-		bool IsActive() const { return false; };
-		//returns a type of an object
-		const ObjectType& GetType() const { return m_type; }
-		bool operator==(const std::string& x) const { return x == m_name; }
-		bool operator==(const Object& x) const { return x.GetName() == m_name; }
-		virtual ~Object();
+		/**
+		* Checks the activity of an object it is mainly related to the associated animations
+		*/
+		bool IsActive() const { 
+			return false; 
+		};
+		/**
+		* Outputs the type of an MEP::Object
+		* @return MEP::Object::ObjectType 
+		*/
+		const ObjectType& GetType() const { 
+			return m_type; 
+		}
+		/**
+		* Outputs the number of copies of the MEP::Object
+		* @return Number of copies.
+		*/
+		const unsigned int NufC() const {
+			return *nufC;
+		}
+		/**
+		* Operator == operates on MEP::Object name.
+		*/
+		bool operator==(const std::string& x) const { 
+			return x == m_name; 
+		}
+		/**
+		* Operator == operates on MEP::Object name.
+		*/
+		bool operator==(const Object& x) const { 
+			return x.GetName() == m_name; 
+		}
+		~Object() override;
 	}; 
 	
 	inline void MEP::Object::loadTransparancy(sf::Image& surface)
@@ -98,12 +217,14 @@ namespace MEP {
 		for (int i = 0; i < surface.getSize().x; ++i)
 			table[i] = new bool[surface.getSize().y];
 		//fill table
-		for (int i = 0; i < surface.getSize().x; i++) {
-			for (int j = 0; j < surface.getSize().y; j++) {
-				table[i][j] = surface.getPixel(i, j).a < 100;
+		if (table) {
+			for (int i = 0; i < surface.getSize().x; i++) {
+				for (int j = 0; j < surface.getSize().y; j++) {
+					table[i][j] = surface.getPixel(i, j).a < 100;
+				}
 			}
+			transparency = true;
 		}
-		transparency = true;
 	}
 
 	inline void MEP::Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
@@ -125,6 +246,25 @@ namespace MEP {
 		}
 	}
 
+	inline void Object::deleteObject()
+	{
+		std::cout << "Delete call, Object: " << m_name;
+		if (*nufC == 0) {
+			if (table != nullptr) {
+				delete[] table;
+			}
+			for (auto x = texture.begin(); x != texture.end(); x++)
+				delete* x;
+			std::cout << ", object has been permanently deleted.";
+			delete nufC;
+		}
+		else {
+			*nufC -= 1;
+			std::cout << " Copies left: " << *nufC;
+		}
+		std::cout << std::endl;
+	}
+
 	inline bool MEP::Object::isTansparent(unsigned int x, unsigned int y)
 	{
 		if (transparency and x < m_size.x and y < m_size.y)
@@ -132,13 +272,16 @@ namespace MEP {
 		return true;
 	}
 
-	inline MEP::Object::Object(const std::string& path, const std::string& filename, bool transparencyM) : m_name(filename),
+	inline MEP::Object::Object(const std::string& path, const std::string& filename, bool transparencyM) : 
+		nufC(new int(0)), 
+		m_name(filename),
 		m_type(ObjectType::Single)
 	{
 		load(path + filename + ".png", transparencyM, true);
 	}
 
 	inline MEP::Object::Object(const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
+		nufC(new int(0)),
 		m_name(filename), 
 		m_type(ObjectType::Multi)
 	{
@@ -147,7 +290,8 @@ namespace MEP {
 		}
 	}
 
-	inline Object::Object(std::list<sf::Image>& images, const std::string& filename, unsigned int frames, bool transparencyM):
+	inline Object::Object(std::list<sf::Image>& images, const std::string& filename, bool transparencyM):
+		nufC(new int(0)),
 		m_name(filename),
 		transparency(false)
 	{
@@ -168,21 +312,15 @@ namespace MEP {
 		m_size.y = texture.front()->getSize().y;
 	}
 
-	inline void MEP::Object::draw(sf::RenderWindow& window)
+	inline bool MEP::Object::draw(sf::RenderWindow& window)
 	{
 		if (m_type == MEP::Object::ObjectType::Single or m_type == MEP::Object::ObjectType::Multi)
 			window.draw(sf::Sprite(*texture.front()));
+		return true;
 	}
 
 	inline MEP::Object::~Object()
 	{
-		if (transparency and nufC == 0 and table != nullptr) {
-			delete[] table;
-			for (auto x = texture.begin(); x != texture.end(); x++)
-				delete* x;
-		}
-		else {
-			nufC--;
-		}
+		deleteObject();
 	}
 }

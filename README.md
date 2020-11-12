@@ -1,8 +1,11 @@
-# MEP -  Middle Europe Productions
+# MEP -  Middle Europe Productions alpha v1.1
 
 Following library is a header only environment which does not need to be build.
 The only requirement is linking the MEP file to the environment in which you work
 ### For the library to function, the installation of SFML 2.0 is required.
+
+## MEP Documentation
+The documentation is available here: 
 
 ## MEP Library
 
@@ -27,6 +30,7 @@ Following functionalities are available:
 
 ### - For the templates.
 - Template of a hub. MEP::Window::Template::BaseHub
+- Template of a loading window. With the ability to execute methods while window is active. MEP::Window::Template::BaseLoading
   
 ## Author
 

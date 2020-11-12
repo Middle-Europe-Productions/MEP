@@ -28,13 +28,25 @@
 namespace MEP {
 	namespace Window {
 		namespace Template {
+			/**
+			* I do recommend to use it with all of the template windows.
+			* It provides two additional methods:
+			* additinalEvents() - it is recommended to override the method in case of additional out of MEP::Window::Template events.
+			* additinalInit() - it is recommended to override the method in case of additional initialization objects.
+			* \brief A class with the additional methods for the MEP::Window::Template
+			*/
 			class BaseTemplate {
 			public:
 				BaseTemplate() = default;				
-				//It is recommenced not to override Update() in template classes.
-				//Method handling additional events defined by the user.
+				/**
+				* Method handling additional events defined by the user.
+				* It is recommended to use it with any Template window.
+				*/
 				virtual void additionalEvents(sf::RenderWindow& Window, sf::Event& Event) {}
-				//Method handling initialization of the objects defined by the user.
+				/**
+				* Method handling initialization of the objects defined by the user.
+				* It is recommended to use it with any Template window.
+				*/
 				virtual void additionalInit() {};
 			};
 		}

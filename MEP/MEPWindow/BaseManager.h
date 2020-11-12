@@ -22,177 +22,94 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#pragma once 
+#include"Base.h"
 
-#pragma once
-#include <list>
-#include "WindowCrossPlatform.h"
-#include "WindowsStat.h"
-#include "Base.h"
 namespace MEP {
     namespace Window {
-        class BaseManager : public Resources, public WindowStats {
-        protected:
-            std::list<BaseWindow*> m_windows;
-            BaseWindow* GetWindow(unsigned int ID) {
-                for (auto& x : m_windows)
-                    if (*x == ID)
-                        return x;
-                return nullptr;
-            }
-            //Outputs the window at the front
-            BaseWindow* WindowFront() {
-                return m_windows.front();
-            }
-            //Outputs the window at the back
-            BaseWindow* WindowBack() {
-                return m_windows.back();
-            }
-            //Adds a new window to back of the windows list.
-            void AddWindowBack(BaseWindow* window) {
-                m_windows.push_back(window);
-            }
-            //Adds a new window to front of the windows list.
-            void AddWindowFront(BaseWindow* window) {
-                m_windows.push_front(window);
-            }
-            sf::RenderWindow Window;
-            sf::View m_view;
-            sf::Vector2u m_resolution;
-            sf::ContextSettings m_settings;
-            //initialization of a window
-            void init(const char* title, 
-                const sf::Vector2u& Resolution = { 1280, 720 },
-                const sf::Vector2u& mainResolution = { 1280, 720 }) 
-            {
-                Window.create(sf::VideoMode(Resolution.x, Resolution.y), title, sf::Style::None, m_settings);
-                Window.setFramerateLimit(120); 
-                SetResolution(mainResolution);
-            };
-            //////////////////////////////////////////////////////////
-            //Updates a main loop of a code.
-            virtual void update() {
-                for (auto& x : m_windows) {
-                    if (x->GetStatus() != BaseWindow::Status::NullAction) {
-                        try {
-                            x->update(GetGlobalTime());
-                        }
-                        catch (const WindowException& x) {
-                            std::cout << x;
-                        }
-                    }
-
+        /**
+        * It manages all of the MEP::Window added to the MEP::Teamplate::Application
+        * \brief A MEP::Window manager. With a build in memory management.
+        */
+        class BaseManager {
+            protected:
+                std::list<std::shared_ptr<BaseWindow>> m_windows;
+            public:
+                BaseManager() = default;
+                /**
+                * Outputs a window std::shared_ptr to a MEP::Window::BaseWindow
+                * *Warning* The connection feature inside of a MEP::Window::BaseWindow is in fact a std::weak_ptr
+                * to properly add a window into a scope of another MEP::Window::BaseWindow u do need to use this method.
+                * @param[in] window : unsigned int ID
+                * @return shared_ptr to a window.
+                */
+                std::shared_ptr<BaseWindow>& GetWindowSharedPtr(unsigned int ID) {
+                    for (auto& x : m_windows)
+                        if (x.get()->getID() == ID)
+                            return x;
+                    throw MEP::Window::WindowException(-1, "Window not found!");
                 }
-            }
-            //Handles events inside of a events.
-            virtual void handleEvents() {
-                sf::Event event;
-                while (Window.pollEvent(event))
+                /**
+                * Outputs a reference to a MEP::Window
+                * @param[in] window : unsigned int ID
+                */
+                BaseWindow& GetBaseWindow(unsigned int ID) {
+                    for (auto& x : m_windows)
+                        if (x.get()->getID() == ID)
+                            return *x;
+                    throw MEP::Window::WindowException(-1, "Window not found!");
+                }
+                /**
+                * Deletes the window with a given id.
+                * @param[in] window : unsigned int ID
+                */
+                void DeleteWindow(unsigned int ID)
                 {
-                    for (auto& x : m_windows) {
-                        if (x->GetStatus() == BaseWindow::Status::Main)
-                            x->handleEvent(Window, event);
+                    std::list<std::shared_ptr<BaseWindow>>::iterator it = m_windows.begin();
+                    while (it != m_windows.end()) {
+                        if ((*it).get()->getID() == ID)
+                            break;
+                        it++;
+                    }
+                    if (it != m_windows.end()) {
+                        m_windows.remove(*it);
+                    }
+                    else {
+                        throw MEP::Window::WindowException(-1, "Could not find a window inside of a DeteleWindow method!");
                     }
                 }
-            }
-            //Renders the window.
-            virtual void render() {
-                Window.clear(sf::Color::Transparent);
-                for (auto& x : m_windows) {
-                    if (x->GetStatus() != BaseWindow::Status::NullAction)
-                        x->render(Window);
+                /**
+                * Outputs the first element of m_windows list.
+                * @return Front MEP::Window::BaseWindow
+                */
+                BaseWindow& WindowFront() {
+                    return *m_windows.front();
                 }
-                Window.display();
-            }
-            //Changes the resolution of a window
-            void ChangeResolution(const sf::Vector2u& newRes) {
-                Window.setSize(newRes);
-            }
-        public:
-            BaseManager(const char* title, 
-                const char* resPath, 
-                const sf::Vector2u& Resolution = {1280, 720}, 
-                const sf::Vector2u& mainResolution = {1280, 720})
-                : MEP::Resources(resPath) 
-            {
-                init(title, Resolution, mainResolution);
-            }
-            //function sets the transparency mode of a sf::Color::Transparent
-            void setWindowTransparent() {
-                PLATFORM::transparent(Window.getSystemHandle());
-            }
-            //function changes the alpha channel of a window
-            void setWindowTransparency(unsigned char alpha) {
-                PLATFORM::transparency(Window.getSystemHandle(), alpha);
-            }
-            //Returns size of a window
-            const sf::Vector2u GetWindowSize() const { return Window.getSize(); }
-            //Returns sf::RenderWindow of an object
-            sf::RenderWindow& GetWindow() { return Window;}
-            sf::ContextSettings& GetContext() { return m_settings; }
-            //Changes the target resolution of a window
-            void SetResolution(const sf::Vector2u& res) {
-                m_resolution = res;
-            }
-            //Updates the resolution of an object as well as a camera view
-            void UpdateResolution() {
-                Window.setSize(m_resolution);
-                m_view.setCenter({ (float)m_resolution.x / 2, (float)m_resolution.y / 2 });
-                m_view.setSize({ (float)m_resolution.x, (float)m_resolution.y });
-                Window.setView(m_view);
-            }
-            //Resturns current resolution of an object
-            sf::Vector2u GetResolution() const { 
-                return m_resolution; 
-            }
-            //Initialization of the textures and windows
-            void init() {
-                try {
-                    loadResorces();
+                /**
+                * Outputs the last element of m_windows list.
+                * @return Back MEP::Window::BaseWindow
+                */
+                BaseWindow& WindowBack() {
+                    return *m_windows.back();
                 }
-                catch (const MEP::ResourceException& x) {
-                    throw MEP::Window::WindowException(-1, x);
+                /**
+                * Adds a new window to back of the m_windows render list.
+                * Window is being renderd only if its Type != NullAction.
+                * Object added with this command has lower priority. It is added at the end of the list.
+                * @param[in] window : MEP::Window::BaseWindow
+                */
+                void AddWindowBack(BaseWindow* window) {
+                    m_windows.push_back(std::move(std::shared_ptr<BaseWindow>{window}));
                 }
-                try{
-                    createWindows();
+                /**
+                * Adds a new window to back of the m_windows render list.
+                * Window is being renderd only if its Type != NullAction.
+                * Object added with this command has higher priority. It is added at the front of the list.
+                * @param[in] window : MEP::Window::BaseWindow
+                */
+                void AddWindowFront(BaseWindow* window) {
+                    m_windows.push_front(std::move(std::shared_ptr<BaseWindow>{window}));
                 }
-                catch (const MEP::Window::WindowException& x) {
-                    throw x;
-                }
-                isLoaded = true;
-            }
-            //Method closing the main window.
-            void close() {
-                Window.close();
-            }
-            //Main program loop
-            virtual bool Run() {
-                sf::Clock clock;
-                sf::Time timeSinceLastUpdate = sf::Time::Zero;
-
-                while (Window.isOpen())
-                {
-                    sf::Time dt = clock.restart();
-                    GetGlobalTime() += dt;
-                    handleEvents();
-                    update();
-                    render();
-                    updateStatistics(dt);
-                }
-                return false;
-            }
-            //////////////////////////////////////////////////////////
-            //Virtual Method
-            //function creating windows with a BaseWindow base
-            virtual void createWindows() {};
-            //Virtual Method
-            //function creating windows after loading with a BaseWindow base window has been lunched 
-            virtual void runtimeCreateWindows() {};
-            //Virtual Method
-            //function loading resources
-            virtual void loadResorces() {  };
-            //Virtual Method
-            //function loading resources while loading window is active
-            virtual void runtimeloadResources() {};
         };
     }
 }

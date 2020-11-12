@@ -28,11 +28,50 @@
 #include"Drawable.h"
 
 namespace MEP {
-	class TextObject : public Drawable, public Following {
-		sf::Text text;
+	/**
+	* Type only very important feature here is the ability of displaying the text with a position tag.
+	* The tricky part in here is that we are not able to tell the size of a Text before rendering it on a screen in order to solve the issue
+	* MEP::Text has an ability of skiping the frame. But keep in mind that this is a very costly operation.
+	* \brief A basic Text class.
+	*/
+	class Text : public Drawable, public Following {
 	public:
-		TextObject(const std::string& content, sf::Font& font);
-		//void draw(sf::RenderWindow& window) override;
-		//sf::Text& getObject() { return text; }
+		enum class PositionTag {
+			Non,
+			XMiddle,
+			YMiddle,
+			Middle
+		};
+	private:
+		bool tagApplied = false;
+		PositionTag m_tag;
+		sf::Text text;
+		std::string m_content;
+	public:
+		Text(const std::string& content, sf::Font& font, sf::Vector2f position = {0, 0}, unsigned int fontSize = 40): m_content(content) {
+			text.setFont(font);
+			text.setString(content); 
+			text.setCharacterSize(fontSize);
+			m_tag = PositionTag::Middle;
+			// set the color
+			text.setFillColor(sf::Color::Black);
+			// set the text style
+			text.setStyle(sf::Text::Bold);
+			text.setPosition(position.x, position.y);
+			std::cout << text.getLocalBounds().height << " " << text.getLocalBounds().width << std::endl;
+		}
+		bool draw(sf::RenderWindow& window) override {
+			window.draw(text); 
+			if (!tagApplied and m_tag != PositionTag::Non) {
+				if (m_tag == PositionTag::Middle) {
+					text.setPosition(text.getPosition().x - text.getLocalBounds().width / 2, 
+						text.getPosition().y - 24);
+					tagApplied = true;
+					return false;
+				}
+			}
+			return true;
+		}
+		const std::string& getText() const { return m_content; }
 	};
 }

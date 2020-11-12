@@ -27,17 +27,23 @@
 #include <SFML/System/Time.hpp>
 namespace MEP {
 	namespace Window {
-		//Holds information about basic window statistics related to time in general. 
-		//Avalible operations:
-		//-Frame rate.
-		//-Global time.
+		/**
+		* Holds information about basic window statistics related to time in general.
+		* Avalible operations: \n
+		* Frame rate. \n 
+		* Global time. \n
+		* \brief Statistics of a window.
+		*/
 		class WindowStats {
 			sf::Time globalTime = sf::Time::Zero;
 			sf::Time mStatisticsUpdateTime = sf::Time::Zero;
 			unsigned int mStatisticsNumFrames = 0;
 		public:
 			WindowStats() = default;
-			//Updates statistics of a main code loop
+			/**
+			* Updates statistics of a main code loop
+			* @param[in] dt : Current time
+			*/
 			void updateStatistics(sf::Time dt) {
 				mStatisticsUpdateTime += dt;
 				mStatisticsNumFrames += 1;
@@ -47,15 +53,21 @@ namespace MEP {
 					mStatisticsNumFrames = 0;
 				}
 			}
-			//Returns current number of frames.
-			//if 0 == updateStatistics has not been called!
-			unsigned int GetFrameRate() const { 
+			/**
+			* Outputs number of frames in latest updateStatistics call.
+			* @return Number of frames.
+			*/
+			unsigned int getFrameRate() const { 
 				return mStatisticsNumFrames; 
 			}
-			//Returns global time.
-			sf::Time& GetGlobalTime() {
+			/**
+			* Outputs current global time.
+			* @return Global time. 
+			*/
+			sf::Time& getGlobalTime() {
 				return globalTime; 
 			}
+			~WindowStats() { std::cout << "Stats"; };
 		};
 	}
 }

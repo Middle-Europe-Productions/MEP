@@ -25,65 +25,91 @@
 #pragma once
 #include"AnimationObject.h"
 namespace MEP {
+	/**
+	* Basic type of a MEP::Drawable element in which the creation of a sf::Sprite is done via a single texture.
+	* \brief Basic MEP::Drawable element based on a single texture. 
+	*/
 	class TextureObject : public Object, public Following {
 		//current sprite ready to bo rendered
 		sf::Sprite currentSprite;
-		void updateSprite();
-		void init();
+		void updateSprite() {
+			if (!followingList.empty()) {
+				for (auto& x : followingList)
+					x->CheckVariables(m_pos, m_posFixed, m_scale, m_scaleFixed);
+			}
+			currentSprite.setPosition(m_posFixed);
+			currentSprite.setScale(m_scaleFixed);
+		}
+		void init() {
+			currentSprite.setTexture(*texture.front());
+			currentSprite.setPosition(m_posFixed);
+			currentSprite.setScale(m_scaleFixed);
+			isInit = true;
+		}
 		bool isInit = false;
 	public:
-		TextureObject(const std::string& path,
-			const std::string& filename,
-			sf::Vector2f poss = { 0.f, 0.f },
-			sf::Vector2f scale = { 1.f, 1.f },
-			bool transparencyM = false) :
-			Object(path, filename, transparencyM), Following(poss, poss, scale, scale) { init(); };
+		/**
+		* Constructor of a TextureObject
+		* @param[in] x : MEP::Object
+		* @param[in] pos : Pos of an MEP::TextureObject
+		* @param[in] scale : Scale of an MEP::TextureObject
+		*/
 		TextureObject(const Object& x,
-			sf::Vector2f poss = { 0.f, 0.f },
+			sf::Vector2f pos = { 0.f, 0.f },
 			sf::Vector2f scale = { 1.f, 1.f }) :
 			Object(x),
-			Following(poss, poss, scale, scale) { init(); };
-		void draw(sf::RenderWindow& window) override;
-		void update(sf::Time& currentTime) override;
-		void SetRect(const sf::IntRect& rect) { currentSprite.setTextureRect(rect); }
-		void SetColor(const sf::Color& color) { currentSprite.setColor(color); }
-		const sf::Color& GetColor() const { return currentSprite.getColor(); }
-		//returns activity of an object it is mainly related to the associated animations
-		bool IsActive() const override;
+			Following(pos, pos, scale, scale) 
+		{ 
+			init(); 
+		};
+		/**
+		* Override of a MEP::Drawable draw.
+		*/
+		bool draw(sf::RenderWindow& window) override {
+			if (isInit) {
+				window.draw(currentSprite);
+			}
+			return true;
+		}
+		/**
+		* Override of a MEP::Drawable update.
+		*/
+		void update(sf::Time& currentTime) override {
+			updateSprite();
+		}
+		/**
+		* Sets the main sprite Rect
+		*/
+		void SetRect(const sf::IntRect& rect) { 
+			currentSprite.setTextureRect(rect); 
+		}
+		/**
+		* Outputs the color of a main sprite.
+		* @return sf::Color
+		*/
+		void SetColor(const sf::Color& color) { 
+			currentSprite.setColor(color); 
+		}
+		/**
+		* Sets the rotation of an object.
+		* param[in] angle : angle of n rotation.
+		*/
+		void setRotation(const float angle) {
+			currentSprite.setRotation(angle);
+		}
+		/**
+		* Outputs the color of a main sprite.
+		* @return sf::Color
+		*/
+		const sf::Color& GetColor() const { 
+			return currentSprite.getColor(); 
+		}
+		/**
+		* Outputs activity of a texture. It is related to associated animations.
+		* @return true - is active, false - otherwise.
+		*/
+		bool IsActive() const override {
+			return isFollowerActive();
+		}
 	};
-	void MEP::TextureObject::updateSprite()
-	{
-		if (!followingList.empty()) {
-			for (auto& x : followingList)
-				x->CheckVariables(m_poss, m_possFixed, m_scale, m_scaleFixed);
-		}
-		currentSprite.setPosition(m_possFixed);
-		currentSprite.setScale(m_scaleFixed);
-	}
-
-	void MEP::TextureObject::init()
-	{
-		currentSprite.setTexture(*texture.front());
-		currentSprite.setPosition(m_possFixed);
-		currentSprite.setScale(m_scaleFixed);
-		isInit = true;
-	}
-
-	void MEP::TextureObject::draw(sf::RenderWindow& window)
-	{
-		if (isInit) {
-			window.draw(currentSprite);
-		}
-	}
-
-	void MEP::TextureObject::update(sf::Time& currentTime)
-	{
-		updateSprite();
-	}
-
-	bool MEP::TextureObject::IsActive() const
-	{
-		return isFollowerActive();
-	}
-
 }

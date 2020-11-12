@@ -62,7 +62,7 @@ Enables display of a single texture.
 Inheritance: AnimationObject
 Defines simple button with the use of at least a set o three objects with the MEP::Object.
 */
-#include"AnimationPossition.h"
+#include"AnimationPosition.h"
 /*
 Inheritance: Drawable, Animation
 Simple definition of a possition animation with the use of lambda function.
@@ -74,3 +74,4 @@ f(x) or -f(x) according to the given values
 /*
 Enables automation data loading. Using MEP::Object and sf::Texture
 */
+#include"TextObject.h"

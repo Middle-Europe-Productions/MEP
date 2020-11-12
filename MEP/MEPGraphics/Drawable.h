@@ -26,14 +26,40 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 namespace MEP {
+	/**
+	* \brief MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen.
+	*/
 	class Drawable {
 	public:
+		/**
+		* Default contructor.
+		*/
 		Drawable() = default;
-		virtual void draw(sf::RenderWindow& window) {};
-		//virtual update functions
+		/**
+		* Default virtual draw function.
+		* @param[in] window : Reference to a window.
+		* @return True if the drawing was successful, or false if there is something wrong with an object and it must be redrawn.
+		*/
+		virtual bool draw(sf::RenderWindow& window) { return false; };
+		/**
+		* Default virtual update function.
+		* @param[in] currentTime : Current global time.
+		*/
 		virtual void update(sf::Time& currentTime) {};
+		/**
+		* Default virtual entry update function.
+		* @param[in] currentTime : Current global time.
+		*/
 		virtual void entryUpdate(sf::Time& currentTime) { update(currentTime); };
+		/**
+		* Default virtual exit update function.
+		* @param[in] currentTime : Current global time.
+		*/
 		virtual void exitUpdate(sf::Time & currentTime) { update(currentTime); };
+		/**
+		* Default virtual activation status method.
+		* @param[in] currentTime : Current global time.
+		*/
 		virtual bool IsActive() const { return false; };
 		virtual ~Drawable() {};
 	};

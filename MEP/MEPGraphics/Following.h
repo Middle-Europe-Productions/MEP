@@ -24,89 +24,175 @@
 ////////////////////////////////////////////////////////////
 
 #pragma once
-#include"AnimationPossition.h"
+#include"AnimationPosition.h"
 namespace MEP {
+	/**
+	* \brief MEP::Following keeps track of a MEP::Object position.
+	*/
 	class Following {
 	public:
+		/**
+		* @enum MEP::Button::FollowType
+		* Types of the following.
+		*/
 		enum class FollowType {
+			/** Following not initialized.*/
 			NotInit,
+			/** Following other Objects.*/
 			Objects,
+			/** Following with o change of X scale*/
 			X_Scale,
+			/** Following with o change of Y scale*/
 			Y_Scale,
-			X_Poss,
-			Y_Poss
+			/** Following with o change of X position*/
+			X_Pos,
+			/** Following with o change of Y position*/
+			Y_Pos
 		};
 	private:		
 		//type of a following
 		FollowType m_followType = FollowType::NotInit;
 		struct Follow {
-			const AnimationPossition& m_animation;
+			const AnimationPosition& m_animation;
 			FollowType m_followType = FollowType::NotInit;
-			Follow(const AnimationPossition& animation, FollowType followType = FollowType::NotInit) :
+			Follow(const AnimationPosition& animation, FollowType followType = FollowType::NotInit) :
 				m_animation(animation),
 				m_followType(followType) {}
-			void CheckVariables(sf::Vector2f& m_poss, sf::Vector2f& m_possFixed, sf::Vector2f& m_scale, sf::Vector2f& m_scaleFixed);
+			void CheckVariables(sf::Vector2f& m_pos, sf::Vector2f& m_posFixed, sf::Vector2f& m_scale, sf::Vector2f& m_scaleFixed);
 		};
 	protected:
-		std::list<Follow*> followingList;
-		//texture possition and scale
-		sf::Vector2f m_poss = {0.f, 0.f};
-		sf::Vector2f m_possFixed = { 0.f, 0.f };
+		std::list<std::unique_ptr<Follow>> followingList;
+		//texture position and scale
+		sf::Vector2f m_pos = {0.f, 0.f};
+		sf::Vector2f m_posFixed = { 0.f, 0.f };
 		sf::Vector2f m_scale = { 1.f, 1.f };
 		sf::Vector2f m_scaleFixed = { 1.f, 1.f };
 	public:
+		/**
+		* Default contructor.
+		*/
 		Following() = default;
+		/**
+		* Constructor of a following type.
+		* @param[in] followType : MEP::Following::FollowType type of an animation.
+		* @param[in] pos : Position of the follower.
+		* @param[in] posFixed : Fixed position of the follower.
+		* @param[in] scale : Scale of the follower.
+		* @param[in] scaleFixed : Fixed scale of the follower.
+		*/
 		Following(const FollowType& followType,
-			sf::Vector2f poss = { 0.f, 0.f },
-			sf::Vector2f possFixed = { 0.f, 0.f }, 
+			sf::Vector2f pos = { 0.f, 0.f },
+			sf::Vector2f posFixed = { 0.f, 0.f }, 
 			sf::Vector2f scale = { 1.f, 1.f }, 
 			sf::Vector2f scaleFixed = { 1.f, 1.f }) : 
 			m_followType(followType), 
-			m_poss(poss), 
-			m_possFixed(possFixed), 
+			m_pos(pos), 
+			m_posFixed(posFixed), 
 			m_scale(scale), 
 			m_scaleFixed(scaleFixed)
 		{};
-		Following(sf::Vector2f poss,
-			sf::Vector2f possFixed,
+		/**
+		* Constructor of a following type.
+		* @param[in] pos : Position of the follower.
+		* @param[in] posFixed : Fixed position of the follower.
+		* @param[in] scale : Scale of the follower.
+		* @param[in] scaleFixed : Fixed scale of the follower.
+		*/
+		Following(sf::Vector2f pos,
+			sf::Vector2f posFixed,
 			sf::Vector2f scale,
 			sf::Vector2f scaleFixed) :
-			m_poss(poss),
-			m_possFixed(possFixed),
+			m_pos(pos),
+			m_posFixed(posFixed),
 			m_scale(scale),
 			m_scaleFixed(scaleFixed)
 		{};
-		//setting following animation
-		void SetFollow(const AnimationPossition& base, const FollowType type);
-		//possition and sclae setting
-		virtual void SetPossition(const sf::Vector2f poss) { m_poss = poss; m_possFixed = poss; }
-		virtual void SetPossition(const Following& x) { m_poss = x.m_poss; m_possFixed = x.m_possFixed; }
-		virtual void SetScale(const sf::Vector2f scale) { m_scale = scale; m_scaleFixed = scale; }
-		virtual void SetScale(const Following& x) { m_scale = x.m_scale; m_scaleFixed = x.m_scaleFixed; }
-		//gets info about possition and scale
-		sf::Vector2f GetPossition() const { return m_possFixed; }
-		sf::Vector2f GetScale() const { return m_scaleFixed; }
-		sf::Vector2f GetOriginPossition() const { return m_poss; }
-		sf::Vector2f GetOriginScale() const { return m_scale; }
-		//returns an information about an activity of at least one follower
-		bool isFollowerActive() const;
-		void ClearFollow() { followingList.clear(); }
+		/**
+		* Sets the object to follow using another MEP::AnimationPosition instance.
+		* @param[in] base : MEP::AnimationPosition object to follow.
+		* @param[in] type : Type of a follow.
+		*/
+		void SetFollow(const AnimationPosition& base, const FollowType type) {
+			for (auto& x : followingList)
+				if (type == x->m_followType)
+					throw "This type of follow already exists!";
+			followingList.push_back(std::make_unique<Follow>(base, type));
+		}
+		/**
+		* Sets the position and fixed position of an MEP::Following.
+		* @param[in] pos : Position.
+		*/
+		virtual void SetPosition(const sf::Vector2f pos) { 
+			m_pos = pos; 
+			m_posFixed = pos; 
+		}
+		/**
+		* Sets the position and fixed position of an MEP::Following.
+		* @param[in] x : MEP::Following object.
+		*/
+		virtual void SetPosition(const Following& x) { 
+			m_pos = x.m_pos; 
+			m_posFixed = x.m_posFixed; 
+		}
+		/**
+		* Sets the scale and fixed scale of the MEP::Following.
+		* @param[in] scale : Scale.
+		*/
+		virtual void SetScale(const sf::Vector2f scale) { 
+			m_scale = scale; 
+			m_scaleFixed = scale; 
+		}
+		/**
+		* Sets the scale and fixed scale of the MEP::Following.
+		* @param[in] x : MEP::Following object.
+		*/
+		virtual void SetScale(const Following& x) { 
+			m_scale = x.m_scale; 
+			m_scaleFixed = x.m_scaleFixed; 
+		}
+		/**
+		* Outputs the current position of the MEP::Folowing
+		* @return Fixed position.
+		*/
+		sf::Vector2f GetPosition() const { 
+			return m_posFixed; 
+		}
+		/**
+		* Outputs the current scale of the MEP::Folowing
+		* @return Fixed scale.
+		*/
+		sf::Vector2f GetScale() const { 
+			return m_scaleFixed; 
+		}
+		/**
+		* Outputs the position of the MEP::Folowing
+		* @return Position.
+		*/
+		sf::Vector2f GetOriginPosition() const { 
+			return m_pos; 
+		}
+		/**
+		* Outputs the scale of the MEP::Folowing
+		* @return Scale.
+		*/
+		sf::Vector2f GetOriginScale() const { 
+			return m_scale; 
+		}
+		/**
+		* Outputs the information about MEP::Following activity.
+		* @return true - if atleast one istance of the Follwer is active, false - otherwise.
+		*/
+		bool isFollowerActive() const {
+			for (auto& a : followingList)
+				if (a->m_animation.IsActive())
+					return true;
+			return false;
+		}
+		/**
+		* Clears the follower list.
+		*/
+		void ClearFollow() { 
+			followingList.clear(); 
+		}
 	};
-
-	void MEP::Following::SetFollow(const AnimationPossition& base, const FollowType type)
-	{
-		for (auto& x : followingList)
-			if (type == x->m_followType)
-				throw "This type of follow already exists!";
-		followingList.push_back(new Follow(base, type));
-	}
-
-	bool MEP::Following::isFollowerActive() const
-	{
-		for (auto& a : followingList)
-			if (a->m_animation.IsActive())
-				return true;
-		return false;
-	}
-
 };

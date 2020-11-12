@@ -26,25 +26,47 @@
 #include<SFML/Graphics.hpp>
 #pragma once
 namespace MEP {
+	/**
+	* \brief MEP::Animation base definition of an animation. 
+	*/
 	class Animation {
 	public:
-		//direction of an animation
+		/**
+		* @enum MEP::Animation::Direction
+		* Provides basic movement definition.
+		*/
 		enum class Direction {
+			/** Basic animation movement.*/
 			Forward = 0,
+			/** Reversed animation movement.*/
 			Backwards = 1
 		};
-		//initialization type of an animation
+		/**
+		* @enum MEP::Animation::AnimationInit
+		* Provides basic animation tags.
+		*/
 		enum class AnimationInit {
+			/** Animation is not initialized.*/
 			NotInit,
+			/** Animation will be following the Animation.*/
 			Follow,
+			/** Animation will be animating Object type of variable.*/
 			ObjectAnimation,
-			PossitionAnimation
+			/** Animation will be animating Position type of variable.*/
+			PositionAnimation
 		};
-		//additional tags
+		/**
+		* @enum MEP::Animation::AdditionalTag
+		* Provides a support for automatic activation. 
+		*/
 		enum class AdditionalTag {
+			/** There no additional tag.*/
 			Non,
+			/** Animation will be automatically activated at MEP::Window::BaseWindow entry.*/
 			RunAtEntry,
+			/** Animation will be automatically activated at MEP::Window::BaseWindow exit.*/
 			RunAtEnd,
+			/** Animation will be automatically activated at MEP::Window::BaseWindow entry and exit.*/
 			RunAtEntryAndEnd
 		};
 	protected:
@@ -60,36 +82,83 @@ namespace MEP {
 		//direction of an animation movement
 		Direction direction = Direction::Backwards;
 	public:
+		/**
+		* Constructor of an base animation.
+		* @param[in] initType : Initialization type.
+		* @param[in] frameRate : Frame rate of an animation.
+		*/
 		Animation(const AnimationInit initType, const float frameRate):
 			isInit(initType),
 			toWait(sf::milliseconds(1000) / frameRate) {}
+		/**
+		* Constructor of an base animation.
+		* @param[in] initType : Initialization type.
+		* @param[in] towait : Time to wait between aniamtion frames.
+		*/
 		Animation(const AnimationInit initType, const sf::Time towait) :
 			isInit(initType),
 			toWait(towait) {}
+		/**
+		* Copy constructor of an base animation.
+		* @param[in] x : MEP::Animation.
+		*/
 		Animation(const Animation& x) :
 			isInit(x.isInit),
 			updateTime(x.updateTime),
 			toWait(x.toWait),
 			isRunning(x.isRunning),
 			direction(x.direction) {}
-		//Ests the running tag to true and changes the direction of a movement, furthermore,
-		//it is capable of setting a current time.
+		/**
+		* Sets the running tag to true and changes the direction of a movement, furthermore,
+		* it is capable of setting a current time.
+		* @param[in] direc : MEP::Animation::Direction.
+		* @param[in] currentTime : sf::Time = sf::Time::Zero.
+		*/
 		virtual void Run(const Direction direc, sf::Time currentTime = sf::Time::Zero) {
 			direction = direc;
 			updateTime = currentTime;
 			isRunning = true;
 		};
-		//Changes current status to !status
-		void ChangeStatus() { isRunning = !isRunning; }
-		//Returns a status of an animation
-		bool GetStatus() const { return isRunning; }
-		//changing a tag of an animation
-		void ChangeTag(const AdditionalTag& tag) { m_tag = tag; }
-		//toWait information
-		sf::Time GetToWait() const { return toWait; }
-		//Returns an animation initialization type
-		const AnimationInit GetInit() const { return isInit; }
-		//current direction of an animation
-		const Direction& GetDirection() const { return direction; }
+		/**
+		* Changes current status to !status
+		*/
+		void ChangeStatus() { 
+			isRunning = !isRunning; 
+		}
+		/**
+		* Outputs a current status of an animation.
+		* @return true - animation is active, false - animation is unactive.
+		*/
+		bool GetStatus() const { 
+			return isRunning; 
+		}
+		/**
+		* Changes the additional tag of an animation.
+		* @param[in] tag MEP::Animation::AdditionalTag.
+		*/
+		void ChangeTag(const AdditionalTag& tag) { 
+			m_tag = tag; 
+		}
+		/**
+		* Outputs time to wait between animation frames.
+		* @return sf::Time
+		*/
+		sf::Time GetToWait() const { 
+			return toWait; 
+		}
+		/**
+		* Outputs animation initialization tag.
+		* @return MEP::Animation::AnimationInit
+		*/
+		const AnimationInit GetInit() const { 
+			return isInit; 
+		}
+		/**
+		* Outputs animation direction.
+		* @return MEP::Animation::Direction
+		*/
+		const Direction& GetDirection() const { 
+			return direction; 
+		}
 	};
 };
