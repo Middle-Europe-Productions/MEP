@@ -20,10 +20,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mep0.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.1</span>
+   &#160;<span id="projectnumber">alpha 1.2</span>
    </div>
   </td>
  </tr>
@@ -87,9 +87,11 @@ Inheritance diagram for MEP::Animation:</div>
  <div class="center">
   <img src="class_m_e_p_1_1_animation.png" usemap="#MEP::Animation_map" alt=""/>
   <map id="MEP::Animation_map" name="MEP::Animation_map">
-<area href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation." alt="MEP::AnimationObject" shape="rect" coords="0,56,144,80"/>
-<area href="class_m_e_p_1_1_animation_position.html" title="MEP::AnimationPosition provides a basic implementation of a modification of the position." alt="MEP::AnimationPosition" shape="rect" coords="154,56,298,80"/>
-<area href="class_m_e_p_1_1_button.html" title="MEP::Button provides a basic implementation of an object with the ability of display it on a screen." alt="MEP::Button" shape="rect" coords="0,112,144,136"/>
+<area href="class_m_e_p_1_1_non_copyable.html" title="Deletes the copy constructor and assign operator." alt="MEP::NonCopyable" shape="rect" coords="77,0,221,24"/>
+<area href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation." alt="MEP::AnimationObject" shape="rect" coords="0,112,144,136"/>
+<area href="class_m_e_p_1_1_animation_position.html" title="MEP::AnimationPosition provides a basic implementation of a modification of the position." alt="MEP::AnimationPosition" shape="rect" coords="154,112,298,136"/>
+<area href="class_m_e_p_1_1_button.html" title="MEP::Button provides a basic implementation of an object with the ability of display it on a screen." alt="MEP::Button" shape="rect" coords="0,168,144,192"/>
+<area href="class_m_e_p_1_1_animation_color.html" title="Class is responsible for the sf::Color transitions." alt="MEP::AnimationColor" shape="rect" coords="154,168,298,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -120,20 +122,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab2f1f46d1d2a6d0df8e44fc60f569c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f36aafe1a466313d100f8ac7ea1fbb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a8f36aafe1a466313d100f8ac7ea1fbb1">Animation</a> (const <a class="el" href="class_m_e_p_1_1_animation.html">Animation</a> &amp;x)</td></tr>
 <tr class="separator:a8f36aafe1a466313d100f8ac7ea1fbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee23f62ec0c7f53c8a22be28f6353ab3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aee23f62ec0c7f53c8a22be28f6353ab3">Run</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a> direc, sf::Time currentTime=sf::Time::Zero)</td></tr>
-<tr class="separator:aee23f62ec0c7f53c8a22be28f6353ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02fbc399ca1f51872923ecb42e4a8bfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a02fbc399ca1f51872923ecb42e4a8bfa">ChangeStatus</a> ()</td></tr>
-<tr class="separator:a02fbc399ca1f51872923ecb42e4a8bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8367b08b87a66539c5e2c08717678d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ab8367b08b87a66539c5e2c08717678d8">GetStatus</a> () const</td></tr>
-<tr class="separator:ab8367b08b87a66539c5e2c08717678d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69540de49c2d525db950902dfef7d54d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a69540de49c2d525db950902dfef7d54d">ChangeTag</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a> &amp;tag)</td></tr>
-<tr class="separator:a69540de49c2d525db950902dfef7d54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a753d6df5b0dd526571c49a5d26f6fc39"><td class="memItemLeft" align="right" valign="top">sf::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a753d6df5b0dd526571c49a5d26f6fc39">GetToWait</a> () const</td></tr>
-<tr class="separator:a753d6df5b0dd526571c49a5d26f6fc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac59c50c05003d121f0cadcc87ef21929"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ac59c50c05003d121f0cadcc87ef21929">GetInit</a> () const</td></tr>
-<tr class="separator:ac59c50c05003d121f0cadcc87ef21929"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f68a1c866f08ef4b92b33427ac91b6f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a9f68a1c866f08ef4b92b33427ac91b6f">GetDirection</a> () const</td></tr>
-<tr class="separator:a9f68a1c866f08ef4b92b33427ac91b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c40b7152c181df1dd59d9c629c28253"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a4c40b7152c181df1dd59d9c629c28253">run</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a> direc, sf::Time currentTime=sf::Time::Zero)</td></tr>
+<tr class="separator:a4c40b7152c181df1dd59d9c629c28253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47013707e6e636ae293f5ddb2193d5ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae">changeStatus</a> ()</td></tr>
+<tr class="separator:a47013707e6e636ae293f5ddb2193d5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39919ddde07094550d7179f1260de34d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a39919ddde07094550d7179f1260de34d">getStatus</a> () const</td></tr>
+<tr class="separator:a39919ddde07094550d7179f1260de34d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6a787f72a5ad18d15e072dab36b3d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aeb6a787f72a5ad18d15e072dab36b3d5">changeTag</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a> &amp;tag)</td></tr>
+<tr class="separator:aeb6a787f72a5ad18d15e072dab36b3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cef913ffb34aed34001111cc135acaa"><td class="memItemLeft" align="right" valign="top">sf::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a2cef913ffb34aed34001111cc135acaa">getToWait</a> () const</td></tr>
+<tr class="separator:a2cef913ffb34aed34001111cc135acaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7b3729b93c49a23c055a30df3c7398"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aeb7b3729b93c49a23c055a30df3c7398">getInit</a> () const</td></tr>
+<tr class="separator:aeb7b3729b93c49a23c055a30df3c7398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca25dc3955185a37f36acd3bfba207d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a7ca25dc3955185a37f36acd3bfba207d">getDirection</a> () const</td></tr>
+<tr class="separator:a7ca25dc3955185a37f36acd3bfba207d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -149,6 +151,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaa66c896894c67bd4d937074bed4dcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad281f63f6e0eb482c4d6145147e026f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ad281f63f6e0eb482c4d6145147e026f7">direction</a> = <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056a9d1104e419414f4c268be7211fb8fc4a">Direction::Backwards</a></td></tr>
 <tr class="separator:ad281f63f6e0eb482c4d6145147e026f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_class_m_e_p_1_1_non_copyable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_p_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_p_1_1_non_copyable.html">MEP::NonCopyable</a></td></tr>
+<tr class="memitem:a6c6d626afeb530339a1624ed34652a1e inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a> ()=default</td></tr>
+<tr class="separator:a6c6d626afeb530339a1624ed34652a1e inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41cf3102b79e136f160e2940598da1d inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">~NonCopyable</a> ()=default</td></tr>
+<tr class="separator:ab41cf3102b79e136f160e2940598da1d inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_m_e_p_1_1_animation.html" title="MEP::Animation base definition of an animation.">MEP::Animation</a> base definition of an animation. </p>
@@ -365,8 +375,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a02fbc399ca1f51872923ecb42e4a8bfa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02fbc399ca1f51872923ecb42e4a8bfa">&#9670;&nbsp;</a></span>ChangeStatus()</h2>
+<a id="a47013707e6e636ae293f5ddb2193d5ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47013707e6e636ae293f5ddb2193d5ae">&#9670;&nbsp;</a></span>changeStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +385,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MEP::Animation::ChangeStatus </td>
+          <td class="memname">void MEP::Animation::changeStatus </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -391,8 +401,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a69540de49c2d525db950902dfef7d54d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69540de49c2d525db950902dfef7d54d">&#9670;&nbsp;</a></span>ChangeTag()</h2>
+<a id="aeb6a787f72a5ad18d15e072dab36b3d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6a787f72a5ad18d15e072dab36b3d5">&#9670;&nbsp;</a></span>changeTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,7 +411,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void MEP::Animation::ChangeTag </td>
+          <td class="memname">void MEP::Animation::changeTag </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a> &amp;&#160;</td>
           <td class="paramname"><em>tag</em></td><td>)</td>
@@ -423,8 +433,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9f68a1c866f08ef4b92b33427ac91b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f68a1c866f08ef4b92b33427ac91b6f">&#9670;&nbsp;</a></span>GetDirection()</h2>
+<a id="a7ca25dc3955185a37f36acd3bfba207d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca25dc3955185a37f36acd3bfba207d">&#9670;&nbsp;</a></span>getDirection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,7 +443,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a>&amp; MEP::Animation::GetDirection </td>
+          <td class="memname">const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a>&amp; MEP::Animation::getDirection </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -449,8 +459,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac59c50c05003d121f0cadcc87ef21929"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac59c50c05003d121f0cadcc87ef21929">&#9670;&nbsp;</a></span>GetInit()</h2>
+<a id="aeb7b3729b93c49a23c055a30df3c7398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb7b3729b93c49a23c055a30df3c7398">&#9670;&nbsp;</a></span>getInit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -459,7 +469,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> MEP::Animation::GetInit </td>
+          <td class="memname">const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> MEP::Animation::getInit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -475,8 +485,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab8367b08b87a66539c5e2c08717678d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8367b08b87a66539c5e2c08717678d8">&#9670;&nbsp;</a></span>GetStatus()</h2>
+<a id="a39919ddde07094550d7179f1260de34d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39919ddde07094550d7179f1260de34d">&#9670;&nbsp;</a></span>getStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -485,7 +495,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool MEP::Animation::GetStatus </td>
+          <td class="memname">bool MEP::Animation::getStatus </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -501,8 +511,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a753d6df5b0dd526571c49a5d26f6fc39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a753d6df5b0dd526571c49a5d26f6fc39">&#9670;&nbsp;</a></span>GetToWait()</h2>
+<a id="a2cef913ffb34aed34001111cc135acaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cef913ffb34aed34001111cc135acaa">&#9670;&nbsp;</a></span>getToWait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -511,7 +521,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Time MEP::Animation::GetToWait </td>
+          <td class="memname">sf::Time MEP::Animation::getToWait </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -527,8 +537,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aee23f62ec0c7f53c8a22be28f6353ab3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee23f62ec0c7f53c8a22be28f6353ab3">&#9670;&nbsp;</a></span>Run()</h2>
+<a id="a4c40b7152c181df1dd59d9c629c28253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c40b7152c181df1dd59d9c629c28253">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,7 +547,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void MEP::Animation::Run </td>
+          <td class="memname">virtual void MEP::Animation::run </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_animation.html#a9abe9e6d816a437698fb425cb65f2056">Direction</a>&#160;</td>
           <td class="paramname"><em>direc</em>, </td>

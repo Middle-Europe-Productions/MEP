@@ -130,20 +130,32 @@ namespace MEP {
 					}
 
 					//Setting attributes of the objects
-					textures[1]->SetRect({ 0, 0, (int)base.getWindowSize().x * 2, 4 });
-					textures[1]->SetColor(color);
-					textures[0]->SetPosition(sf::Vector2f(0, 4));
-					textures[0]->SetColor(textures[1]->GetColor());
-					buttons[0]->SetColor(textures[1]->GetColor());
-					textures[2]->SetColor(buttons[0]->GetColor());
-					buttons[1]->SetColor(textures[1]->GetColor());
-					textures[3]->SetPosition(*buttons[1]);
-					textures[3]->SetScale(*buttons[1]);
-					textures[2]->SetPosition(*buttons[0]);
-					textures[2]->SetScale(*buttons[0]);
-					textures[3]->SetColor(buttons[0]->GetColor());
+					textures[1]->setRect({ 0, 0, (int)base.getWindowSize().x * 2, 4 });
+					textures[1]->setColor(color);
+					textures[0]->setPosition(sf::Vector2f(0, 4));
+					textures[0]->setColor(textures[1]->getColor());
+					buttons[0]->setColor(textures[1]->getColor());
+					textures[2]->setColor(buttons[0]->getColor());
+					buttons[1]->setColor(textures[1]->getColor());
+					textures[3]->setPosition(*buttons[1]);
+					textures[3]->setScale(*buttons[1]);
+					textures[2]->setPosition(*buttons[0]);
+					textures[2]->setScale(*buttons[0]);
+					textures[3]->setColor(buttons[0]->getColor());
 					//Adding objects to the list of drawing objects in the window
 					newObjects(textures[0], textures[1], buttons[0], textures[2], buttons[1], textures[3]);
+				}
+				/**
+				* Changes the color of a HUB.
+				* @param[in] event : sf::Color
+				*/
+				void changeColor(const sf::Color& color) {
+					textures[0]->setColor(color);
+					textures[1]->setColor(color);
+					buttons[0]->setColor(color);
+					textures[2]->setColor(color);
+					buttons[1]->setColor(color);
+					textures[3]->setColor(color);
 				}
 				/**
 				* Handles the events of the Hub

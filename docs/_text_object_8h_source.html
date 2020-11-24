@@ -20,10 +20,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mep0.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.1</span>
+   &#160;<span id="projectnumber">alpha 1.2</span>
    </div>
   </td>
  </tr>
@@ -71,7 +71,7 @@ $(function() {
 <div class="title">TextObject.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_text_object_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//  TextObject.h created with the use of SFML</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//  MEP - Middle Europe Productions</span></div>
@@ -95,66 +95,147 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include&lt;string&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include&quot;<a class="code" href="_following_8h.html">Following.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&quot;<a class="code" href="_drawable_8h.html">Drawable.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include&quot;Following.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&quot;Drawable.h&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html">   37</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_text.html">Text</a> : <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_drawable.html">Drawable</a>, <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_following.html">Following</a> {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">   39</a></span>&#160;        <span class="keyword">enum class</span> <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">Non</a>,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da">XMiddle</a>,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56">YMiddle</a>,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">Middle</a></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">bool</span> tagApplied = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> m_tag;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        sf::Text text;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::string m_content;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a9296e97a58ec2f695696e5244e3de4ec">   51</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html#a9296e97a58ec2f695696e5244e3de4ec">Text</a>(<span class="keyword">const</span> std::string&amp; content, sf::Font&amp; font, sf::Vector2f position = {0, 0}, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fontSize = 40): m_content(content) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            text.setFont(font);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            text.setString(content); </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            text.setCharacterSize(fontSize);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            m_tag = <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">PositionTag::Middle</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="comment">// set the color</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            text.setFillColor(sf::Color::Black);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="comment">// set the text style</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            text.setStyle(sf::Text::Bold);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            text.setPosition(position.x, position.y);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            std::cout &lt;&lt; text.getLocalBounds().height &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; text.getLocalBounds().width &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">   63</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">draw</a>(sf::RenderWindow&amp; window)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            window.draw(text); </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span> (!tagApplied and m_tag != <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordflow">if</span> (m_tag == <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">PositionTag::Middle</a>) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    text.setPosition(text.getPosition().x - text.getLocalBounds().width / 2, </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        text.getPosition().y - 24);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    tagApplied = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">   75</a></span>&#160;        <span class="keyword">const</span> std::string&amp; <a class="code" href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">getText</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_content; }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">   43</a></span>&#160;        <span class="keyword">enum class</span> <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">Non</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da">XMiddle</a>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56">YMiddle</a>,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">Middle</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">bool</span> tagApplied = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> m_tag = <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        sf::Text text;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::string m_content;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a7e408162b28520bb990ae4775e946b50">   80</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html#a7e408162b28520bb990ae4775e946b50">Text</a>(<span class="keyword">const</span> std::string&amp; content,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            sf::Font&amp; font,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fontSize = 40,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            sf::Vector2f position = { 0, 0 },</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> tag = <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>) :</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <a class="code" href="class_m_e_p_1_1_following.html#a9c6699f5c55643be7c6017d67b2136cb">Following</a>(position, position),</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            m_tag(tag),</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            m_content(content)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <a class="code" href="class_m_e_p_1_1_following.html#a8e89ae336d4f8f01e7332dc0dc6d66b5">setPosition</a>(position);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            text.setFont(font);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            text.setString(content); </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            text.setCharacterSize(fontSize);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="comment">//By default its black. We are using it here.</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            text.setFillColor(<a class="code" href="class_m_e_p_1_1_following.html#a99b1de43071cd67845aedc49c6b0e3de">getColor</a>());</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#aaaf11bda7900407ed2b1f32f6de711b0">  104</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html#aaaf11bda7900407ed2b1f32f6de711b0">Text</a>(<span class="keyword">const</span> std::string&amp; content,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            sf::Font&amp; font,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_following.html">Following</a>&amp; follow,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fontSize = 40,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> tag = <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>) :</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <a class="code" href="class_m_e_p_1_1_following.html">Following</a>(follow),</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            m_tag(tag),</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            m_content(content)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <a class="code" href="class_m_e_p_1_1_following.html#a8e89ae336d4f8f01e7332dc0dc6d66b5">setPosition</a>(<a class="code" href="class_m_e_p_1_1_following.html#a27f6f40bc5632d8a2aea48e4e241f211">m_posFixed</a>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            text.setFont(font);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            text.setString(content);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            text.setCharacterSize(fontSize);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="comment">//By default its black. We are using it here.</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            text.setFillColor(<a class="code" href="class_m_e_p_1_1_following.html#a99b1de43071cd67845aedc49c6b0e3de">getColor</a>());</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a14595445ee2149183a16f519f590ce93">  120</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html">Text</a>&amp; <a class="code" href="class_m_e_p_1_1_text.html#a14595445ee2149183a16f519f590ce93">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_sprite.html">Sprite</a>&amp; x) {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            (<a class="code" href="class_m_e_p_1_1_following.html">Following</a>&amp;)(*<span class="keyword">this</span>) &lt;&lt; x;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a6e01f6c02e47b9cdd691af1943d00e85">  124</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_text.html">Text</a>&amp; <a class="code" href="class_m_e_p_1_1_text.html#a6e01f6c02e47b9cdd691af1943d00e85">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_text.html">Text</a>&amp; x) {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;x) {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                (<a class="code" href="class_m_e_p_1_1_following.html">Following</a>&amp;)(*<span class="keyword">this</span>) &lt;&lt; x;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#aeb2ab5a148ecc173f22834472a171f80">  133</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_text.html#aeb2ab5a148ecc173f22834472a171f80">update</a>(sf::Time&amp; currentTime)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; x : <a class="code" href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">followingList</a>)</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                x-&gt;updateVariables(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            text.setPosition(<a class="code" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a>());</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            text.setScale(<a class="code" href="class_m_e_p_1_1_following.html#ada2ca108122ea0ea8f95d3ac6c7e8954">getScale</a>());</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            text.setFillColor(<a class="code" href="class_m_e_p_1_1_following.html#a99b1de43071cd67845aedc49c6b0e3de">getColor</a>());</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        }</div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#ac82ef1fb2fd827231ad8f779d8574f35">  140</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_text.html#ac82ef1fb2fd827231ad8f779d8574f35">changePositionTag</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a>&amp; x) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">if</span> (x != m_tag) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                m_tag = x;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                tagApplied = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">  155</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">draw</a>(sf::RenderWindow&amp; window)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            window.draw(text); </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">if</span> (!tagApplied and m_tag != <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="keywordflow">if</span> (m_tag == <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">PositionTag::Middle</a>) {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    text.setOrigin({ text.getLocalBounds().width / 2,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                         (<span class="keywordtype">float</span>)text.getCharacterSize()/2 + ((<span class="keywordtype">float</span>)text.getCharacterSize() - text.getLocalBounds().height)/2});</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    text.setPosition(<a class="code" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a>());</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    tagApplied = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_tag == <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da">PositionTag::XMiddle</a>) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    text.setOrigin({ text.getLocalBounds().width / 2,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                         0 });</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    text.setPosition(<a class="code" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a>());</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    tagApplied = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_tag == <a class="code" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56">PositionTag::YMiddle</a>) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    text.setOrigin({ 0,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                         (float)text.getCharacterSize() / 2 + ((float)text.getCharacterSize() - text.getLocalBounds().height) / 2 });</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    text.setPosition(<a class="code" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a>());</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    tagApplied = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        }</div>
+<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">  186</a></span>&#160;        <span class="keyword">const</span> std::string&amp; <a class="code" href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">getText</a>()<span class="keyword"> const </span>{ </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <span class="keywordflow">return</span> m_content; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        }</div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a6e30dbd8bf6fb05054db8b1947305f13">  193</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_text.html#a6e30dbd8bf6fb05054db8b1947305f13">setText</a>(<span class="keyword">const</span> std::string&amp; in) {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            m_content = in;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            text.setString(in);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        }</div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_text.html#a3c6c1bb42111648b38c78a37b8d0ec79">  201</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_text.html#a3c6c1bb42111648b38c78a37b8d0ec79">setColor</a>(<span class="keyword">const</span> sf::Color&amp; in) {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <a class="code" href="class_m_e_p_1_1_following.html#ab0c13b2bbc8339d13bd4e69b16eafcba">m_color</a> = in;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    };</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_m_e_p_1_1_text_html_a9296e97a58ec2f695696e5244e3de4ec"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a9296e97a58ec2f695696e5244e3de4ec">MEP::Text::Text</a></div><div class="ttdeci">Text(const std::string &amp;content, sf::Font &amp;font, sf::Vector2f position={0, 0}, unsigned int fontSize=40)</div><div class="ttdef"><b>Definition:</b> TextObject.h:51</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a6e30dbd8bf6fb05054db8b1947305f13"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a6e30dbd8bf6fb05054db8b1947305f13">MEP::Text::setText</a></div><div class="ttdeci">void setText(const std::string &amp;in)</div><div class="ttdef"><b>Definition:</b> TextObject.h:193</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a14595445ee2149183a16f519f590ce93"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a14595445ee2149183a16f519f590ce93">MEP::Text::operator&lt;&lt;</a></div><div class="ttdeci">Text &amp; operator&lt;&lt;(const Sprite &amp;x)</div><div class="ttdef"><b>Definition:</b> TextObject.h:120</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_drawable_html"><div class="ttname"><a href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a></div><div class="ttdoc">MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...</div><div class="ttdef"><b>Definition:</b> Drawable.h:32</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_text_html_a703cbcfc3b94aad64d5c1bc1195f1fba"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">MEP::Text::getText</a></div><div class="ttdeci">const std::string &amp; getText() const</div><div class="ttdef"><b>Definition:</b> TextObject.h:75</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_text_html_a78dc979a1625c42901ff09a81bfe7df9"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">MEP::Text::draw</a></div><div class="ttdeci">bool draw(sf::RenderWindow &amp;window) override</div><div class="ttdef"><b>Definition:</b> TextObject.h:63</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_a6f1fb8b755d44375b723f591d910b62b"><div class="ttname"><a href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">MEP::Following::followingList</a></div><div class="ttdeci">std::list&lt; std::unique_ptr&lt; Follow &gt; &gt; followingList</div><div class="ttdef"><b>Definition:</b> Following.h:104</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a6e01f6c02e47b9cdd691af1943d00e85"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a6e01f6c02e47b9cdd691af1943d00e85">MEP::Text::operator&lt;&lt;</a></div><div class="ttdeci">Text &amp; operator&lt;&lt;(const Text &amp;x)</div><div class="ttdef"><b>Definition:</b> TextObject.h:124</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_ab85285733cb038fcabe17b08c3f7c078"><div class="ttname"><a href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">MEP::Following::getPosition</a></div><div class="ttdeci">sf::Vector2f getPosition() const</div><div class="ttdef"><b>Definition:</b> Following.h:259</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a703cbcfc3b94aad64d5c1bc1195f1fba"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">MEP::Text::getText</a></div><div class="ttdeci">const std::string &amp; getText() const</div><div class="ttdef"><b>Definition:</b> TextObject.h:186</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_ac82ef1fb2fd827231ad8f779d8574f35"><div class="ttname"><a href="class_m_e_p_1_1_text.html#ac82ef1fb2fd827231ad8f779d8574f35">MEP::Text::changePositionTag</a></div><div class="ttdeci">void changePositionTag(const PositionTag &amp;x)</div><div class="ttdef"><b>Definition:</b> TextObject.h:140</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_a99b1de43071cd67845aedc49c6b0e3de"><div class="ttname"><a href="class_m_e_p_1_1_following.html#a99b1de43071cd67845aedc49c6b0e3de">MEP::Following::getColor</a></div><div class="ttdeci">virtual const sf::Color &amp; getColor() const</div><div class="ttdef"><b>Definition:</b> Following.h:252</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a7e408162b28520bb990ae4775e946b50"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a7e408162b28520bb990ae4775e946b50">MEP::Text::Text</a></div><div class="ttdeci">Text(const std::string &amp;content, sf::Font &amp;font, unsigned int fontSize=40, sf::Vector2f position={ 0, 0 }, PositionTag tag=PositionTag::Non)</div><div class="ttdef"><b>Definition:</b> TextObject.h:80</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_a8e89ae336d4f8f01e7332dc0dc6d66b5"><div class="ttname"><a href="class_m_e_p_1_1_following.html#a8e89ae336d4f8f01e7332dc0dc6d66b5">MEP::Following::setPosition</a></div><div class="ttdeci">virtual void setPosition(const sf::Vector2f pos)</div><div class="ttdef"><b>Definition:</b> Following.h:205</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a78dc979a1625c42901ff09a81bfe7df9"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">MEP::Text::draw</a></div><div class="ttdeci">bool draw(sf::RenderWindow &amp;window) override</div><div class="ttdef"><b>Definition:</b> TextObject.h:155</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">MEP::Text::PositionTag::Middle</a></div><div class="ttdeci">@ Middle</div></div>
-<div class="ttc" id="a_following_8h_html"><div class="ttname"><a href="_following_8h.html">Following.h</a></div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_aaaf11bda7900407ed2b1f32f6de711b0"><div class="ttname"><a href="class_m_e_p_1_1_text.html#aaaf11bda7900407ed2b1f32f6de711b0">MEP::Text::Text</a></div><div class="ttdeci">Text(const std::string &amp;content, sf::Font &amp;font, const Following &amp;follow, unsigned int fontSize=40, PositionTag tag=PositionTag::Non)</div><div class="ttdef"><b>Definition:</b> TextObject.h:104</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_text_html"><div class="ttname"><a href="class_m_e_p_1_1_text.html">MEP::Text</a></div><div class="ttdoc">A basic Text class.</div><div class="ttdef"><b>Definition:</b> TextObject.h:37</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">MEP::Text::PositionTag::Non</a></div><div class="ttdeci">@ Non</div></div>
-<div class="ttc" id="a_drawable_8h_html"><div class="ttname"><a href="_drawable_8h.html">Drawable.h</a></div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_ab0c13b2bbc8339d13bd4e69b16eafcba"><div class="ttname"><a href="class_m_e_p_1_1_following.html#ab0c13b2bbc8339d13bd4e69b16eafcba">MEP::Following::m_color</a></div><div class="ttdeci">sf::Color m_color</div><div class="ttdef"><b>Definition:</b> Following.h:110</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a3c6c1bb42111648b38c78a37b8d0ec79"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a3c6c1bb42111648b38c78a37b8d0ec79">MEP::Text::setColor</a></div><div class="ttdeci">void setColor(const sf::Color &amp;in)</div><div class="ttdef"><b>Definition:</b> TextObject.h:201</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_aeb2ab5a148ecc173f22834472a171f80"><div class="ttname"><a href="class_m_e_p_1_1_text.html#aeb2ab5a148ecc173f22834472a171f80">MEP::Text::update</a></div><div class="ttdeci">void update(sf::Time &amp;currentTime) override</div><div class="ttdef"><b>Definition:</b> TextObject.h:133</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56">MEP::Text::PositionTag::YMiddle</a></div><div class="ttdeci">@ YMiddle</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdef"><b>Definition:</b> AnimationBase.h:28</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_ada2ca108122ea0ea8f95d3ac6c7e8954"><div class="ttname"><a href="class_m_e_p_1_1_following.html#ada2ca108122ea0ea8f95d3ac6c7e8954">MEP::Following::getScale</a></div><div class="ttdeci">sf::Vector2f getScale() const</div><div class="ttdef"><b>Definition:</b> Following.h:266</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdef"><b>Definition:</b> AnimationBase.h:29</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da">MEP::Text::PositionTag::XMiddle</a></div><div class="ttdeci">@ XMiddle</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_following_html"><div class="ttname"><a href="class_m_e_p_1_1_following.html">MEP::Following</a></div><div class="ttdoc">MEP::Following keeps track of a MEP::Object position.</div><div class="ttdef"><b>Definition:</b> Following.h:32</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505f"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">MEP::Text::PositionTag</a></div><div class="ttdeci">PositionTag</div><div class="ttdef"><b>Definition:</b> TextObject.h:39</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_a9c6699f5c55643be7c6017d67b2136cb"><div class="ttname"><a href="class_m_e_p_1_1_following.html#a9c6699f5c55643be7c6017d67b2136cb">MEP::Following::Following</a></div><div class="ttdeci">Following(const FollowType &amp;followType, sf::Vector2f pos={ 0.f, 0.f }, sf::Vector2f posFixed={ 0.f, 0.f }, sf::Vector2f scale={ 1.f, 1.f }, sf::Vector2f scaleFixed={ 1.f, 1.f })</div><div class="ttdef"><b>Definition:</b> Following.h:121</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_sprite_html"><div class="ttname"><a href="class_m_e_p_1_1_sprite.html">MEP::Sprite</a></div><div class="ttdoc">Basically the SFML sprite with the support for the MEP functionalities.</div><div class="ttdef"><b>Definition:</b> Sprite.h:7</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html"><div class="ttname"><a href="class_m_e_p_1_1_following.html">MEP::Following</a></div><div class="ttdoc">MEP::Following keeps track of a MEP::Object position.</div><div class="ttdef"><b>Definition:</b> Following.h:33</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_following_html_a27f6f40bc5632d8a2aea48e4e241f211"><div class="ttname"><a href="class_m_e_p_1_1_following.html#a27f6f40bc5632d8a2aea48e4e241f211">MEP::Following::m_posFixed</a></div><div class="ttdeci">sf::Vector2f m_posFixed</div><div class="ttdef"><b>Definition:</b> Following.h:107</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_text_html_a0bb160179b8967e96c5256822141505f"><div class="ttname"><a href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">MEP::Text::PositionTag</a></div><div class="ttdeci">PositionTag</div><div class="ttdef"><b>Definition:</b> TextObject.h:43</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

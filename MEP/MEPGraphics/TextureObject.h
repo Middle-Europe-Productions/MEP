@@ -29,13 +29,11 @@ namespace MEP {
 	* Basic type of a MEP::Drawable element in which the creation of a sf::Sprite is done via a single texture.
 	* \brief Basic MEP::Drawable element based on a single texture. 
 	*/
-	class TextureObject : public Object, public Following {
-		//current sprite ready to bo rendered
-		sf::Sprite currentSprite;
-		void updateSprite() {
+	class TextureObject : public Object, public Sprite {
+		void updateSprite() override {
 			if (!followingList.empty()) {
 				for (auto& x : followingList)
-					x->CheckVariables(m_pos, m_posFixed, m_scale, m_scaleFixed);
+					x->updateVariables(*this, currentSprite);
 			}
 			currentSprite.setPosition(m_posFixed);
 			currentSprite.setScale(m_scaleFixed);
@@ -58,7 +56,7 @@ namespace MEP {
 			sf::Vector2f pos = { 0.f, 0.f },
 			sf::Vector2f scale = { 1.f, 1.f }) :
 			Object(x),
-			Following(pos, pos, scale, scale) 
+			Sprite(pos, scale) 
 		{ 
 			init(); 
 		};
@@ -80,14 +78,14 @@ namespace MEP {
 		/**
 		* Sets the main sprite Rect
 		*/
-		void SetRect(const sf::IntRect& rect) { 
+		void setRect(const sf::IntRect& rect) { 
 			currentSprite.setTextureRect(rect); 
 		}
 		/**
 		* Outputs the color of a main sprite.
 		* @return sf::Color
 		*/
-		void SetColor(const sf::Color& color) { 
+		void setColor(const sf::Color& color) { 
 			currentSprite.setColor(color); 
 		}
 		/**
@@ -101,14 +99,14 @@ namespace MEP {
 		* Outputs the color of a main sprite.
 		* @return sf::Color
 		*/
-		const sf::Color& GetColor() const { 
+		const sf::Color& getColor() const { 
 			return currentSprite.getColor(); 
 		}
 		/**
 		* Outputs activity of a texture. It is related to associated animations.
 		* @return true - is active, false - otherwise.
 		*/
-		bool IsActive() const override {
+		bool isActive() const override {
 			return isFollowerActive();
 		}
 	};

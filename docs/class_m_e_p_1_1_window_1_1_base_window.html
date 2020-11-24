@@ -20,10 +20,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mep0.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.1</span>
+   &#160;<span id="projectnumber">alpha 1.2</span>
    </div>
   </td>
  </tr>
@@ -110,8 +110,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a32a97beb58dcd743ac2567b25990470e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a32a97beb58dcd743ac2567b25990470e">BaseWindow</a> (const unsigned int ID)</td></tr>
 <tr class="separator:a32a97beb58dcd743ac2567b25990470e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a167fc39191813945eb49692925a95392"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a167fc39191813945eb49692925a95392">BaseWindow</a> (const unsigned int ID, const sf::View &amp;view)</td></tr>
-<tr class="separator:a167fc39191813945eb49692925a95392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f96da1e0491f2b3f8a2921b517f49c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a2f96da1e0491f2b3f8a2921b517f49c0">BaseWindow</a> (const unsigned int ID, const sf::View &amp;view, const sf::View &amp;master)</td></tr>
+<tr class="separator:a2f96da1e0491f2b3f8a2921b517f49c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab55b7bddaa3f6ae6613a58d295b50613"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#ab55b7bddaa3f6ae6613a58d295b50613">render</a> (sf::RenderWindow &amp;Window)</td></tr>
 <tr class="separator:ab55b7bddaa3f6ae6613a58d295b50613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24b134fb96e517730437b4a51900faac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a24b134fb96e517730437b4a51900faac">update</a> (sf::Time &amp;currentTime)</td></tr>
@@ -138,6 +138,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a36da969f5c4877ddaabd940972ff517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1587f306cec656048d2fca8b183295"><td class="memItemLeft" align="right" valign="top">const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#afb1587f306cec656048d2fca8b183295">getView</a> () const</td></tr>
 <tr class="separator:afb1587f306cec656048d2fca8b183295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6969565c0c2c1714379765035d6d50a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a6969565c0c2c1714379765035d6d50a5">setView</a> (const sf::View &amp;view)</td></tr>
+<tr class="separator:a6969565c0c2c1714379765035d6d50a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5490f07afbdfa96e43c2bdd572635e82"><td class="memItemLeft" align="right" valign="top">const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a5490f07afbdfa96e43c2bdd572635e82">getMasterView</a> () const</td></tr>
+<tr class="separator:a5490f07afbdfa96e43c2bdd572635e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9d7a72c0e26845b858dc3e8969d4c50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#ab9d7a72c0e26845b858dc3e8969d4c50">isConnected</a> (unsigned int ID) const</td></tr>
 <tr class="separator:ab9d7a72c0e26845b858dc3e8969d4c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27627e280f8efd300f1790a63cfb9b3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a27627e280f8efd300f1790a63cfb9b3f">newObject</a> (<a class="el" href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a> *object)</td></tr>
@@ -175,6 +179,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5735e4b8a7744ab60c9c0edef76e60ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa43d108c37d1d7a7d15b370a9c58ad96"><td class="memItemLeft" align="right" valign="top">sf::View&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#aa43d108c37d1d7a7d15b370a9c58ad96">m_view</a></td></tr>
 <tr class="separator:aa43d108c37d1d7a7d15b370a9c58ad96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca90d23de149429d335de08e1d7199d"><td class="memItemLeft" align="right" valign="top">const sf::View *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a0ca90d23de149429d335de08e1d7199d">m_appView</a> = nullptr</td></tr>
+<tr class="separator:a0ca90d23de149429d335de08e1d7199d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71087b543e4d920dab89ee721b2135bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a71087b543e4d920dab89ee721b2135bb">isCustomViewEnabled</a> = false</td></tr>
 <tr class="separator:a71087b543e4d920dab89ee721b2135bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -249,8 +255,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a167fc39191813945eb49692925a95392"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a167fc39191813945eb49692925a95392">&#9670;&nbsp;</a></span>BaseWindow() <span class="overload">[2/2]</span></h2>
+<a id="a2f96da1e0491f2b3f8a2921b517f49c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f96da1e0491f2b3f8a2921b517f49c0">&#9670;&nbsp;</a></span>BaseWindow() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +274,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const sf::View &amp;&#160;</td>
-          <td class="paramname"><em>view</em>&#160;</td>
+          <td class="paramname"><em>view</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>master</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -493,6 +505,37 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5490f07afbdfa96e43c2bdd572635e82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5490f07afbdfa96e43c2bdd572635e82">&#9670;&nbsp;</a></span>getMasterView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::View&amp; MEP::Window::BaseWindow::getMasterView </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the view parameter of a main app. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td>const sf::View&amp; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a1e24b8a327ae8ac988c792a0da788e81"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e24b8a327ae8ac988c792a0da788e81">&#9670;&nbsp;</a></span>getStatus()</h2>
 
@@ -541,12 +584,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Outputs the view parameter. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td>const sf::View&amp; </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Outputs the view parameter. </p><dl class="section return"><dt>Returns</dt><dd>: const sf::View&amp; </dd></dl>
 
 </div>
 </div>
@@ -858,6 +896,38 @@ template&lt;typename ... Values&gt; </div>
 
 </div>
 </div>
+<a id="a6969565c0c2c1714379765035d6d50a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6969565c0c2c1714379765035d6d50a5">&#9670;&nbsp;</a></span>setView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Window::BaseWindow::setView </td>
+          <td>(</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>view</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the view parameter. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td>const sf::View&amp; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a24b134fb96e517730437b4a51900faac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a24b134fb96e517730437b4a51900faac">&#9670;&nbsp;</a></span>update()</h2>
 
@@ -998,6 +1068,28 @@ template&lt;typename ... Values&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool MEP::Window::BaseWindow::isCustomViewEnabled = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ca90d23de149429d335de08e1d7199d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca90d23de149429d335de08e1d7199d">&#9670;&nbsp;</a></span>m_appView</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::View* MEP::Window::BaseWindow::m_appView = nullptr</td>
         </tr>
       </table>
   </td>

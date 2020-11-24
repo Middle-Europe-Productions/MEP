@@ -111,10 +111,8 @@ namespace MEP {
                     for (auto& x : m_windows) {
                         if (x->getStatus() != BaseWindow::Status::NullAction) {
                             if (x->customView()) {
-                                Window.setView(x->getView());
                                 if (!x->render(Window))
                                     ready = false;
-                                Window.setView(m_view);
                             }
                             else {
                                 if (!x->render(Window))
@@ -239,7 +237,7 @@ namespace MEP {
                 */
                 virtual bool run() {
                     if (isInit == false) {
-                        throw MEP::Window::WindowException(-1, "Appliaction is not initialized!");
+                        throw MEP::Window::WindowException("Appliaction is not initialized!");
                     }
                     sf::Clock clock;
                     sf::Time timeSinceLastUpdate = sf::Time::Zero;

@@ -25,6 +25,7 @@
 
 #pragma once
 #include"AnimationObject.h"
+#include"NonCopyable.h"
 namespace MEP {
 	/**
 	* \brief MEP::Button provides a basic implementation of an object with the ability of display it on a screen.
@@ -101,25 +102,25 @@ namespace MEP {
 		* Changes the status of a button.
 		* @param[in] status : A MEP::Button::ButtonStatus object
 		*/
-		void ChangeStatus(const ButtonStatus& status) { m_status = status; }
+		void changeStatus(const ButtonStatus& status) { m_status = status; }
 		/**
 		* Outputs current status of a button.
 		* @return Current status
 		*/
-		const ButtonStatus& GetStatus() const { return  m_status; }
+		const ButtonStatus& getStatus() const { return m_status; }
 	};
 	MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(1, x, pos, scale),
 		m_base(0)
 	{
-		if (x.GetNufTextures() < 3)
+		if (x.getNufTextures() < 3)
 			throw "Textures too small!";
-		if (active_breakpoint < x.GetNufTextures())
+		if (active_breakpoint < x.getNufTextures())
 			m_active = active_breakpoint;
 		else
 			throw "Wrong middle paremeter!";
-		if (active_breakpoint < x.GetNufTextures() - 1)
-			m_pressed = x.GetNufTextures() - 1;
+		if (active_breakpoint < x.getNufTextures() - 1)
+			m_pressed = x.getNufTextures() - 1;
 		else
 			throw "Wrong end parameter!";
 	}
@@ -128,14 +129,14 @@ namespace MEP {
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
-		if (x.GetNufTextures() < 3)
+		if (x.getNufTextures() < 3)
 			throw "Textures too small!";
-		if (active_breakpoint < x.GetNufTextures())
+		if (active_breakpoint < x.getNufTextures())
 			m_active = active_breakpoint;
 		else
 			throw "Wrong middle paremeter!";
-		if (active_breakpoint < x.GetNufTextures() - 1)
-			m_pressed = x.GetNufTextures() - 1;
+		if (active_breakpoint < x.getNufTextures() - 1)
+			m_pressed = x.getNufTextures() - 1;
 		else
 			throw "Wrong end parameter!";
 	}
@@ -144,14 +145,14 @@ namespace MEP {
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
-		if (x.GetNufTextures() < 3)
+		if (x.getNufTextures() < 3)
 			throw "Textures too small!";
-		if (active_breakpoint < x.GetNufTextures())
+		if (active_breakpoint < x.getNufTextures())
 			m_active = active_breakpoint;
 		else
 			throw "Wrong middle paremeter!";
-		if (active_breakpoint < x.GetNufTextures() - 1)
-			m_pressed = x.GetNufTextures() - 1;
+		if (active_breakpoint < x.getNufTextures() - 1)
+			m_pressed = x.getNufTextures() - 1;
 		else
 			throw "Wrong end parameter!";
 	}
@@ -171,7 +172,7 @@ namespace MEP {
 						index_currentFrame++;
 						currentFrame++;
 					}
-					updateSprite();
+					updateSprite(**currentFrame);
 				}
 				else if (m_status == ButtonStatus::Base and index_currentFrame != m_base) {
 					if (index_currentFrame > m_active) {
@@ -184,12 +185,12 @@ namespace MEP {
 						index_currentFrame--;
 						currentFrame--;
 					}
-					updateSprite();
+					updateSprite(**currentFrame);
 				}
 				else if (m_status == ButtonStatus::Pressed and index_currentFrame != m_pressed) {
 					index_currentFrame++;
 					currentFrame++;
-					updateSprite();
+					updateSprite(**currentFrame);
 				}
 			}
 		}
@@ -204,31 +205,31 @@ namespace MEP {
 		if (!followingList.empty()) {
 			if (!isTran)
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					ChangeStatus(ButtonStatus::Pressed);
+					changeStatus(ButtonStatus::Pressed);
 				else
-					ChangeStatus(ButtonStatus::Active);
+					changeStatus(ButtonStatus::Active);
 			else
-				ChangeStatus(ButtonStatus::Base);
+				changeStatus(ButtonStatus::Base);
 		}
 		if (event.type == sf::Event::MouseMoved) {
 			if (!isTran)
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					ChangeStatus(ButtonStatus::Pressed);
+					changeStatus(ButtonStatus::Pressed);
 				else
-					ChangeStatus(ButtonStatus::Active);
+					changeStatus(ButtonStatus::Active);
 			else
-				ChangeStatus(ButtonStatus::Base);
+				changeStatus(ButtonStatus::Base);
 		}
 		else if (event.type == sf::Event::MouseButtonPressed) {
 			if (event.key.code == sf::Mouse::Left) {
 				if (!isTran)
-					ChangeStatus(ButtonStatus::Pressed);
+					changeStatus(ButtonStatus::Pressed);
 			}
 		}
 		else if (event.type == sf::Event::MouseButtonReleased) {
 			if (event.key.code == sf::Mouse::Left) {
 				if (!isTran) {
-					ChangeStatus(ButtonStatus::Active);
+					changeStatus(ButtonStatus::Active);
 					return true;
 				}
 			}

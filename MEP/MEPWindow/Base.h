@@ -32,28 +32,49 @@ namespace MEP {
 		* \brief MEP::Window::BaseWindow exceptions handler. 
 		*/
 		struct WindowException {
-			const unsigned int WindowID;
+			bool master = false;
+			const unsigned int WindowID = 0;
 			std::string Message;
 			/**
-			* Constructor of a BaseWindow
+			* Constructor of a WindowException
 			* @param[in] ID : Identification of a w MEP::Window::BaseWindow
 			* @param[in] msg : Message
 			*/
 			explicit WindowException(const unsigned int ID, const std::string& msg) : WindowID(ID), Message(msg)
 			{}
 			/**
-			* Constructor of a BaseWindow
+			* Constructor of a WindowException
 			* @param[in] ID : Identification of a w MEP::Window::BaseWindow
 			* @param[in] msg : Message
 			*/
 			explicit WindowException(const unsigned int ID, const char* msg) : WindowID(ID), Message(msg)
 			{}
 			/**
-			* Constructor of a BaseWindow
+			* Constructor of a WindowException
 			* @param[in] ID : Identification of a w MEP::Window::BaseWindow
 			* @param[in] x : A MEP::ResourceException that caused the MEP::Window::WindowException
 			*/
 			explicit WindowException(const unsigned int ID, const MEP::ResourceException& x) : WindowID(ID)
+			{
+				Message = "caused by ResourceException ResourceName: " + x.ResourceName + ", Message: " + x.Message;
+			}/**
+			* Constructor of a WindowException
+			* @param[in] ID : Identification of a w MEP::Window::BaseWindow
+			* @param[in] msg : Message
+			*/
+			explicit WindowException(const std::string& msg) : master(true), Message(msg)
+			{}
+			/**
+			* Constructor of a WindowException
+			* @param[in] msg : Message
+			*/
+			explicit WindowException(const char* msg) : master(true), Message(msg)
+			{}
+			/**
+			* Constructor of a WindowException
+			* @param[in] x : A MEP::ResourceException that caused the MEP::Window::WindowException
+			*/
+			explicit WindowException(const MEP::ResourceException& x): master(true)
 			{
 				Message = "caused by ResourceException ResourceName: " + x.ResourceName + ", Message: " + x.Message;
 			}
@@ -61,7 +82,10 @@ namespace MEP {
 			* Overloading the << operator.
 			*/
 			friend std::ostream& operator<<(std::ostream& out, const WindowException& x) {
-				out << "WindowException, ID:" << x.WindowID << ", Message:" << x.Message << std::endl;
+				if (x.master)
+					out << "WindowException, ID: MASTER, Message:" << x.Message << std::endl;
+				else
+					out << "WindowException, ID:" << x.WindowID << ", Message:" << x.Message << std::endl;
 				return out;
 			}
 		};
@@ -105,18 +129,27 @@ namespace MEP {
 			std::shared_ptr<BaseWindow>& getWindow(unsigned int ID);
 			//custom view
 			sf::View m_view;
+			//view of a master window
+			const sf::View* m_appView = nullptr;
 			bool isCustomViewEnabled = false;
 		public:
 			/**
 			* Constructor of a BaseWindow
 			* @param[in] id : Window identifier
 			*/
-			BaseWindow(const unsigned int ID) : m_ID(ID) {}
+			BaseWindow(const unsigned int ID) : 
+				m_ID(ID) 
+			{}
 			/**
 			* Constructor of a BaseWindow
 			* @param[in] id : Window identifier
 			*/
-			BaseWindow(const unsigned int ID, const sf::View& view) : m_ID(ID), m_view(view), isCustomViewEnabled(true) {}
+			BaseWindow(const unsigned int ID, const sf::View& view, const sf::View& master) : 
+				m_ID(ID), 
+				m_view(view), 
+				m_appView(&master), 
+				isCustomViewEnabled(true) 
+			{}
 			/**
 			* Base render method.
 			* @param[in] Window : RenderWindow object.
@@ -124,11 +157,27 @@ namespace MEP {
 			*/
 			virtual bool render(sf::RenderWindow& Window) {
 				bool stop = true;
+				if(customView())
+					Window.setView(getView());
 				for (auto& x : m_objects) {
-					if (!x->draw(Window)) {
-						stop = false;
+					if (x->getDrawTag() == MEP::Drawable::DrawTag::ViewLock and customView()) {
+						Window.setView(getMasterView());
+						if (!x->draw(Window)) {
+							stop = false;
+						}
+						Window.setView(getView());;
+					}
+					else if (x->getDrawTag() == MEP::Drawable::DrawTag::Unactive) {
+						continue;
+					}
+					else {
+						if (!x->draw(Window)) {
+							stop = false;
+						}
 					}
 				}
+				if (customView())
+					Window.setView(getMasterView());
 				return stop;
 			}
 			/**
@@ -193,14 +242,28 @@ namespace MEP {
 			* @return : true if a custom view is enabled for the window, false otherwise.
 			*/
 			bool customView() const { 
-				return isCustomViewEnabled; 
+				return isCustomViewEnabled and m_appView; 
 			}
 			/**
 			* Outputs the view parameter.
-			* @param[in] : const sf::View&
+			* @return : const sf::View&
 			*/
 			const sf::View& getView() const { 
 				return m_view; 
+			}
+			/**
+			* Sets the view parameter.
+			* @param[in] : const sf::View&
+			*/
+			void setView(const sf::View& view) { 
+				m_view = view;
+			}
+			/**
+			* Outputs the view parameter of a main app.
+			* @param[in] : const sf::View&
+			*/
+			const sf::View& getMasterView() const {
+				return *m_appView;
 			}
 			/**
 			* Checks if the connection is established.
@@ -309,7 +372,7 @@ namespace MEP {
 				x->exitUpdate(currentTime);
 			}
 			for (auto& x : m_objects) {
-				if (x->IsActive())
+				if (x->isActive())
 					isActive = true;
 			}
 			if (!isActive) {

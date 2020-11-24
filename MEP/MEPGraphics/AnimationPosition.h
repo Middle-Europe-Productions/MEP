@@ -27,14 +27,20 @@
 #include<functional>
 #include<list>
 #include<iostream>
+#include <cmath>
 #include"AnimationBase.h"
 #include"Drawable.h"
 namespace MEP {
 	/**
+	* The idea here is simple. We take a function f.
+	* Then min(<f(begin), ..., f(end)>) where min is a minimal value. Becomes our entry position.
+	* And max(<f(begin), ..., f(end)>) where max is a maximal value. Becomes our exit position.
+	* Please keep in mind that f(begin) and minimal value are 2 seperate things, but of course f(begin) can be equal to minimal value.
+	* After all of that we generate points according to the given framerate and animation lenght.
 	* \brief MEP::AnimationPosition provides a basic implementation of a modification of the position.
 	*/
 	class AnimationPosition : public Drawable, public Animation {
-	private:
+	protected:
 		std::function<double(double x)> m_function;
 		//all frames information
 		unsigned int nofFrames;
@@ -52,6 +58,11 @@ namespace MEP {
 		//run with the delay
 		sf::Time m_delay = sf::Time::Zero;
 		bool delayInit = false;
+		/**
+		* Core updates for position animation.
+		* This method is needed in order to avoid CTRL-C/V.
+		*/
+		void updatePositionAnimation(sf::Time& currentTime);
 	public:
 		AnimationPosition() = default;
 		/**
@@ -105,13 +116,30 @@ namespace MEP {
 		*/
 		const double GetFixedVariable() const { return *currentFrame; }
 		/**
+		* Outputs the current position of an animation.
+		* @return Current position as unsigned int.
+		*/
+		const unsigned int GetFixedUintVariable() const { 
+			return (unsigned int)round(*currentFrame); 
+		}
+		/**
+		* Outputs the entry position of an animation.
+		* @return Entry position.
+		*/
+		const double getEntry() const { return m_entry; }
+		/**
+		* Outputs the exit position of an animation.
+		* @return Exit position.
+		*/
+		const double getExit() const { return m_exit; }
+		/**
 		* Override of a MEP::Drawable draw.
 		*/
-		bool draw(sf::RenderWindow& window) override {}
+		bool draw(sf::RenderWindow& window) override { return true; }
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time& currentTime) override;
+		virtual void update(sf::Time& currentTime);
 		/**
 		* Override of a MEP::Drawable entryUpdate.
 		*/
@@ -124,8 +152,16 @@ namespace MEP {
 		* Outputs the activation status of an animation.
 		* @return True - active, False - unactive
 		*/
-		bool IsActive() const override;
-		//~AnimationPosition() = default;
+		bool isActive() const override;
+		/**
+		* Outputs the current frame as a Color
+		* *Warning* For color animation it is recommended to use MEP::AnimationColor
+		* @return : sf::Color
+		*/
+		virtual sf::Color getFrameAsColor() const { 
+			return sf::Color(std::round(*currentFrame)); 
+		}
+		virtual ~AnimationPosition() = default;
 	};
 	void MEP::AnimationPosition::init()
 	{
@@ -161,6 +197,13 @@ namespace MEP {
 
 	void MEP::AnimationPosition::update(sf::Time& currentTime)
 	{
+		updatePositionAnimation(currentTime);
+	}
+	/**
+	* Core updates for position animation.
+	* This method is needed in order to avoid CTRL-C/V.
+	*/
+	void MEP::AnimationPosition::updatePositionAnimation(sf::Time& currentTime) {
 		if (isRunning and (isInit == AnimationInit::PositionAnimation)) {
 			if (currentTime - updateTime >= toWait) {
 				if (direction == Direction::Forward) {
@@ -190,31 +233,29 @@ namespace MEP {
 				delayInit = true;
 			}
 			else if (currentTime - updateTime > m_delay) {
-				Run(direction);
+				run(direction);
 				m_delay = sf::Time::Zero;
 				delayInit = false;
 			}
 		}
 	}
-
 	void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			Run(Direction::Forward);
+			run(Direction::Forward);
 		update(currentTime);
 	}
 
 	void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			Run(Direction::Backwards);
+			run(Direction::Backwards);
 		update(currentTime);
-
 	}
 
-	bool MEP::AnimationPosition::IsActive() const
+	bool MEP::AnimationPosition::isActive() const
 	{
-		return GetStatus();
+		return getStatus();
 	}
 
 };

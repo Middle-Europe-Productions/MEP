@@ -22,14 +22,15 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-
-#include<SFML/Graphics.hpp>
 #pragma once
+#include<SFML/Graphics.hpp>
+#include"NonCopyable.h"
+
 namespace MEP {
 	/**
 	* \brief MEP::Animation base definition of an animation. 
 	*/
-	class Animation {
+	class Animation: public NonCopyable {
 	public:
 		/**
 		* @enum MEP::Animation::Direction
@@ -114,7 +115,7 @@ namespace MEP {
 		* @param[in] direc : MEP::Animation::Direction.
 		* @param[in] currentTime : sf::Time = sf::Time::Zero.
 		*/
-		virtual void Run(const Direction direc, sf::Time currentTime = sf::Time::Zero) {
+		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero) {
 			direction = direc;
 			updateTime = currentTime;
 			isRunning = true;
@@ -122,42 +123,42 @@ namespace MEP {
 		/**
 		* Changes current status to !status
 		*/
-		void ChangeStatus() { 
+		void changeStatus() { 
 			isRunning = !isRunning; 
 		}
 		/**
 		* Outputs a current status of an animation.
 		* @return true - animation is active, false - animation is unactive.
 		*/
-		bool GetStatus() const { 
+		bool getStatus() const { 
 			return isRunning; 
 		}
 		/**
 		* Changes the additional tag of an animation.
 		* @param[in] tag MEP::Animation::AdditionalTag.
 		*/
-		void ChangeTag(const AdditionalTag& tag) { 
+		void changeTag(const AdditionalTag& tag) { 
 			m_tag = tag; 
 		}
 		/**
 		* Outputs time to wait between animation frames.
 		* @return sf::Time
 		*/
-		sf::Time GetToWait() const { 
+		sf::Time getToWait() const { 
 			return toWait; 
 		}
 		/**
 		* Outputs animation initialization tag.
 		* @return MEP::Animation::AnimationInit
 		*/
-		const AnimationInit GetInit() const { 
+		const AnimationInit getInit() const { 
 			return isInit; 
 		}
 		/**
 		* Outputs animation direction.
 		* @return MEP::Animation::Direction
 		*/
-		const Direction& GetDirection() const { 
+		const Direction& getDirection() const { 
 			return direction; 
 		}
 	};

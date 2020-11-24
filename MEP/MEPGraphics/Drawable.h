@@ -32,6 +32,30 @@ namespace MEP {
 	class Drawable {
 	public:
 		/**
+		* @enum MEP::Button::DrawTag defines a draw tag.
+		*/
+		enum class DrawTag {
+			/** There is no draw tag.*/
+			Non,
+			/** View lock tag. Objects will be rendered using master view if custom view is enabled.*/
+			ViewLock,
+			/** Unactive tag. Objects will not be rendered. */
+			Unactive
+		};
+		/**
+		* Outputs draw tag of a MEP::Drawable.
+		* @return : MEP::Drawable::DrawTag.
+		*/
+		const DrawTag& getDrawTag() const { return m_drawTag; }
+		/**
+		* Sets the draw tag of a MEP::Drawable.
+		* @param[in] : MEP::Drawable::DrawTag.
+		*/
+		void setDrawTag(const DrawTag& tag) { m_drawTag = tag; }
+	private:
+		DrawTag m_drawTag = DrawTag::Non;
+	public:
+		/**
 		* Default contructor.
 		*/
 		Drawable() = default;
@@ -60,7 +84,7 @@ namespace MEP {
 		* Default virtual activation status method.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual bool IsActive() const { return false; };
+		virtual bool isActive() const { return false; };
 		virtual ~Drawable() {};
 	};
 };

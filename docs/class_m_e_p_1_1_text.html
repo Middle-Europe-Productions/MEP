@@ -20,10 +20,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="mep0.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.1</span>
+   &#160;<span id="projectnumber">alpha 1.2</span>
    </div>
   </td>
  </tr>
@@ -99,6 +99,12 @@ Public Types</h2></td></tr>
 <a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05">PositionTag::Middle</a>
  }</td></tr>
 <tr class="separator:a0bb160179b8967e96c5256822141505f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_class_m_e_p_1_1_drawable"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_m_e_p_1_1_drawable')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a></td></tr>
+<tr class="memitem:aeee70ba2555a5eb2bd4caad84a99175b inherit pub_types_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> { <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175ba6679e65c932b2c5ad98080ee21a4f0d4">DrawTag::Non</a>, 
+<a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175bae49b6e288f1d5b0d228933c082a181d4">DrawTag::ViewLock</a>, 
+<a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175bab4eddfe28794300438c09ae75dd59824">DrawTag::Unactive</a>
+ }</td></tr>
+<tr class="separator:aeee70ba2555a5eb2bd4caad84a99175b inherit pub_types_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_m_e_p_1_1_following"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_m_e_p_1_1_following')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_m_e_p_1_1_following.html">MEP::Following</a></td></tr>
 <tr class="memitem:af7c054b0039410f44e0af93576599a3a inherit pub_types_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> { <br />
 &#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa46dbb2fe48fe1beb6a7f2893c6ae56e5">FollowType::NotInit</a>, 
@@ -107,61 +113,86 @@ Public Types</h2></td></tr>
 <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810">FollowType::Y_Scale</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa3df68b85d23637a7c82d111a000d2b80">FollowType::X_Pos</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a>
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a>, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aacb5feb1b7314637725a2e73bdc9f7295">FollowType::Color</a>
 <br />
  }</td></tr>
 <tr class="separator:af7c054b0039410f44e0af93576599a3a inherit pub_types_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9296e97a58ec2f695696e5244e3de4ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a9296e97a58ec2f695696e5244e3de4ec">Text</a> (const std::string &amp;content, sf::Font &amp;font, sf::Vector2f position={0, 0}, unsigned int fontSize=40)</td></tr>
-<tr class="separator:a9296e97a58ec2f695696e5244e3de4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e408162b28520bb990ae4775e946b50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a7e408162b28520bb990ae4775e946b50">Text</a> (const std::string &amp;content, sf::Font &amp;font, unsigned int fontSize=40, sf::Vector2f position={ 0, 0 }, <a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> tag=<a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>)</td></tr>
+<tr class="separator:a7e408162b28520bb990ae4775e946b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf11bda7900407ed2b1f32f6de711b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#aaaf11bda7900407ed2b1f32f6de711b0">Text</a> (const std::string &amp;content, sf::Font &amp;font, const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;follow, unsigned int fontSize=40, <a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> tag=<a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a>)</td></tr>
+<tr class="separator:aaaf11bda7900407ed2b1f32f6de711b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14595445ee2149183a16f519f590ce93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_text.html">Text</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a14595445ee2149183a16f519f590ce93">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_sprite.html">Sprite</a> &amp;x)</td></tr>
+<tr class="separator:a14595445ee2149183a16f519f590ce93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e01f6c02e47b9cdd691af1943d00e85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_text.html">Text</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a6e01f6c02e47b9cdd691af1943d00e85">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_text.html">Text</a> &amp;x)</td></tr>
+<tr class="separator:a6e01f6c02e47b9cdd691af1943d00e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2ab5a148ecc173f22834472a171f80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#aeb2ab5a148ecc173f22834472a171f80">update</a> (sf::Time &amp;currentTime) override</td></tr>
+<tr class="separator:aeb2ab5a148ecc173f22834472a171f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82ef1fb2fd827231ad8f779d8574f35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#ac82ef1fb2fd827231ad8f779d8574f35">changePositionTag</a> (const <a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> &amp;x)</td></tr>
+<tr class="separator:ac82ef1fb2fd827231ad8f779d8574f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78dc979a1625c42901ff09a81bfe7df9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a78dc979a1625c42901ff09a81bfe7df9">draw</a> (sf::RenderWindow &amp;window) override</td></tr>
 <tr class="separator:a78dc979a1625c42901ff09a81bfe7df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a703cbcfc3b94aad64d5c1bc1195f1fba"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a703cbcfc3b94aad64d5c1bc1195f1fba">getText</a> () const</td></tr>
 <tr class="separator:a703cbcfc3b94aad64d5c1bc1195f1fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e30dbd8bf6fb05054db8b1947305f13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a6e30dbd8bf6fb05054db8b1947305f13">setText</a> (const std::string &amp;in)</td></tr>
+<tr class="separator:a6e30dbd8bf6fb05054db8b1947305f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6c1bb42111648b38c78a37b8d0ec79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_text.html#a3c6c1bb42111648b38c78a37b8d0ec79">setColor</a> (const sf::Color &amp;in)</td></tr>
+<tr class="separator:a3c6c1bb42111648b38c78a37b8d0ec79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_m_e_p_1_1_drawable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_drawable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a></td></tr>
+<tr class="memitem:a48c97a4eddc344f53b84b989614a5d13 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a48c97a4eddc344f53b84b989614a5d13">getDrawTag</a> () const</td></tr>
+<tr class="separator:a48c97a4eddc344f53b84b989614a5d13 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cbd55e97252e4dfd4a12ea05befb3fc inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a8cbd55e97252e4dfd4a12ea05befb3fc">setDrawTag</a> (const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> &amp;tag)</td></tr>
+<tr class="separator:a8cbd55e97252e4dfd4a12ea05befb3fc inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90fadf06cd76d83f74a6cb2fe92c108 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae90fadf06cd76d83f74a6cb2fe92c108">Drawable</a> ()=default</td></tr>
 <tr class="separator:ae90fadf06cd76d83f74a6cb2fe92c108 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da74643ffddb9dc287296571662b0cc inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a6da74643ffddb9dc287296571662b0cc">update</a> (sf::Time &amp;currentTime)</td></tr>
-<tr class="separator:a6da74643ffddb9dc287296571662b0cc inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477b47c638f6b6f9f48aa14ba5bc8bcf inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a477b47c638f6b6f9f48aa14ba5bc8bcf">entryUpdate</a> (sf::Time &amp;currentTime)</td></tr>
 <tr class="separator:a477b47c638f6b6f9f48aa14ba5bc8bcf inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0570882fc96c96fd1adf316b319146 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a2b0570882fc96c96fd1adf316b319146">exitUpdate</a> (sf::Time &amp;currentTime)</td></tr>
 <tr class="separator:a2b0570882fc96c96fd1adf316b319146 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a055820e3484b71fa32625ea1b8b4d262 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a055820e3484b71fa32625ea1b8b4d262">IsActive</a> () const</td></tr>
-<tr class="separator:a055820e3484b71fa32625ea1b8b4d262 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a5e089ef0c013202668665457a71be9 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a6a5e089ef0c013202668665457a71be9">isActive</a> () const</td></tr>
+<tr class="separator:a6a5e089ef0c013202668665457a71be9 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e3510eb4e5f1780ce147e2c33846e9e inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a5e3510eb4e5f1780ce147e2c33846e9e">~Drawable</a> ()</td></tr>
 <tr class="separator:a5e3510eb4e5f1780ce147e2c33846e9e inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_m_e_p_1_1_following"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_following')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_following.html">MEP::Following</a></td></tr>
-<tr class="memitem:adbb4d787dc8fbb3b20e5412c24f24473 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#adbb4d787dc8fbb3b20e5412c24f24473">Following</a> ()=default</td></tr>
-<tr class="separator:adbb4d787dc8fbb3b20e5412c24f24473 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c6699f5c55643be7c6017d67b2136cb inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c6699f5c55643be7c6017d67b2136cb">Following</a> (const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> &amp;followType, sf::Vector2f pos={ 0.f, 0.f }, sf::Vector2f posFixed={ 0.f, 0.f }, sf::Vector2f scale={ 1.f, 1.f }, sf::Vector2f scaleFixed={ 1.f, 1.f })</td></tr>
 <tr class="separator:a9c6699f5c55643be7c6017d67b2136cb inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10b51a23d21312d13cf5bbcc90649367 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a10b51a23d21312d13cf5bbcc90649367">Following</a> (sf::Vector2f pos, sf::Vector2f posFixed, sf::Vector2f scale, sf::Vector2f scaleFixed)</td></tr>
-<tr class="separator:a10b51a23d21312d13cf5bbcc90649367 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57298d41fb26803178f6192cdf472dce inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a57298d41fb26803178f6192cdf472dce">SetFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
-<tr class="separator:a57298d41fb26803178f6192cdf472dce inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c1ce740b4c64712915ffc28793e081e inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a3c1ce740b4c64712915ffc28793e081e">SetPosition</a> (const sf::Vector2f pos)</td></tr>
-<tr class="separator:a3c1ce740b4c64712915ffc28793e081e inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a483b01c8fcd17185a04d459df12c26c0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a483b01c8fcd17185a04d459df12c26c0">SetPosition</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
-<tr class="separator:a483b01c8fcd17185a04d459df12c26c0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e09d6b9d5ca7fdd01e1c79f407de724 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a8e09d6b9d5ca7fdd01e1c79f407de724">SetScale</a> (const sf::Vector2f scale)</td></tr>
-<tr class="separator:a8e09d6b9d5ca7fdd01e1c79f407de724 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef6ef7a5a4e057f2ae08b51efb7ee4bf inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aef6ef7a5a4e057f2ae08b51efb7ee4bf">SetScale</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
-<tr class="separator:aef6ef7a5a4e057f2ae08b51efb7ee4bf inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1274521352def09998369ac8c3bb0bfa inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a1274521352def09998369ac8c3bb0bfa">GetPosition</a> () const</td></tr>
-<tr class="separator:a1274521352def09998369ac8c3bb0bfa inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79ec14d1468735298c0e6cdab0bf7cc0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a79ec14d1468735298c0e6cdab0bf7cc0">GetScale</a> () const</td></tr>
-<tr class="separator:a79ec14d1468735298c0e6cdab0bf7cc0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaeab59b7a77b8787b70062597327451 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aaaeab59b7a77b8787b70062597327451">GetOriginPosition</a> () const</td></tr>
-<tr class="separator:aaaeab59b7a77b8787b70062597327451 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade19a3dc0bca6368d2eae54617e25eae inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ade19a3dc0bca6368d2eae54617e25eae">GetOriginScale</a> () const</td></tr>
-<tr class="separator:ade19a3dc0bca6368d2eae54617e25eae inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad487fb9ba52e6779ed4985d3b5d555fa inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ad487fb9ba52e6779ed4985d3b5d555fa">Following</a> (sf::Vector2f pos={ 0.f, 0.f }, sf::Vector2f posFixed={ 0.f, 0.f }, sf::Vector2f scale={ 1.f, 1.f }, sf::Vector2f scaleFixed={ 1.f, 1.f })</td></tr>
+<tr class="separator:ad487fb9ba52e6779ed4985d3b5d555fa inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3968237184824e889742c166740e38 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a7c3968237184824e889742c166740e38">Following</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
+<tr class="separator:a7c3968237184824e889742c166740e38 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c596f1fdf4aa3d68f9ae4bad874622b">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
+<tr class="separator:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c81007da8335561e08e1d5d73104a4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a28c81007da8335561e08e1d5d73104a4">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
+<tr class="separator:a28c81007da8335561e08e1d5d73104a4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7155595b0b51fa9f1853034f760dba5d inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a7155595b0b51fa9f1853034f760dba5d">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> &amp;base)</td></tr>
+<tr class="separator:a7155595b0b51fa9f1853034f760dba5d inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e89ae336d4f8f01e7332dc0dc6d66b5 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a8e89ae336d4f8f01e7332dc0dc6d66b5">setPosition</a> (const sf::Vector2f pos)</td></tr>
+<tr class="separator:a8e89ae336d4f8f01e7332dc0dc6d66b5 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96a7d93171b1e9f053e0ad76b4b497d6 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a96a7d93171b1e9f053e0ad76b4b497d6">setPosition</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
+<tr class="separator:a96a7d93171b1e9f053e0ad76b4b497d6 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be1334f37ca8e4dfba4cbc1f76e7799 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a4be1334f37ca8e4dfba4cbc1f76e7799">movePosition</a> (const sf::Vector2f pos)</td></tr>
+<tr class="separator:a4be1334f37ca8e4dfba4cbc1f76e7799 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa696cee9423baa4b1139f46e41452bb4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aa696cee9423baa4b1139f46e41452bb4">setScale</a> (const sf::Vector2f scale)</td></tr>
+<tr class="separator:aa696cee9423baa4b1139f46e41452bb4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c85822872140c6163695f518a018de inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a01c85822872140c6163695f518a018de">setScale</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
+<tr class="separator:a01c85822872140c6163695f518a018de inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99b1de43071cd67845aedc49c6b0e3de inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a99b1de43071cd67845aedc49c6b0e3de">getColor</a> () const</td></tr>
+<tr class="separator:a99b1de43071cd67845aedc49c6b0e3de inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85285733cb038fcabe17b08c3f7c078 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a> () const</td></tr>
+<tr class="separator:ab85285733cb038fcabe17b08c3f7c078 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada2ca108122ea0ea8f95d3ac6c7e8954 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ada2ca108122ea0ea8f95d3ac6c7e8954">getScale</a> () const</td></tr>
+<tr class="separator:ada2ca108122ea0ea8f95d3ac6c7e8954 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e355ebbbb25bfae69fecc3302dae17 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ab1e355ebbbb25bfae69fecc3302dae17">getOriginPosition</a> () const</td></tr>
+<tr class="separator:ab1e355ebbbb25bfae69fecc3302dae17 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c550cc3aa1eb64e2526f8716dbea7e0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a4c550cc3aa1eb64e2526f8716dbea7e0">getOriginScale</a> () const</td></tr>
+<tr class="separator:a4c550cc3aa1eb64e2526f8716dbea7e0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a5d47a3fc29c73533c51a01b11519e inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af9a5d47a3fc29c73533c51a01b11519e">isFollowerActive</a> () const</td></tr>
 <tr class="separator:af9a5d47a3fc29c73533c51a01b11519e inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad50efe739017b8fe663a7f92fef8c37a inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ad50efe739017b8fe663a7f92fef8c37a">ClearFollow</a> ()</td></tr>
-<tr class="separator:ad50efe739017b8fe663a7f92fef8c37a inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae517c33753f1c813c6b6827fc2bcc0dc inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ae517c33753f1c813c6b6827fc2bcc0dc">clearFollow</a> ()</td></tr>
+<tr class="separator:ae517c33753f1c813c6b6827fc2bcc0dc inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -176,6 +207,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa204b2a2b4f1b98652b8dc8fc321095f inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fbbc840243bda9a9b9630cd1b5311c4 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9fbbc840243bda9a9b9630cd1b5311c4">m_scaleFixed</a> = { 1.f, 1.f }</td></tr>
 <tr class="separator:a9fbbc840243bda9a9b9630cd1b5311c4 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c13b2bbc8339d13bd4e69b16eafcba inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ab0c13b2bbc8339d13bd4e69b16eafcba">m_color</a></td></tr>
+<tr class="separator:ab0c13b2bbc8339d13bd4e69b16eafcba inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9a0a3743bcb7ee31cc6f4a579ca0f2 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ada9a0a3743bcb7ee31cc6f4a579ca0f2">m_colorFixed</a></td></tr>
+<tr class="separator:ada9a0a3743bcb7ee31cc6f4a579ca0f2 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A basic <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a> class. </p>
@@ -201,17 +236,21 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4"></a>Non&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da"></a>XMiddle&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56"></a>YMiddle&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05"></a>Middle&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4"></a>Non&#160;</td><td class="fielddoc"><p>Position.x and Position.y are the top left corner of the text. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fa06be74e80d776ac9cda56506a4f237da"></a>XMiddle&#160;</td><td class="fielddoc"><p>Position.y is not changed while Position.x is in the middle of the text. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56"></a>YMiddle&#160;</td><td class="fielddoc"><p>Position.x is not changed while Position.y is in the middle of the text. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0bb160179b8967e96c5256822141505fab1ca34f82e83c52b010f86955f264e05"></a>Middle&#160;</td><td class="fielddoc"><p>Both Postition.x and Position.y are exactly in the middle of the text. </p>
+</td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9296e97a58ec2f695696e5244e3de4ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9296e97a58ec2f695696e5244e3de4ec">&#9670;&nbsp;</a></span>Text()</h2>
+<a id="a7e408162b28520bb990ae4775e946b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e408162b28520bb990ae4775e946b50">&#9670;&nbsp;</a></span>Text() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,14 +273,20 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::Vector2f&#160;</td>
-          <td class="paramname"><em>position</em> = <code>{0,&#160;0}</code>, </td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>fontSize</em> = <code>40</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>fontSize</em> = <code>40</code>&#160;</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>position</em> = <code>{&#160;0,&#160;0&#160;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a>&#160;</td>
+          <td class="paramname"><em>tag</em> = <code><a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -255,10 +300,110 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Constructor of a text. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>: This goes on your screen. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">font</td><td>: Font of a <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fontSize</td><td>: Size of the font. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">position</td><td>: Position on the screen. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tag</td><td>: MEP::TextOboject::PositionTag </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaaf11bda7900407ed2b1f32f6de711b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf11bda7900407ed2b1f32f6de711b0">&#9670;&nbsp;</a></span>Text() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MEP::Text::Text </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>content</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Font &amp;&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td>
+          <td class="paramname"><em>follow</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>fontSize</em> = <code>40</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a>&#160;</td>
+          <td class="paramname"><em>tag</em> = <code><a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505fa6679e65c932b2c5ad98080ee21a4f0d4">PositionTag::Non</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Constructor of a text. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>: This goes on your screen. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">font</td><td>: Font of a <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fontSize</td><td>: Size of the font. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">position</td><td>: Position on the screen. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tag</td><td>: MEP::TextOboject::PositionTag </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac82ef1fb2fd827231ad8f779d8574f35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82ef1fb2fd827231ad8f779d8574f35">&#9670;&nbsp;</a></span>changePositionTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Text::changePositionTag </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f">PositionTag</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a78dc979a1625c42901ff09a81bfe7df9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78dc979a1625c42901ff09a81bfe7df9">&#9670;&nbsp;</a></span>draw()</h2>
 
@@ -282,13 +427,12 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Default virtual draw function. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The implementation of this draw method is slightly different than the other ones. It does some update job. The reason for that is rather straightforward, in order to get text bound we do need to render it. <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">MEP::Text</a> provides operation based on that that is why I needed to implement some user friendly solution. I would highly recommend you to avoid using the PositionTag beacause in order to use it you need to 'loose first frame of the execution'. why? <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a> is being rendered than we calculate the bound and after all of that we do need to request frame rebuild to avoid text without MEP::TextObject::PositionTag applied. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">window</td><td>: Reference to a window. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">window</td><td>: Classic sf::RenderWindow </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the drawing was successful, or false if there is something wrong with an object and it must be redrawn. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a6ae92056a7d22b1ebda3694b85d99f8e">MEP::Drawable</a>.</p>
 
@@ -316,6 +460,154 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Outputs the content of a <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a> </p><dl class="section return"><dt>Returns</dt><dd>: <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">Text</a> as std::string </dd></dl>
+
+</div>
+</div>
+<a id="a14595445ee2149183a16f519f590ce93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14595445ee2149183a16f519f590ce93">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_e_p_1_1_text.html">Text</a>&amp; MEP::Text::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_sprite.html">Sprite</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e01f6c02e47b9cdd691af1943d00e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e01f6c02e47b9cdd691af1943d00e85">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_e_p_1_1_text.html">Text</a>&amp; MEP::Text::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_text.html">Text</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c6c1bb42111648b38c78a37b8d0ec79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6c1bb42111648b38c78a37b8d0ec79">&#9670;&nbsp;</a></span>setColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Text::setColor </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Color &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Changes the main string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in</td><td>: New string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_following.html#a8dc7aa2edbdcdf19ec2043365ae1340f">MEP::Following</a>.</p>
+
+</div>
+</div>
+<a id="a6e30dbd8bf6fb05054db8b1947305f13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e30dbd8bf6fb05054db8b1947305f13">&#9670;&nbsp;</a></span>setText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Text::setText </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Changes the main string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">in</td><td>: New string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeb2ab5a148ecc173f22834472a171f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2ab5a148ecc173f22834472a171f80">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Text::update </td>
+          <td>(</td>
+          <td class="paramtype">sf::Time &amp;&#160;</td>
+          <td class="paramname"><em>currentTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Override of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> update. </p>
+
+<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a6da74643ffddb9dc287296571662b0cc">MEP::Drawable</a>.</p>
 
 </div>
 </div>

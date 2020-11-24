@@ -51,7 +51,7 @@ namespace MEP {
 		};
 	private:
 		//number of copies 
-		int* nufC = nullptr;
+		int* m_nufC = nullptr;
 		//name of an object
 		const std::string m_name;
 		//function creats transparency table
@@ -87,9 +87,9 @@ namespace MEP {
 			m_type(x.m_type) 
 		{ 
 			std::cout << "Copy constructor: Name: " <<x.m_name;
-			nufC = x.nufC;
-			*nufC += 1;
-			std::cout << ", copy: " << *nufC << std::endl;
+			m_nufC = x.m_nufC;
+			*m_nufC += 1;
+			std::cout << ", copy: " << *m_nufC << std::endl;
 		}
 		/**
 		* Constructor of an object.
@@ -125,14 +125,14 @@ namespace MEP {
 		* Outputs the size of a master MEP::Object
 		* @return sf:Vector2u size.
 		*/
-		const sf::Vector2u& getSize() const { 
+		virtual const sf::Vector2u& getSize() const { 
 			return m_size; 
 		};
 		/**
 		* Outputs the number of frames of a MEP::Object
 		* @return sf:Vector2u size.
 		*/
-		unsigned long GetNufTextures() const {
+		unsigned long getNufTextures() const {
 			return texture.size(); 
 		}
 		/**
@@ -159,17 +159,17 @@ namespace MEP {
 		* Outputs the pointer to the MEP::Object
 		* @return MEP::Object
 		*/
-		Object* GetObjectPoint() { *nufC += 1;  return this; }
+		Object* getObjectPoint() { *m_nufC += 1;  return this; }
 		/**
 		* Outputs the reference to the MEP::Object
 		* @return MEP::Object
 		*/
-		Object& GetObjectRef() { return *this; }
+		Object& getObjectRef() { return *this; }
 		/**
 		* Outputs the name of the MEP::Object
 		* @return MEP::Object
 		*/
-		const std::string& GetName() const { return m_name; }
+		const std::string& getName() const { return m_name; }
 		/**
 		* Checks the transparency of an object for the default SDL_Rect
 		* @return true - position has an alpha channel > 100, false - position has an alpha chanel < 100 
@@ -178,22 +178,22 @@ namespace MEP {
 		/**
 		* Checks the activity of an object it is mainly related to the associated animations
 		*/
-		bool IsActive() const { 
+		bool isActive() const { 
 			return false; 
 		};
 		/**
 		* Outputs the type of an MEP::Object
 		* @return MEP::Object::ObjectType 
 		*/
-		const ObjectType& GetType() const { 
+		const ObjectType& getType() const { 
 			return m_type; 
 		}
 		/**
 		* Outputs the number of copies of the MEP::Object
 		* @return Number of copies.
 		*/
-		const unsigned int NufC() const {
-			return *nufC;
+		const unsigned int nufC() const {
+			return *m_nufC;
 		}
 		/**
 		* Operator == operates on MEP::Object name.
@@ -205,7 +205,7 @@ namespace MEP {
 		* Operator == operates on MEP::Object name.
 		*/
 		bool operator==(const Object& x) const { 
-			return x.GetName() == m_name; 
+			return x.getName() == m_name; 
 		}
 		~Object() override;
 	}; 
@@ -248,21 +248,18 @@ namespace MEP {
 
 	inline void Object::deleteObject()
 	{
-		std::cout << "Delete call, Object: " << m_name;
-		if (*nufC == 0) {
+		if (*m_nufC == 0) {
 			if (table != nullptr) {
 				delete[] table;
 			}
 			for (auto x = texture.begin(); x != texture.end(); x++)
 				delete* x;
 			std::cout << ", object has been permanently deleted.";
-			delete nufC;
+			delete m_nufC;
 		}
 		else {
-			*nufC -= 1;
-			std::cout << " Copies left: " << *nufC;
+			*m_nufC -= 1;
 		}
-		std::cout << std::endl;
 	}
 
 	inline bool MEP::Object::isTansparent(unsigned int x, unsigned int y)
@@ -273,7 +270,7 @@ namespace MEP {
 	}
 
 	inline MEP::Object::Object(const std::string& path, const std::string& filename, bool transparencyM) : 
-		nufC(new int(0)), 
+		m_nufC(new int(0)), 
 		m_name(filename),
 		m_type(ObjectType::Single)
 	{
@@ -281,7 +278,7 @@ namespace MEP {
 	}
 
 	inline MEP::Object::Object(const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
-		nufC(new int(0)),
+		m_nufC(new int(0)),
 		m_name(filename), 
 		m_type(ObjectType::Multi)
 	{
@@ -291,7 +288,7 @@ namespace MEP {
 	}
 
 	inline Object::Object(std::list<sf::Image>& images, const std::string& filename, bool transparencyM):
-		nufC(new int(0)),
+		m_nufC(new int(0)),
 		m_name(filename),
 		transparency(false)
 	{

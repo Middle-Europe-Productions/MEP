@@ -28,6 +28,7 @@
 #include<thread>
 #include"AnimationObject.h"
 #include"TextureObject.h"
+#include"NonCopyable.h"
 namespace MEP {
 	/**
 	* \brief Resource exception structure.
@@ -96,7 +97,7 @@ namespace MEP {
 		/**
 		* \brief A deffinitio of a individual resource.
 		*/
-		struct Resource {
+		struct Resource: public NonCopyable {
 			const std::string m_name;
 			Resources::ResourceType m_type;
 			unsigned int m_nofFrames = 0;
@@ -231,8 +232,8 @@ namespace MEP {
 	inline Object& Resources::getObject(const std::string& name)
 	{
 		for (auto& x : objects) {
-			if (x->GetName() == name) {
-				return x->GetObjectRef();
+			if (x->getName() == name) {
+				return x->getObjectRef();
 			}
 		}
 		throw ResourceException(name, "Could not find the object!", ResourceException::ExceptionType::ObjectNotFound);
@@ -242,7 +243,7 @@ namespace MEP {
 	{
 		std::list<std::unique_ptr<Object>>::iterator it = objects.begin();
 		while (it != objects.end()) {
-			if (it->get()->GetName() == name)
+			if (it->get()->getName() == name)
 				break;
 			it++;
 		}

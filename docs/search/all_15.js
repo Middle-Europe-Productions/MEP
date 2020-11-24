@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['_7eanimationobject_216',['~AnimationObject',['../class_m_e_p_1_1_animation_object.html#ae7ed199e9ddfe0fddacf2ab2d810f094',1,'MEP::AnimationObject']]],
-  ['_7eapplication_217',['~Application',['../class_m_e_p_1_1_window_1_1_template_1_1_application.html#a819a8daed5e16b4e14d9f4b092b213f3',1,'MEP::Window::Template::Application']]],
-  ['_7ebasewindow_218',['~BaseWindow',['../class_m_e_p_1_1_window_1_1_base_window.html#a068652790b822cd46fcaa295528d11ec',1,'MEP::Window::BaseWindow']]],
-  ['_7edrawable_219',['~Drawable',['../class_m_e_p_1_1_drawable.html#a5e3510eb4e5f1780ce147e2c33846e9e',1,'MEP::Drawable']]],
-  ['_7eloading_220',['~Loading',['../class_m_e_p_1_1_window_1_1_template_1_1_loading.html#aa92a3b0a1a4b1de7a41802a0a8ee05ed',1,'MEP::Window::Template::Loading']]],
-  ['_7eobject_221',['~Object',['../class_m_e_p_1_1_object.html#a7c4115ef1cef83f4a294d6e5a54723dd',1,'MEP::Object']]],
-  ['_7eresources_222',['~Resources',['../class_m_e_p_1_1_resources.html#a5a60ee675bf8d518898b918e2aa9c9c2',1,'MEP::Resources']]],
-  ['_7ewindowstats_223',['~WindowStats',['../class_m_e_p_1_1_window_1_1_window_stats.html#a6a9d41d561e7f45ebf4d9b92fd0d8b38',1,'MEP::Window::WindowStats']]]
+  ['y_5fpos_229',['Y_Pos',['../class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492',1,'MEP::Following']]],
+  ['y_5fscale_230',['Y_Scale',['../class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810',1,'MEP::Following']]],
+  ['ymiddle_231',['YMiddle',['../class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505faa0b405855d6ee6814fcc00e436d82e56',1,'MEP::Text']]]
 ];

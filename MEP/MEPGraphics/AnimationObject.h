@@ -26,17 +26,14 @@
 #pragma once
 #include"AnimationBase.h"
 #include"AnimationPosition.h"
-#include"Following.h"
+#include"Sprite.h"
 #include"Object.h"
 namespace MEP {
 	/**
 	* \brief MEP::AnimationObject is a sprite with the ability to dislay an animation.
 	*/
-	class AnimationObject : public Animation, public Object, public Following {
+	class AnimationObject : public Animation, public Object, public Sprite {
 	protected:
-		//current sprite ready to bo rendered
-		sf::Sprite currentSprite;
-		void updateSprite();
 		//pointer to a current frame
 		std::list<sf::Texture*>::iterator currentFrame;
 		//index of a currently displayed sprite is a table of the frames
@@ -58,7 +55,7 @@ namespace MEP {
 		AnimationObject(const float frameRate, const Object& x, sf::Vector2f pos = { 0.f, 0.f }, sf::Vector2f scale = { 1.f, 1.f }) :
 			Animation(AnimationInit::ObjectAnimation, frameRate),
 			Object(x),
-			Following(pos, pos, scale, scale)
+			Sprite(pos, scale)
 		{
 			if (!correctObject(x))
 				throw "[AnimationObject] Incorrect object type!";
@@ -72,45 +69,32 @@ namespace MEP {
 		* @param[in] scale : Scale of an animation.
 		*/
 		AnimationObject(const Object& x, const AnimationObject& animation, sf::Vector2f pos = { 0.f, 0.f }, sf::Vector2f scale = { 1.f, 1.f }) :
-			Animation(AnimationInit::Follow, animation.GetToWait()),
+			Animation(AnimationInit::Follow, animation.getToWait()),
 			Object(x),
-			Following(FollowType::Objects, pos, pos, scale, scale),
+			Sprite(FollowType::Objects, pos, scale),
 			toFollowOBJ(&animation)
 		{
-			if (x.GetNufTextures() != animation.GetNufTextures())
+			if (x.getNufTextures() != animation.getNufTextures())
 				throw "[AnimationObject] Follow animation needs to have the same number of frames!";
 			init();
 		}
 		/**
-		* Sets the position
-		* @param[in] pos : Possition.
+		* Outputs the size of a master MEP::Object
+		* @return sf:Vector2u size.
 		*/
-		void SetPosition(const sf::Vector2f pos) override { m_pos = pos; m_posFixed = pos; updateSprite(); }
-		/**
-		* Sets the position
-		* @param[in] x : MEP::Following object.
-		*/
-		void SetPosition(const Following& x) override { m_pos = x.GetOriginPosition(); m_posFixed = x.GetPosition(); updateSprite(); }
-		/**
-		* Sets the scale.
-		* @param[in] scale : Scale.
-		*/
-		void SetScale(const sf::Vector2f scale) override { m_scale = scale; m_scaleFixed = scale; updateSprite(); }
-		/**
-		* Sets the scale.
-		* @param[in] pos : MEP::Following object.
-		*/
-		void SetScale(const Following& x) override { m_scale = x.GetOriginScale(); m_scaleFixed = x.GetScale(); updateSprite(); }
+		virtual const sf::Vector2u& getSize() const {
+			return { (unsigned int)(m_size.x * m_scale.x), (unsigned int)(m_size.y * m_scale.y) };
+		};
 		/**
 		* Runs the animation in the forward direction.
 		* @param[in] currentTime : Current global time.
 		*/
-		void RunForward(sf::Time& currentTime);
+		void runForward(sf::Time& currentTime);
 		/**
 		* Runs the animation in the backward direction.
 		* @param[in] currentTime : Current global time.
 		*/
-		void RunBackward(sf::Time& currentTime);
+		void runBackward(sf::Time& currentTime);
 		/**
 		* Override of a MEP::Drawable draw.
 		*/
@@ -131,7 +115,7 @@ namespace MEP {
 		* Outputs the activation status of an animation.
 		* @return True - active, False - unactive
 		*/
-		bool IsActive() const override;
+		bool isActive() const override;
 		/**
 		* Checks if a given position is Transparent.
 		* MEP::Objects of a button needs to have transparency initialized.
@@ -139,51 +123,34 @@ namespace MEP {
 		*/
 		bool isTansparent(unsigned int x, unsigned int y) override;
 		/**
-		* Changes the color of a master sprite.
-		* @param[in] color : Color.
-		*/
-		void SetColor(const sf::Color& color) { currentSprite.setColor(color); }
-		/**
-		* Outputs the color of a master sprite.
-		* @return : Color.
-		*/
-		const sf::Color& GetColor() const { return currentSprite.getColor(); }
-		/**
 		* Outputs the animation object.
 		* @return : MEP::AnimationObject.
 		*/
-		const AnimationObject& GetAnimationObject() { return *this; }
-		~AnimationObject() = default;
+		const AnimationObject& getAnimationObject() { return *this; }
+		virtual ~AnimationObject() = default;
 	};
-
-	void MEP::AnimationObject::updateSprite()
-	{
-		currentSprite.setTexture(**currentFrame);
-		for (auto& x : followingList)
-			x->CheckVariables(m_pos, m_posFixed, m_scale, m_scaleFixed);
-		currentSprite.setPosition(m_posFixed);
-		currentSprite.setScale(m_scaleFixed);
-	}
 
 	void MEP::AnimationObject::init()
 	{
 		currentFrame = texture.begin();
-		updateSprite();
+		currentSprite.setPosition(m_posFixed);
+		currentSprite.setScale(m_scaleFixed);
+		updateSprite(**currentFrame);
 	}
 
 	bool MEP::AnimationObject::correctObject(const Object& x)
 	{
-		return x.GetType() == ObjectType::Multi;
+		return x.getType() == ObjectType::Multi;
 	}
 
-	void MEP::AnimationObject::RunForward(sf::Time& currentTime)
+	void MEP::AnimationObject::runForward(sf::Time& currentTime)
 	{
-		Run(Direction::Forward, currentTime);
+		run(Direction::Forward, currentTime);
 	}
 
-	void MEP::AnimationObject::RunBackward(sf::Time& currentTime)
+	void MEP::AnimationObject::runBackward(sf::Time& currentTime)
 	{
-		Run(Direction::Backwards, currentTime);
+		run(Direction::Backwards, currentTime);
 	}
 
 	bool MEP::AnimationObject::draw(sf::RenderWindow& window)
@@ -215,11 +182,11 @@ namespace MEP {
 					}
 				}
 				updateTime = currentTime;
-				updateSprite();
+				updateSprite(**currentFrame);
 			}
 		}
 		if (isInit == AnimationInit::Follow) {
-			if (toFollowOBJ->GetInit() != AnimationInit::Follow) {
+			if (toFollowOBJ->getInit() != AnimationInit::Follow) {
 				while (toFollowOBJ->index_currentFrame != index_currentFrame) {
 					if (toFollowOBJ->index_currentFrame > index_currentFrame) {
 						if (currentFrame == --texture.end()) {
@@ -236,13 +203,13 @@ namespace MEP {
 						currentFrame--;
 					}
 				}
-				if (toFollowOBJ->GetPosition() != GetPosition()) {
-					m_posFixed = toFollowOBJ->GetPosition();
+				if (toFollowOBJ->getPosition() != getPosition()) {
+					m_posFixed = toFollowOBJ->getPosition();
 				}
-				if (toFollowOBJ->GetScale() != GetScale()) {
-					m_scaleFixed = toFollowOBJ->GetScale();
+				if (toFollowOBJ->getScale() != getScale()) {
+					m_scaleFixed = toFollowOBJ->getScale();
 				}
-				updateSprite();
+				updateSprite(**currentFrame);
 			}
 		}
 		if (!followingList.empty()) {
@@ -253,42 +220,25 @@ namespace MEP {
 	void MEP::AnimationObject::entryUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			Run(Direction::Forward, currentTime);
+			run(Direction::Forward, currentTime);
 		update(currentTime);
 	}
 
 	void MEP::AnimationObject::exitUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			Run(Direction::Backwards, currentTime);
+			run(Direction::Backwards, currentTime);
 		update(currentTime);
 	}
 
-	bool MEP::AnimationObject::IsActive() const
+	bool MEP::AnimationObject::isActive() const
 	{
-		return GetStatus() or isFollowerActive();
+		return getStatus() or isFollowerActive();
 	}
 
 	bool MEP::AnimationObject::isTansparent(unsigned int x, unsigned int y)
 	{
 		return false;
-	}
-
-	void MEP::AnimationObject::Follow::CheckVariables(sf::Vector2f& m_pos, sf::Vector2f& m_posFixed, sf::Vector2f& m_scale, sf::Vector2f& m_scaleFixed)
-	{
-		if (m_followType == FollowType::X_Pos) {
-			m_posFixed.x = m_pos.x + m_animation.GetFixedVariable();
-		}
-		else if (m_followType == FollowType::Y_Pos) {
-			m_posFixed.y = m_pos.y + m_animation.GetFixedVariable();
-		}
-		else if (m_followType == FollowType::X_Scale) {
-			m_scaleFixed.x = m_scale.x + m_animation.GetFixedVariable();
-			std::cout << m_scaleFixed.x;
-		}
-		else if (m_followType == FollowType::Y_Scale) {
-			m_scaleFixed.y = m_scale.y + m_animation.GetFixedVariable();
-		}
 	}
 
 }
