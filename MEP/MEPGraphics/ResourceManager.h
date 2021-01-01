@@ -39,8 +39,10 @@ namespace MEP {
 		* Provides quick definition of an exceptions.
 		*/
 		enum class ExceptionType {
+			ResourceAlreadyExists,
 			WrongResourceConstructor,
 			ObjectNotFound,
+			GroupNotFound,
 			CouldntLoad
 		};
 		const ExceptionType exceptionType;
@@ -95,9 +97,11 @@ namespace MEP {
 			Multi = 0
 		};
 		/**
-		* \brief A deffinitio of a individual resource.
+		* \brief A deffinition of an individual resource.
 		*/
 		struct Resource: public NonCopyable {
+			const U_int32 m_ID;
+			const U_int32 m_group;
 			const std::string m_name;
 			Resources::ResourceType m_type;
 			unsigned int m_nofFrames = 0;
@@ -105,14 +109,30 @@ namespace MEP {
 			std::list<sf::Image>* m_array = nullptr;
 			/**
 			* Resource contructor. It is capable of creating Single and Multi resource.
+			* @param[in] ID : An ID of a resource.
 			* @param[in] name : Name of a resource.
 			* @param[in] nofFrames : Number of textures. 1 by default.
 			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 			*/
-			explicit Resource(const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+			Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+				//by default we are assigning it to the MEP::UserAssets (-1)
+				Resource(ID, -1, name, nofFrames, transparency)
+			{}
+			/**
+			* Resource contructor. It is capable of creating Single and Multi resource.
+			* @param[in] ID : An ID of a resource.
+			* @param[in] group : A group of a resource.
+			* @param[in] name : Name of a resource.
+			* @param[in] nofFrames : Number of textures. 1 by default.
+			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+			*/
+			Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+				m_ID(ID),
+				m_group(group),
 				m_name(name), 
 				m_transparency(transparency), 
-				m_type(Resources::ResourceType::Single){
+				m_type(Resources::ResourceType::Single)
+			{
 				if (nofFrames == 0)
 					throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
 				if (nofFrames > 1)
@@ -121,11 +141,27 @@ namespace MEP {
 			}
 			/**
 			* Resource contructor. It is capable of creating ImageArray resource.
+			* @param[in] ID : An ID of a resource.
 			* @param[in] name : Name of a resource.
 			* @param[in] nofFrames : Number of textures. 1 by default.
 			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 			*/
-			explicit Resource(std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+			Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+				//by default we are assigning it to the MEP::UserAssets (-1)
+				Resource(ID, -1, images, name, transparency)
+			{
+			}
+			/**
+			* Resource contructor. It is capable of creating ImageArray resource.
+			* @param[in] ID : An ID of a resource.
+			* @param[in] group : A group of a resource.
+			* @param[in] name : Name of a resource.
+			* @param[in] nofFrames : Number of textures. 1 by default.
+			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+			*/
+			Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+				m_ID(ID),
+				m_group(group),
 				m_name(name),
 				m_transparency(transparency),
 				m_array(&images) 
@@ -134,10 +170,16 @@ namespace MEP {
 			}
 		};
 	private:
+		struct Group {
+			const U_int32 group_ID;
+			std::list<std::unique_ptr<Object>> objects;
+			Group(const U_int32& ID) : group_ID(ID) {}
+		};
+	private:
 		const std::string m_path;
 		bool isInit = false;
 		//List of the objects
-		std::list<std::unique_ptr<Object>> objects;
+		std::list<Group> objects;
 		//Method loading individual resource
 		void load(const Resource& data);
 		void loadResources() { 
@@ -146,6 +188,49 @@ namespace MEP {
 		//Forwarding method
 		template <typename First, typename ... Rest>
 		void loadResources(First&& first, Rest&& ... rest);
+		//finds or of creates a new group
+		std::list<std::unique_ptr<Object>>& findOrAdd(const U_int32& group) {
+			for (auto& x : objects)
+				if (x.group_ID == group)
+					return x.objects;
+			objects.push_back(Group(group));
+			return objects.back().objects;
+		}
+		//adds an object to a group
+		void check(std::list<std::unique_ptr<Object>>& x, const U_int32& ID) {
+			for(auto& it: x)
+				if(it.get()->getID() == ID)
+					throw ResourceException(it.get()->getName(), "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+		}
+		//find or throws an exception
+		template<typename Type>
+		Object& find(const U_int32& group, Type method)
+		{
+			for (auto it = objects.begin(); it != objects.end(); ++it) {
+				if (it->group_ID == group) {
+					for (auto ele = it->objects.begin(); ele != it->objects.end(); ++ele)
+						if (method(ele))
+							return ele->get()->getObjectRef();
+					throw ResourceException("unknown", "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
+				}				
+			}
+			throw ResourceException("unknown", "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
+		}
+		//find or throws an exception
+		template<typename Type>
+		void remove(const U_int32& group, Type method)
+		{
+			for (auto it = objects.begin(); it != objects.end(); ++it) {
+				if (it->group_ID == group) {
+					for (auto ele = it->objects.begin(); ele != it->objects.end(); ++ele)
+						if (method(ele))
+							it->objects.remove(*ele);
+				}
+				else
+					throw ResourceException("unknown", "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
+			}
+			throw ResourceException("unknown", "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
+		}
 	protected:
 		bool isLoaded = false;
 	public:
@@ -167,14 +252,29 @@ namespace MEP {
 		/**
 		* Outputs created MEP::Object
 		* @param[in] name : Name of a MEP::Object.
+		* @param[in] group : Group of a MEP::Object.
 		* @return Reference to MEP::Object.
 		*/
-		Object& getObject(const std::string& name);
+		Object& getObject(const std::string& name, const U_int32 group = -1);
 		/**
 		* Deletes MEP::Object with agiven name.
 		* @param[in] name : Name of a MEP::Object.
+		* @param[in] group : Group of a MEP::Object.
 		*/
-		void deleteObject(const std::string& name);
+		void deleteObject(const std::string& name, const U_int32 group = -1);
+		/**
+		* Outputs created MEP::Object
+		* @param[in] ID : ID of a MEP::Object.
+		* @param[in] group : Group of a MEP::Object.
+		* @return Reference to MEP::Object.
+		*/
+		Object& getObject(const U_int32 ID, const U_int32 group = -1);
+		/**
+		* Deletes MEP::Object with agiven name.
+		* @param[in] name : ID of a MEP::Object
+		* @param[in] group : Group of a MEP::Object.
+		*/
+		void deleteObject(const U_int32 ID, const U_int32 group = -1);
 		/**
 		* Deletes all MEP::Object.
 		* @param[in] name : Name of a MEP::Object.
@@ -183,7 +283,7 @@ namespace MEP {
 			objects.clear();
 		}
 		virtual ~Resources() {
-			objects.clear();
+			deleteObjects();
 		};
 	};
 
@@ -203,9 +303,13 @@ namespace MEP {
 	inline void Resources::load(const MEP::Resources::Resource& data)
 	{
 		std::cout << data.m_name << " " << data.m_nofFrames << " " << (int)data.m_type << std::endl;
+		//finds the target group
+		std::list<std::unique_ptr<Object>>& x = findOrAdd(data.m_group);
+		//check is the resource already exists in a group
+		check(x, data.m_ID);
 		if (data.m_type == ResourceType::Multi) {
 			try {
-				objects.push_back(std::make_unique<MEP::Object>(m_path, data.m_name, data.m_nofFrames, data.m_transparency));
+				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_nofFrames, data.m_transparency));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -213,7 +317,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::Single) {
 			try {
-				objects.push_back(std::make_unique<MEP::Object>( m_path, data.m_name, data.m_transparency ));
+				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -221,7 +325,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::ImageArray) {
 			try {
-				objects.push_back(std::make_unique<MEP::Object>(*data.m_array, data.m_name, data.m_transparency ));
+				x.push_back(std::make_unique<MEP::Object>(data.m_ID, *data.m_array, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -229,29 +333,36 @@ namespace MEP {
 		}
 	}
 
-	inline Object& Resources::getObject(const std::string& name)
+	inline Object& Resources::getObject(const std::string& name, const U_int32 group)
 	{
-		for (auto& x : objects) {
-			if (x->getName() == name) {
-				return x->getObjectRef();
-			}
-		}
-		throw ResourceException(name, "Could not find the object!", ResourceException::ExceptionType::ObjectNotFound);
+		std::cout << "ID:" << name << ", gourp: " << group << std::endl;
+		return find(group, [name](auto& element) -> bool
+			{
+				return element->get()->getName() == name;
+			});
 	}
 
-	inline void Resources::deleteObject(const std::string& name)
+	inline void Resources::deleteObject(const std::string& name, const U_int32 group)
 	{
-		std::list<std::unique_ptr<Object>>::iterator it = objects.begin();
-		while (it != objects.end()) {
-			if (it->get()->getName() == name)
-				break;
-			it++;
-		}
-		if (it != objects.end()) {
-			objects.remove(*it);
-		}
-		else {
-			throw ResourceException(name, "Could not find the object!", ResourceException::ExceptionType::ObjectNotFound);
-		}
+		remove(group, [name](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
+			{
+				return element->get()->getName() == name;
+			});
+	}
+
+	inline Object& Resources::getObject(const U_int32 ID, const U_int32 group)
+	{
+		return find(group, [ID](auto& element) -> bool
+			{
+				return element->get()->getID() == ID;
+			});
+	}
+
+	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
+	{
+		remove(group, [ID](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
+			{
+				return element->get()->getID() == ID;
+			});
 	}
 }

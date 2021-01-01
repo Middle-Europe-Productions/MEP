@@ -26,6 +26,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"Drawable.h"
+#include"Config.h"
 #include<list>
 #include<string>
 #include<iostream>
@@ -52,6 +53,8 @@ namespace MEP {
 	private:
 		//number of copies 
 		int* m_nufC = nullptr;
+		//an ID of a file
+		const U_int32 m_ID;
 		//name of an object
 		const std::string m_name;
 		//function creats transparency table
@@ -74,11 +77,12 @@ namespace MEP {
 		/**
 		* Default constructor.
 		*/
-		Object() = default;
+		Object() = delete;
 		/**
 		* Copy constructor.
 		*/
 		Object(const Object& x) : 
+			m_ID(x.m_ID),
 			m_name(x.m_name), 
 			transparency(x.transparency), 
 			table(x.table), 
@@ -97,7 +101,8 @@ namespace MEP {
 		* @param[in] name : Name of a resource.
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
-		Object(const std::string& path, 
+		Object(const U_int32 ID,
+			const std::string& path,
 			const std::string& filename, 
 			bool transparencyM = false);
 		/**
@@ -107,7 +112,8 @@ namespace MEP {
 		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1. 
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
-		Object(const std::string& path, 
+		Object(const U_int32 ID,
+			const std::string& path,
 			const std::string& filename, 
 			unsigned int frames, 
 			bool transparencyM = false);
@@ -118,7 +124,8 @@ namespace MEP {
 		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1.
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
-		Object(std::list<sf::Image>& images, 
+		Object(const U_int32 ID,
+			std::list<sf::Image>& images,
 			const std::string& filename,
 			bool transparencyM = false);
 		/**
@@ -166,6 +173,11 @@ namespace MEP {
 		*/
 		Object& getObjectRef() { return *this; }
 		/**
+		* Outputs the ID of the MEP::Object
+		* @return MEP::Object
+		*/
+		const U_int32 getID() const { return m_ID; }
+		/**
 		* Outputs the name of the MEP::Object
 		* @return MEP::Object
 		*/
@@ -210,7 +222,7 @@ namespace MEP {
 		~Object() override;
 	}; 
 	
-	inline void MEP::Object::loadTransparancy(sf::Image& surface)
+	inline void Object::loadTransparancy(sf::Image& surface)
 	{
 		//allocate table
 		table = new bool* [surface.getSize().x];
@@ -227,7 +239,7 @@ namespace MEP {
 		}
 	}
 
-	inline void MEP::Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
+	inline void Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
 		texture.push_back(new sf::Texture());
 		if (!texture.back()->loadFromFile(fulladdress)) {
 			throw "Texture not loaded!";
@@ -262,14 +274,15 @@ namespace MEP {
 		}
 	}
 
-	inline bool MEP::Object::isTansparent(unsigned int x, unsigned int y)
+	inline bool Object::isTansparent(unsigned int x, unsigned int y)
 	{
 		if (transparency and x < m_size.x and y < m_size.y)
 			return table[x][y];
 		return true;
 	}
 
-	inline MEP::Object::Object(const std::string& path, const std::string& filename, bool transparencyM) : 
+	inline Object::Object(const U_int32 ID, const std::string& path, const std::string& filename, bool transparencyM) :
+		m_ID(ID),
 		m_nufC(new int(0)), 
 		m_name(filename),
 		m_type(ObjectType::Single)
@@ -277,7 +290,8 @@ namespace MEP {
 		load(path + filename + ".png", transparencyM, true);
 	}
 
-	inline MEP::Object::Object(const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
+	inline Object::Object(const U_int32 ID, const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
+		m_ID(ID),
 		m_nufC(new int(0)),
 		m_name(filename), 
 		m_type(ObjectType::Multi)
@@ -287,7 +301,8 @@ namespace MEP {
 		}
 	}
 
-	inline Object::Object(std::list<sf::Image>& images, const std::string& filename, bool transparencyM):
+	inline Object::Object(const U_int32 ID, std::list<sf::Image>& images, const std::string& filename, bool transparencyM):
+		m_ID(ID),
 		m_nufC(new int(0)),
 		m_name(filename),
 		transparency(false)
@@ -309,14 +324,14 @@ namespace MEP {
 		m_size.y = texture.front()->getSize().y;
 	}
 
-	inline bool MEP::Object::draw(sf::RenderWindow& window)
+	inline bool Object::draw(sf::RenderWindow& window)
 	{
 		if (m_type == MEP::Object::ObjectType::Single or m_type == MEP::Object::ObjectType::Multi)
 			window.draw(sf::Sprite(*texture.front()));
 		return true;
 	}
 
-	inline MEP::Object::~Object()
+	inline Object::~Object()
 	{
 		deleteObject();
 	}

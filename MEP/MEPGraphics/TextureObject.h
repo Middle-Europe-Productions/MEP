@@ -61,6 +61,12 @@ namespace MEP {
 			init(); 
 		};
 		/**
+		* On resize we want to update the position.
+		*/
+		void onResize() override {
+			updatePosition();
+		}
+		/**
 		* Override of a MEP::Drawable draw.
 		*/
 		bool draw(sf::RenderWindow& window) override {

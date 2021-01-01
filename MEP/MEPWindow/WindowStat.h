@@ -34,7 +34,7 @@ namespace MEP {
 		* Global time. \n
 		* \brief Statistics of a window.
 		*/
-		class WindowStats {
+		class WindowStats: public NonCopyable {
 			sf::Time globalTime = sf::Time::Zero;
 			sf::Time mStatisticsUpdateTime = sf::Time::Zero;
 			unsigned int mStatisticsNumFrames = 0;
@@ -67,7 +67,7 @@ namespace MEP {
 			sf::Time& getGlobalTime() {
 				return globalTime; 
 			}
-			~WindowStats() { std::cout << "Stats"; };
+			~WindowStats() = default;
 		};
 	}
 }

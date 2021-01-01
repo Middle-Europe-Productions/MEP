@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.2</span>
+   &#160;<span id="projectnumber">alpha 1.3</span>
    </div>
   </td>
  </tr>
@@ -119,6 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad487fb9ba52e6779ed4985d3b5d555fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c3968237184824e889742c166740e38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a7c3968237184824e889742c166740e38">Following</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a7c3968237184824e889742c166740e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeda088403795e9610f49507840566da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#abeda088403795e9610f49507840566da">updatePosition</a> ()</td></tr>
+<tr class="separator:abeda088403795e9610f49507840566da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a924b1c884189dcf0bdb21732d197888f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a924b1c884189dcf0bdb21732d197888f">addMethodPos</a> (std::function&lt; sf::Vector2f()&gt; method)</td></tr>
+<tr class="separator:a924b1c884189dcf0bdb21732d197888f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c596f1fdf4aa3d68f9ae4bad874622b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c596f1fdf4aa3d68f9ae4bad874622b">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a9c596f1fdf4aa3d68f9ae4bad874622b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c81007da8335561e08e1d5d73104a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a28c81007da8335561e08e1d5d73104a4">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
@@ -154,6 +158,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a6277f689ed50b319442f787812bb8b61"><td class="memItemLeft" align="right" valign="top">std::function&lt; sf::Vector2f()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6277f689ed50b319442f787812bb8b61">calc_position</a> = [this]()-&gt;sf::Vector2f { return <a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a>; }</td></tr>
+<tr class="separator:a6277f689ed50b319442f787812bb8b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1fb8b755d44375b723f591d910b62b"><td class="memItemLeft" align="right" valign="top">std::list&lt; std::unique_ptr&lt; Follow &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">followingList</a></td></tr>
 <tr class="separator:a6f1fb8b755d44375b723f591d910b62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1359b1ea309834062aec84c77fd21e"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a> = {0.f, 0.f}</td></tr>
@@ -355,7 +361,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Warning list of the following objects is indivdual for every object. <b>Copy constructor does not copy them.</b> Copy constructor copy position, scale and color. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Warning list of the following objects is individual for every object. <b>Copy constructor does not copy them.</b> Copy constructor copy position, scale and color. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: Another <a class="el" href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position.">MEP::Following</a> instance. </td></tr>
   </table>
@@ -365,6 +371,38 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a924b1c884189dcf0bdb21732d197888f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a924b1c884189dcf0bdb21732d197888f">&#9670;&nbsp;</a></span>addMethodPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::addMethodPos </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; sf::Vector2f()&gt;&#160;</td>
+          <td class="paramname"><em>method</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds a method of calculation the position. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">method</td><td>: A method of calculating the position. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae517c33753f1c813c6b6827fc2bcc0dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae517c33753f1c813c6b6827fc2bcc0dc">&#9670;&nbsp;</a></span>clearFollow()</h2>
 
@@ -859,7 +897,55 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abeda088403795e9610f49507840566da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeda088403795e9610f49507840566da">&#9670;&nbsp;</a></span>updatePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::updatePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Updates the position of an object according the the given method. If method is not specified does not change anything. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6277f689ed50b319442f787812bb8b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6277f689ed50b319442f787812bb8b61">&#9670;&nbsp;</a></span>calc_position</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;sf::Vector2f()&gt; MEP::Following::calc_position = [this]()-&gt;sf::Vector2f { return <a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a>; }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6f1fb8b755d44375b723f591d910b62b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f1fb8b755d44375b723f591d910b62b">&#9670;&nbsp;</a></span>followingList</h2>
 

@@ -101,6 +101,9 @@ namespace MEP {
 			}
 		};
 	protected:
+		//[optional] formula for calculation of the position and scale.
+		std::function<sf::Vector2f()> calc_position = [this]()->sf::Vector2f { return m_pos; };
+
 		std::list<std::unique_ptr<Follow>> followingList;
 		//texture position and scale
 		sf::Vector2f m_pos = {0.f, 0.f};
@@ -146,12 +149,13 @@ namespace MEP {
 			m_scaleFixed(scaleFixed)
 		{};
 		/**
-		* Warning list of the following objects is indivdual for every object.
+		* Warning list of the following objects is individual for every object.
 		* **Copy constructor does not copy them.**
 		* Copy constructor copy position, scale and color.
 		* @param[in] x : Another MEP::Following instance.
 		*/
 		Following(const Following& x) :
+			calc_position(x.calc_position),
 			m_pos(x.m_pos),
 			m_posFixed(x.m_posFixed),
 			m_scale(x.m_scale),
@@ -159,6 +163,20 @@ namespace MEP {
 			m_color(x.m_color),
 			m_colorFixed(x.m_colorFixed)
 		{};
+		/**
+		* Updates the position of an object according the the given method.
+		* If method is not specified does not change anything.
+		*/
+		void updatePosition() {
+			setPosition(calc_position());
+		}
+		/**
+		* Adds a method of calculation the position.
+		* @param[in] method : A method of calculating the position.
+		*/
+		void addMethodPos(std::function<sf::Vector2f()> method) {
+			calc_position = method;
+		}
 		/**
 		* Warning list of the following objects is indivdual for every object.
 		* **Assign operator does not copy them.**
@@ -173,6 +191,7 @@ namespace MEP {
 				m_scaleFixed = x.m_scaleFixed;
 				m_color = x.m_color;
 				m_colorFixed = x.m_colorFixed;
+				calc_position = x.calc_position;
 			}
 			return *this;
 		}

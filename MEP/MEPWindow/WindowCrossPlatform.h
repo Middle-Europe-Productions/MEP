@@ -25,26 +25,45 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-#if defined (SFML_SYSTEM_WINDOWS)
+#include "OSSetUp.h"
+#if defined (MEP_WINDOWS)
 #include <windows.h>
 #include <Dwmapi.h>
 #pragma comment (lib, "Dwmapi.lib")
 namespace PLATFORM {
     /**
-    * Makes the window open in transparent mode.
-    * Background of a window is now transparent.
+    * Makes the window open for alpha channel and deletes the WS_CAPTION tag. 
+    * Background of a window is now transparent if m_backgroundColor is transparent.
     */
     inline bool transparent(HWND hWnd) {
-        MARGINS margins;
-        margins.cxLeftWidth = -1;
-
-        SetWindowLong(hWnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+        MARGINS margins = {-1};
         DwmExtendFrameIntoClientArea(hWnd, &margins);
         return true;
     }
+    inline bool blurBehind(HWND hWnd) {
+        HRESULT hr = S_OK;
+
+        // Create and populate the blur-behind structure.
+        DWM_BLURBEHIND bb = { 0 };
+
+        // Specify blur-behind and blur region.
+        bb.dwFlags = DWM_BB_ENABLE;
+        bb.fEnable = true;
+        bb.hRgnBlur = NULL;
+
+        // Enable blur-behind.
+        hr = DwmEnableBlurBehindWindow(hWnd, &bb);
+        if (SUCCEEDED(hr))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     /**
     * Provides an ability to manipulate general transparency of a window.
-    * @param[in] aplha : Value of a alpha channel.
+    * @param[in] alpha : Value of a alpha channel.
     */
     inline bool transparency(HWND hWnd, unsigned char alpha)
     {
@@ -57,7 +76,12 @@ namespace PLATFORM {
     * Usefull with the use of mep HUB
     */
     inline bool minimalize(HWND hWnd) {
-        return ShowWindow(hWnd, SW_MINIMIZE);
+        ShowWindow(hWnd, SW_MINIMIZE);
+        //AnimateWindow(hWnd, 100, AW_SLIDE | AW_HIDE);
+        return 0;
+    }
+    inline void maximalize(HWND hWnd) {
+        //customWindow(hWnd);
     }
 }
 #elif defined (SFML_SYSTEM_LINUX)

@@ -24,7 +24,9 @@
 ////////////////////////////////////////////////////////////
 
 #pragma once
-#include<SFML/Graphics.hpp>
+#include"Config.h"
+#include <SFML/Graphics.hpp>
+
 namespace MEP {
 	/**
 	* \brief MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen.
@@ -34,26 +36,48 @@ namespace MEP {
 		/**
 		* @enum MEP::Button::DrawTag defines a draw tag.
 		*/
-		enum class DrawTag {
+		enum DrawTag: U_int32 {
 			/** There is no draw tag.*/
-			Non,
+			Non = 0,
 			/** View lock tag. Objects will be rendered using master view if custom view is enabled.*/
-			ViewLock,
+			ViewLock = 1 << 1,
 			/** Unactive tag. Objects will not be rendered. */
-			Unactive
+			Unactive = 1 << 2,
+			/** Resize position following tag.*/
+			Resize_Pos = 1 << 3
 		};
 		/**
 		* Outputs draw tag of a MEP::Drawable.
 		* @return : MEP::Drawable::DrawTag.
 		*/
-		const DrawTag& getDrawTag() const { return m_drawTag; }
+		DrawTag getDrawTag() const { 
+			return (DrawTag)m_drawTag; 
+		}
 		/**
 		* Sets the draw tag of a MEP::Drawable.
 		* @param[in] : MEP::Drawable::DrawTag.
 		*/
-		void setDrawTag(const DrawTag& tag) { m_drawTag = tag; }
+		void setDrawTag(const U_int32 tag) { 
+			m_drawTag = tag; 
+		}
+		/**
+		* Sets the draw tag of a MEP::Drawable.
+		* @param[in] : MEP::Drawable::DrawTag.
+		* @return : True - draw tag was added. False - draw tag is already added.
+		*/
+		bool addDrawTag(const U_int32 tag) {
+			if (tag & m_drawTag)
+				return false;
+			else
+				m_drawTag |= tag;
+			return true;
+		}
+		/**
+		* Instructions on what to do when window is being resized.
+		*/
+		virtual void onResize() {}
 	private:
-		DrawTag m_drawTag = DrawTag::Non;
+		U_int32 m_drawTag = DrawTag::Non;
 	public:
 		/**
 		* Default contructor.

@@ -128,6 +128,12 @@ namespace MEP {
 			return *this;
 		}
 		/**
+		* On resize we want to update the position.
+		*/
+		void onResize() override {
+			updatePosition();
+		}
+		/**
 		* Override of a MEP::Drawable update.
 		*/
 		void update(sf::Time& currentTime) override {

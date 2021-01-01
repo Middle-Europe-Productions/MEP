@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.2</span>
+   &#160;<span id="projectnumber">alpha 1.3</span>
    </div>
   </td>
  </tr>
@@ -98,18 +98,23 @@ Inheritance diagram for MEP::Drawable:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aeee70ba2555a5eb2bd4caad84a99175b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> { <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175ba6679e65c932b2c5ad98080ee21a4f0d4">DrawTag::Non</a>, 
-<a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175bae49b6e288f1d5b0d228933c082a181d4">DrawTag::ViewLock</a>, 
-<a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175bab4eddfe28794300438c09ae75dd59824">DrawTag::Unactive</a>
+<tr class="memitem:a1bacc47fbebbac8a86493ecbc40e894a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">DrawTag</a> : U_int32 { <a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894aa5d5865e2240ca0eeeb9f8dc4df630bce">Non</a> = 0, 
+<a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894aa6e6d415da6c097108b53140c55000029">ViewLock</a> = 1 &lt;&lt; 1, 
+<a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894aa52a4afbce93f4bc4af6bb23aa72635f4">Unactive</a> = 1 &lt;&lt; 2, 
+<a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894aab79561bde44703d27f4bbcd417a57168">Resize_Pos</a> = 1 &lt;&lt; 3
  }</td></tr>
-<tr class="separator:aeee70ba2555a5eb2bd4caad84a99175b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a1bacc47fbebbac8a86493ecbc40e894a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a48c97a4eddc344f53b84b989614a5d13"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a48c97a4eddc344f53b84b989614a5d13">getDrawTag</a> () const</td></tr>
-<tr class="separator:a48c97a4eddc344f53b84b989614a5d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cbd55e97252e4dfd4a12ea05befb3fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a8cbd55e97252e4dfd4a12ea05befb3fc">setDrawTag</a> (const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> &amp;tag)</td></tr>
-<tr class="separator:a8cbd55e97252e4dfd4a12ea05befb3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc78ee1bdb436933149cd2dca11994be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">DrawTag</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#afc78ee1bdb436933149cd2dca11994be">getDrawTag</a> () const</td></tr>
+<tr class="separator:afc78ee1bdb436933149cd2dca11994be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18b64d0aa33648673d5263ca4bcbf14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae18b64d0aa33648673d5263ca4bcbf14">setDrawTag</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> tag)</td></tr>
+<tr class="separator:ae18b64d0aa33648673d5263ca4bcbf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aabfdbeca0804c79bbe8cda9e554954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a1aabfdbeca0804c79bbe8cda9e554954">addDrawTag</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> tag)</td></tr>
+<tr class="separator:a1aabfdbeca0804c79bbe8cda9e554954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63f77f985011cfb82c2aaa1b53e2f72"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ac63f77f985011cfb82c2aaa1b53e2f72">onResize</a> ()</td></tr>
+<tr class="separator:ac63f77f985011cfb82c2aaa1b53e2f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90fadf06cd76d83f74a6cb2fe92c108"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae90fadf06cd76d83f74a6cb2fe92c108">Drawable</a> ()=default</td></tr>
 <tr class="separator:ae90fadf06cd76d83f74a6cb2fe92c108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ae92056a7d22b1ebda3694b85d99f8e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a6ae92056a7d22b1ebda3694b85d99f8e">draw</a> (sf::RenderWindow &amp;window)</td></tr>
@@ -128,31 +133,25 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> provides a basic implementation of an object with the ability of display it on a screen. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="aeee70ba2555a5eb2bd4caad84a99175b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeee70ba2555a5eb2bd4caad84a99175b">&#9670;&nbsp;</a></span>DrawTag</h2>
+<a id="a1bacc47fbebbac8a86493ecbc40e894a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bacc47fbebbac8a86493ecbc40e894a">&#9670;&nbsp;</a></span>DrawTag</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">MEP::Drawable::DrawTag</a></td>
+          <td class="memname">enum <a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">MEP::Drawable::DrawTag</a> : <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aeee70ba2555a5eb2bd4caad84a99175ba6679e65c932b2c5ad98080ee21a4f0d4"></a>Non&#160;</td><td class="fielddoc"><p>There is no draw tag. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1bacc47fbebbac8a86493ecbc40e894aa5d5865e2240ca0eeeb9f8dc4df630bce"></a>Non&#160;</td><td class="fielddoc"><p>There is no draw tag. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aeee70ba2555a5eb2bd4caad84a99175bae49b6e288f1d5b0d228933c082a181d4"></a>ViewLock&#160;</td><td class="fielddoc"><p>View lock tag. Objects will be rendered using master view if custom view is enabled. </p>
+<tr><td class="fieldname"><a id="a1bacc47fbebbac8a86493ecbc40e894aa6e6d415da6c097108b53140c55000029"></a>ViewLock&#160;</td><td class="fielddoc"><p>View lock tag. Objects will be rendered using master view if custom view is enabled. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aeee70ba2555a5eb2bd4caad84a99175bab4eddfe28794300438c09ae75dd59824"></a>Unactive&#160;</td><td class="fielddoc"><p>Unactive tag. Objects will not be rendered. </p>
+<tr><td class="fieldname"><a id="a1bacc47fbebbac8a86493ecbc40e894aa52a4afbce93f4bc4af6bb23aa72635f4"></a>Unactive&#160;</td><td class="fielddoc"><p>Unactive tag. Objects will not be rendered. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1bacc47fbebbac8a86493ecbc40e894aab79561bde44703d27f4bbcd417a57168"></a>Resize_Pos&#160;</td><td class="fielddoc"><p>Resize position following tag. </p>
 </td></tr>
 </table>
 
@@ -211,6 +210,39 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1aabfdbeca0804c79bbe8cda9e554954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aabfdbeca0804c79bbe8cda9e554954">&#9670;&nbsp;</a></span>addDrawTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MEP::Drawable::addDrawTag </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the draw tag of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td><a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">MEP::Drawable::DrawTag</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: True - draw tag was added. False - draw tag is already added. </dd></dl>
+
+</div>
+</div>
 <a id="a6ae92056a7d22b1ebda3694b85d99f8e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ae92056a7d22b1ebda3694b85d99f8e">&#9670;&nbsp;</a></span>draw()</h2>
 
@@ -314,8 +346,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a48c97a4eddc344f53b84b989614a5d13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48c97a4eddc344f53b84b989614a5d13">&#9670;&nbsp;</a></span>getDrawTag()</h2>
+<a id="afc78ee1bdb436933149cd2dca11994be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc78ee1bdb436933149cd2dca11994be">&#9670;&nbsp;</a></span>getDrawTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +356,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a>&amp; MEP::Drawable::getDrawTag </td>
+          <td class="memname"><a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">DrawTag</a> MEP::Drawable::getDrawTag </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -336,7 +368,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Outputs draw tag of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a>. </p><dl class="section return"><dt>Returns</dt><dd>: <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">MEP::Drawable::DrawTag</a>. </dd></dl>
+<p>Outputs draw tag of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a>. </p><dl class="section return"><dt>Returns</dt><dd>: <a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">MEP::Drawable::DrawTag</a>. </dd></dl>
 
 </div>
 </div>
@@ -373,8 +405,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8cbd55e97252e4dfd4a12ea05befb3fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cbd55e97252e4dfd4a12ea05befb3fc">&#9670;&nbsp;</a></span>setDrawTag()</h2>
+<a id="ac63f77f985011cfb82c2aaa1b53e2f72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63f77f985011cfb82c2aaa1b53e2f72">&#9670;&nbsp;</a></span>onResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void MEP::Drawable::onResize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Instructions on what to do when window is being resized. </p>
+
+<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_texture_object.html#a71adbc4096e4170e5bab2e740e4aade9">MEP::TextureObject</a>, <a class="el" href="class_m_e_p_1_1_text.html#afb5d833f2185727bf47f2d661d32cf21">MEP::Text</a>, and <a class="el" href="class_m_e_p_1_1_animation_object.html#aaf86df15ab14ab38cb00a94c49282a1d">MEP::AnimationObject</a>.</p>
+
+</div>
+</div>
+<a id="ae18b64d0aa33648673d5263ca4bcbf14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18b64d0aa33648673d5263ca4bcbf14">&#9670;&nbsp;</a></span>setDrawTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -385,7 +445,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void MEP::Drawable::setDrawTag </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">DrawTag</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
           <td class="paramname"><em>tag</em></td><td>)</td>
           <td></td>
         </tr>
@@ -398,7 +458,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets the draw tag of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td><a class="el" href="class_m_e_p_1_1_drawable.html#aeee70ba2555a5eb2bd4caad84a99175b">MEP::Drawable::DrawTag</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td><a class="el" href="class_m_e_p_1_1_drawable.html#a1bacc47fbebbac8a86493ecbc40e894a">MEP::Drawable::DrawTag</a>. </td></tr>
   </table>
   </dd>
 </dl>

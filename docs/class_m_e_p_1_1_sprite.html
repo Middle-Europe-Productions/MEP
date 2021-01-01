@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.2</span>
+   &#160;<span id="projectnumber">alpha 1.3</span>
    </div>
   </td>
  </tr>
@@ -126,6 +126,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad487fb9ba52e6779ed4985d3b5d555fa inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c3968237184824e889742c166740e38 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a7c3968237184824e889742c166740e38">Following</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a7c3968237184824e889742c166740e38 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeda088403795e9610f49507840566da inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#abeda088403795e9610f49507840566da">updatePosition</a> ()</td></tr>
+<tr class="separator:abeda088403795e9610f49507840566da inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a924b1c884189dcf0bdb21732d197888f inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a924b1c884189dcf0bdb21732d197888f">addMethodPos</a> (std::function&lt; sf::Vector2f()&gt; method)</td></tr>
+<tr class="separator:a924b1c884189dcf0bdb21732d197888f inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c596f1fdf4aa3d68f9ae4bad874622b">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c81007da8335561e08e1d5d73104a4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a28c81007da8335561e08e1d5d73104a4">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
@@ -152,6 +156,8 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a2f53b4b4d12fba5af61e567bcf213c4e"><td class="memItemLeft" align="right" valign="top">sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_sprite.html#a2f53b4b4d12fba5af61e567bcf213c4e">currentSprite</a></td></tr>
 <tr class="separator:a2f53b4b4d12fba5af61e567bcf213c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_m_e_p_1_1_following"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_m_e_p_1_1_following')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_m_e_p_1_1_following.html">MEP::Following</a></td></tr>
+<tr class="memitem:a6277f689ed50b319442f787812bb8b61 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">std::function&lt; sf::Vector2f()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6277f689ed50b319442f787812bb8b61">calc_position</a> = [this]()-&gt;sf::Vector2f { return <a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a>; }</td></tr>
+<tr class="separator:a6277f689ed50b319442f787812bb8b61 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1fb8b755d44375b723f591d910b62b inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">std::list&lt; std::unique_ptr&lt; Follow &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">followingList</a></td></tr>
 <tr class="separator:a6f1fb8b755d44375b723f591d910b62b inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1359b1ea309834062aec84c77fd21e inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a> = {0.f, 0.f}</td></tr>

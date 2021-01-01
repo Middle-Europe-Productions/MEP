@@ -52,7 +52,10 @@ namespace MEP {
 		* @param[in] pos : Position of an animation.
 		* @param[in] scale : Scale of an animation.
 		*/
-		AnimationObject(const float frameRate, const Object& x, sf::Vector2f pos = { 0.f, 0.f }, sf::Vector2f scale = { 1.f, 1.f }) :
+		AnimationObject(const float frameRate, 
+			const Object& x, 
+			sf::Vector2f pos = { 0.f, 0.f }, 
+			sf::Vector2f scale = { 1.f, 1.f }) :
 			Animation(AnimationInit::ObjectAnimation, frameRate),
 			Object(x),
 			Sprite(pos, scale)
@@ -68,7 +71,10 @@ namespace MEP {
 		* @param[in] pos : Position of an animation.
 		* @param[in] scale : Scale of an animation.
 		*/
-		AnimationObject(const Object& x, const AnimationObject& animation, sf::Vector2f pos = { 0.f, 0.f }, sf::Vector2f scale = { 1.f, 1.f }) :
+		AnimationObject(const Object& x, 
+			const AnimationObject& animation, 
+			sf::Vector2f pos = { 0.f, 0.f }, 
+			sf::Vector2f scale = { 1.f, 1.f }) :
 			Animation(AnimationInit::Follow, animation.getToWait()),
 			Object(x),
 			Sprite(FollowType::Objects, pos, scale),
@@ -77,6 +83,12 @@ namespace MEP {
 			if (x.getNufTextures() != animation.getNufTextures())
 				throw "[AnimationObject] Follow animation needs to have the same number of frames!";
 			init();
+		}
+		/**
+		* On resize we want to update the position.
+		*/
+		void onResize() override {
+			updatePosition();
 		}
 		/**
 		* Outputs the size of a master MEP::Object

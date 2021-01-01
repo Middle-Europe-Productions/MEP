@@ -160,14 +160,14 @@ namespace MEP {
 				if(customView())
 					Window.setView(getView());
 				for (auto& x : m_objects) {
-					if (x->getDrawTag() == MEP::Drawable::DrawTag::ViewLock and customView()) {
+					if (x->getDrawTag() & MEP::Drawable::DrawTag::ViewLock and customView()) {
 						Window.setView(getMasterView());
 						if (!x->draw(Window)) {
 							stop = false;
 						}
 						Window.setView(getView());;
 					}
-					else if (x->getDrawTag() == MEP::Drawable::DrawTag::Unactive) {
+					else if (x->getDrawTag() & MEP::Drawable::DrawTag::Unactive) {
 						continue;
 					}
 					else {
@@ -179,6 +179,17 @@ namespace MEP {
 				if (customView())
 					Window.setView(getMasterView());
 				return stop;
+			}
+			/**
+			* Updates the position when window is resized.
+			*/
+			void onResize(const sf::Vector2u& new_res) {
+				if (isCustomViewEnabled) {
+					m_view.setSize({ (float)new_res.x, (float)new_res.y });
+				}
+				for (auto& x : m_objects)
+					if (x->getDrawTag() & MEP::Drawable::DrawTag::Resize_Pos)
+						x->onResize();
 			}
 			/**
 			* Base update method.
@@ -285,15 +296,6 @@ namespace MEP {
 				m_objects.push_back(&object);
 			}
 			/**
-			* Deletes all MEP::Drawable in the MEP::Window::BaseWindow
-			*/
-			void deleteObjects() {
-				while (!m_objects.empty()) {
-					delete m_objects.front();
-					m_objects.pop_front();
-				}
-			}
-			/**
 			* Deletes all MEP::Objects in the MEP::Window::BaseWindow
 			*/
 			template<typename ... Values>
@@ -311,9 +313,7 @@ namespace MEP {
 			bool operator==(const BaseWindow& x) const { 
 				return getID() == x.getID(); 
 			}
-			virtual ~BaseWindow() { 
-				deleteObjects();
-			};
+			virtual ~BaseWindow() {};
 		};
 
 		template<typename First, typename ...Rest>

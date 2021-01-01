@@ -77,3 +77,5 @@ Enables automation data loading. Using MEP::Object and sf::Texture
 #include"TextObject.h"
 
 #include"AnimationColor.h"
+
+#include"Assets.h"

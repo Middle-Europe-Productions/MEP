@@ -45,9 +45,10 @@ Namespace PLATFORM
 /*
 Base window functionalities time and FPS handler.
 */
-#include "WindowsStat.h"
+#include "WindowStat.h"
 /*
 Deffinition of a loading Window which handles given methods on a different thread.
 */
 #include "Loading.h"
+
 #include "Application.h"
