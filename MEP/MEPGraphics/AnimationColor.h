@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_ANIMATION_COLOR_H
+#define MEP_ANIMATION_COLOR_H
 
-#pragma once
 #include"AnimationPosition.h"
 namespace MEP {
 	/**
@@ -69,14 +70,13 @@ namespace MEP {
 		* @param[in] lenght : Animation lenght in ms.
 		* @param[in] fun : Function graph. Method with the return type double. 
 		*/
-		template<typename Function>
 		AnimationColor(sf::Color entry,
 			sf::Color exit,
-			const float frameRate,
-			const double begin,
-			const double end,
 			sf::Time lenght,
-			Function fun) :
+			const float frameRate = 120,
+			const double begin = 0,
+			const double end = 10,
+			std::function<double(double x)> function = [](double x)->double { return x; }) :
 			entry_r(entry.r), 
 			entry_g(entry.g), 
 			entry_b(entry.b), 
@@ -89,7 +89,7 @@ namespace MEP {
 			g(entry.g),
 			b(entry.b),
 			a(entry.a),
-			AnimationPosition(frameRate, begin, end, 0, 100, lenght, fun) 
+			AnimationPosition(0, 100, lenght, frameRate, begin, end, function)
 		{
 			entry_r = 10;
 		}
@@ -159,3 +159,5 @@ namespace MEP {
 		}
 	};
 }
+
+#endif

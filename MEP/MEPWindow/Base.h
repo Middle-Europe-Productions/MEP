@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_BASE_WINDOW_H
+#define MEP_BASE_WINDOW_H
 
-#pragma once
 #include "..\MEPGraphics\MEPGraphics.h"
 
 namespace MEP {
@@ -143,6 +144,8 @@ namespace MEP {
 			/**
 			* Constructor of a BaseWindow
 			* @param[in] id : Window identifier
+			* @patam[in] view : Input view of the window.
+			* @patam[in] master : Main window view.
 			*/
 			BaseWindow(const unsigned int ID, const sf::View& view, const sf::View& master) : 
 				m_ID(ID), 
@@ -160,14 +163,14 @@ namespace MEP {
 				if(customView())
 					Window.setView(getView());
 				for (auto& x : m_objects) {
-					if (x->getDrawTag() & MEP::Drawable::DrawTag::ViewLock and customView()) {
+					if (x->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
 						Window.setView(getMasterView());
 						if (!x->draw(Window)) {
 							stop = false;
 						}
 						Window.setView(getView());;
 					}
-					else if (x->getDrawTag() & MEP::Drawable::DrawTag::Unactive) {
+					else if (x->getDrawTag() & MEP::DrawTag::Unactive) {
 						continue;
 					}
 					else {
@@ -188,8 +191,7 @@ namespace MEP {
 					m_view.setSize({ (float)new_res.x, (float)new_res.y });
 				}
 				for (auto& x : m_objects)
-					if (x->getDrawTag() & MEP::Drawable::DrawTag::Resize_Pos)
-						x->onResize();
+					x->onResize();
 			}
 			/**
 			* Base update method.
@@ -268,6 +270,14 @@ namespace MEP {
 			*/
 			void setView(const sf::View& view) { 
 				m_view = view;
+			}
+			/**
+			* Moves the view.
+			*/
+			virtual void moveView(sf::RenderWindow& Window) {
+				m_view.move(-(sf::Mouse::getPosition(Window).x - m_windowPossChange.x),
+					-(sf::Mouse::getPosition(Window).y - m_windowPossChange.y));
+				m_windowPossChange = sf::Mouse::getPosition(Window);
 			}
 			/**
 			* Outputs the view parameter of a main app.
@@ -395,24 +405,6 @@ namespace MEP {
 		{
 			if (event.type == sf::Event::Closed)
 				Window.close();
-			else if (event.type == sf::Event::MouseButtonPressed)
-			{
-				if (event.mouseButton.button == sf::Mouse::Left)
-				{
-					m_windowPossChange = Window.getPosition() - sf::Mouse::getPosition();
-					m_grabbedWindow = true;
-				}
-			}
-			else if (event.type == sf::Event::MouseButtonReleased)
-			{
-				if (event.mouseButton.button == sf::Mouse::Left)
-					m_grabbedWindow = false;
-			}
-			else if (event.type == sf::Event::MouseMoved)
-			{
-				if (m_grabbedWindow)
-					Window.setPosition(sf::Mouse::getPosition() + m_windowPossChange);
-			}
 		}
 
 		inline bool BaseWindow::isConnected(unsigned int ID) const
@@ -427,3 +419,5 @@ namespace MEP {
 		}
 	}
 }
+
+#endif

@@ -22,9 +22,11 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_OBJECT_H
+#define MEP_OBJECT_H
 
-#pragma once
 #include<SFML/Graphics.hpp>
+#include"ResourceException.h"
 #include"Drawable.h"
 #include"Config.h"
 #include<list>
@@ -68,7 +70,7 @@ namespace MEP {
 		//master texture size
 		sf::Vector2u m_size = {0, 0};
 		//textures inside of the Object
-		std::list<sf::Texture*> texture;
+		std::list<sf::Texture*>* texture;
 		//type on an object
 		ObjectType m_type = Object::ObjectType::NotInit;
 		//deletes the MEP::Object
@@ -90,10 +92,8 @@ namespace MEP {
 			texture(x.texture), 
 			m_type(x.m_type) 
 		{ 
-			std::cout << "Copy constructor: Name: " <<x.m_name;
 			m_nufC = x.m_nufC;
 			*m_nufC += 1;
-			std::cout << ", copy: " << *m_nufC << std::endl;
 		}
 		/**
 		* Constructor of an object.
@@ -140,7 +140,9 @@ namespace MEP {
 		* @return sf:Vector2u size.
 		*/
 		unsigned long getNufTextures() const {
-			return texture.size(); 
+			if (!texture)
+				return 0;
+			return texture->size(); 
 		}
 		/**
 		* Override of a MEP::Drawable draw.
@@ -240,11 +242,11 @@ namespace MEP {
 	}
 
 	inline void Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
-		texture.push_back(new sf::Texture());
-		if (!texture.back()->loadFromFile(fulladdress)) {
+		texture->push_back(new sf::Texture());
+		if (!texture->back()->loadFromFile(fulladdress)) {
 			throw "Texture not loaded!";
 		}
-		texture.back()->setSmooth(true);
+		texture->back()->setSmooth(true);
 		if (transparencyM) {
 			sf::Image x;
 			if (!x.loadFromFile(fulladdress)) {
@@ -253,8 +255,8 @@ namespace MEP {
 			loadTransparancy(x);
 		}
 		if (masterSize) {
-			m_size.x = texture.front()->getSize().x;
-			m_size.y = texture.front()->getSize().y;
+			m_size.x = texture->front()->getSize().x;
+			m_size.y = texture->front()->getSize().y;
 		}
 	}
 
@@ -264,7 +266,7 @@ namespace MEP {
 			if (table != nullptr) {
 				delete[] table;
 			}
-			for (auto x = texture.begin(); x != texture.end(); x++)
+			for (auto x = texture->begin(); x != texture->end(); x++)
 				delete* x;
 			std::cout << ", object has been permanently deleted.";
 			delete m_nufC;
@@ -285,17 +287,21 @@ namespace MEP {
 		m_ID(ID),
 		m_nufC(new int(0)), 
 		m_name(filename),
+		texture(nullptr),
 		m_type(ObjectType::Single)
 	{
+		texture = new std::list<sf::Texture*>;
 		load(path + filename + ".png", transparencyM, true);
 	}
 
 	inline Object::Object(const U_int32 ID, const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
 		m_ID(ID),
 		m_nufC(new int(0)),
-		m_name(filename), 
+		m_name(filename),
+		texture(nullptr),
 		m_type(ObjectType::Multi)
 	{
+		texture = new std::list<sf::Texture*>;
 		for (int i = 0; i < frames; i++) {
 			load(path + filename + std::to_string(i) + ".png", transparencyM and i == 0, i == 0);
 		}
@@ -305,14 +311,16 @@ namespace MEP {
 		m_ID(ID),
 		m_nufC(new int(0)),
 		m_name(filename),
+		texture(nullptr),
 		transparency(false)
 	{
+		texture = new std::list<sf::Texture*>;
 		for (auto& i : images) {
-			texture.push_back(new sf::Texture());
-			if (!texture.back()->loadFromImage(i)) {
+			texture->push_back(new sf::Texture());
+			if (!texture->back()->loadFromImage(i)) {
 				throw "Texture not loaded!";
 			}
-			texture.back()->setSmooth(true);
+			texture->back()->setSmooth(true);
 		}
 		if (transparencyM)
 			loadTransparancy(images.front());
@@ -320,14 +328,14 @@ namespace MEP {
 			m_type = ObjectType::Multi;
 		else
 			m_type = ObjectType::Single;
-		m_size.x = texture.front()->getSize().x;
-		m_size.y = texture.front()->getSize().y;
+		m_size.x = texture->front()->getSize().x;
+		m_size.y = texture->front()->getSize().y;
 	}
 
 	inline bool Object::draw(sf::RenderWindow& window)
 	{
 		if (m_type == MEP::Object::ObjectType::Single or m_type == MEP::Object::ObjectType::Multi)
-			window.draw(sf::Sprite(*texture.front()));
+			window.draw(sf::Sprite(*texture->front()));
 		return true;
 	}
 
@@ -336,3 +344,5 @@ namespace MEP {
 		deleteObject();
 	}
 }
+
+#endif

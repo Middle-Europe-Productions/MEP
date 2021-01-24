@@ -62,4 +62,11 @@
 		*When set it is going to be used when the window is resized. \n
 		*It executes the calculation method to recalculate the position of an objects. \n
 		*You do need to provide the method with the use of: addMethodPos(...) \n
-		
+### 13.01.2021
+## MEP lib version alpha 1.3.1
+	-Better memory management. \n
+	-General code improvements. \n
+	-Added Font resource type. \n
+	-A new methods were added to ResourceManager. get<Type>(ID, group) enables you to quick access fonts & objects. \n
+	-Better constructors. \n
+	-Examples were added. \n

@@ -22,7 +22,8 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_NON_COPYABLE_H
+#define MEP_NON_COPYABLE_H
 
 namespace MEP {
 	/**
@@ -37,3 +38,5 @@ namespace MEP {
 		NonCopyable& operator=(const NonCopyable& x) = delete;
 	};
 }
+
+#endif

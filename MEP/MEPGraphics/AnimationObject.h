@@ -23,7 +23,9 @@
 //
 ////////////////////////////////////////////////////////////
 
-#pragma once
+#ifndef MEP_ANIMATION_OBJECT_H
+#define MEP_ANIMATION_OBJECT_H
+
 #include"AnimationBase.h"
 #include"AnimationPosition.h"
 #include"Sprite.h"
@@ -88,7 +90,12 @@ namespace MEP {
 		* On resize we want to update the position.
 		*/
 		void onResize() override {
-			updatePosition();
+			if (getDrawTag() & DrawTag::Resize_Scale)
+				updateScale();
+			if (getDrawTag() & DrawTag::Resize_Pos)
+				updatePosition();
+			if (getDrawTag() & DrawTag::Resize_Rect)
+				updateRect();
 		}
 		/**
 		* Outputs the size of a master MEP::Object
@@ -142,30 +149,30 @@ namespace MEP {
 		virtual ~AnimationObject() = default;
 	};
 
-	void MEP::AnimationObject::init()
+	inline void MEP::AnimationObject::init()
 	{
-		currentFrame = texture.begin();
+		currentFrame = texture->begin();
 		currentSprite.setPosition(m_posFixed);
 		currentSprite.setScale(m_scaleFixed);
 		updateSprite(**currentFrame);
 	}
 
-	bool MEP::AnimationObject::correctObject(const Object& x)
+	inline bool MEP::AnimationObject::correctObject(const Object& x)
 	{
 		return x.getType() == ObjectType::Multi;
 	}
 
-	void MEP::AnimationObject::runForward(sf::Time& currentTime)
+	inline void MEP::AnimationObject::runForward(sf::Time& currentTime)
 	{
 		run(Direction::Forward, currentTime);
 	}
 
-	void MEP::AnimationObject::runBackward(sf::Time& currentTime)
+	inline void MEP::AnimationObject::runBackward(sf::Time& currentTime)
 	{
 		run(Direction::Backwards, currentTime);
 	}
 
-	bool MEP::AnimationObject::draw(sf::RenderWindow& window)
+	inline bool MEP::AnimationObject::draw(sf::RenderWindow& window)
 	{
 		if (isInit != AnimationInit::NotInit) {
 			window.draw(currentSprite);
@@ -173,12 +180,12 @@ namespace MEP {
 		return true;
 	}
 
-	void MEP::AnimationObject::update(sf::Time& currentTime)
+	inline void MEP::AnimationObject::update(sf::Time& currentTime)
 	{
 		if (isRunning and (isInit == AnimationInit::ObjectAnimation)) {
 			if (currentTime - updateTime >= toWait) {
 				if (direction == Direction::Forward) {
-					if (currentFrame == --texture.end()) {
+					if (currentFrame == --texture->end()) {
 						isRunning = false;
 					}
 					else {
@@ -189,7 +196,7 @@ namespace MEP {
 				else if (direction == Direction::Backwards) {
 					currentFrame--;
 					index_currentFrame++;
-					if (currentFrame == texture.begin()) {
+					if (currentFrame == texture->begin()) {
 						isRunning = false;
 					}
 				}
@@ -201,14 +208,14 @@ namespace MEP {
 			if (toFollowOBJ->getInit() != AnimationInit::Follow) {
 				while (toFollowOBJ->index_currentFrame != index_currentFrame) {
 					if (toFollowOBJ->index_currentFrame > index_currentFrame) {
-						if (currentFrame == --texture.end()) {
+						if (currentFrame == --texture->end()) {
 							break;
 						}
 						index_currentFrame++;
 						currentFrame++;
 					}
 					else {
-						if (currentFrame == texture.begin()) {
+						if (currentFrame == texture->begin()) {
 							break;
 						}
 						index_currentFrame--;
@@ -229,28 +236,29 @@ namespace MEP {
 		}
 	}
 
-	void MEP::AnimationObject::entryUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationObject::entryUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
 			run(Direction::Forward, currentTime);
 		update(currentTime);
 	}
 
-	void MEP::AnimationObject::exitUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationObject::exitUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
 			run(Direction::Backwards, currentTime);
 		update(currentTime);
 	}
 
-	bool MEP::AnimationObject::isActive() const
+	inline bool MEP::AnimationObject::isActive() const
 	{
 		return getStatus() or isFollowerActive();
 	}
 
-	bool MEP::AnimationObject::isTansparent(unsigned int x, unsigned int y)
+	inline bool MEP::AnimationObject::isTansparent(unsigned int x, unsigned int y)
 	{
 		return false;
 	}
 
 }
+#endif

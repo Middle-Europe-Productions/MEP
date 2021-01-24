@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_APPLICATION_H
+#define MEP_APPLICATION_H
 
-#pragma once
 #include <list>
 #include "WindowCrossPlatform.h"
 #include "WindowStat.h"
@@ -124,7 +125,7 @@ namespace MEP {
                 * @param[in] style : Style of a window. Use sf::Style here.
                 * @param[in] settings : Have a look on sf::ContextSettings for the information.
                 */
-                Application(const char* title,
+                _cdecl Application(const char* title,
                     const char* resPath,
                     const sf::Vector2u& mainResolution = { 1280, 720 },
                     U_int32 style = sf::Style::Default, 
@@ -160,7 +161,8 @@ namespace MEP {
                 */
                 void initApp() {
                     try {
-                        createResorces();
+                        createResources();
+                        initWindow();
                     }
                     catch (const MEP::ResourceException& x) {
                         throw MEP::Window::WindowException(-1, x);
@@ -173,12 +175,6 @@ namespace MEP {
                     }
                     isLoaded = true;
                     isInit = true;
-                }
-                /**
-                * Simply closes the window.
-                */
-                void close() {
-                    close();
                 }
                 /**
                 * Main loop. Just use it to run an application.
@@ -209,12 +205,14 @@ namespace MEP {
                 /**
                 * Creates the game resources. Method needs to be overwritten
                 */
-                virtual void createResorces() {};
+                virtual void createResources() = 0;
                 /**
                 * Creates the game resources. Method needs to be overwritten
                 */
-                virtual void createWindows() {};
+                virtual void createWindows() = 0;
             };
         }
     }
 }
+
+#endif

@@ -23,7 +23,10 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_MEP_H
+#define MEP_MEP_H
 
-#pragma once
-#include<MEPGraphics/MEPGraphics.h>
 #include<MEPWindow/MEPWindow.h>
+#include<MEPGraphics/MEPGraphics.h>
+
+#endif

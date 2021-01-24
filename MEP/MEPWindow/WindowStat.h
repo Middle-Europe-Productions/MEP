@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-
-#pragma once
+#ifndef MEP_WINDOW_STATS_H
+#define MEP_WINDOW_STATS_H
+#include "../MEPGraphics/NonCopyable.h"
 #include <SFML/System/Time.hpp>
 namespace MEP {
 	namespace Window {
@@ -71,3 +72,5 @@ namespace MEP {
 		};
 	}
 }
+
+#endif

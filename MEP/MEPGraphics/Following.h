@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_FOLLOWING_H
+#define MEP_FOLLOWING_H
 
-#pragma once
 #include"AnimationPosition.h"
 #include"AnimationColor.h"
 namespace MEP {
@@ -101,8 +102,10 @@ namespace MEP {
 			}
 		};
 	protected:
-		//[optional] formula for calculation of the position and scale.
+		//[optional] formula for calculation of the position
 		std::function<sf::Vector2f()> calc_position = [this]()->sf::Vector2f { return m_pos; };
+		//[optional] formula for calculation of the scale.
+		std::function<sf::Vector2f()> calc_scale = [this]()->sf::Vector2f { return m_scale; };
 
 		std::list<std::unique_ptr<Follow>> followingList;
 		//texture position and scale
@@ -178,6 +181,20 @@ namespace MEP {
 			calc_position = method;
 		}
 		/**
+		* Updates the scale of an object according the the given method.
+		* If method is not specified does not change anything.
+		*/
+		void updateScale() {
+			setScale(calc_scale());
+		}
+		/**
+		* Adds a method of calculation the scale.
+		* @param[in] method : A method of calculating the position.
+		*/
+		void addMethodScale(std::function<sf::Vector2f()> method) {
+			calc_scale = method;
+		}
+		/**
 		* Warning list of the following objects is indivdual for every object.
 		* **Assign operator does not copy them.**
 		* Assign operator copy position, scale and color.
@@ -192,6 +209,7 @@ namespace MEP {
 				m_color = x.m_color;
 				m_colorFixed = x.m_colorFixed;
 				calc_position = x.calc_position;
+				calc_scale = x.calc_scale;
 			}
 			return *this;
 		}
@@ -317,3 +335,5 @@ namespace MEP {
 		}
 	};
 };
+
+#endif

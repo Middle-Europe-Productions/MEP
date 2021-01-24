@@ -22,7 +22,8 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_OSSETUP_H
+#define MEP_OSSETUP_H
 
 #define MEP_STATE "Alpha";
 #define MEP_STATE_VERSION 3;
@@ -40,3 +41,5 @@
 #else
 	#error Operating system not supported!
 #endif
+
+#endif /*MEP_OSSETUP_H*/

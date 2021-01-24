@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -70,7 +70,7 @@ $(function() {
 : <a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a0ca90d23de149429d335de08e1d7199d">MEP::Window::BaseWindow</a>
 </li>
 <li>m_array
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#a43544f50e2bdfc90a8b2c08af58b95dd">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#ab5af69ea57c06fcc60e78f175fdcd06f">MEP::Resource</a>
 </li>
 <li>m_backgroundColor
 : <a class="el" href="class_m_e_p_1_1_window_1_1_window_data.html#a958a0fb6b5cb13d0ffe5156b5d0d45cb">MEP::Window::WindowData</a>
@@ -106,16 +106,19 @@ $(function() {
 : <a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#ae2f6ed8a31eaa6fce99e7e7c28775c92">MEP::Window::BaseWindow</a>
 </li>
 <li>m_group
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#aa818962a1e87ccbf8ee16e391f11c997">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#a62336c32d18f908d5189157b805ef170">MEP::Resource</a>
 </li>
 <li>m_ID
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#a0da8ae9327138001d46c9f0c468f2c61">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#a5c54805dd25103c7303fb611bf45d877">MEP::Resource</a>
+</li>
+<li>m_launchResolution
+: <a class="el" href="class_m_e_p_1_1_window_1_1_window_data.html#a33c4a15639a7c02841bb7b9dea8fc970">MEP::Window::WindowData</a>
 </li>
 <li>m_name
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#aff6e1df8e034d1d2fa53e00fccf4704d">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#a0480398a583096b7da8c3b4091b1bcf2">MEP::Resource</a>
 </li>
 <li>m_nofFrames
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#a1bca6080d822095a2c81bf85302cac89">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#a10fc94ec3dfa045076509f4dc83d96ff">MEP::Resource</a>
 </li>
 <li>m_objects
 : <a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#a5b6323175871b57926e7dd6d05c9336b">MEP::Window::BaseWindow</a>
@@ -141,15 +144,21 @@ $(function() {
 <li>m_size
 : <a class="el" href="class_m_e_p_1_1_object.html#a06ebed75f58e0f03f2a63664af8f1f48">MEP::Object</a>
 </li>
+<li>m_style
+: <a class="el" href="class_m_e_p_1_1_window_1_1_window_data.html#a1a1127441b18723d0c5061401c182af5">MEP::Window::WindowData</a>
+</li>
 <li>m_tag
 : <a class="el" href="class_m_e_p_1_1_animation.html#a7becf5a8d38508bbc4cd5b38358caeb0">MEP::Animation</a>
 </li>
+<li>m_title
+: <a class="el" href="class_m_e_p_1_1_window_1_1_window_data.html#a6f618b1fa2bc9cfef57116e9827d60c5">MEP::Window::WindowData</a>
+</li>
 <li>m_transparency
-: <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#a7d2356712dee32bda31cb140ff0c2b4e">MEP::Resources::Resource</a>
+: <a class="el" href="struct_m_e_p_1_1_resource.html#a55e57d3e7d538956a4cec746c0a11b47">MEP::Resource</a>
 </li>
 <li>m_type
 : <a class="el" href="class_m_e_p_1_1_object.html#a772e5abd3fa34fd7ad5e2e3c0637ab16">MEP::Object</a>
-, <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html#adc27b93a23580fdc167ea4139349a113">MEP::Resources::Resource</a>
+, <a class="el" href="struct_m_e_p_1_1_resource.html#a639cb4c79f2a889229567b40577dba9c">MEP::Resource</a>
 </li>
 <li>m_view
 : <a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#aa43d108c37d1d7a7d15b370a9c58ad96">MEP::Window::BaseWindow</a>
@@ -173,6 +182,9 @@ $(function() {
 </li>
 <li>movePosition()
 : <a class="el" href="class_m_e_p_1_1_following.html#a4be1334f37ca8e4dfba4cbc1f76e7799">MEP::Following</a>
+</li>
+<li>moveView()
+: <a class="el" href="class_m_e_p_1_1_window_1_1_base_window.html#ad5f047cc0596f9d3c11eaf89daf80360">MEP::Window::BaseWindow</a>
 </li>
 </ul>
 </div><!-- contents -->

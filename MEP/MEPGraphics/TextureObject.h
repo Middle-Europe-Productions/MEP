@@ -22,12 +22,14 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_TEXTURE_OBJECT_H
+#define MEP_TEXTURE_OBJECT_H
+
 #include"AnimationObject.h"
 namespace MEP {
 	/**
 	* Basic type of a MEP::Drawable element in which the creation of a sf::Sprite is done via a single texture.
-	* \brief Basic MEP::Drawable element based on a single texture. 
+	* \brief Basic MEP::Drawable element based on a single texture.
 	*/
 	class TextureObject : public Object, public Sprite {
 		void updateSprite() override {
@@ -39,7 +41,7 @@ namespace MEP {
 			currentSprite.setScale(m_scaleFixed);
 		}
 		void init() {
-			currentSprite.setTexture(*texture.front());
+			currentSprite.setTexture(*texture->front());
 			currentSprite.setPosition(m_posFixed);
 			currentSprite.setScale(m_scaleFixed);
 			isInit = true;
@@ -64,7 +66,12 @@ namespace MEP {
 		* On resize we want to update the position.
 		*/
 		void onResize() override {
-			updatePosition();
+			if(getDrawTag() & DrawTag::Resize_Scale)
+				updateScale();
+			if(getDrawTag() & DrawTag::Resize_Pos)
+				updatePosition();
+			if (getDrawTag() & DrawTag::Resize_Rect)
+				updateRect();
 		}
 		/**
 		* Override of a MEP::Drawable draw.
@@ -80,12 +87,6 @@ namespace MEP {
 		*/
 		void update(sf::Time& currentTime) override {
 			updateSprite();
-		}
-		/**
-		* Sets the main sprite Rect
-		*/
-		void setRect(const sf::IntRect& rect) { 
-			currentSprite.setTextureRect(rect); 
 		}
 		/**
 		* Outputs the color of a main sprite.
@@ -117,3 +118,5 @@ namespace MEP {
 		}
 	};
 }
+
+#endif

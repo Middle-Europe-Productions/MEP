@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_LOADING_H
+#define MEP_LEADING_H
 
-#pragma once
 #include<thread>
 #include "BaseTemplate.h"
 #include "Application.h"
@@ -115,3 +116,5 @@ namespace MEP {
 		}
 	}
 }
+
+#endif

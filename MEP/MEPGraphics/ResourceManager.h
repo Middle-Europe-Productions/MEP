@@ -22,164 +22,142 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_RESOURCE_H
+#define MEP_RESOURCE_H
+
 #include<list>
-#include<string>
 #include<thread>
 #include"AnimationObject.h"
 #include"TextureObject.h"
 #include"NonCopyable.h"
+#include"FontManager.h"
+#include"Assets.h"
 namespace MEP {
 	/**
-	* \brief Resource exception structure.
-	*/
-	struct ResourceException {
-		/**
 		* @enum MEP::ExceptionType
-		* Provides quick definition of an exceptions.
+		* Provides a types of a Resource.
 		*/
-		enum class ExceptionType {
-			ResourceAlreadyExists,
-			WrongResourceConstructor,
-			ObjectNotFound,
-			GroupNotFound,
-			CouldntLoad
-		};
-		const ExceptionType exceptionType;
-		const std::string ResourceName;
-		const std::string Message;
+	enum class ResourceType {
+		/** A simple case to handle the fonts.*/
+		Font = 3,
+		/** When image of arrays is provided to constuct a MEP::Object*/
+		ImageArray = 2,
+		/** When there is only a single texture to create a MEP::Object*/
+		Single = 1,
+		/** When there is a set of texture on an input to create a MEP::Object*/
+		Multi = 0
+	};
+	/**
+	* \brief A deffinition of an individual resource.
+	*/
+	struct Resource : public NonCopyable {
+		const U_int32 m_ID;
+		const U_int32 m_group;
+		const std::string m_name;
+		ResourceType m_type;
+		unsigned int m_nofFrames = 0;
+		bool m_transparency = false;
+		std::list<sf::Image>* m_array = nullptr;
 		/**
-		* explicit contructor
-		* @param[in] name : Name of the MEP::Object.
-		* @param[in] msg : Description of an error.
-		* @param[in] type : MEP::ResourceException::ExceptionType
+		* Resource contructor. It creates the font.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		explicit ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type) :
-			ResourceName(name),
-			Message(msg),
-			exceptionType(type)
+		Resource(const ResourceType type, const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+			Resource(type, ID, AssetsGroup::UserAssets, name, nofFrames, transparency)
+		{
+		}
+		/**
+		* Resource contructor. It creates the font.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+		*/
+		Resource(const ResourceType type, const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+			m_ID(ID),
+			m_group(group),
+			m_name(name),
+			m_transparency(transparency),
+			m_type(type)
+		{
+			if (nofFrames == 0)
+				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
+			m_nofFrames = nofFrames;
+		}
+		/**
+		* Resource contructor. It is capable of creating Single and Multi resource.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+		*/
+		Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+			//by default we are assigning it to the MEP::UserAssets (-1)
+			Resource(ID, -1, name, nofFrames, transparency)
 		{}
 		/**
-		* explicit contructor
-		* @param[in] name : Name of the MEP::Object.
-		* @param[in] msg : Description of an error.
-		* @param[in] type : MEP::ResourceException::ExceptionType
+		* Resource contructor. It is capable of creating Single and Multi resource.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] group : A group of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		explicit ResourceException(const char* name, const char* msg, const ExceptionType& type) :
-			ResourceName(name),
-			Message(msg),
-			exceptionType(type)
-		{}
+		Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
+			m_ID(ID),
+			m_group(group),
+			m_name(name),
+			m_transparency(transparency),
+			m_type(ResourceType::Single)
+		{
+			if (nofFrames == 0)
+				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
+			if (nofFrames > 1)
+				m_type = ResourceType::Multi;
+			m_nofFrames = nofFrames;
+		}
 		/**
-		* Overloading the << operator.
+		* Resource contructor. It is capable of creating ImageArray resource.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const ResourceException& x) {
-			out << "ResourceException ResourceName: " << x.ResourceName << ", Message: " << x.Message << std::endl;
-			return out;
+		Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+			//by default we are assigning it to the MEP::UserAssets (-1)
+			Resource(ID, -1, images, name, transparency)
+		{
+		}
+		/**
+		* Resource contructor. It is capable of creating ImageArray resource.
+		* @param[in] ID : An ID of a resource.
+		* @param[in] group : A group of a resource.
+		* @param[in] name : Name of a resource.
+		* @param[in] nofFrames : Number of textures. 1 by default.
+		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
+		*/
+		Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
+			m_ID(ID),
+			m_group(group),
+			m_name(name),
+			m_transparency(transparency),
+			m_array(&images)
+		{
+			m_type = ResourceType::ImageArray;
 		}
 	};
 	/**
 	* Resources class is a utility which is meant to be working with all of the MEP::Drawable objects.
 	* \brief A main MEP::Drawable cointainer.
 	*/
-	class Resources {
-	public:
-		/**
-		* @enum MEP::ExceptionType
-		* Provides a types of a Resource.
-		*/
-		enum class ResourceType {
-			/** When image of arrays is provided to constuct a MEP::Object*/
-			ImageArray = 2,
-			/** When there is only a single texture to create a MEP::Object*/
-			Single = 1,
-			/** When there is a set of texture on an input to create a MEP::Object*/
-			Multi = 0
-		};
-		/**
-		* \brief A deffinition of an individual resource.
-		*/
-		struct Resource: public NonCopyable {
-			const U_int32 m_ID;
-			const U_int32 m_group;
-			const std::string m_name;
-			Resources::ResourceType m_type;
-			unsigned int m_nofFrames = 0;
-			bool m_transparency = false;
-			std::list<sf::Image>* m_array = nullptr;
-			/**
-			* Resource contructor. It is capable of creating Single and Multi resource.
-			* @param[in] ID : An ID of a resource.
-			* @param[in] name : Name of a resource.
-			* @param[in] nofFrames : Number of textures. 1 by default.
-			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-			*/
-			Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-				//by default we are assigning it to the MEP::UserAssets (-1)
-				Resource(ID, -1, name, nofFrames, transparency)
-			{}
-			/**
-			* Resource contructor. It is capable of creating Single and Multi resource.
-			* @param[in] ID : An ID of a resource.
-			* @param[in] group : A group of a resource.
-			* @param[in] name : Name of a resource.
-			* @param[in] nofFrames : Number of textures. 1 by default.
-			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-			*/
-			Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-				m_ID(ID),
-				m_group(group),
-				m_name(name), 
-				m_transparency(transparency), 
-				m_type(Resources::ResourceType::Single)
-			{
-				if (nofFrames == 0)
-					throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
-				if (nofFrames > 1)
-					m_type = Resources::ResourceType::Multi;
-				m_nofFrames = nofFrames;
-			}
-			/**
-			* Resource contructor. It is capable of creating ImageArray resource.
-			* @param[in] ID : An ID of a resource.
-			* @param[in] name : Name of a resource.
-			* @param[in] nofFrames : Number of textures. 1 by default.
-			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-			*/
-			Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
-				//by default we are assigning it to the MEP::UserAssets (-1)
-				Resource(ID, -1, images, name, transparency)
-			{
-			}
-			/**
-			* Resource contructor. It is capable of creating ImageArray resource.
-			* @param[in] ID : An ID of a resource.
-			* @param[in] group : A group of a resource.
-			* @param[in] name : Name of a resource.
-			* @param[in] nofFrames : Number of textures. 1 by default.
-			* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-			*/
-			Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
-				m_ID(ID),
-				m_group(group),
-				m_name(name),
-				m_transparency(transparency),
-				m_array(&images) 
-			{
-				m_type = Resources::ResourceType::ImageArray;
-			}
-		};
-	private:
-		struct Group {
-			const U_int32 group_ID;
-			std::list<std::unique_ptr<Object>> objects;
-			Group(const U_int32& ID) : group_ID(ID) {}
-		};
-	private:
+	class Resources: public FontManager {
 		const std::string m_path;
 		bool isInit = false;
 		//List of the objects
-		std::list<Group> objects;
+		std::list<Group<Object>> objects;
 		//Method loading individual resource
 		void load(const Resource& data);
 		void loadResources() { 
@@ -188,49 +166,22 @@ namespace MEP {
 		//Forwarding method
 		template <typename First, typename ... Rest>
 		void loadResources(First&& first, Rest&& ... rest);
+
 		//finds or of creates a new group
-		std::list<std::unique_ptr<Object>>& findOrAdd(const U_int32& group) {
-			for (auto& x : objects)
-				if (x.group_ID == group)
-					return x.objects;
-			objects.push_back(Group(group));
-			return objects.back().objects;
-		}
+		template<typename Type, typename ListContent>
+		std::list<std::unique_ptr<Type>>& findOrAdd(const U_int32& group, std::list<ListContent>& container);
+
 		//adds an object to a group
-		void check(std::list<std::unique_ptr<Object>>& x, const U_int32& ID) {
-			for(auto& it: x)
-				if(it.get()->getID() == ID)
-					throw ResourceException(it.get()->getName(), "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
-		}
-		//find or throws an exception
 		template<typename Type>
-		Object& find(const U_int32& group, Type method)
-		{
-			for (auto it = objects.begin(); it != objects.end(); ++it) {
-				if (it->group_ID == group) {
-					for (auto ele = it->objects.begin(); ele != it->objects.end(); ++ele)
-						if (method(ele))
-							return ele->get()->getObjectRef();
-					throw ResourceException("unknown", "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
-				}				
-			}
-			throw ResourceException("unknown", "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
-		}
-		//find or throws an exception
-		template<typename Type>
-		void remove(const U_int32& group, Type method)
-		{
-			for (auto it = objects.begin(); it != objects.end(); ++it) {
-				if (it->group_ID == group) {
-					for (auto ele = it->objects.begin(); ele != it->objects.end(); ++ele)
-						if (method(ele))
-							it->objects.remove(*ele);
-				}
-				else
-					throw ResourceException("unknown", "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
-			}
-			throw ResourceException("unknown", "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
-		}
+		void check(std::list<std::unique_ptr<Type>>& x, const U_int32& ID);
+
+		//finds an element
+		template<typename Out, typename ListContent, typename Type>
+		Out* find(const U_int32& group, Type method, const std::list<ListContent>& container);
+		
+		//removes an element
+		template<typename Out, typename ListContent, typename Type>
+		void remove(const U_int32& group, Type method, std::list<ListContent>& container);
 	protected:
 		bool isLoaded = false;
 	public:
@@ -270,11 +221,42 @@ namespace MEP {
 		*/
 		Object& getObject(const U_int32 ID, const U_int32 group = -1);
 		/**
+		* Outputs the font.
+		* @param[in] ID : ID of a MEP::Object.
+		* @param[in] group : Group of a MEP::Object.
+		*/
+		sf::Font& getFont(const U_int32 ID, const U_int32 group = -1);
+		/**
+		* Outputs the Type.
+		* if MEP::Objects outputs object.
+		* if sf::Font outputs font.
+		* @param[in] ID : ID of a MEP::Object.
+		* @param[in] group : Group of a MEP::Object.
+		*/
+		template <typename T>
+		T& get(const U_int32 ID, const U_int32 group = -1);
+		/**
+		* Implementation of get. T = MEP::Object
+		*/
+		template <> 
+		MEP::Object& get(const U_int32 ID, const U_int32 group);
+		/**
+		* Implementation of get. T = sf::Font
+		*/
+		template <>
+		sf::Font& get(const U_int32 ID, const U_int32 group);
+		/**
 		* Deletes MEP::Object with agiven name.
 		* @param[in] name : ID of a MEP::Object
 		* @param[in] group : Group of a MEP::Object.
 		*/
 		void deleteObject(const U_int32 ID, const U_int32 group = -1);
+		/**
+		* Deletes sf::Font with agiven name.
+		* @param[in] name : ID of a MEP::Object
+		* @param[in] group : Group of a MEP::Object.
+		*/
+		void deleteFont(const U_int32 ID, const U_int32 group = -1);
 		/**
 		* Deletes all MEP::Object.
 		* @param[in] name : Name of a MEP::Object.
@@ -294,21 +276,67 @@ namespace MEP {
 		loadResources(std::forward<Rest>(rest) ...);
 	}
 
+	template<typename Type, typename ListContent>
+	inline std::list<std::unique_ptr<Type>>& Resources::findOrAdd(const U_int32& group, std::list<ListContent>& container)
+	{
+		for (auto& x : container)
+			if (x.group_ID == group)
+				return x.objects;
+		container.push_back(Group<Type>(group));
+		return container.back().objects;
+	}
+
+	template<typename Type>
+	inline void Resources::check(std::list<std::unique_ptr<Type>>& x, const U_int32& ID)
+	{
+		for (auto& it : x)
+			if (it.get()->getID() == ID)
+				throw ResourceException(it.get()->getName(), "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+	}
+
+	template<typename Out, typename ListContent, typename Type>
+	inline Out* Resources::find(const U_int32& group, Type method, const std::list<ListContent>& container)
+	{
+		for (auto& it : container) {
+			if (it.getID() == group) {
+				if (Out* x = it.find(method))
+					return x;
+				throw ResourceException(std::to_string(group), "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
+			}
+		}
+		throw ResourceException(std::to_string(group), "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
+	}
+
+	template<typename Out, typename ListContent, typename Type>
+	inline void Resources::remove(const U_int32& group, Type method, std::list<ListContent>& container)
+	{
+		for (auto& it : container) {
+			if (it.getID() == group) {
+				if (it.remove(method)) {
+					return;
+				}
+				else {
+					throw ResourceException(std::to_string(group), "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
+				}
+			}
+		}
+		throw ResourceException(std::to_string(group), "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
+	}
+
 	template<typename ... Values>
 	inline void Resources::initResources(Values&& ...values)
 	{
 		loadResources(std::forward<Values>(values) ...);
 	}
 
-	inline void Resources::load(const MEP::Resources::Resource& data)
+	inline void Resources::load(const MEP::Resource& data)
 	{
-		std::cout << data.m_name << " " << data.m_nofFrames << " " << (int)data.m_type << std::endl;
-		//finds the target group
-		std::list<std::unique_ptr<Object>>& x = findOrAdd(data.m_group);
-		//check is the resource already exists in a group
-		check(x, data.m_ID);
 		if (data.m_type == ResourceType::Multi) {
 			try {
+				//finds the target group
+				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
+				//check is the resource already exists in a group
+				check<Object>(x, data.m_ID);
 				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_nofFrames, data.m_transparency));
 			}
 			catch (const char* x) {
@@ -317,6 +345,10 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::Single) {
 			try {
+				//finds the target group
+				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
+				//check is the resource already exists in a group
+				check<Object>(x, data.m_ID);
 				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
@@ -325,44 +357,92 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::ImageArray) {
 			try {
+				//finds the target group
+				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
+				//check is the resource already exists in a group
+				check<Object>(x, data.m_ID);
 				x.push_back(std::make_unique<MEP::Object>(data.m_ID, *data.m_array, data.m_name, data.m_transparency ));
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
 			}
 		}
+		else if (data.m_type == ResourceType::Font) {
+			//finds the target group
+			std::list<std::unique_ptr<Font>>& x = findOrAdd<Font, Group<Font>>(data.m_group, fonts);
+			//check is the resource already exists in a group
+			check<Font>(x, data.m_ID);
+			//initialize and add the newly created object.
+			x.push_back(std::make_unique<Font>(data.m_ID, data.m_name, m_path));
+		}
 	}
 
 	inline Object& Resources::getObject(const std::string& name, const U_int32 group)
 	{
 		std::cout << "ID:" << name << ", gourp: " << group << std::endl;
-		return find(group, [name](auto& element) -> bool
+		return find<MEP::Object>(group, [name](auto& element) -> bool
 			{
-				return element->get()->getName() == name;
-			});
+				return element->getName() == name;
+			}, 
+			objects)->getObjectRef();
 	}
 
 	inline void Resources::deleteObject(const std::string& name, const U_int32 group)
 	{
-		remove(group, [name](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
+		remove<Object, Group<Object>>(group, [name](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
 			{
 				return element->get()->getName() == name;
-			});
+			}, objects);
 	}
 
 	inline Object& Resources::getObject(const U_int32 ID, const U_int32 group)
 	{
-		return find(group, [ID](auto& element) -> bool
+		return find<MEP::Object, Group<MEP::Object>>(group, [ID](auto& element) -> bool
 			{
-				return element->get()->getID() == ID;
-			});
+				return element->getID() == ID;
+			},
+			objects)->getObjectRef();
+	}
+
+	inline sf::Font& Resources::getFont(const U_int32 ID, const U_int32 group)
+	{
+		return find<Font, Group<Font>>(group, [ID](auto& element)->bool
+			{
+				return element->getID() == ID;
+			},
+			fonts)->getFont();
+	}
+
+	template <typename T>
+	inline T& Resources::get(const U_int32 ID, const U_int32 group) {
+		throw ResourceException("ID: " + std::to_string(ID), "Incorrect type!", ResourceException::ExceptionType::IncorrectType);
+	}
+
+	template <>
+	inline MEP::Object& Resources::get(const U_int32 ID, const U_int32 group) {
+		return getObject(ID, group);
+	}
+
+	template <>
+	inline sf::Font& Resources::get(const U_int32 ID, const U_int32 group) {
+		return getFont(ID, group);
 	}
 
 	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
 	{
-		remove(group, [ID](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
+		remove<Object, Group<Object>>(group, [ID](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
 			{
 				return element->get()->getID() == ID;
-			});
+			}, objects);
+	}
+	inline void Resources::deleteFont(const U_int32 ID, const U_int32 group)
+	{
+		remove<Font, Group<Font>>(group, [ID](auto& element)->bool
+			{
+				return element->get()->getID() == ID;
+			},
+			fonts);
 	}
 }
+
+#endif

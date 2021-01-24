@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -68,8 +68,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_m_e_p_1_1_resources-members.html">List of all members</a>  </div>
@@ -88,24 +86,11 @@ Inheritance diagram for MEP::Resources:</div>
  <div class="center">
   <img src="class_m_e_p_1_1_resources.png" usemap="#MEP::Resources_map" alt=""/>
   <map id="MEP::Resources_map" name="MEP::Resources_map">
-<area href="class_m_e_p_1_1_window_1_1_template_1_1_application.html" title="A basic class for the Application." alt="MEP::Window::Template::Application" shape="rect" coords="0,56,214,80"/>
+<area href="class_m_e_p_1_1_font_manager.html" alt="MEP::FontManager" shape="rect" coords="0,0,214,24"/>
+<area href="class_m_e_p_1_1_window_1_1_template_1_1_application.html" title="A basic class for the Application." alt="MEP::Window::Template::Application" shape="rect" coords="0,112,214,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html">Resource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A deffinition of an individual resource.  <a href="struct_m_e_p_1_1_resources_1_1_resource.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:ae6e1ba5680f36de87acb1a6541c0abd5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#ae6e1ba5680f36de87acb1a6541c0abd5">ResourceType</a> { <a class="el" href="class_m_e_p_1_1_resources.html#ae6e1ba5680f36de87acb1a6541c0abd5acd0402ad1a79da4eb6bfaaf959b5a1a8">ResourceType::ImageArray</a> = 2, 
-<a class="el" href="class_m_e_p_1_1_resources.html#ae6e1ba5680f36de87acb1a6541c0abd5a66ba162102bbf6ae31b522aec561735e">ResourceType::Single</a> = 1, 
-<a class="el" href="class_m_e_p_1_1_resources.html#ae6e1ba5680f36de87acb1a6541c0abd5ace7898536dd0e928d1640ee2ad531cc8">ResourceType::Multi</a> = 0
- }</td></tr>
-<tr class="separator:ae6e1ba5680f36de87acb1a6541c0abd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:add520849311a87f15075f2fd9bd20d95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#add520849311a87f15075f2fd9bd20d95">Resources</a> (const std::string &amp;path)</td></tr>
@@ -121,53 +106,41 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aac5fd3e71b26e69283b9f806dc7a163a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a4180bf8ae568b4b9bebabed9fa35d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a3a4180bf8ae568b4b9bebabed9fa35d2">getObject</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group=-1)</td></tr>
 <tr class="separator:a3a4180bf8ae568b4b9bebabed9fa35d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a7b76636dab64d454d17204b45e0f9e"><td class="memItemLeft" align="right" valign="top">sf::Font &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a9a7b76636dab64d454d17204b45e0f9e">getFont</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group=-1)</td></tr>
+<tr class="separator:a9a7b76636dab64d454d17204b45e0f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e922079282b8806c69f0594238d2fa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a04e922079282b8806c69f0594238d2fa"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a04e922079282b8806c69f0594238d2fa">get</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group=-1)</td></tr>
+<tr class="separator:a04e922079282b8806c69f0594238d2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9966e729ea04e32a6261b7fddfabc0a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:ad9966e729ea04e32a6261b7fddfabc0a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_object.html">MEP::Object</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#ad9966e729ea04e32a6261b7fddfabc0a">get</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group)</td></tr>
+<tr class="separator:ad9966e729ea04e32a6261b7fddfabc0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947aadc171e5ee837576511bcdfd2aae"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a947aadc171e5ee837576511bcdfd2aae"><td class="memTemplItemLeft" align="right" valign="top">sf::Font &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a947aadc171e5ee837576511bcdfd2aae">get</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group)</td></tr>
+<tr class="separator:a947aadc171e5ee837576511bcdfd2aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb7ffb2c4e82d9e5ff322873af618bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a3cb7ffb2c4e82d9e5ff322873af618bc">deleteObject</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group=-1)</td></tr>
 <tr class="separator:a3cb7ffb2c4e82d9e5ff322873af618bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99ca1cb2e5ba905c32c99e2b53d730f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#aa99ca1cb2e5ba905c32c99e2b53d730f">deleteFont</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> ID, const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> group=-1)</td></tr>
+<tr class="separator:aa99ca1cb2e5ba905c32c99e2b53d730f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22212bb504cd8e037ff0a1199528cbb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a22212bb504cd8e037ff0a1199528cbb2">deleteObjects</a> ()</td></tr>
 <tr class="separator:a22212bb504cd8e037ff0a1199528cbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a60ee675bf8d518898b918e2aa9c9c2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a5a60ee675bf8d518898b918e2aa9c9c2">~Resources</a> ()</td></tr>
 <tr class="separator:a5a60ee675bf8d518898b918e2aa9c9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_m_e_p_1_1_font_manager"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_font_manager')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_font_manager.html">MEP::FontManager</a></td></tr>
+<tr class="memitem:a20faedd5a7305cf78cd30fb0e1027564 inherit pub_methods_class_m_e_p_1_1_font_manager"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_font_manager.html#a20faedd5a7305cf78cd30fb0e1027564">FontManager</a> ()=default</td></tr>
+<tr class="separator:a20faedd5a7305cf78cd30fb0e1027564 inherit pub_methods_class_m_e_p_1_1_font_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a79d926e8386b044d097647cef50f629c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_resources.html#a79d926e8386b044d097647cef50f629c">isLoaded</a> = false</td></tr>
 <tr class="separator:a79d926e8386b044d097647cef50f629c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_m_e_p_1_1_font_manager"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_m_e_p_1_1_font_manager')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_m_e_p_1_1_font_manager.html">MEP::FontManager</a></td></tr>
+<tr class="memitem:a0bf51de310f21635c4277f9ff1555239 inherit pro_attribs_class_m_e_p_1_1_font_manager"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="class_group.html">Group</a>&lt; <a class="el" href="class_m_e_p_1_1_font_manager_1_1_font.html">Font</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_font_manager.html#a0bf51de310f21635c4277f9ff1555239">fonts</a></td></tr>
+<tr class="separator:a0bf51de310f21635c4277f9ff1555239 inherit pro_attribs_class_m_e_p_1_1_font_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A main <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> cointainer. </p>
 <p><a class="el" href="class_m_e_p_1_1_resources.html" title="A main MEP::Drawable cointainer.">Resources</a> class is a utility which is meant to be working with all of the <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> objects. </p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="ae6e1ba5680f36de87acb1a6541c0abd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6e1ba5680f36de87acb1a6541c0abd5">&#9670;&nbsp;</a></span>ResourceType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_m_e_p_1_1_resources.html#ae6e1ba5680f36de87acb1a6541c0abd5">MEP::Resources::ResourceType</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae6e1ba5680f36de87acb1a6541c0abd5acd0402ad1a79da4eb6bfaaf959b5a1a8"></a>ImageArray&#160;</td><td class="fielddoc"><p>When image of arrays is provided to constuct a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ae6e1ba5680f36de87acb1a6541c0abd5a66ba162102bbf6ae31b522aec561735e"></a>Single&#160;</td><td class="fielddoc"><p>When there is only a single texture to create a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ae6e1ba5680f36de87acb1a6541c0abd5ace7898536dd0e928d1640ee2ad531cc8"></a>Multi&#160;</td><td class="fielddoc"><p>When there is a set of texture on an input to create a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="add520849311a87f15075f2fd9bd20d95"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add520849311a87f15075f2fd9bd20d95">&#9670;&nbsp;</a></span>Resources()</h2>
 
@@ -226,6 +199,49 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa99ca1cb2e5ba905c32c99e2b53d730f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa99ca1cb2e5ba905c32c99e2b53d730f">&#9670;&nbsp;</a></span>deleteFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Resources::deleteFont </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Deletes sf::Font with agiven name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>: ID of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aac5fd3e71b26e69283b9f806dc7a163a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac5fd3e71b26e69283b9f806dc7a163a">&#9670;&nbsp;</a></span>deleteObject() <span class="overload">[1/2]</span></h2>
 
@@ -262,7 +278,7 @@ Protected Attributes</h2></td></tr>
 <p>Deletes <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> with agiven name. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>: Name of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: Group of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -305,7 +321,7 @@ Protected Attributes</h2></td></tr>
 <p>Deletes <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> with agiven name. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>: ID of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: Group of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -337,6 +353,164 @@ Protected Attributes</h2></td></tr>
 <p>Deletes all <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>: Name of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad9966e729ea04e32a6261b7fddfabc0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9966e729ea04e32a6261b7fddfabc0a">&#9670;&nbsp;</a></span>get() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Font &amp; MEP::Resources::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Implementation of get. T = <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p>
+
+</div>
+</div>
+<a id="a947aadc171e5ee837576511bcdfd2aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a947aadc171e5ee837576511bcdfd2aae">&#9670;&nbsp;</a></span>get() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Font&amp; MEP::Resources::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Implementation of get. T = sf::Font </p>
+
+</div>
+</div>
+<a id="a04e922079282b8806c69f0594238d2fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04e922079282b8806c69f0594238d2fa">&#9670;&nbsp;</a></span>get() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; MEP::Resources::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the Type. if MEP::Objects outputs object. if sf::Font outputs font. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ID</td><td>: ID of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9a7b76636dab64d454d17204b45e0f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a7b76636dab64d454d17204b45e0f9e">&#9670;&nbsp;</a></span>getFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Font &amp; MEP::Resources::getFont </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the font. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ID</td><td>: ID of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -379,7 +553,7 @@ Protected Attributes</h2></td></tr>
 <p>Outputs created <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>: Name of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: Group of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -423,7 +597,7 @@ Protected Attributes</h2></td></tr>
 <p>Outputs created <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">ID</td><td>: ID of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: Group of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>: <a class="el" href="class_group.html" title="Simple group manager.">Group</a> of a <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">MEP::Object</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -458,7 +632,7 @@ template&lt;typename ... Values&gt; </div>
 </div><div class="memdoc">
 <p>Initialization of the resources. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>: Inputs ... number of <a class="el" href="struct_m_e_p_1_1_resources_1_1_resource.html" title="A deffinition of an individual resource.">MEP::Resources::Resource</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>: Inputs ... number of MEP::Resources::Resource. </td></tr>
   </table>
   </dd>
 </dl>

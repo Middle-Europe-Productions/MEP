@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resourcename_485',['ResourceName',['../struct_m_e_p_1_1_resource_exception.html#ad35f9d710ef6f7e195d402c49ddc2aba',1,'MEP::ResourceException']]]
+  ['nofframes_535',['nofFrames',['../class_m_e_p_1_1_animation_position.html#a3ff3ea7210c7e7f98bab3848eca3c578',1,'MEP::AnimationPosition']]]
 ];

@@ -21,8 +21,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_WINDOW_DATA_H
+#define MEP_WINDOW_DATA_H
 
-#pragma once
 #include<SFML/Graphics.hpp>
 namespace MEP {
 	namespace Window {
@@ -46,6 +47,10 @@ namespace MEP {
             */
             sf::Vector2u m_resolution;
             /**
+            * Lunching resloution of the code.
+            */
+            const sf::Vector2u m_launchResolution;
+            /**
             * Setting of a context. Antialiasing etc.
             */
             sf::ContextSettings m_settings;
@@ -53,18 +58,31 @@ namespace MEP {
             * Color of a background of the window.
             */
             sf::Color m_backgroundColor = sf::Color::Black;
+            /**
+            * Title of the window.
+            */
+            std::string m_title;
+            /**
+            * Style of the window.
+            */
+            U_int32 m_style;
         public:
             WindowData(const char* title, const 
                 sf::Vector2u& mainResolution = { 1280, 720 }, 
                 U_int32 style = sf::Style::Default, 
                 sf::ContextSettings settings = sf::ContextSettings()) :
+                m_launchResolution(mainResolution),
                 m_resolution(mainResolution),
-                m_settings(settings)
+                m_settings(settings),
+                m_title(title),
+                m_style(style)
             {
-                create(sf::VideoMode(mainResolution.x, mainResolution.y), title, style, m_settings);
-                m_settings.antialiasingLevel = 16;
-                setFramerateLimit(120);
-                setResolution(mainResolution);
+            }
+            /**
+            * Creates the window.
+            */
+            void initWindow() {
+                create(sf::VideoMode(m_resolution.x, m_resolution.y), m_title, m_style, m_settings);
                 m_view = getView();
             }
             /**
@@ -85,6 +103,12 @@ namespace MEP {
             */
             void changeResolution(const sf::Vector2u& newRes) {
                 setSize(newRes);
+            }
+            /**
+            * Outputs the lunch re
+            */
+            const sf::Vector2u& getLaunchResolution() const {
+                return m_launchResolution;
             }
             /**
                 * Returns the actual size of a window if you are using MEP::Template::Hub size == resolution.
@@ -120,3 +144,5 @@ namespace MEP {
 		};
 	}
 }
+
+#endif

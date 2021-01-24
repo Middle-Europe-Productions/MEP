@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_BUTTON_H
+#define MEP_BUTTON_H
 
-#pragma once
 #include"AnimationObject.h"
 #include"NonCopyable.h"
 namespace MEP {
@@ -109,7 +110,7 @@ namespace MEP {
 		*/
 		const ButtonStatus& getStatus() const { return m_status; }
 	};
-	MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+	inline MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(1, x, pos, scale),
 		m_base(0)
 	{
@@ -125,7 +126,7 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	MEP::Button::Button(const float frameRate, const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
@@ -141,7 +142,7 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	MEP::Button::Button(const float frameRate, const Object& x, unsigned int base_breakpoint, unsigned int active_breakpoint, unsigned int pressed_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int base_breakpoint, unsigned int active_breakpoint, unsigned int pressed_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
@@ -157,7 +158,7 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	void MEP::Button::update(sf::Time& currentTime)
+	inline void MEP::Button::update(sf::Time& currentTime)
 	{
 		if (isInit == AnimationInit::ObjectAnimation) {
 			if (currentTime - updateTime >= toWait) {
@@ -199,7 +200,7 @@ namespace MEP {
 		}
 	}
 
-	bool MEP::Button::handleEvent(sf::Event& event, sf::Vector2i& pos)
+	inline bool MEP::Button::handleEvent(sf::Event& event, sf::Vector2i& pos)
 	{
 		bool isTran = isTansparent(pos.x, pos.y);
 		if (!followingList.empty()) {
@@ -237,7 +238,7 @@ namespace MEP {
 		return false;
 	}
 
-	bool MEP::Button::isTansparent(unsigned int x, unsigned int y)
+	inline bool MEP::Button::isTansparent(unsigned int x, unsigned int y)
 	{
 		int fixed_x = (x - m_posFixed.x) / m_scaleFixed.x;
 		int fixed_y = (y - m_posFixed.y) / m_scaleFixed.y;
@@ -251,3 +252,5 @@ namespace MEP {
 		return true;
 	}
 }
+
+#endif

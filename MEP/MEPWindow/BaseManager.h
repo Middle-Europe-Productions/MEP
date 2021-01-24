@@ -22,7 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once 
+#ifndef MEP_BASE_MANAGER_H
+#define MEP_BASE_MANAGER_H
+
 #include"Base.h"
 
 namespace MEP {
@@ -132,3 +134,5 @@ namespace MEP {
         };
     }
 }
+
+#endif

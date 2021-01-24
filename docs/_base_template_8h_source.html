@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -93,28 +93,32 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//  Created by Piotr Skibiñski</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//  Copyright © Middle Europe Productions. All rights reserved.</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#include&quot;Base.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">namespace </span>Window {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">namespace </span>Template {</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">   38</a></span>&#160;            <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">BaseTemplate</a> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ae2c2271f5434497055601b469d2d94a4">   40</a></span>&#160;                <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ae2c2271f5434497055601b469d2d94a4">BaseTemplate</a>() = <span class="keywordflow">default</span>;               </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">   45</a></span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">additionalEvents</a>(sf::RenderWindow&amp; Window, sf::Event&amp; Event) {}</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">   50</a></span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">additionalInit</a>() {};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            };</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#ifndef MEP_BASE_TEMPLATE_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define MEP_BASE_TEMPLATE_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&quot;Base.h&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">namespace </span>Window {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">namespace </span>Template {</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">   41</a></span>&#160;            <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">BaseTemplate</a> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ae2c2271f5434497055601b469d2d94a4">   43</a></span>&#160;                <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ae2c2271f5434497055601b469d2d94a4">BaseTemplate</a>() = <span class="keywordflow">default</span>;               </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">   48</a></span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">additionalEvents</a>(sf::RenderWindow&amp; Window, sf::Event&amp; Event) {}</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">   53</a></span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">additionalInit</a>() {};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            };</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html_a3b495552aa6a5232e3d399a677ef2647"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">MEP::Window::Template::BaseTemplate::additionalEvents</a></div><div class="ttdeci">virtual void additionalEvents(sf::RenderWindow &amp;Window, sf::Event &amp;Event)</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:45</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html_ac04ecceb7c6659fddede86baedcb3934"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">MEP::Window::Template::BaseTemplate::additionalInit</a></div><div class="ttdeci">virtual void additionalInit()</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:50</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html_a3b495552aa6a5232e3d399a677ef2647"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#a3b495552aa6a5232e3d399a677ef2647">MEP::Window::Template::BaseTemplate::additionalEvents</a></div><div class="ttdeci">virtual void additionalEvents(sf::RenderWindow &amp;Window, sf::Event &amp;Event)</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:48</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html_ac04ecceb7c6659fddede86baedcb3934"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ac04ecceb7c6659fddede86baedcb3934">MEP::Window::Template::BaseTemplate::additionalInit</a></div><div class="ttdeci">virtual void additionalInit()</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:53</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html_ae2c2271f5434497055601b469d2d94a4"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html#ae2c2271f5434497055601b469d2d94a4">MEP::Window::Template::BaseTemplate::BaseTemplate</a></div><div class="ttdeci">BaseTemplate()=default</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdef"><b>Definition:</b> AnimationBase.h:29</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">MEP::Window::Template::BaseTemplate</a></div><div class="ttdoc">A class with the additional methods for the MEP::Window::Template.</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:38</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_template_1_1_base_template_html"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_template_1_1_base_template.html">MEP::Window::Template::BaseTemplate</a></div><div class="ttdoc">A class with the additional methods for the MEP::Window::Template.</div><div class="ttdef"><b>Definition:</b> BaseTemplate.h:41</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

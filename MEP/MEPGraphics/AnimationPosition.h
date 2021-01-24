@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_ANIMATION_POSITION_H
+#define MEP_ANIMATION_POSITION_H
 
-#pragma once
 #include<functional>
 #include<list>
 #include<iostream>
@@ -82,18 +83,17 @@ namespace MEP {
 		/**
 		* Contructor of an animation. It is taking a part of a from f(begin) to f(end) then calculation the position accoring to the formula.
 		* Fmax(F(begin), F(end)) = exit, and Fmin(F(begin), F(end) = min.
-		* @param[in] frameRate : Frame rate of an animation.
 		* @param[in] begin : Begining point on a graph,
 		* @param[in] end : End point of a graph.
+		* @param[in] lenght : Animation lenght in ms.
+		* @param[in] frameRate : Frame rate of an animation.
 		* @param[in] entry : Entry position of an Object (before the animation)
 		* @param[in] exit : Exit position of an Object (after the animation)
-		* @param[in] lenght : Animation lenght in ms.
 		* @param[in] fun : Function graph. Method with the return type double. 
 		*/
-		template<class Function>
-		AnimationPosition(const float frameRate, const double begin, const double end, const double entry, const double exit, sf::Time lenght, Function fun) :
+		AnimationPosition(const double entry, const double exit, sf::Time lenght, const float frameRate = 120, const double begin = 0, const double end = 100, std::function<double(double x)> function = [](double x)->double{ return x; }) :
 			Animation(AnimationInit::PositionAnimation, sf::Time(sf::milliseconds(1000) / frameRate)),
-			m_function(fun),
+			m_function(function),
 			nofFrames(lenght / toWait),
 			m_begin(begin),
 			m_end(end),
@@ -109,7 +109,7 @@ namespace MEP {
 		/**
 		* Sets the delay of an animation. Delay is a time to wait from starting the animation.
 		*/
-		void SetDelay(const sf::Time& delay, const Direction& dir = Direction::Backwards);
+		void setDelay(const sf::Time& delay, const Direction& dir = Direction::Backwards);
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position.
@@ -163,7 +163,7 @@ namespace MEP {
 		}
 		virtual ~AnimationPosition() = default;
 	};
-	void MEP::AnimationPosition::init()
+	inline void MEP::AnimationPosition::init()
 	{
 		double jump = (m_end - m_begin) / nofFrames;
 		double min = sizeof(double), max = 0;
@@ -181,13 +181,10 @@ namespace MEP {
 		for (auto& x : frames) {
 			x = (m_entry + ((x)*multiplication));
 		}
-		for (auto& x : frames) {
-			std::cout << x << std::endl;
-		}
 		currentFrame = frames.begin();
 	}
 
-	void MEP::AnimationPosition::SetDelay(const sf::Time& delay, const Direction& dir)
+	inline void MEP::AnimationPosition::setDelay(const sf::Time& delay, const Direction& dir)
 	{
 		if (isRunning)
 			throw "[AnimationPosition]You cannot delay running animation!";
@@ -195,7 +192,7 @@ namespace MEP {
 		direction = dir;
 	}
 
-	void MEP::AnimationPosition::update(sf::Time& currentTime)
+	inline void MEP::AnimationPosition::update(sf::Time& currentTime)
 	{
 		updatePositionAnimation(currentTime);
 	}
@@ -203,7 +200,7 @@ namespace MEP {
 	* Core updates for position animation.
 	* This method is needed in order to avoid CTRL-C/V.
 	*/
-	void MEP::AnimationPosition::updatePositionAnimation(sf::Time& currentTime) {
+	inline void MEP::AnimationPosition::updatePositionAnimation(sf::Time& currentTime) {
 		if (isRunning and (isInit == AnimationInit::PositionAnimation)) {
 			if (currentTime - updateTime >= toWait) {
 				if (direction == Direction::Forward) {
@@ -239,23 +236,25 @@ namespace MEP {
 			}
 		}
 	}
-	void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
 			run(Direction::Forward);
 		update(currentTime);
 	}
 
-	void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime)
 	{
 		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
 			run(Direction::Backwards);
 		update(currentTime);
 	}
 
-	bool MEP::AnimationPosition::isActive() const
+	inline bool MEP::AnimationPosition::isActive() const
 	{
 		return getStatus();
 	}
 
 };
+
+#endif

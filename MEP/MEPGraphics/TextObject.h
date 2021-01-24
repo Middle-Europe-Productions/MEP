@@ -22,6 +22,8 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_TEXT_H
+#define MEP_TEXT_H
 
 #include<string>
 #include"Following.h"
@@ -131,7 +133,10 @@ namespace MEP {
 		* On resize we want to update the position.
 		*/
 		void onResize() override {
-			updatePosition();
+			if (getDrawTag() & DrawTag::Resize_Scale)
+				updateScale();
+			if (getDrawTag() & DrawTag::Resize_Pos)
+				updatePosition();
 		}
 		/**
 		* Override of a MEP::Drawable update.
@@ -209,3 +214,5 @@ namespace MEP {
 		}
 	};
 }
+
+#endif

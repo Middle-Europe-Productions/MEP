@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -93,23 +93,26 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//  Created by Piotr Skibiñski</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//  Copyright © Middle Europe Productions. All rights reserved.</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html">   31</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">   33</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">   34</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">~NonCopyable</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; x) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; x) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#ifndef MEP_NON_COPYABLE_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define MEP_NON_COPYABLE_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html">   32</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">   34</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">   35</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">~NonCopyable</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; x) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a>&amp; x) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_m_e_p_1_1_non_copyable_html"><div class="ttname"><a href="class_m_e_p_1_1_non_copyable.html">MEP::NonCopyable</a></div><div class="ttdoc">Deletes the copy constructor and assign operator.</div><div class="ttdef"><b>Definition:</b> NonCopyable.h:31</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_non_copyable_html"><div class="ttname"><a href="class_m_e_p_1_1_non_copyable.html">MEP::NonCopyable</a></div><div class="ttdoc">Deletes the copy constructor and assign operator.</div><div class="ttdef"><b>Definition:</b> NonCopyable.h:32</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_non_copyable_html_a6c6d626afeb530339a1624ed34652a1e"><div class="ttname"><a href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">MEP::NonCopyable::NonCopyable</a></div><div class="ttdeci">NonCopyable()=default</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_non_copyable_html_ab41cf3102b79e136f160e2940598da1d"><div class="ttname"><a href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">MEP::NonCopyable::~NonCopyable</a></div><div class="ttdeci">~NonCopyable()=default</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdef"><b>Definition:</b> AnimationBase.h:29</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

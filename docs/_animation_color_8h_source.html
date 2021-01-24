@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -93,38 +93,38 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//  Created by Piotr Skibiñski</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//  Copyright © Middle Europe Productions. All rights reserved.</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include&quot;AnimationPosition.h&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_animation_color.html">   33</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> : <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        sf::Uint8 entry_r, entry_g, entry_b, entry_a;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        sf::Uint8 exit_r, exit_g, exit_b, exit_a;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        sf::Uint8 r, g, b, a;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        sf::Uint8 value(sf::Uint8 r, <span class="keyword">const</span> sf::Uint8&amp; entry, <span class="keyword">const</span> sf::Uint8&amp; exit)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">if</span> (entry - exit &lt; 0) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">return</span> entry + *<a class="code" href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">currentFrame</a> * abs(entry - exit) / 100;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (entry - exit &gt; 0) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">return</span> entry - *<a class="code" href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">currentFrame</a> * abs(entry - exit) / 100;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">return</span> r;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> updateRGBA() {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            r = value(r, entry_r, exit_r);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            g = value(g, entry_g, exit_g);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            b = value(b, entry_b, exit_b);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            a = value(a, entry_a, exit_a);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_animation_color.html#a20749d7bda9541752ee83d13067cfb56">   73</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_animation_color.html#a20749d7bda9541752ee83d13067cfb56">AnimationColor</a>(sf::Color entry,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#ifndef MEP_ANIMATION_COLOR_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define MEP_ANIMATION_COLOR_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&quot;AnimationPosition.h&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_animation_color.html">   34</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> : <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        sf::Uint8 entry_r, entry_g, entry_b, entry_a;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        sf::Uint8 exit_r, exit_g, exit_b, exit_a;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        sf::Uint8 r, g, b, a;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        sf::Uint8 value(sf::Uint8 r, <span class="keyword">const</span> sf::Uint8&amp; entry, <span class="keyword">const</span> sf::Uint8&amp; exit)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">if</span> (entry - exit &lt; 0) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">return</span> entry + *<a class="code" href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">currentFrame</a> * abs(entry - exit) / 100;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (entry - exit &gt; 0) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordflow">return</span> entry - *<a class="code" href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">currentFrame</a> * abs(entry - exit) / 100;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> r;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span> updateRGBA() {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            r = value(r, entry_r, exit_r);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            g = value(g, entry_g, exit_g);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            b = value(b, entry_b, exit_b);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            a = value(a, entry_a, exit_a);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_animation_color.html#a123991dca16c1d370826e2d9e24fade3">   73</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_animation_color.html#a123991dca16c1d370826e2d9e24fade3">AnimationColor</a>(sf::Color entry,</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            sf::Color exit,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> frameRate,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> begin,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> end,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            sf::Time lenght,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            Function fun) :</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            sf::Time lenght,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> frameRate = 120,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> begin = 0,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> end = 10,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            std::function&lt;<span class="keywordtype">double</span>(<span class="keywordtype">double</span> x)&gt; <span class="keyword">function</span> = [](<span class="keywordtype">double</span> x)-&gt;<span class="keywordtype">double</span> { <span class="keywordflow">return</span> x; }) :</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            entry_r(entry.r), </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            entry_g(entry.g), </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            entry_b(entry.b), </div>
@@ -137,7 +137,7 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            g(entry.g),</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            b(entry.b),</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            a(entry.a),</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a>(frameRate, begin, end, 0, 100, lenght, fun) </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="class_m_e_p_1_1_animation_position.html#a08355ab3e1eadb3c7342cf2461838a13">AnimationPosition</a>(0, 100, lenght, frameRate, begin, end, <span class="keyword">function</span>)</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            entry_r = 10;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
@@ -185,20 +185,23 @@ $(function() {
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    };</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_a20749d7bda9541752ee83d13067cfb56"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#a20749d7bda9541752ee83d13067cfb56">MEP::AnimationColor::AnimationColor</a></div><div class="ttdeci">AnimationColor(sf::Color entry, sf::Color exit, const float frameRate, const double begin, const double end, sf::Time lenght, Function fun)</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:73</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_af46ff5da01dfe2a262ed4b69b2e61e49"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">MEP::AnimationPosition::currentFrame</a></div><div class="ttdeci">std::list&lt; double &gt;::iterator currentFrame</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:48</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_a08383e5a78c999cd4a83a58e8b97cd5b"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#a08383e5a78c999cd4a83a58e8b97cd5b">MEP::AnimationPosition::frames</a></div><div class="ttdeci">std::list&lt; double &gt; frames</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:47</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_af46ff5da01dfe2a262ed4b69b2e61e49"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#af46ff5da01dfe2a262ed4b69b2e61e49">MEP::AnimationPosition::currentFrame</a></div><div class="ttdeci">std::list&lt; double &gt;::iterator currentFrame</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:49</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_a08383e5a78c999cd4a83a58e8b97cd5b"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#a08383e5a78c999cd4a83a58e8b97cd5b">MEP::AnimationPosition::frames</a></div><div class="ttdeci">std::list&lt; double &gt; frames</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:48</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_a71e82d81f659811f88c9869492a8e807"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#a71e82d81f659811f88c9869492a8e807">MEP::AnimationColor::update</a></div><div class="ttdeci">void update(sf::Time &amp;currentTime) override</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:149</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_ae0194ffcd5e7ac954444c24a0fb0086c"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#ae0194ffcd5e7ac954444c24a0fb0086c">MEP::AnimationColor::changeEntryColor</a></div><div class="ttdeci">bool changeEntryColor(const sf::Color &amp;newColor)</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:117</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html">MEP::AnimationPosition</a></div><div class="ttdoc">MEP::AnimationPosition provides a basic implementation of a modification of the position.</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:42</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_color_html"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html">MEP::AnimationColor</a></div><div class="ttdoc">Class is responsible for the sf::Color transitions.</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:33</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html">MEP::AnimationPosition</a></div><div class="ttdoc">MEP::AnimationPosition provides a basic implementation of a modification of the position.</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:43</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_color_html"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html">MEP::AnimationColor</a></div><div class="ttdoc">Class is responsible for the sf::Color transitions.</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:34</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_ab8c89763a59d5fcda31c4a282ab8fd7b"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#ab8c89763a59d5fcda31c4a282ab8fd7b">MEP::AnimationColor::changeExitColor</a></div><div class="ttdeci">bool changeExitColor(const sf::Color &amp;newColor)</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:101</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdef"><b>Definition:</b> AnimationBase.h:29</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_a123991dca16c1d370826e2d9e24fade3"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#a123991dca16c1d370826e2d9e24fade3">MEP::AnimationColor::AnimationColor</a></div><div class="ttdeci">AnimationColor(sf::Color entry, sf::Color exit, sf::Time lenght, const float frameRate=120, const double begin=0, const double end=10, std::function&lt; double(double x)&gt; function=[](double x) -&gt;double { return x;})</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:73</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_a08355ab3e1eadb3c7342cf2461838a13"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#a08355ab3e1eadb3c7342cf2461838a13">MEP::AnimationPosition::AnimationPosition</a></div><div class="ttdeci">AnimationPosition()=default</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_a6707e77cee6380bafda8418ae17399b2"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#a6707e77cee6380bafda8418ae17399b2">MEP::AnimationColor::getFrameAsColor</a></div><div class="ttdeci">virtual sf::Color getFrameAsColor() const override</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:157</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_color_html_af884a088ad687b799b3ddb64ff789d0e"><div class="ttname"><a href="class_m_e_p_1_1_animation_color.html#af884a088ad687b799b3ddb64ff789d0e">MEP::AnimationColor::changeEndPointColor</a></div><div class="ttdeci">bool changeEndPointColor(const sf::Color &amp;newColor)</div><div class="ttdef"><b>Definition:</b> AnimationColor.h:133</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_html_aaa66c896894c67bd4d937074bed4dcd4"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#aaa66c896894c67bd4d937074bed4dcd4">MEP::Animation::isRunning</a></div><div class="ttdeci">bool isRunning</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:82</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_a3c90e6555e5b80fbe6d6249773a7422d"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#a3c90e6555e5b80fbe6d6249773a7422d">MEP::AnimationPosition::updatePositionAnimation</a></div><div class="ttdeci">void updatePositionAnimation(sf::Time &amp;currentTime)</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:206</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_html_aaa66c896894c67bd4d937074bed4dcd4"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#aaa66c896894c67bd4d937074bed4dcd4">MEP::Animation::isRunning</a></div><div class="ttdeci">bool isRunning</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:84</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_position_html_a3c90e6555e5b80fbe6d6249773a7422d"><div class="ttname"><a href="class_m_e_p_1_1_animation_position.html#a3c90e6555e5b80fbe6d6249773a7422d">MEP::AnimationPosition::updatePositionAnimation</a></div><div class="ttdeci">void updatePositionAnimation(sf::Time &amp;currentTime)</div><div class="ttdef"><b>Definition:</b> AnimationPosition.h:203</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

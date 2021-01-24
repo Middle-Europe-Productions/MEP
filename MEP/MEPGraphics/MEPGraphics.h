@@ -22,9 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_GRAPHICS_H
+#define MEP_GRAPHICS_H
 
-
-#pragma once
 //core classes
 #include"Drawable.h"
 /*
@@ -79,3 +79,5 @@ Enables automation data loading. Using MEP::Object and sf::Texture
 #include"AnimationColor.h"
 
 #include"Assets.h"
+
+#endif

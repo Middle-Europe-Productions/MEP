@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3</span>
+   &#160;<span id="projectnumber">alpha 1.3.1</span>
    </div>
   </td>
  </tr>
@@ -67,33 +67,33 @@ $(function() {
 <div class="title">Patch notes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md12"></a>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md8"></a>
 28.10.2020</h2>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 MEP Lib version alpha 1.0</h1>
 <p>-Initial implementation.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 12.11.2020</h2>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 MEP Lib version alpha 1.1:</h1>
 <p>-Added documentation. <br  />
  -Added memory management. <br  />
  -Added view functionality for the BaseWindow. <br  />
  -Reorganized templates.</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 24.11.2020</h2>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 MEP Lib version alpha 1.2:</h1>
 <p>-Improved methods naming. <br  />
  -Added <a class="el" href="class_m_e_p_1_1_sprite.html" title="Basically the SFML sprite with the support for the MEP functionalities.">MEP::Sprite</a> type. Provides access to the sf::Sprite as well as <a class="el" href="class_m_e_p_1_1_animation.html" title="MEP::Animation base definition of an animation.">MEP::Animation</a> functionalities. <br  />
- -Implementation of a MEP::TextObject with the full support of the <a class="el" href="namespace_m_e_p.html">MEP</a> lib elements. <br  />
+ -Implementation of a MEP::TextObject with the full support of the <a class="el" href="namespace_m_e_p.html" title="A main sf::Font container.">MEP</a> lib elements. <br  />
  -Implementation of a <a class="el" href="class_m_e_p_1_1_animation_color.html" title="Class is responsible for the sf::Color transitions.">MEP::AnimationColor</a> it works with the use of <a class="el" href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position.">MEP::Following</a>. Generally it is another type of a FollowType. Enjoy :) <br  />
  -DrawTag has been added to the <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> object. Currently only ViewLock is avalible. If window is using custom view an object with the tag will be rendered using master app view. <br  />
  -Added &lt;&lt; operator for all <a class="el" href="class_m_e_p_1_1_sprite.html" title="Basically the SFML sprite with the support for the MEP functionalities.">MEP::Sprite(MEP::TextureObject, MEP::Button, MEP::AnimationObject)</a> and <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">MEP::Text</a>. The operator copies position, scale and color (Following attributes) to a left object. <br  />
  -When ID of a <a class="el" href="struct_m_e_p_1_1_window_1_1_window_exception.html" title="MEP::Window::BaseWindow exceptions handler.">MEP::Window::WindowException</a> is not specified exception will ba a master exception. -better naming &amp; getLastAccess(); in base manager. </p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 1.01.2021</h2>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 MEP lib version alpha 1.3</h1>
 <p>-Added <a class="el" href="_o_s_set_up_8h_source.html">OSSetUp.h</a> which specifies the operating systems. Currently only MEP_WINDOWS is avalible. <br  />
  -Added <a class="el" href="_window_data_8h_source.html">WindowData.h</a> responsible for window and view management. <br  />
@@ -133,6 +133,17 @@ MEP lib version alpha 1.3</h1>
  *When set it is going to be used when the window is resized. <br  />
  *It executes the calculation method to recalculate the position of an objects. <br  />
  *You do need to provide the method with the use of: addMethodPos(...) <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md16"></a>
+13.01.2021</h2>
+<h1><a class="anchor" id="autotoc_md17"></a>
+MEP lib version alpha 1.3.1</h1>
+<p>-Better memory management. <br  />
+ -General code improvements. <br  />
+ -Added Font resource type. <br  />
+ -A new methods were added to ResourceManager. get&lt;Type&gt;(ID, group) enables you to quick access fonts &amp; objects. <br  />
+ -Better constructors. <br  />
+ -Examples were added. <br  />
 </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

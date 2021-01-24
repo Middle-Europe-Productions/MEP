@@ -1,11 +1,9 @@
-# MEP -  Middle Europe Productions alpha v1.3
+# MEP -  Middle Europe Productions alpha v1.3.1
 
 Following library is a header only environment which does not need to be build.
-The only requirement is linking the MEP file to the environment in which you work.
-### For the library to function, the installation of SFML 2.0 is required.
-### 1.3 version provides additional futures to the SFML 2.5.1
-in order to access them you do need to build the SFML lib with the files from SFML_2.5.1_Changes
-Please keep in mind that I do not own any rights the the files.
+The only requirement is linking the MEP file to the environment in which you work is addition to that you do need to setup SFML. Furthermore if you want to receive full MEP experience you do need to download SFML, replace the files from the `SFML_2.5.1_Changes` and build the SFML by yourself. 
+
+##### Keep in mind that I do not own any rights to the files in the `SFML_2.5.1_Changes`. 
 All of the changes are marked in the following way:
 /// <MEP Modification>
 Implementation
@@ -20,16 +18,13 @@ Is a simple and easy to use library which minimizes the work that needs to be sp
 Following functionalities are available:
 
 ## MEP Library objectives:
+    Objects creation.
+    Sprites modification.
+    Window Management.
+    Easy to access templates.
 
-### - Objects creation.
-
-### - Sprites modification.
- 
-### - Window Management.
-
-### - Easy to access templates.
+## MEP Examples
+Currently there are examples in the subfolder. They do describe some of the basic concepts of the MEP library. I highly recommend you to take a look on them if you are struggling with the initial setup. 
   
-## Author
-
+##### Author
 Piotr Skibiński
-

@@ -22,26 +22,28 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_ANIMATION_H
+#define MEP_ANIMATION_H
+
 #include<SFML/Graphics.hpp>
 #include"NonCopyable.h"
 
 namespace MEP {
 	/**
+	* @enum MEP::Animation::Direction
+	* Provides basic movement definition.
+	*/
+	enum class Direction {
+		/** Basic animation movement.*/
+		Forward = 0,
+		/** Reversed animation movement.*/
+		Backwards = 1
+	};
+	/**
 	* \brief MEP::Animation base definition of an animation. 
 	*/
 	class Animation: public NonCopyable {
 	public:
-		/**
-		* @enum MEP::Animation::Direction
-		* Provides basic movement definition.
-		*/
-		enum class Direction {
-			/** Basic animation movement.*/
-			Forward = 0,
-			/** Reversed animation movement.*/
-			Backwards = 1
-		};
 		/**
 		* @enum MEP::Animation::AnimationInit
 		* Provides basic animation tags.
@@ -163,3 +165,5 @@ namespace MEP {
 		}
 	};
 };
+
+#endif

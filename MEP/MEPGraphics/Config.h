@@ -21,7 +21,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once
+#ifndef MEP_CONFIG_H
+#define MEP_CONFIG_H
+
 namespace MEP {
 	//16bits integers
 	typedef short int16;
@@ -33,3 +35,5 @@ namespace MEP {
 	typedef long long int64;
 	typedef unsigned long long U_int64;
 }
+
+#endif

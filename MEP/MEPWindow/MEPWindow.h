@@ -22,8 +22,11 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_WINDOW_H
+#define MEP_WINDOW_H
+#include "Application.h"
 
-#pragma once
+#include "Loading.h"
 /*
 Deffinition of a base window HUB with a exit minimalize and MEP trademark buttons.
 */
@@ -49,6 +52,5 @@ Base window functionalities time and FPS handler.
 /*
 Deffinition of a loading Window which handles given methods on a different thread.
 */
-#include "Loading.h"
 
-#include "Application.h"
+#endif

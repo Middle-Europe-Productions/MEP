@@ -21,7 +21,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-#pragma once 
+#ifndef MEP_ASSETS_H
+#define MEP_ASSETS_H
+
 #include"Config.h"
 namespace MEP {
 	enum AssetsGroup: U_int32 {
@@ -35,3 +37,5 @@ namespace MEP {
 		Box
 	};
 }
+
+#endif

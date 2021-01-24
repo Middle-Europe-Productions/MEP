@@ -1,10 +1,14 @@
+#ifndef MEP_SPRITE_H
+#define MEP_SPRITE_H
+
 #include"Following.h"
-#pragma once
 namespace MEP {
 	/**
 	* \brief Basically the SFML sprite with the support for the MEP functionalities.
 	*/
 	class Sprite: public Following {
+		//[optional] formula for calculation of the rect of the 
+		std::function<sf::IntRect()> calc_rect = [this]()->sf::IntRect { return currentSprite.getTextureRect(); };
 	protected:
 		/**
 		* Current sprite ready to bo rendered;
@@ -95,6 +99,31 @@ namespace MEP {
 			currentSprite.setColor(color); 
 		}
 		/**
+		* Sets the main sprite Rect
+		*/
+		void setRect(const sf::IntRect& rect) {
+			currentSprite.setTextureRect(rect);
+		}
+		/**
+		* Adds a method of calculation the scale.
+		* @param[in] method : A method of calculating the position.
+		*/
+		void addMethodRect(std::function<sf::IntRect()> method) {
+			calc_rect = method;
+		}
+		/**
+		* Updates the rect of the Sprite
+		*/
+		void updateRect() {
+			currentSprite.setTextureRect(calc_rect());
+		}
+		/**
+		* Outputs the rect.
+		*/
+		const sf::IntRect& getRect() const {
+			return currentSprite.getTextureRect();
+		}
+		/**
 		* Outputs the color of a master sprite.
 		* @return : Color.
 		*/
@@ -103,3 +132,5 @@ namespace MEP {
 		}
 	};
 }
+
+#endif

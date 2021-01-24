@@ -22,8 +22,9 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
+#ifndef MEP_WINDOW_CROSS_PLATFORM_H
+#define MEP_WINDOW_CROSS_PLATFORM_H
 
-#pragma once
 #include <SFML/Graphics.hpp>
 #include "OSSetUp.h"
 #if defined (MEP_WINDOWS)
@@ -131,3 +132,5 @@ namespace PLATFORM {
         return false;
     }
 #endif
+
+#endif /*MEP_WINDOW_CROSS_PLATFORM_H*/
