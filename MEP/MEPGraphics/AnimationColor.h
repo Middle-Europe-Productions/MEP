@@ -90,9 +90,7 @@ namespace MEP {
 			b(entry.b),
 			a(entry.a),
 			AnimationPosition(0, 100, lenght, frameRate, begin, end, function)
-		{
-			entry_r = 10;
-		}
+		{}
 		/**
 		* Changes the exit color. Exit means targeted color (after the iterations).
 		* @param[in] newColor : sf::Color
