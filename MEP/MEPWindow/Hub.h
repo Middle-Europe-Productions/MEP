@@ -25,9 +25,9 @@
 #ifndef MEP_BASE_H
 #define MEP_BASE_H
 
-#include "BaseTemplate.h"
-#include "Application.h"
-#include "..\MEPGraphics\Assets.h"
+#include <MEPWindow/BaseTemplate.h>
+#include <MEPWindow/Application.h>
+#include <MEPGraphics/Assets.h>
 namespace MEP {
 	namespace Window {
 		namespace Template {

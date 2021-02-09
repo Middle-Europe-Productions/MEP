@@ -238,12 +238,12 @@ namespace MEP {
 		/**
 		* Implementation of get. T = MEP::Object
 		*/
-		template <> 
+		template <typename T> 
 		MEP::Object& get(const U_int32 ID, const U_int32 group);
 		/**
 		* Implementation of get. T = sf::Font
 		*/
-		template <>
+		template <typename T>
 		sf::Font& get(const U_int32 ID, const U_int32 group);
 		/**
 		* Deletes MEP::Object with agiven name.

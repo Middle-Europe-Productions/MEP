@@ -25,7 +25,7 @@
 #ifndef MEP_BASE_WINDOW_H
 #define MEP_BASE_WINDOW_H
 
-#include "..\MEPGraphics\MEPGraphics.h"
+#include <MEPGraphics/MEPGraphics.h>
 
 namespace MEP {
 	namespace Window {

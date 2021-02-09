@@ -26,10 +26,10 @@
 #define MEP_APPLICATION_H
 
 #include <list>
-#include "WindowCrossPlatform.h"
-#include "WindowStat.h"
-#include "BaseManager.h"
-#include "WindowData.h"
+#include <MEPWindow/WindowCrossPlatform.h>
+#include <MEPWindow/WindowStat.h>
+#include <MEPWindow/BaseManager.h>
+#include <MEPWindow/WindowData.h>
 
 namespace MEP {
     namespace Window {
@@ -125,7 +125,7 @@ namespace MEP {
                 * @param[in] style : Style of a window. Use sf::Style here.
                 * @param[in] settings : Have a look on sf::ContextSettings for the information.
                 */
-                _cdecl Application(const char* title,
+                Application(const char* title,
                     const char* resPath,
                     const sf::Vector2u& mainResolution = { 1280, 720 },
                     U_int32 style = sf::Style::Default, 

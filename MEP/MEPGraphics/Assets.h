@@ -27,8 +27,8 @@
 #include"Config.h"
 namespace MEP {
 	enum AssetsGroup: U_int32 {
-		UserAssets = -1,
-		HUB = -2
+		UserAssets = 4294967295 - 1,
+		HUB = 4294967295 - 2
 	};
 	enum HUB : U_int32 {
 		Exit = 1,

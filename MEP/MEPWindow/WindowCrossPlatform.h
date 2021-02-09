@@ -85,35 +85,21 @@ namespace PLATFORM {
         //customWindow(hWnd);
     }
 }
-#elif defined (SFML_SYSTEM_LINUX)
-#include <X11/Xatom.h>
-#include <X11/extensions/shape.h>
+#elif defined (MEP_LINUX)
 namespace PLATFORM {
-    inline bool transparent(Window wnd) {
+    inline bool transparent(sf::WindowHandle wnd) {
         return false;
     }
 
-    inline bool transparency(Window wnd, unsigned char alpha)
+    inline bool transparency(sf::WindowHandle wnd, unsigned char alpha)
     {
-        Display* display = XOpenDisplay(NULL);
-        unsigned long opacity = (0xffffffff / 0xff) * alpha;
-        Atom property = XInternAtom(display, "_NET_WM_WINDOW_OPACITY", false);
-        if (property != None)
-        {
-            XChangeProperty(display, wnd, property, XA_CARDINAL, 32, PropModeReplace, (unsigned char*)&opacity, 1);
-            XFlush(display);
-            XCloseDisplay(display);
-            return true;
-        }
-        else
-        {
-            XCloseDisplay(display);
-            return false;
-        }
+        return false;
     }
 
-    inline bool minimalize(Window wnd) {
+    inline bool minimalize(sf::WindowHandle wnd) {
         return false;
+    }
+    inline void maximalize(sf::WindowHandle hWnd) {
     }
 }
 #undef None // None conflicts with SFML

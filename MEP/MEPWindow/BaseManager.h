@@ -25,7 +25,7 @@
 #ifndef MEP_BASE_MANAGER_H
 #define MEP_BASE_MANAGER_H
 
-#include"Base.h"
+#include <MEPWindow/Base.h>
 
 namespace MEP {
     namespace Window {

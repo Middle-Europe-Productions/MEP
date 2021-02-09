@@ -36,8 +36,8 @@
 	#endif
 #elif defined(__APPLE__) and defined(__MACH__)
 	#error __APPLE__ curently not supported!
-#elif defined(__UNIX__)
-	#error __UNIX__ currently not supported!
+#elif defined(__unix__)
+	#define MEP_LINUX
 #else
 	#error Operating system not supported!
 #endif
