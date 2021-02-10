@@ -114,7 +114,6 @@ namespace MEP {
                             x->onResize(m_resolution);
                         }
                     }
-                    std::cout << "Resize :)";
                 }
             public:
                 /**

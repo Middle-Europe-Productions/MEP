@@ -190,7 +190,11 @@ namespace MEP {
 					{
 						if (event.mouseButton.button == sf::Mouse::Left)
 						{
-							if (sf::Mouse::getPosition().y - Window.getPosition().y < 35) {
+							if (buttons[0]->mousePress(pos)) {
+							}
+							else if (buttons[1]->mousePress(pos)) {
+							}
+							else if (sf::Mouse::getPosition().y - Window.getPosition().y < 35) {
 								m_windowPossChange = Window.getPosition() - sf::Mouse::getPosition();
 								m_grabbedWindow = true;
 							}
@@ -198,29 +202,32 @@ namespace MEP {
 					}
 					else if (event.type == sf::Event::MouseButtonReleased)
 					{
-						if (event.mouseButton.button == sf::Mouse::Left)
+						if (event.mouseButton.button == sf::Mouse::Left) {
+							if (buttons[0]->mouseRelease(pos)) {
+								Window.close();
+							}
+							else if (buttons[1]->mouseRelease(pos)) {
+								PLATFORM::minimalize(Window.getSystemHandle());
+								buttons[1]->forceRelease();
+							}
 							m_grabbedWindow = false;
+						}
 					}
 					else if (event.type == sf::Event::MouseMoved)
 					{
 						if (m_grabbedWindow)
 							Window.setPosition(sf::Mouse::getPosition() + m_windowPossChange);
+						else { 
+							if (buttons[0]->mouseActivity(pos)) {}
+
+							if (buttons[1]->mouseActivity(pos)) {}
+						}
+						
 					}
 					else if (event.type == sf::Event::GainedFocus) {
-						//PLATFORM::customWindow(Window.getSystemHandle());
 						PLATFORM::maximalize(Window.getSystemHandle());
 					}
-					if (buttons[0]->handleEvent(event, pos)) {
-						Window.close();
-					}
-					if (buttons[1]->handleEvent(event, pos)) {
-						PLATFORM::minimalize(Window.getSystemHandle());
-					}
 					additionalEvents(Window, event);
-					if (event.type == sf::Event::LostFocus) {
-						std::cout << "LOSTFOCUSE";
-					}
-					
 				}
 			};
 		}

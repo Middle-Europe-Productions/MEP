@@ -58,7 +58,8 @@ namespace MEP {
 			explicit WindowException(const unsigned int ID, const MEP::ResourceException& x) : WindowID(ID)
 			{
 				Message = "caused by ResourceException ResourceName: " + x.ResourceName + ", Message: " + x.Message;
-			}/**
+			}
+			/**
 			* Constructor of a WindowException
 			* @param[in] ID : Identification of a w MEP::Window::BaseWindow
 			* @param[in] msg : Message

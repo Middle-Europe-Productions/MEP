@@ -29,21 +29,20 @@
 #include"NonCopyable.h"
 namespace MEP {
 	/**
+	* @enum MEP::Button::ButtonStatus
+	*/
+	enum class ButtonStatus {
+		/** Mouse is away.*/
+		Base = (int)0,
+		/** Mouse is pointing.*/
+		Active = (int)1,
+		/** Mouse is pointing and left mouse button is pressed.*/
+		Pressed = (int)2
+	};
+	/**
 	* \brief MEP::Button provides a basic implementation of an object with the ability of display it on a screen.
 	*/
 	class Button : public AnimationObject {
-	public:
-		/**
-		* @enum MEP::Button::ButtonStatus
-		*/
-		enum class ButtonStatus {
-			/** Mouse is away.*/
-			Base = (int)0,
-			/** Mouse is pointing.*/
-			Active = (int)1,
-			/** Mouse is pointing and left mouse button is pressed.*/
-			Pressed = (int)2
-		};
 	private:
 		unsigned int m_base;
 		unsigned int m_active;
@@ -74,25 +73,7 @@ namespace MEP {
 			unsigned int active_breakpoint,
 			sf::Vector2f pos = { 0, 0 },
 			sf::Vector2f scale = { 1, 1 });
-		/**
-		* Constructor of a Button
-		* @param[in] x : frame rate of an animation.
-		* @param[in] x : MEP::Object
-		* @param[in] base_breakpoint : Base State when mouse is away.
-		* @param[in] active_breakpoint : Activeted state when mouse is pointing.
-		* @param[in] pressed_breakpoint : Pressed state when mouse is poining and left button is pressed.
-		* @param[in] pos : position of a button.
-		* @param[in] scale : scale of a button
-		*/
-		Button(const float frameRate,
-			const Object& x,
-			unsigned int base_breakpoint,
-			unsigned int active_breakpoint,
-			unsigned int pressed_breakpoint,
-			sf::Vector2f pos = { 0, 0 },
-			sf::Vector2f scale = { 1, 1 });
 		void update(sf::Time& currentTime) override;
-		bool handleEvent(sf::Event& event, sf::Vector2i& pos);
 		/**
 		* Checks if a given position is Transparent.
 		* MEP::Objects of a button needs to have transparency initialized.
@@ -109,6 +90,31 @@ namespace MEP {
 		* @return Current status
 		*/
 		const ButtonStatus& getStatus() const { return m_status; }
+		/**
+		* Automatically handles the events.	
+		* This method is not recommended because of the complexity.	
+		* (When executed automatically checks all of the events. Mouse activity, movement etc.)
+		*/
+		bool handleEvent(sf::Event& event, sf::Vector2i& pos);
+		/**
+		* Delivers an information that there is a possible press event tied with the button.
+		* True - if button is pressed, False - otherwise.
+		*/
+		bool mousePress(sf::Vector2i& pos);
+		/**
+		* Delivers an information that there is a possible release event tied with the button.
+		* True - if button is released, False - otherwise.
+		*/
+		bool mouseRelease(sf::Vector2i& pos);
+		/**
+		* Inform the button that the statue of .
+		* @return: True - there was an acctivity on a Button, False - otherwise.
+		*/
+		bool mouseActivity(const sf::Vector2i& pos);
+		/**
+		* Releases the button.
+		*/
+		void forceRelease();
 	};
 	inline MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(1, x, pos, scale),
@@ -127,22 +133,6 @@ namespace MEP {
 	}
 
 	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
-		AnimationObject(frameRate, x, pos, scale),
-		m_base(0)
-	{
-		if (x.getNufTextures() < 3)
-			throw "Textures too small!";
-		if (active_breakpoint < x.getNufTextures())
-			m_active = active_breakpoint;
-		else
-			throw "Wrong middle paremeter!";
-		if (active_breakpoint < x.getNufTextures() - 1)
-			m_pressed = x.getNufTextures() - 1;
-		else
-			throw "Wrong end parameter!";
-	}
-
-	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int /*base_breakpoint*/, unsigned int active_breakpoint, unsigned int /*pressed_breakpoint*/, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
@@ -203,16 +193,7 @@ namespace MEP {
 	inline bool MEP::Button::handleEvent(sf::Event& event, sf::Vector2i& pos)
 	{
 		bool isTran = isTansparent(pos.x, pos.y);
-		if (!followingList.empty()) {
-			if (!isTran)
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					changeStatus(ButtonStatus::Pressed);
-				else
-					changeStatus(ButtonStatus::Active);
-			else
-				changeStatus(ButtonStatus::Base);
-		}
-		if (event.type == sf::Event::MouseMoved) {
+		if (event.type == sf::Event::MouseMoved or !followingList.empty()) {
 			if (!isTran)
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					changeStatus(ButtonStatus::Pressed);
@@ -250,6 +231,44 @@ namespace MEP {
 
 		}
 		return true;
+	}
+	inline bool Button::mousePress(sf::Vector2i& pos) {
+		if (!isTansparent(pos.x, pos.y)) {
+			changeStatus(ButtonStatus::Pressed);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	inline bool Button::mouseRelease(sf::Vector2i& pos) {
+		if (!isTansparent(pos.x, pos.y)) {
+			changeStatus(ButtonStatus::Active);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	inline bool Button::mouseActivity(const sf::Vector2i& pos)
+	{
+		if (!isTansparent(pos.x, pos.y)) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				changeStatus(ButtonStatus::Pressed);
+				return true;
+			}
+			else {
+				changeStatus(ButtonStatus::Active);
+				return false;
+			}
+		} else {
+			changeStatus(ButtonStatus::Base);
+		}
+		return false;
+	}
+	inline void Button::forceRelease()
+	{
+		m_status = ButtonStatus::Base;
 	}
 }
 
