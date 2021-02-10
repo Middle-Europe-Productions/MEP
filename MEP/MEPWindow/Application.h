@@ -185,7 +185,6 @@ namespace MEP {
                         throw MEP::Window::WindowException("Appliaction is not initialized!");
                     }
                     sf::Clock clock;
-                    sf::Time timeSinceLastUpdate = sf::Time::Zero;
                     while (isOpen())
                     {
                         sf::Time dt = clock.restart();

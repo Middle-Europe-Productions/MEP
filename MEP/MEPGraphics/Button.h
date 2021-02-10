@@ -142,7 +142,7 @@ namespace MEP {
 			throw "Wrong end parameter!";
 	}
 
-	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int base_breakpoint, unsigned int active_breakpoint, unsigned int pressed_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
+	inline MEP::Button::Button(const float frameRate, const Object& x, unsigned int /*base_breakpoint*/, unsigned int active_breakpoint, unsigned int /*pressed_breakpoint*/, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(frameRate, x, pos, scale),
 		m_base(0)
 	{
@@ -222,13 +222,13 @@ namespace MEP {
 				changeStatus(ButtonStatus::Base);
 		}
 		else if (event.type == sf::Event::MouseButtonPressed) {
-			if (event.key.code == sf::Mouse::Left) {
+			if (event.mouseButton.button == sf::Mouse::Left) {
 				if (!isTran)
 					changeStatus(ButtonStatus::Pressed);
 			}
 		}
 		else if (event.type == sf::Event::MouseButtonReleased) {
-			if (event.key.code == sf::Mouse::Left) {
+			if (event.mouseButton.button == sf::Mouse::Left) {
 				if (!isTran) {
 					changeStatus(ButtonStatus::Active);
 					return true;
@@ -242,7 +242,7 @@ namespace MEP {
 	{
 		int fixed_x = (x - m_posFixed.x) / m_scaleFixed.x;
 		int fixed_y = (y - m_posFixed.y) / m_scaleFixed.y;
-		if ((fixed_x >= 0 and fixed_x < m_size.x) and (fixed_y >= 0 and fixed_y < m_size.y)) {
+		if ((fixed_x >= 0 and fixed_x < (int)m_size.x) and (fixed_y >= 0 and fixed_y < (int)m_size.y)) {
 			if (transparency)
 				return table[fixed_x][fixed_y];
 			else

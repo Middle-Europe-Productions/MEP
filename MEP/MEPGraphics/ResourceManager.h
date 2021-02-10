@@ -80,8 +80,8 @@ namespace MEP {
 			m_ID(ID),
 			m_group(group),
 			m_name(name),
-			m_transparency(transparency),
-			m_type(type)
+			m_type(type),
+			m_transparency(transparency)
 		{
 			if (nofFrames == 0)
 				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
@@ -110,8 +110,8 @@ namespace MEP {
 			m_ID(ID),
 			m_group(group),
 			m_name(name),
-			m_transparency(transparency),
-			m_type(ResourceType::Single)
+			m_type(ResourceType::Single),
+			m_transparency(transparency)
 		{
 			if (nofFrames == 0)
 				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);

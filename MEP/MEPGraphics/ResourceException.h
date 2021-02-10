@@ -55,9 +55,9 @@ namespace MEP {
 		* @param[in] type : MEP::ResourceException::ExceptionType
 		*/
 		explicit ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type) :
+			exceptionType(type),
 			ResourceName(name),
-			Message(msg),
-			exceptionType(type)
+			Message(msg)
 		{}
 		/**
 		* explicit contructor
@@ -66,9 +66,9 @@ namespace MEP {
 		* @param[in] type : MEP::ResourceException::ExceptionType
 		*/
 		explicit ResourceException(const char* name, const char* msg, const ExceptionType& type) :
+			exceptionType(type),
 			ResourceName(name),
-			Message(msg),
-			exceptionType(type)
+			Message(msg)
 		{}
 		/**
 		* Overloading the << operator.

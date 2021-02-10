@@ -114,28 +114,28 @@ namespace MEP {
 		* Outputs the current position of an animation.
 		* @return Current position.
 		*/
-		const double GetFixedVariable() const { return *currentFrame; }
+		const double& GetFixedVariable() const { return *currentFrame; }
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position as unsigned int.
 		*/
-		const unsigned int GetFixedUintVariable() const { 
+		unsigned int GetFixedUintVariable() const { 
 			return (unsigned int)round(*currentFrame); 
 		}
 		/**
 		* Outputs the entry position of an animation.
 		* @return Entry position.
 		*/
-		const double getEntry() const { return m_entry; }
+		const double& getEntry() const { return m_entry; }
 		/**
 		* Outputs the exit position of an animation.
 		* @return Exit position.
 		*/
-		const double getExit() const { return m_exit; }
+		const double& getExit() const { return m_exit; }
 		/**
 		* Override of a MEP::Drawable draw.
 		*/
-		bool draw(sf::RenderWindow& window) override { return true; }
+		bool draw(sf::RenderWindow&) override { return true; }
 		/**
 		* Override of a MEP::Drawable update.
 		*/

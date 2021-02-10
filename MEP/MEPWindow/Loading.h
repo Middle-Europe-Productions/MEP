@@ -87,7 +87,7 @@ namespace MEP {
 					exception = nullptr;
 					execution = false;
 				}
-				virtual void afterUpdate(sf::Time& currentTime)
+				virtual void afterUpdate(sf::Time&)
 				{
 					if (exception != nullptr) {
 						this->changeStatus(MEP::Window::BaseWindow::Status::NullAction);

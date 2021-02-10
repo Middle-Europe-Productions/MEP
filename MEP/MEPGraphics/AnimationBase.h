@@ -153,7 +153,7 @@ namespace MEP {
 		* Outputs animation initialization tag.
 		* @return MEP::Animation::AnimationInit
 		*/
-		const AnimationInit getInit() const { 
+		AnimationInit getInit() const { 
 			return isInit; 
 		}
 		/**

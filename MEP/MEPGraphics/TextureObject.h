@@ -85,7 +85,7 @@ namespace MEP {
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time& currentTime) override {
+		void update(sf::Time&) override {
 			updateSprite();
 		}
 		/**

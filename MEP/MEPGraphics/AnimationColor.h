@@ -77,6 +77,7 @@ namespace MEP {
 			const double begin = 0,
 			const double end = 10,
 			std::function<double(double x)> function = [](double x)->double { return x; }) :
+			AnimationPosition(0, 100, lenght, frameRate, begin, end, function),
 			entry_r(entry.r), 
 			entry_g(entry.g), 
 			entry_b(entry.b), 
@@ -88,8 +89,7 @@ namespace MEP {
 			r(entry.r),
 			g(entry.g),
 			b(entry.b),
-			a(entry.a),
-			AnimationPosition(0, 100, lenght, frameRate, begin, end, function)
+			a(entry.a)
 		{}
 		/**
 		* Changes the exit color. Exit means targeted color (after the iterations).

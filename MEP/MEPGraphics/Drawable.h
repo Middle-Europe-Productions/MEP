@@ -103,12 +103,12 @@ namespace MEP {
 		* @param[in] window : Reference to a window.
 		* @return True if the drawing was successful, or false if there is something wrong with an object and it must be redrawn.
 		*/
-		virtual bool draw(sf::RenderWindow& window) { return false; };
+		virtual bool draw(sf::RenderWindow&) { return false; };
 		/**
 		* Default virtual update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void update(sf::Time& currentTime) {};
+		virtual void update(sf::Time&) {};
 		/**
 		* Default virtual entry update function.
 		* @param[in] currentTime : Current global time.

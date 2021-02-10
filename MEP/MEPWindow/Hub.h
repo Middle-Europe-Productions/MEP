@@ -36,7 +36,7 @@ namespace MEP {
 			* MEP logo :)
 			* \brief Template of a custom Middle Europe Productions hub.
 			*/
-			class Hub : private Assets::HubAssets, public NonCopyable, public BaseTemplate, public BaseWindow {
+			class Hub : private Assets::HubAssets, public BaseTemplate, public BaseWindow {
 				MEP::TextureObject* textures[4];
 				MEP::Button* buttons[2];
 			public:

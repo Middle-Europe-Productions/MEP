@@ -202,7 +202,7 @@ namespace MEP {
 			* If you dont want to ovveride update just use this function. To update things before update call.
 			* @param[in] currontTime : Current global time.
 			*/
-			virtual void beforeUpdate(sf::Time& currentTime) {}
+			virtual void beforeUpdate(sf::Time&) {}
 			/**
 			* This is a classic update it executes if window has Main or InProgress tag.
 			* @param[in] currontTime : Current global time.
@@ -222,7 +222,7 @@ namespace MEP {
 			* If you dont want to ovveride update just use this function. To update things after update call.
 			* @param[in] currontTime : Current global time.
 			*/
-			virtual void afterUpdate(sf::Time& currentTime) {}
+			virtual void afterUpdate(sf::Time&) {}
 			/**
 			* Base handle events method.
 			* @param[in] Window : sf::RenderWindow.

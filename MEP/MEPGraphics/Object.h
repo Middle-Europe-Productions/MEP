@@ -151,7 +151,7 @@ namespace MEP {
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time& currentTime) override {};
+		void update(sf::Time&) override {};
 		/**
 		* Override of a MEP::Drawable entryUpdate.
 		*/
@@ -178,7 +178,7 @@ namespace MEP {
 		* Outputs the ID of the MEP::Object
 		* @return MEP::Object
 		*/
-		const U_int32 getID() const { return m_ID; }
+		const U_int32& getID() const { return m_ID; }
 		/**
 		* Outputs the name of the MEP::Object
 		* @return MEP::Object
@@ -206,7 +206,7 @@ namespace MEP {
 		* Outputs the number of copies of the MEP::Object
 		* @return Number of copies.
 		*/
-		const unsigned int nufC() const {
+		unsigned int nufC() const {
 			return *m_nufC;
 		}
 		/**
@@ -228,12 +228,12 @@ namespace MEP {
 	{
 		//allocate table
 		table = new bool* [surface.getSize().x];
-		for (int i = 0; i < surface.getSize().x; ++i)
+		for (unsigned int i = 0; i < surface.getSize().x; ++i)
 			table[i] = new bool[surface.getSize().y];
 		//fill table
 		if (table) {
-			for (int i = 0; i < surface.getSize().x; i++) {
-				for (int j = 0; j < surface.getSize().y; j++) {
+			for (unsigned int i = 0; i < surface.getSize().x; i++) {
+				for (unsigned int j = 0; j < surface.getSize().y; j++) {
 					table[i][j] = surface.getPixel(i, j).a < 100;
 				}
 			}
@@ -264,7 +264,7 @@ namespace MEP {
 	{
 		if (*m_nufC == 0) {
 			if (table != nullptr) {
-				for(int i = 0; i < m_size.x; i++){
+				for(unsigned int i = 0; i < m_size.x; i++){
 					delete [] table[i];
 				}
 				delete[] table;
@@ -287,8 +287,8 @@ namespace MEP {
 	}
 
 	inline Object::Object(const U_int32 ID, const std::string& path, const std::string& filename, bool transparencyM) :
-		m_ID(ID),
 		m_nufC(new int(0)), 
+		m_ID(ID),
 		m_name(filename),
 		texture(nullptr),
 		m_type(ObjectType::Single)
@@ -298,24 +298,24 @@ namespace MEP {
 	}
 
 	inline Object::Object(const U_int32 ID, const std::string& path, const std::string& filename, unsigned int frames, bool transparencyM) :
-		m_ID(ID),
 		m_nufC(new int(0)),
+		m_ID(ID),
 		m_name(filename),
 		texture(nullptr),
 		m_type(ObjectType::Multi)
 	{
 		texture = new std::list<sf::Texture*>;
-		for (int i = 0; i < frames; i++) {
+		for (unsigned int i = 0; i < frames; i++) {
 			load(path + filename + std::to_string(i) + ".png", transparencyM and i == 0, i == 0);
 		}
 	}
 
 	inline Object::Object(const U_int32 ID, std::list<sf::Image>& images, const std::string& filename, bool transparencyM):
-		m_ID(ID),
 		m_nufC(new int(0)),
+		m_ID(ID),
 		m_name(filename),
-		texture(nullptr),
-		transparency(false)
+		transparency(false),
+		texture(nullptr)
 	{
 		texture = new std::list<sf::Texture*>;
 		for (auto& i : images) {

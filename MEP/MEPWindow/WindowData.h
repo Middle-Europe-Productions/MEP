@@ -71,8 +71,8 @@ namespace MEP {
                 sf::Vector2u& mainResolution = { 1280, 720 }, 
                 U_int32 style = sf::Style::Default, 
                 sf::ContextSettings settings = sf::ContextSettings()) :
-                m_launchResolution(mainResolution),
                 m_resolution(mainResolution),
+                m_launchResolution(mainResolution),
                 m_settings(settings),
                 m_title(title),
                 m_style(style)

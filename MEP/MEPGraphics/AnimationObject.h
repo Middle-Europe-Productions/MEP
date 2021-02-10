@@ -284,7 +284,7 @@ namespace MEP {
 		return getStatus() or isFollowerActive();
 	}
 
-	inline bool MEP::AnimationObject::isTansparent(unsigned int x, unsigned int y)
+	inline bool MEP::AnimationObject::isTansparent(unsigned int, unsigned int)
 	{
 		return false;
 	}

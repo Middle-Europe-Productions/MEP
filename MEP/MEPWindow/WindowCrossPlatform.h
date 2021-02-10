@@ -26,7 +26,7 @@
 #define MEP_WINDOW_CROSS_PLATFORM_H
 
 #include <SFML/Graphics.hpp>
-#include "OSSetUp.h"
+#include <MEPWindow/OSSetUp.h>
 #if defined (MEP_WINDOWS)
 #include <windows.h>
 #include <Dwmapi.h>
@@ -86,20 +86,49 @@ namespace PLATFORM {
     }
 }
 #elif defined (MEP_LINUX)
+
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+
+
+#undef Status
+
 namespace PLATFORM {
-    inline bool transparent(sf::WindowHandle wnd) {
+    inline bool transparent(sf::WindowHandle) {
         return false;
     }
 
-    inline bool transparency(sf::WindowHandle wnd, unsigned char alpha)
+    inline bool transparency(Window wnd, unsigned char alpha)
     {
-        return false;
+        Display* display = XOpenDisplay(NULL);
+        unsigned long opacity = (0xffffffff / 0xff) * alpha;
+        Atom property = XInternAtom(display, "_NET_WM_WINDOW_OPACITY", false);
+        if (property != None)
+        {
+            XChangeProperty(display, wnd, property, XA_CARDINAL, 32, PropModeReplace, (unsigned char*)&opacity, 1);
+            XFlush(display);
+            XCloseDisplay(display);
+            return true;
+        }
+        else
+        {
+            XCloseDisplay(display);
+            return false;
+        }
     }
 
-    inline bool minimalize(sf::WindowHandle wnd) {
-        return false;
+    inline bool minimalize(Window win) {
+    	// function for minimze your app
+    	XWindowAttributes attr = { 0 };
+    	Display* display = XOpenDisplay(NULL);
+	XGetWindowAttributes (display, win, &attr);
+	int s = XScreenNumberOfScreen (attr.screen);
+	XIconifyWindow(display, win, s);
+        XCloseDisplay(display);
+        return true;
     }
-    inline void maximalize(sf::WindowHandle hWnd) {
+    inline void maximalize(sf::WindowHandle) {
+    
     }
 }
 #undef None // None conflicts with SFML

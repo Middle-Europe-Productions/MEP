@@ -44,7 +44,7 @@ namespace MEP {
 				* Method handling additional events defined by the user.
 				* It is recommended to use it with any Template window.
 				*/
-				virtual void additionalEvents(sf::RenderWindow& Window, sf::Event& Event) {}
+				virtual void additionalEvents(sf::RenderWindow&, sf::Event&) {}
 				/**
 				* Method handling initialization of the objects defined by the user.
 				* It is recommended to use it with any Template window.
