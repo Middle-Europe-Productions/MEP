@@ -46,6 +46,12 @@ namespace MEP {
 		bool correctObject(const Object& x);
 		//object which we are going to follow
 		const AnimationObject* toFollowOBJ = nullptr;	
+		//holds the actual size
+		sf::Vector2u fixSize;
+		//updates the actual size
+		void updateSize() {
+			fixSize = { (unsigned int)(m_size.x * m_scale.x), (unsigned int)(m_size.y * m_scale.y) };
+		}
 	public:
 		/**
 		* Constructor of an animation.
@@ -102,8 +108,30 @@ namespace MEP {
 		* @return sf:Vector2u size.
 		*/
 		virtual const sf::Vector2u& getSize() const {
-			return { (unsigned int)(m_size.x * m_scale.x), (unsigned int)(m_size.y * m_scale.y) };
+			return fixSize;
 		};
+		/**
+		* Sets the scale.
+		* @param[in] scale : Scale.
+		*/
+		void setScale(const sf::Vector2f scale) override {
+			m_scale = scale;
+			m_scaleFixed = scale;
+			currentSprite.setScale(m_scaleFixed);
+			updateSprite();
+			updateSize();
+		}
+		/**
+		* Sets the scale.
+		* @param[in] pos : MEP::Following object.
+		*/
+		void setScale(const Following& x) override {
+			m_scale = x.getOriginScale();
+			m_scaleFixed = x.getScale();
+			currentSprite.setScale(m_scaleFixed);
+			updateSprite();
+			updateSize();
+		}
 		/**
 		* Runs the animation in the forward direction.
 		* @param[in] currentTime : Current global time.
@@ -155,6 +183,7 @@ namespace MEP {
 		currentSprite.setPosition(m_posFixed);
 		currentSprite.setScale(m_scaleFixed);
 		updateSprite(**currentFrame);
+		updateSize();
 	}
 
 	inline bool MEP::AnimationObject::correctObject(const Object& x)

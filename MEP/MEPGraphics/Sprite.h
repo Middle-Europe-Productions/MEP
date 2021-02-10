@@ -75,7 +75,7 @@ namespace MEP {
 		* Sets the scale.
 		* @param[in] scale : Scale.
 		*/
-		void setScale(const sf::Vector2f scale) override { 
+		virtual void setScale(const sf::Vector2f scale) { 
 			m_scale = scale; 
 			m_scaleFixed = scale; 
 			currentSprite.setScale(m_scaleFixed);
@@ -85,7 +85,7 @@ namespace MEP {
 		* Sets the scale.
 		* @param[in] pos : MEP::Following object.
 		*/
-		void setScale(const Following& x) override { 
+		virtual void setScale(const Following& x) { 
 			m_scale = x.getOriginScale(); 
 			m_scaleFixed = x.getScale(); 
 			currentSprite.setScale(m_scaleFixed);
