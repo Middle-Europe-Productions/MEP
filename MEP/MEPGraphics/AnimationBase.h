@@ -26,7 +26,7 @@
 #define MEP_ANIMATION_H
 
 #include<SFML/Graphics.hpp>
-#include"NonCopyable.h"
+#include<MEPGraphics/NonCopyable.h>
 
 namespace MEP {
 	/**

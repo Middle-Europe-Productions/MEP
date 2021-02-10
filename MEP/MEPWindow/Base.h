@@ -127,7 +127,7 @@ namespace MEP {
 			std::list<MEP::Drawable*> m_objects;
 			//Connections to different windows around the scope
 			std::list<std::weak_ptr<BaseWindow>> m_connections;
-			std::shared_ptr<BaseWindow>& getWindow(unsigned int ID);
+			const BaseWindow& getWindow(unsigned int ID);
 			//custom view
 			sf::View m_view;
 			//view of a master window
@@ -390,12 +390,12 @@ namespace MEP {
 			}
 		}
 
-		inline std::shared_ptr<BaseWindow>& BaseWindow::getWindow(unsigned int ID)
+		inline const BaseWindow& BaseWindow::getWindow(unsigned int ID)
 		{
 			for (auto& x : m_connections)
 				if (auto obj = x.lock()) {
 					if (obj.get()->getID() == ID) {
-						return obj;
+						return *obj.get();
 					}
 				}
 			throw MEP::Window::WindowException(getID(), "Window not found!");

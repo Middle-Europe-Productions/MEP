@@ -264,18 +264,21 @@ namespace MEP {
 	{
 		if (*m_nufC == 0) {
 			if (table != nullptr) {
+				for(int i = 0; i < m_size.x; i++){
+					delete [] table[i];
+				}
 				delete[] table;
 			}
 			for (auto x = texture->begin(); x != texture->end(); x++)
 				delete* x;
 			std::cout << ", object has been permanently deleted.";
 			delete m_nufC;
+			delete texture;
 		}
 		else {
 			*m_nufC -= 1;
 		}
 	}
-
 	inline bool Object::isTansparent(unsigned int x, unsigned int y)
 	{
 		if (transparency and x < m_size.x and y < m_size.y)

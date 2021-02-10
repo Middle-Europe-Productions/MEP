@@ -103,8 +103,9 @@ namespace MEP {
 							sf::Vector2f(base.getResolution().x - (float)(base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB).getSize().x), 4.f)
 							);
 						//We provide the formula to calculate the method's position.
-						buttons[0]->addMethodPos([this, &base]()->sf::Vector2f { 
-							return sf::Vector2f(base.getResolution().x - (float)(buttons[0]->getSize().x), 4.f); });
+						buttons[0]->addMethodPos([&base]()->sf::Vector2f {
+								return sf::Vector2f(base.getResolution().x - (float)(base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB).getSize().x), 4.f); 
+							});
 						//And then we can provide the method for the scale.
 						//Example of the scale resize -> \n
 						//buttons[0]->addMethodScale([&base]()->sf::Vector2f {
@@ -153,6 +154,14 @@ namespace MEP {
 
 					//Adding objects to the list of drawing objects in the window
 					newObjects(textures[0], textures[1], buttons[0], textures[2], buttons[1], textures[3]);
+				}
+				~Hub(){
+					delete buttons[0];
+					delete buttons[1];
+					delete textures[0];
+					delete textures[1];
+					delete textures[2];
+					delete textures[3];
 				}
 				/**
 				* Changes the color of a HUB.
