@@ -218,9 +218,8 @@ namespace MEP {
 						if (m_grabbedWindow)
 							Window.setPosition(sf::Mouse::getPosition() + m_windowPossChange);
 						else { 
-							if (buttons[0]->mouseActivity(pos)) {}
-
-							if (buttons[1]->mouseActivity(pos)) {}
+							buttons[0]->mouseActivity(pos);
+							buttons[1]->mouseActivity(pos);
 						}
 						
 					}
