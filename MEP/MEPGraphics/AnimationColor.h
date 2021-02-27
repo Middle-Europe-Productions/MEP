@@ -85,17 +85,17 @@ namespace MEP {
 		* @param[in] frameRate : Frame rate of an animation.
 		* @param[in] begin : Begining point on a graph,
 		* @param[in] end : End point of a graph.
-		* @param[in] lenght : Animation lenght in ms.
+		* @param[in] length : Animation lenght in ms.
 		* @param[in] fun : Function graph. Method with the return type double. 
 		*/
 		AnimationColor(sf::Color entry,
 			sf::Color exit,
-			sf::Time lenght,
+			sf::Time length,
 			const float frameRate = 120,
 			const double begin = 0,
 			const double end = 10,
 			std::function<double(double x)> function = [](double x)->double { return x; }) :
-			AnimationPosition(0, 100, lenght, frameRate, begin, end, function),
+			AnimationPosition(0, 100, length, frameRate, begin, end, function),
 			entry_r(entry.r), 
 			entry_g(entry.g), 
 			entry_b(entry.b), 

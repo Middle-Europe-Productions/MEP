@@ -85,16 +85,16 @@ namespace MEP {
 		* Fmax(F(begin), F(end)) = exit, and Fmin(F(begin), F(end) = min.
 		* @param[in] begin : Begining point on a graph,
 		* @param[in] end : End point of a graph.
-		* @param[in] lenght : Animation lenght in ms.
+		* @param[in] length : Animation lenght in ms.
 		* @param[in] frameRate : Frame rate of an animation.
 		* @param[in] entry : Entry position of an Object (before the animation)
 		* @param[in] exit : Exit position of an Object (after the animation)
 		* @param[in] fun : Function graph. Method with the return type double. 
 		*/
-		AnimationPosition(const double entry, const double exit, sf::Time lenght, const float frameRate = 120, const double begin = 0, const double end = 100, std::function<double(double x)> function = [](double x)->double{ return x; }) :
+		AnimationPosition(const double entry, const double exit, sf::Time length, const float frameRate = 120, const double begin = 0, const double end = 100, std::function<double(double x)> function = [](double x)->double{ return x; }) :
 			Animation(AnimationInit::PositionAnimation, sf::Time(sf::milliseconds(1000) / frameRate)),
 			m_function(function),
-			nofFrames(lenght / toWait),
+			nofFrames(length / toWait),
 			m_begin(begin),
 			m_end(end),
 			m_entry(entry),
