@@ -1,4 +1,4 @@
-![Logo](https://github.com/Middle-Europe-Productions/MEP/tree/master/docs/mepdoc.png)
+![Logo](https://github.com/Middle-Europe-Productions/MEP/blob/master/docs/mepdoc.png)
 _alpha v1.3.2_
 ### Introduction
 A MEP library is designed to provide easy to use templates:
