@@ -120,6 +120,7 @@ namespace MEP {
 				exit_g = newColor.g;
 				exit_b = newColor.b;
 				exit_a = newColor.a;
+				return true;
 			}
 			else {
 				return false;
@@ -136,6 +137,7 @@ namespace MEP {
 				entry_g = newColor.g;
 				entry_b = newColor.b;
 				entry_a = newColor.a;
+				return true;
 			}
 			else {
 				return false;

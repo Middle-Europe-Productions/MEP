@@ -68,9 +68,9 @@ namespace MEP {
 			Follow(const AnimationPosition& animation, 
 				FollowType followType = FollowType::NotInit,
 				MEP::U_int32 colorsFollow = MEP::ColorChannel::ALL) :
+				m_colorsFollow(colorsFollow),
 				m_animation(animation),
-				m_followType(followType),
-				m_colorsFollow(colorsFollow) {}
+				m_followType(followType) {}
 
 			void updateVariables(Following& object, sf::Sprite& toUpdate) {
 				if (m_followType == FollowType::X_Pos) {
