@@ -296,15 +296,21 @@ namespace MEP {
 			* Adds a new MEP::Drawable to the main scope.
 			* @param[in] : MEP::Drawable*
 			*/
-			void newObject(MEP::Drawable* object) { 
-				m_objects.push_back(object); 
+			void newObject(MEP::Drawable* object, bool lowerImpoertance = false) {
+				if (lowerImpoertance)
+					m_objects.push_front(object);
+				else
+					m_objects.push_back(object);
 			};
 			/**
 			* Adds a new MEP::Drawable to the main scope.
 			* @param[in] : MEP::Drawable&
 			*/
-			void newObject(MEP::Drawable& object) { 
-				m_objects.push_back(&object);
+			void newObject(MEP::Drawable& object, bool lowerImpoertance = false) { 
+				if(lowerImpoertance)
+					m_objects.push_front(&object);
+				else
+					m_objects.push_back(&object);
 			}
 			/**
 			* Deletes all MEP::Objects in the MEP::Window::BaseWindow

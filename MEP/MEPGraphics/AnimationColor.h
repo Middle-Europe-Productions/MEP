@@ -28,6 +28,24 @@
 #include"AnimationPosition.h"
 namespace MEP {
 	/**
+	* @enum MEP::ColorChannel
+	* Types of the color channels.
+	*/
+	enum ColorChannel : MEP::U_int32 {
+		/** Non of the channels is being blocked.*/
+		NON = 0,
+		/** Red color channel.*/
+		R = 1 << 1,
+		/** Green color channel.*/
+		G = 1 << 2,
+		/** Blue color channel.*/
+		B = 1 << 3,
+		/** Alpha color channel.*/
+		A = 1 << 4,
+		/** All color channels.*/
+		ALL = R | G | B | A
+	};
+	/**
 	* This class uses MEP::AnimationPosition. It changes color A to the color B (alpha channel is supported).
 	* \brief Class is responsible for the sf::Color transitions.
 	*/

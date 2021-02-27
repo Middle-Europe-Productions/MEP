@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.1</span>
+   &#160;<span id="projectnumber">alpha 1.3.2</span>
    </div>
   </td>
  </tr>
@@ -96,55 +96,81 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define MEP_GROUP_H</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include&quot;ResourceException.h&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include&quot;Config.h&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> X&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_group.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_group.html">Group</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">//Id of the group.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_group.html#ac5cfd2b28161698760f09bd0b198493a">   36</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> <a class="code" href="class_group.html#ac5cfd2b28161698760f09bd0b198493a">group_ID</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//Container of the objects.</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">   39</a></span>&#160;    std::list&lt;std::unique_ptr&lt;X&gt;&gt; <a class="code" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">objects</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//Constructor.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_group.html#a32507ed934ac2011849718de7fc1c97a">   42</a></span>&#160;    <a class="code" href="class_group.html#a32507ed934ac2011849718de7fc1c97a">Group</a>(<span class="keyword">const</span> <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&amp; ID) : <a class="code" href="class_group.html#ac5cfd2b28161698760f09bd0b198493a">group_ID</a>(ID) {}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">//finds an element with a given method</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Method&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_group.html#a741fac66b278a29ebaf9a52f32ed66ae">   46</a></span>&#160;    X* <a class="code" href="class_group.html#a741fac66b278a29ebaf9a52f32ed66ae">find</a>(Method method)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; x : <a class="code" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">objects</a>) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">if</span> (method(x)) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">return</span> x.get();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Method&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_group.html#af450902eff5a05bd1b7d6fb2500abcb4">   56</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_group.html#af450902eff5a05bd1b7d6fb2500abcb4">remove</a>(Method method) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> ele = <a class="code" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">objects</a>.begin(); ele != <a class="code" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">objects</a>.end(); ++ele)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (method(ele)) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <a class="code" href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">objects</a>.remove(*ele);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//outputs the ID of a group</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_group.html#affed059b6e3b5d202d154d5631d414f2">   66</a></span>&#160;    <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> <a class="code" href="class_group.html#affed059b6e3b5d202d154d5631d414f2">getID</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_group.html#ac5cfd2b28161698760f09bd0b198493a">group_ID</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> X&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html">   34</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_group.html">Group</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">//Id of the group.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#ad1dd45e00d4de41b9eee0a98a0f44df1">   37</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> <a class="code" href="class_m_e_p_1_1_group.html#ad1dd45e00d4de41b9eee0a98a0f44df1">group_ID</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">//Container of the objects.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">   40</a></span>&#160;        std::list&lt;std::unique_ptr&lt;X&gt;&gt; <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">//Constructor.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#af56f73590ffdc483bcea7a2a102476e7">   43</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_group.html#af56f73590ffdc483bcea7a2a102476e7">Group</a>(<span class="keyword">const</span> <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&amp; ID) : <a class="code" href="class_m_e_p_1_1_group.html#ad1dd45e00d4de41b9eee0a98a0f44df1">group_ID</a>(ID) {}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">//finds an element with a given method</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Method&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#ac7e55f954d77c1d55dd0f4e183fb0af3">   47</a></span>&#160;        X* <a class="code" href="class_m_e_p_1_1_group.html#ac7e55f954d77c1d55dd0f4e183fb0af3">find</a>(Method method)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; x : <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">if</span> (method(x)) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="keywordflow">return</span> x.get();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Method&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#a2086e3351df3d3dfdb0aebf6bf2b42d6">   57</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_m_e_p_1_1_group.html#a2086e3351df3d3dfdb0aebf6bf2b42d6">remove</a>(Method method) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> ele = <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>.begin(); ele != <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>.end(); ++ele)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordflow">if</span> (method(ele)) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>.remove(*ele);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#a4248b54d554cc1774348fb5e7070eafa">   67</a></span>&#160;        std::list&lt;std::unique_ptr&lt;X&gt;&gt;&amp; <a class="code" href="class_m_e_p_1_1_group.html#a4248b54d554cc1774348fb5e7070eafa">get</a>() {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">objects</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="comment">//outputs the ID of a group</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group.html#ab41da6128aa83eda3c17b60ec8d5a6ee">   72</a></span>&#160;        <a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> <a class="code" href="class_m_e_p_1_1_group.html#ab41da6128aa83eda3c17b60ec8d5a6ee">getID</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_m_e_p_1_1_group.html#ad1dd45e00d4de41b9eee0a98a0f44df1">group_ID</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> X&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group_manager.html">   78</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_group_manager.html">GroupManager</a> {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        std::map&lt;MEP::U_int32, Group&lt;X&gt;&gt; m_objects;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group_manager.html#a8765c2345ef011b114ad3e6ff9d21e00">   81</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_group_manager.html#a8765c2345ef011b114ad3e6ff9d21e00">GroupManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="comment">//add </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_group_manager.html#a8fad9d3fee8b3a54dd344745f744f327">   84</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_group_manager.html#a8fad9d3fee8b3a54dd344745f744f327">add</a>(<a class="code" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> ID) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (<span class="keyword">auto</span>&amp; x = m_objects.find(ID)) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                x.get();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    };</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_group_html_af450902eff5a05bd1b7d6fb2500abcb4"><div class="ttname"><a href="class_group.html#af450902eff5a05bd1b7d6fb2500abcb4">Group::remove</a></div><div class="ttdeci">bool remove(Method method)</div><div class="ttdef"><b>Definition:</b> Group.h:56</div></div>
-<div class="ttc" id="aclass_group_html_ad89193582ee2aaf6053b40fcf438a642"><div class="ttname"><a href="class_group.html#ad89193582ee2aaf6053b40fcf438a642">Group::objects</a></div><div class="ttdeci">std::list&lt; std::unique_ptr&lt; X &gt; &gt; objects</div><div class="ttdef"><b>Definition:</b> Group.h:39</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_ad1dd45e00d4de41b9eee0a98a0f44df1"><div class="ttname"><a href="class_m_e_p_1_1_group.html#ad1dd45e00d4de41b9eee0a98a0f44df1">MEP::Group::group_ID</a></div><div class="ttdeci">const MEP::U_int32 group_ID</div><div class="ttdef"><b>Definition:</b> Group.h:37</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_ab41da6128aa83eda3c17b60ec8d5a6ee"><div class="ttname"><a href="class_m_e_p_1_1_group.html#ab41da6128aa83eda3c17b60ec8d5a6ee">MEP::Group::getID</a></div><div class="ttdeci">MEP::U_int32 getID() const</div><div class="ttdef"><b>Definition:</b> Group.h:72</div></div>
 <div class="ttc" id="anamespace_m_e_p_html_a42f9b3b66d1a5e6eda27432d8163b33e"><div class="ttname"><a href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a></div><div class="ttdeci">unsigned int U_int32</div><div class="ttdef"><b>Definition:</b> Config.h:33</div></div>
-<div class="ttc" id="aclass_group_html"><div class="ttname"><a href="class_group.html">Group</a></div><div class="ttdoc">Simple group manager.</div><div class="ttdef"><b>Definition:</b> Group.h:33</div></div>
-<div class="ttc" id="aclass_group_html_a741fac66b278a29ebaf9a52f32ed66ae"><div class="ttname"><a href="class_group.html#a741fac66b278a29ebaf9a52f32ed66ae">Group::find</a></div><div class="ttdeci">X * find(Method method) const</div><div class="ttdef"><b>Definition:</b> Group.h:46</div></div>
-<div class="ttc" id="aclass_group_html_a32507ed934ac2011849718de7fc1c97a"><div class="ttname"><a href="class_group.html#a32507ed934ac2011849718de7fc1c97a">Group::Group</a></div><div class="ttdeci">Group(const MEP::U_int32 &amp;ID)</div><div class="ttdef"><b>Definition:</b> Group.h:42</div></div>
-<div class="ttc" id="aclass_group_html_ac5cfd2b28161698760f09bd0b198493a"><div class="ttname"><a href="class_group.html#ac5cfd2b28161698760f09bd0b198493a">Group::group_ID</a></div><div class="ttdeci">const MEP::U_int32 group_ID</div><div class="ttdef"><b>Definition:</b> Group.h:36</div></div>
-<div class="ttc" id="aclass_group_html_affed059b6e3b5d202d154d5631d414f2"><div class="ttname"><a href="class_group.html#affed059b6e3b5d202d154d5631d414f2">Group::getID</a></div><div class="ttdeci">MEP::U_int32 getID() const</div><div class="ttdef"><b>Definition:</b> Group.h:66</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_manager_html_a8fad9d3fee8b3a54dd344745f744f327"><div class="ttname"><a href="class_m_e_p_1_1_group_manager.html#a8fad9d3fee8b3a54dd344745f744f327">MEP::GroupManager::add</a></div><div class="ttdeci">void add(MEP::U_int32 ID)</div><div class="ttdef"><b>Definition:</b> Group.h:84</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_a68129523668038cd0f88df5253946ba0"><div class="ttname"><a href="class_m_e_p_1_1_group.html#a68129523668038cd0f88df5253946ba0">MEP::Group::objects</a></div><div class="ttdeci">std::list&lt; std::unique_ptr&lt; X &gt; &gt; objects</div><div class="ttdef"><b>Definition:</b> Group.h:40</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_a2086e3351df3d3dfdb0aebf6bf2b42d6"><div class="ttname"><a href="class_m_e_p_1_1_group.html#a2086e3351df3d3dfdb0aebf6bf2b42d6">MEP::Group::remove</a></div><div class="ttdeci">bool remove(Method method)</div><div class="ttdef"><b>Definition:</b> Group.h:57</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_ac7e55f954d77c1d55dd0f4e183fb0af3"><div class="ttname"><a href="class_m_e_p_1_1_group.html#ac7e55f954d77c1d55dd0f4e183fb0af3">MEP::Group::find</a></div><div class="ttdeci">X * find(Method method) const</div><div class="ttdef"><b>Definition:</b> Group.h:47</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_manager_html_a8765c2345ef011b114ad3e6ff9d21e00"><div class="ttname"><a href="class_m_e_p_1_1_group_manager.html#a8765c2345ef011b114ad3e6ff9d21e00">MEP::GroupManager::GroupManager</a></div><div class="ttdeci">GroupManager()=default</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html"><div class="ttname"><a href="class_m_e_p_1_1_group.html">MEP::Group</a></div><div class="ttdoc">Simple group manager.</div><div class="ttdef"><b>Definition:</b> Group.h:34</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_a4248b54d554cc1774348fb5e7070eafa"><div class="ttname"><a href="class_m_e_p_1_1_group.html#a4248b54d554cc1774348fb5e7070eafa">MEP::Group::get</a></div><div class="ttdeci">std::list&lt; std::unique_ptr&lt; X &gt; &gt; &amp; get()</div><div class="ttdef"><b>Definition:</b> Group.h:67</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_html_af56f73590ffdc483bcea7a2a102476e7"><div class="ttname"><a href="class_m_e_p_1_1_group.html#af56f73590ffdc483bcea7a2a102476e7">MEP::Group::Group</a></div><div class="ttdeci">Group(const MEP::U_int32 &amp;ID)</div><div class="ttdef"><b>Definition:</b> Group.h:43</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_group_manager_html"><div class="ttname"><a href="class_m_e_p_1_1_group_manager.html">MEP::GroupManager</a></div><div class="ttdef"><b>Definition:</b> Group.h:78</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

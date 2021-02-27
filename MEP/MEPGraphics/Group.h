@@ -25,47 +25,68 @@
 #define MEP_GROUP_H
 #include"ResourceException.h"
 #include"Config.h"
-/**
+namespace MEP {
+	/**
 * Object group manager.
 * \brief Simple group manager.
 */
-template<typename X>
-class Group {
-public:
-	//Id of the group.
-	const MEP::U_int32 group_ID;
-	
-	//Container of the objects.
-	std::list<std::unique_ptr<X>> objects;
-public:
-	//Constructor.
-	Group(const MEP::U_int32& ID) : group_ID(ID) {}
+	template<typename X>
+	class Group {
+	public:
+		//Id of the group.
+		const MEP::U_int32 group_ID;
 
-	//finds an element with a given method
-	template<typename Method>
-	X* find(Method method) const {
-		for (auto& x : objects) {
-			if (method(x)) {
-				return x.get();
+		//Container of the objects.
+		std::list<std::unique_ptr<X>> objects;
+	public:
+		//Constructor.
+		Group(const MEP::U_int32& ID) : group_ID(ID) {}
+
+		//finds an element with a given method
+		template<typename Method>
+		X* find(Method method) const {
+			for (auto& x : objects) {
+				if (method(x)) {
+					return x.get();
+				}
+			}
+			return nullptr;
+		}
+
+		template<typename Method>
+		bool remove(Method method) {
+			for (auto ele = objects.begin(); ele != objects.end(); ++ele)
+				if (method(ele)) {
+					objects.remove(*ele);
+					return true;
+				}
+
+			return false;
+		}
+
+		std::list<std::unique_ptr<X>>& get() {
+			return objects;
+		}
+
+		//outputs the ID of a group
+		MEP::U_int32 getID() const {
+			return group_ID;
+		}
+	};
+
+	template<typename X>
+	class GroupManager {
+		std::map<MEP::U_int32, Group<X>> m_objects;
+	public:
+		GroupManager() = default;
+
+		//add 
+		void add(MEP::U_int32 ID) {
+			if (auto& x = m_objects.find(ID)) {
+				x.get();
 			}
 		}
-		return nullptr;
-	}
-
-	template<typename Method>
-	bool remove(Method method) {
-		for (auto ele = objects.begin(); ele != objects.end(); ++ele)
-			if (method(ele)) {
-				objects.remove(*ele);
-				return true;
-			}
-				
-		return false;
-	}
-	//outputs the ID of a group
-	MEP::U_int32 getID() const {
-		return group_ID;
-	}
-};
+	};
+}
 
 #endif

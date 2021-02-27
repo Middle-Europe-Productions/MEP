@@ -44,6 +44,8 @@ namespace MEP {
 	*/
 	class Button : public AnimationObject {
 	private:
+		bool m_block = false;
+
 		unsigned int m_base;
 		unsigned int m_active;
 		unsigned int m_pressed;
@@ -108,13 +110,39 @@ namespace MEP {
 		bool mouseRelease(sf::Vector2i& pos);
 		/**
 		* Inform the button that the statue of .
-		* @return: True - there was an acctivity on a Button, False - otherwise.
+		* @return: True - there was an activity on a Button, False - otherwise.
 		*/
 		bool mouseActivity(const sf::Vector2i& pos);
 		/**
-		* Releases the button.
+		* Forces to releases the button.
 		*/
 		void forceRelease();
+		/**
+		* Forces the button to be released. Ignores the animation.
+		* @return: True - Button was released, False - animation is active.
+		*/
+		bool forceReleased();
+		/**
+		* Forces to press the button. Not ignoring the animation.
+		*/
+		void forcePress();
+		/**
+		* Forces the button to be pressed. Ignores the animation.
+		* @return: True - Button was pressed, False - animation is active.
+		*/
+		bool forcePressed();
+		/**
+		* Block any activity in the button.
+		*/
+		void block();
+		/**
+		* Unlocks activity among the button.
+		*/
+		void release();
+		/**
+		* Checks the activity of the button.
+		*/
+		bool isBlocked() const;
 	};
 	inline MEP::Button::Button(const Object& x, unsigned int active_breakpoint, sf::Vector2f pos, sf::Vector2f scale) :
 		AnimationObject(1, x, pos, scale),
@@ -192,13 +220,20 @@ namespace MEP {
 
 	inline bool MEP::Button::handleEvent(sf::Event& event, sf::Vector2i& pos)
 	{
+		if (m_block)
+			return false;
 		bool isTran = isTansparent(pos.x, pos.y);
 		if (event.type == sf::Event::MouseMoved or !followingList.empty()) {
 			if (!isTran)
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					changeStatus(ButtonStatus::Pressed);
 				else
-					changeStatus(ButtonStatus::Active);
+					if (event.type == sf::Event::MouseButtonReleased) {
+						changeStatus(ButtonStatus::Active);
+						return true;
+					}
+					else
+						changeStatus(ButtonStatus::Active);
 			else
 				changeStatus(ButtonStatus::Base);
 		}
@@ -233,7 +268,7 @@ namespace MEP {
 		return true;
 	}
 	inline bool Button::mousePress(sf::Vector2i& pos) {
-		if (!isTansparent(pos.x, pos.y)) {
+		if (!m_block and !isTansparent(pos.x, pos.y)) {
 			changeStatus(ButtonStatus::Pressed);
 			return true;
 		}
@@ -242,7 +277,7 @@ namespace MEP {
 		}
 	}
 	inline bool Button::mouseRelease(sf::Vector2i& pos) {
-		if (!isTansparent(pos.x, pos.y)) {
+		if (!m_block and !isTansparent(pos.x, pos.y)) {
 			changeStatus(ButtonStatus::Active);
 			return true;
 		}
@@ -252,6 +287,8 @@ namespace MEP {
 	}
 	inline bool Button::mouseActivity(const sf::Vector2i& pos)
 	{
+		if (m_block)
+			return false;
 		if (!isTansparent(pos.x, pos.y)) {
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 				changeStatus(ButtonStatus::Pressed);
@@ -266,9 +303,49 @@ namespace MEP {
 		}
 		return false;
 	}
+
 	inline void Button::forceRelease()
 	{
 		m_status = ButtonStatus::Base;
+	}
+
+	inline bool Button::forceReleased() {
+		if (isRunning)
+			return false;
+		m_status = ButtonStatus::Base;
+		direction = Direction::Backwards;
+		currentFrame = texture->begin();
+		index_currentFrame = 0;
+		updateSprite(**currentFrame);
+		return true;
+	}
+
+	inline void Button::forcePress()
+	{
+		m_status = ButtonStatus::Pressed;
+	}
+
+	inline bool Button::forcePressed() {
+		if (isRunning)
+			return false; 
+		m_status = ButtonStatus::Pressed;
+		direction = Direction::Forward;
+		currentFrame = --texture->end();
+		index_currentFrame = texture->size() - 1; 
+		updateSprite(**currentFrame);
+		return true;
+	}
+
+	inline void Button::block() {
+		m_block = true;
+	}
+
+	inline void Button::release() {
+		m_block = false;
+	}
+
+	inline bool Button::isBlocked() const {
+		return m_block;
 	}
 }
 

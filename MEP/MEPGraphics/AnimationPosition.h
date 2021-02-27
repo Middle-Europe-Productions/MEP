@@ -154,6 +154,12 @@ namespace MEP {
 		*/
 		bool isActive() const override;
 		/**
+		* Resets the parameters of the animation if the animation is not active.
+		* Reset means changing it's current frame to begin or end depending of the direction.
+		* If direction is forward changes to begin otherwise to end.
+		*/
+		bool reset();
+		/**
 		* Outputs the current frame as a Color
 		* *Warning* For color animation it is recommended to use MEP::AnimationColor
 		* @return : sf::Color
@@ -253,6 +259,21 @@ namespace MEP {
 	inline bool MEP::AnimationPosition::isActive() const
 	{
 		return getStatus();
+	}
+
+	inline bool AnimationPosition::reset()
+	{
+		if(isRunning)
+			return false;
+		if (direction == Direction::Forward) {
+			currentFrame = frames.begin();
+			current_frame = 0;
+		}
+		else {
+			currentFrame = --frames.end();
+			current_frame = frames.size()-1;
+		}
+		return true;
 	}
 
 };

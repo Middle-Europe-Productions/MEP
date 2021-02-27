@@ -191,19 +191,30 @@ namespace MEP {
 			return true;
 		}
 		/**
-		*	Outputs the content of a Text
+		*	Outputs the content of a string of the text
 		*	@return : Text as std::string
 		*/
-		const std::string& getText() const { 
+		const std::string& getString() const { 
 			return m_content; 
+		}
+		/**
+		*	Outputs the content of a sf::Text
+		*	@return : sf::Text
+		*/
+		sf::Text& getText() {
+			return text;
 		}
 		/**
 		*	Changes the main string.
 		*	@param[in] in : New string.
 		*/
 		void setText(const std::string& in) {
-			m_content = in;
-			text.setString(in);
+			if (in != m_content) {
+				m_content = in;
+				text.setString(in);
+				tagApplied = false;
+			}
+			
 		}
 		/**
 		*	Changes the main string.

@@ -163,6 +163,12 @@ namespace MEP {
 		const Direction& getDirection() const { 
 			return direction; 
 		}
+		/**
+		* Sets the direction of an animation.
+		*/
+		void setDirection(MEP::Direction dir) {
+			direction = dir;
+		}
 	};
 };
 

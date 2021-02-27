@@ -53,7 +53,8 @@ namespace MEP {
 		U_int32 m_drawTag = DrawTag::Non;
 	public:
 		/**
-		* Outputs draw tag of a MEP::Drawable.
+		* Outputs draw tag of a MEP::Drawable
+		* Use MEP::DrawTag here.
 		* @return : MEP::Drawable::DrawTag.
 		*/
 		U_int32 getDrawTag() const {
@@ -61,6 +62,7 @@ namespace MEP {
 		}
 		/**
 		* Sets the draw tag of a MEP::Drawable.
+		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		*/
 		void setDrawTag(const U_int32 tag) { 
@@ -68,6 +70,7 @@ namespace MEP {
 		}
 		/**
 		* Adds the draw tag of a MEP::Drawable.
+		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		* @return : True - draw tag was added. False - draw tag is already added.
 		*/
@@ -80,6 +83,7 @@ namespace MEP {
 		}
 		/**
 		* Removes the draw tag of a MEP::Drawable.
+		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		* @return : True - draw tag was deleted. False - draw tag was not set.
 		*/

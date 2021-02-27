@@ -236,16 +236,6 @@ namespace MEP {
 		template <typename T>
 		T& get(const U_int32 ID, const U_int32 group = -1);
 		/**
-		* Implementation of get. T = MEP::Object
-		*/
-		template <typename T> 
-		MEP::Object& get(const U_int32 ID, const U_int32 group);
-		/**
-		* Implementation of get. T = sf::Font
-		*/
-		template <typename T>
-		sf::Font& get(const U_int32 ID, const U_int32 group);
-		/**
 		* Deletes MEP::Object with agiven name.
 		* @param[in] name : ID of a MEP::Object
 		* @param[in] group : Group of a MEP::Object.
@@ -415,19 +405,14 @@ namespace MEP {
 
 	template <typename T>
 	inline T& Resources::get(const U_int32 ID, const U_int32 group) {
-		throw ResourceException("ID: " + std::to_string(ID), "Incorrect type!", ResourceException::ExceptionType::IncorrectType);
+		if (std::is_same<T, MEP::Object>()) {
+			return (T&)getObject(ID, group);
+		}
+		else if (std::is_same<T, sf::Font>()) {
+			return (T&)getFont(ID, group);
+		} else
+			throw ResourceException("ID: " + std::to_string(ID), "Incorrect type!", ResourceException::ExceptionType::IncorrectType);
 	}
-
-	template <>
-	inline MEP::Object& Resources::get(const U_int32 ID, const U_int32 group) {
-		return getObject(ID, group);
-	}
-
-	template <>
-	inline sf::Font& Resources::get(const U_int32 ID, const U_int32 group) {
-		return getFont(ID, group);
-	}
-
 	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
 	{
 		remove<Object, Group<Object>>(group, [ID](std::list<std::unique_ptr<Object>>::iterator& element) -> bool

@@ -70,3 +70,18 @@
 	-A new methods were added to ResourceManager. get<Type>(ID, group) enables you to quick access fonts & objects. \n
 	-Better constructors. \n
 	-Examples were added. \n
+### 20.02.2021
+## MEP lib version alpha 1.3.2
+	-Now u can reset the animation position/color. \n
+	-Fixed memory leaks. \n
+	-Better Button functionallities (force actions forcePress() forcePressed(), forceRelease(), forceReleased and block button activity block()) \n
+	-Now there is a possibility of setting the any sort of an animation for the objects of the HUB thanks to the setFollow() method. \n
+	-MEP::TextObject now can output sf::Text object thanks to getText method. The getText method(which outputs the content of the string) is now getString() \n
+	-AnimationColor R channel locked at 10 bugfix. \n
+	-Fixed groups in get method from resource exception. \n
+	-Now there is a method to setDirection of an animation. \n
+	-Fixed a bug which blocked interaction with the button with following list active. \n
+	-Now while connecting the MEP::ColorAnimation to the objects you can limit it to the RGBA channel \n
+	-Now u can use up to 4 MEP::ColorAnimation in one objects (for each individual channel) \n
+	-Now there is a possibility to add lower importance objects. In the future there are going to be layers. (newObject(object, true(lower importance))\n
+	-If you move the texture using movePosition() method it will be applyed on addMethodPos() \n

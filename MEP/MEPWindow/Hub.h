@@ -26,9 +26,20 @@
 #define MEP_HUB_H
 
 #include <MEPWindow/HubAssets.h>
+#include <MEPGraphics/Config.h>
+#include <MEPGraphics/AnimationObject.h>
+#include <MEPGraphics/AnimationColor.h>
+
 namespace MEP {
 	namespace Window {
 		namespace Template {
+			enum HubElements : MEP::U_int32 {
+				TopLine = 1 << 1,
+				MEPLogo = 1 << 2,
+				ExitButton = 1 << 3,
+				MiniButton = 1 << 4,
+				All = TopLine | MEPLogo | ExitButton | MiniButton
+			};
 			/**
 			* Functionalities: \n
 			* Exit button. \n
@@ -58,6 +69,15 @@ namespace MEP {
 						base.initResources(MEP::Resource(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB, list, "HUB/mepblack"));
 						std::cout << "[MEP_HUB] A new object has been added to the resources. Name: HUB/mepblack" << std::endl;
 						textures[0] = new MEP::TextureObject(base.getObject(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB));
+						sf::Uint8 imageArray2[16384];
+						for (int i = 0; i < 16384; ++i) {
+							imageArray2[i] = (char)0;
+						}
+						int _break = 64 * 4 * 19;
+						for (int i = _break; i < _break + 6656; ++i) {
+							imageArray2[i] = imageArray[i - _break];
+						}
+						base.getWindow().setIcon(64, 64, imageArray2);
 					}
 					catch (const ResourceException& x) {
 						throw WindowException(getID(), x);
@@ -174,6 +194,38 @@ namespace MEP {
 					textures[2]->setColor(color);
 					buttons[1]->setColor(color);
 					textures[3]->setColor(color);
+				}
+				void setFollow(const MEP::AnimationColor& animation, HubElements element, MEP::U_int32 x) {
+					if (element & HubElements::MEPLogo) {
+						textures[0]->setFollow(animation, x);
+					}
+					if (element & HubElements::TopLine) {
+						textures[1]->setFollow(animation, x);
+					}
+					if (element & HubElements::ExitButton) {
+						textures[2]->setFollow(animation, x);
+						buttons[0]->setFollow(animation, x);
+					}
+					if (element & HubElements::MiniButton) {
+						textures[3]->setFollow(animation, x);
+						buttons[1]->setFollow(animation, x);
+					}
+				}
+				void setFollow(const MEP::AnimationPosition& base, const MEP::Following::FollowType type, HubElements element) {
+					if (element & HubElements::MEPLogo) {
+						textures[0]->setFollow(base, type);
+					}
+					if (element & HubElements::TopLine) {
+						textures[1]->setFollow(base, type);
+					}
+					if (element & HubElements::ExitButton) {
+						textures[2]->setFollow(base, type);
+						buttons[0]->setFollow(base, type);
+					}
+					if (element & HubElements::MiniButton) {
+						textures[3]->setFollow(base, type);
+						buttons[1]->setFollow(base, type);
+					}
 				}
 				/**
 				* Handles the events of the Hub
