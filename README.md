@@ -34,9 +34,13 @@ Variety of Objects and Animations:
 |Linux |    Ubuntu 20.o4|  ✔️ |  ❌|  
 
 In order to install the MEP library download SFML 2.5.1 from [official webside](https://www.sfml-dev.org/download/sfml/2.5.1/). Then include the [MEP](https://github.com/Middle-Europe-Productions/MEP/tree/master/MEP) file.
+
 **Additional features**
+
 First of all, I would like to highlight that the lack of installation of the additional features will not make the library stopped working. The only thing that you are going to miss is the resizable custom window. Unfortunately, SFML does not provide any support for that solution in a result I had to change some of the files listed in `SFML_2.5.1_Changes`. In order to make it work, you will need to download the SFML 2.5.1 source switch the files, and then build the library using CMake.
+
 **Keep in mind that I do not own any rights to the files in the** `SFML_2.5.1_Changes`. 
+
 All of the changes are marked in the following way:
 ```
 /// <MEP Modification>
