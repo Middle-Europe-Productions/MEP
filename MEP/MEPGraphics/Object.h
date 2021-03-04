@@ -26,9 +26,8 @@
 #define MEP_OBJECT_H
 
 #include<SFML/Graphics.hpp>
-#include"ResourceException.h"
-#include"Drawable.h"
-#include"Config.h"
+#include<MEPGraphics/ResourceException.h>
+#include<MEPGraphics/Drawable.h>
 #include<list>
 #include<string>
 #include<iostream>

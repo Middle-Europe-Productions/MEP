@@ -25,7 +25,7 @@
 #ifndef MEP_TEXTURE_OBJECT_H
 #define MEP_TEXTURE_OBJECT_H
 
-#include"AnimationObject.h"
+#include<MEPGraphics/AnimationObject.h>
 namespace MEP {
 	/**
 	* Basic type of a MEP::Drawable element in which the creation of a sf::Sprite is done via a single texture.

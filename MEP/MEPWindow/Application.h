@@ -32,8 +32,7 @@
 #include <MEPWindow/WindowData.h>
 
 namespace MEP {
-    namespace Window {
-        namespace Template {
+    namespace Template {
             /**
             * MEP::Window::Teample::Application features:
             * Window management.
@@ -164,12 +163,12 @@ namespace MEP {
                         initWindow();
                     }
                     catch (const MEP::ResourceException& x) {
-                        throw MEP::Window::WindowException(-1, x);
+                        throw MEP::WindowException(-1, x);
                     }
                     try {
                         createWindows();
                     }
-                    catch (const MEP::Window::WindowException& x) {
+                    catch (const MEP::WindowException& x) {
                         throw x;
                     }
                     isLoaded = true;
@@ -181,7 +180,7 @@ namespace MEP {
                 */
                 virtual bool run() {
                     if (isInit == false) {
-                        throw MEP::Window::WindowException("Appliaction is not initialized!");
+                        throw MEP::WindowException("Appliaction is not initialized!");
                     }
                     sf::Clock clock;
                     while (isOpen())
@@ -192,7 +191,7 @@ namespace MEP {
                         try {
                             update();
                         }
-                        catch (const MEP::Window::WindowException& x) {
+                        catch (const MEP::WindowException& x) {
                             throw x;
                         }
                         render();
@@ -210,7 +209,6 @@ namespace MEP {
                 virtual void createWindows() = 0;
             };
         }
-    }
 }
 
 #endif

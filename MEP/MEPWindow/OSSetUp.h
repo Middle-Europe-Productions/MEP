@@ -25,8 +25,9 @@
 #ifndef MEP_OSSETUP_H
 #define MEP_OSSETUP_H
 
-#define MEP_STATE "Alpha";
-#define MEP_STATE_VERSION 3;
+#define MEP_VERSION 1
+#define MEP_UPDATE 3
+#define MEP_RELEASE 3
 
 #if defined(_WIN32)
 //Windows

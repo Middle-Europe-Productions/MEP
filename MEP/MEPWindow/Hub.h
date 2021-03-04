@@ -31,8 +31,7 @@
 #include <MEPGraphics/AnimationColor.h>
 
 namespace MEP {
-	namespace Window {
-		namespace Template {
+	namespace Template {
 			enum HubElements : MEP::U_int32 {
 				TopLine = 1 << 1,
 				MEPLogo = 1 << 2,
@@ -52,12 +51,12 @@ namespace MEP {
 				MEP::Button* buttons[2];
 			public:
 				/**
-				* Constructor of a MEP::Window::Template::Hub
+				* Constructor of a MEP::Template::Hub
 				* @param[in] ID : Window identifier
 				* @param[in] base : Reference to a MEP::Window::Template::Application
 				* @param[in] color : Color of the elements.
 				*/
-				Hub(unsigned int ID, MEP::Window::Template::Application& base, const sf::Color& color = sf::Color::White) : BaseWindow(ID)
+				Hub(unsigned int ID, MEP::Template::Application& base, const sf::Color& color = sf::Color::White) : BaseWindow(ID)
 				{
 					try {
 						//Creating a MEP logo in the left corner of the screen
@@ -282,7 +281,6 @@ namespace MEP {
 				}
 			};
 		}
-	}
 }
 
 #endif

@@ -28,9 +28,9 @@
 #include<functional>
 #include<list>
 #include<iostream>
-#include <cmath>
-#include"AnimationBase.h"
-#include"Drawable.h"
+#include<cmath>
+#include<MEPGraphics/AnimationBase.h>
+#include<MEPGraphics/Drawable.h>
 namespace MEP {
 	/**
 	* The idea here is simple. We take a function f.

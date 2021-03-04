@@ -13,7 +13,7 @@ void TreeDrawer::createWindows()
 {
     ...
     addWindow(new TreeRenderer(*this));
-    latestWindow().changeStatus(MEP::Window::BaseWindow::Status::Main);
+    latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
 **Animations**

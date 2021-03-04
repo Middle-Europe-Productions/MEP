@@ -1,7 +1,7 @@
 #ifndef MEP_SPRITE_H
 #define MEP_SPRITE_H
 
-#include"Following.h"
+#include<MEPGraphics/Following.h>
 namespace MEP {
 	/**
 	* \brief Basically the SFML sprite with the support for the MEP functionalities.

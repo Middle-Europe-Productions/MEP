@@ -27,11 +27,11 @@
 
 #include<list>
 #include<thread>
-#include"AnimationObject.h"
-#include"TextureObject.h"
-#include"NonCopyable.h"
-#include"FontManager.h"
-#include"Assets.h"
+#include<MEPGraphics/AnimationObject.h>
+#include<MEPGraphics/TextureObject.h>
+#include<MEPGraphics/NonCopyable.h>
+#include<MEPGraphics/FontManager.h>
+#include<MEPGraphics/Assets.h>
 namespace MEP {
 	/**
 		* @enum MEP::ExceptionType

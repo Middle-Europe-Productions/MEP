@@ -1,15 +1,15 @@
 ### 1. Simple Window
-In order to create a simple window will need to create a new class and inherit MEP::Window::Template::Application. 
+In order to create a simple window will need to create a new class and inherit MEP::Template::Application. 
 ``` cpp
-class TreeDrawer : public MEP::Window::Template::Application {
+class TreeDrawer : public MEP::Template::Application {
      ...
 }
 ```
-Secondly, you will need to properly create constructor. MEP::Window::Template::Application takes up to five arguments.
+Secondly, you will need to properly create constructor. MEP::Template::Application takes up to five arguments.
 First is a title of the window (const char *), second resolution of the window (sf::Vector2u), third style of the window (U_int32), fourth setting (sf::ContextSettings). At this point I would like to higlight some things. As yo can see all of those method are stricly realted to the SFML library. That is bacause MEP is using it to display the output. In the folowing example I am using one of the futures (sf::Style::Modern_Resize) that is not available in the SFML. In order to get this working you will need to build SFML on your own using cmake with [this](https://github.com/Middle-Europe-Productions/MEP/tree/master/SFML_2.5.1_Changes) files replaced.
 ``` cpp
 TreeDrawer::TreeDrawer() :
-	MEP::Window::Template::Application("Tree Drawer", "resources/", { 500, 500 }, sf::Style::Modern_Resize)
+	MEP::Template::Application("Tree Drawer", "resources/", { 500, 500 }, sf::Style::Modern_Resize)
 {}
 ```
 Thirdly, you will need to override two of the MEP::Application methods.
@@ -21,15 +21,15 @@ void createResources() override;
 ``` cpp
 void TreeDrawer::createWindows()
 {
-    addWindow(new MEP::Window::Template::Hub(1, *this, sf::Color::Blue));
-    latestWindow().changeStatus(MEP::Window::BaseWindow::Status::Main);
+    addWindow(new MEP::Template::Hub(1, *this, sf::Color::Blue));
+    latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
 In the aforementioned example I am using addWindow() method which is designed to load the MEP::BaseWindow into the application memory. In the basic example we will use one of the other build in Templates a Hub. Hub class adds an interactive bar which is capable of repositioning, closing and minimizing the window. Second method latestWindow() outputs the latest added window. Third method changeStatus() changes the status of the window. In the library we have five states of the window:
- - ```MEP::Window::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry and RunAtEntryAndEnd tag and then switches the state to Main.
-- ```MEP::Window::BaseWindow::Status::Exit``` - examples of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
-- ```MEP::Window::BaseWindow::Status::InProgress``` - windows with this tag is visible but events are not processed.
-- ```MEP::Window::BaseWindow::Status::NullAction``` - windows with the tag is not visible.
+ - ```MEP::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry and RunAtEntryAndEnd tag and then switches the state to Main.
+- ```MEP::BaseWindow::Status::Exit``` - examples of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
+- ```MEP::BaseWindow::Status::InProgress``` - windows with this tag is visible but events are not processed.
+- ```MEP::BaseWindow::Status::NullAction``` - windows with the tag is not visible.
 
 ```createResources()``` is used load resources into the memory. Resources are loaded thanks to the initResources(...) method.
 ``` cpp

@@ -26,10 +26,10 @@
 #ifndef MEP_ANIMATION_OBJECT_H
 #define MEP_ANIMATION_OBJECT_H
 
-#include"AnimationBase.h"
-#include"AnimationPosition.h"
-#include"Sprite.h"
-#include"Object.h"
+#include<MEPGraphics/AnimationBase.h>
+#include<MEPGraphics/AnimationPosition.h>
+#include<MEPGraphics/Sprite.h>
+#include<MEPGraphics/Object.h>
 namespace MEP {
 	/**
 	* \brief MEP::AnimationObject is a sprite with the ability to dislay an animation.

@@ -28,12 +28,11 @@
 #include <MEPWindow/Base.h>
 
 namespace MEP {
-    namespace Window {
-        /**
-        * It manages all of the MEP::Window added to the MEP::Teamplate::Application
-        * \brief A MEP::Window manager. With a build in memory management.
-        */
-        class BaseManager {
+    /**
+    * It manages all of the MEP::Window added to the MEP::Teamplate::Application
+    * \brief A MEP::Window manager. With a build in memory management.
+    */
+    class BaseManager {
             protected:
                 std::list<std::shared_ptr<BaseWindow>> m_windows;
                 std::shared_ptr<BaseWindow> mostRecentAccess;
@@ -52,7 +51,7 @@ namespace MEP {
                             mostRecentAccess = x;
                             return x;
                         }
-                    throw MEP::Window::WindowException("Window not found!");
+                    throw MEP::WindowException("Window not found!");
                 }
                 /**
                 * Ouputs last accessed window.
@@ -60,7 +59,7 @@ namespace MEP {
                 */
                 BaseWindow& getLastAccess() {
                     if (mostRecentAccess.get() == nullptr) {
-                        throw MEP::Window::WindowException("You did not access any base window yet!");
+                        throw MEP::WindowException("You did not access any base window yet!");
                     }
                     return *mostRecentAccess.get();
                 }
@@ -75,7 +74,7 @@ namespace MEP {
                                 mostRecentAccess = x;
                                 return *x;
                             }
-                    throw MEP::Window::WindowException("Window not found!");
+                    throw MEP::WindowException("Window not found!");
                 }
                 /**
                 * Deletes the window with a given id.
@@ -93,12 +92,12 @@ namespace MEP {
                         m_windows.remove(*it);
                     }
                     else {
-                        throw MEP::Window::WindowException("Could not find a window inside of a DeteleWindow method!");
+                        throw MEP::WindowException("Could not find a window inside of a DeteleWindow method!");
                     }
                 }
                 /**
                 * Outputs the first element of m_windows list.
-                * @return Front MEP::Window::BaseWindow
+                * @return Front MEP::BaseWindow
                 */
                 BaseWindow& latestWindow() {
                     mostRecentAccess = m_windows.front();
@@ -106,7 +105,7 @@ namespace MEP {
                 }
                 /**
                 * Outputs the last element of m_windows list.
-                * @return Back MEP::Window::BaseWindow
+                * @return Back MEP::BaseWindow
                 */
                 BaseWindow& latestWindowMaster() {
                     mostRecentAccess = m_windows.back();
@@ -115,9 +114,9 @@ namespace MEP {
                 /**
                 * Adds a new window to back of the m_windows render list. \n
                 * Window is being renderd only if its Type != NullAction. \n
-                * MEP::Window::BaseWindow added with this command has lower priority. \n
+                * MEP::BaseWindow added with this command has lower priority. \n
                 * It is added at the end of the list.
-                * @param[in] window : MEP::Window::BaseWindow
+                * @param[in] window : MEP::BaseWindow
                 */
                 void addWindow(BaseWindow* window) {
                     m_windows.push_front(std::move(std::shared_ptr<BaseWindow>{window}));
@@ -126,13 +125,13 @@ namespace MEP {
                 * Adds a new window to back of the m_windows render list.
                 * Window is being renderd only if its Type != NullAction.
                 * Object added with this command has higher priority. It is added at the front of the list.
-                * @param[in] window : MEP::Window::BaseWindow
+                * @param[in] window : MEP::BaseWindow
                 */
                 void addWindowMaster(BaseWindow* window) {
                     m_windows.push_back(std::move(std::shared_ptr<BaseWindow>{window}));
                 }
         };
-    }
+
 }
 
 #endif

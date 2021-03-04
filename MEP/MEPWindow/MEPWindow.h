@@ -24,33 +24,13 @@
 ////////////////////////////////////////////////////////////
 #ifndef MEP_WINDOW_H
 #define MEP_WINDOW_H
-#include "Application.h"
 
-#include "Loading.h"
-/*
-Deffinition of a base window HUB with a exit minimalize and MEP trademark buttons.
-*/
-#include "Hub.h"
-/*
-Inharitance: Resources <MEP/MEPGraphics/ResourcesManager.h> , WindowStats
-Manager of an application provides virtual definition af a base sf::Window functionallities.
-*/
-#include "BaseManager.h"
-/*
-Deffinition of a base MEP Window
-*/
-#include "Base.h"
-/*
-Provides definitions of a cross plaftorm functions not included in the SFML 2 lib.
-Namespace PLATFORM
-*/
-#include "WindowCrossPlatform.h"
-/*
-Base window functionalities time and FPS handler.
-*/
-#include "WindowStat.h"
-/*
-Deffinition of a loading Window which handles given methods on a different thread.
-*/
+#include <MEPWindow/Application.h>
+#include <MEPWindow/Loading.h>
+#include <MEPWindow/Hub.h>
+#include <MEPWindow/BaseManager.h>
+#include <MEPWindow/Base.h>
+#include <MEPWindow/WindowCrossPlatform.h>
+#include <MEPWindow/WindowStat.h>
 
 #endif

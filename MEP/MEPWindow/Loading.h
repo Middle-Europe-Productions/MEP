@@ -26,94 +26,92 @@
 #define MEP_LEADING_H
 
 #include<thread>
-#include "BaseTemplate.h"
-#include "Application.h"
+#include <MEPWindow/BaseTemplate.h>
+#include <MEPWindow/Application.h>
 namespace MEP {
-	namespace Window {
-		namespace Template {
-			/**
-			* Functionalities:
-			* The window is capable of execution of given N number of methods on a seperate thread, 
-			* furthermore, it keeps the track of the exceptions and automatically changes its status to MEP::Window::BaseWindow::Status::Exit
-			* when execution of a thread is completed.
-			* \brief Template of a custom Middle Europe Productions loading window.
-			*/
-			class Loading: public BaseTemplate, public BaseWindow {
-			private:
-				inline static std::exception_ptr exception;
-				inline static bool execution;
+	namespace Template {
+		/**
+		* Functionalities:
+		* The window is capable of execution of given N number of methods on a seperate thread,
+		* furthermore, it keeps the track of the exceptions and automatically changes its status to MEP::BaseWindow::Status::Exit
+		* when execution of a thread is completed.
+		* \brief Template of a custom Middle Europe Productions loading window.
+		*/
+		class Loading : public BaseTemplate, public BaseWindow {
+		private:
+			std::exception_ptr exception;
+			bool execution;
 
-				std::list<std::function<void()>> m_todo;
-				std::thread* m_executionThread;
-			private:
-				void addMethod() {}
-				template<typename Fun>
-				void addMethod(Fun fun) {
-					m_todo.push_back(fun);
-				}
-				template<typename First, typename ... Rest>
-				void addMethod(First&& first, Rest&& ... rest) {
-					addMethod(std::forward<First>(first));
-					addMethod(std::forward<Rest>(rest) ...);
-				}
-				void MainMethod() {
-					execution = true;
-					for (auto& i : m_todo) {
-						try {
-							i();
-						}
-						catch (const MEP::ResourceException& x) {
-							exception = std::make_exception_ptr(MEP::Window::WindowException(getID(), x));
-						}
-						catch (const MEP::Window::WindowException& x) {
-							exception = std::make_exception_ptr(x);
-						}
-					}	
-					execution = false;
-				}
-			public:
-				/**
-				* Constructor of a MEP::Window::Template::Hub
-				* @param[in] ID : Window identifier
-				* @param[in] base : Reference to a MEP::Window::Template::Application
-				* @param[in] todo : Methods that are going to be executed in the background.
-				*/
-				template<typename ... ToDo>
-				Loading(unsigned int ID, MEP::Window::Template::Application& base, ToDo&& ... todo) :
-					BaseWindow(ID)
-				{
-					additionalInit();
-					addMethod(std::forward<ToDo>(todo) ...);
-					exception = nullptr;
-					execution = false;
-				}
-				virtual void afterUpdate(sf::Time&)
-				{
-					if (exception != nullptr) {
-						this->changeStatus(MEP::Window::BaseWindow::Status::NullAction);
-						std::rethrow_exception(exception);
+			std::list<std::function<void()>> m_todo;
+			std::thread* m_executionThread;
+		private:
+			void addMethod() {}
+			template<typename Fun>
+			void addMethod(Fun fun) {
+				m_todo.push_back(fun);
+			}
+			template<typename First, typename ... Rest>
+			void addMethod(First&& first, Rest&& ... rest) {
+				addMethod(std::forward<First>(first));
+				addMethod(std::forward<Rest>(rest) ...);
+			}
+			void MainMethod() {
+				execution = true;
+				for (auto& i : m_todo) {
+					try {
+						i();
 					}
-					if (execution == false and
-						(getStatus() == MEP::Window::BaseWindow::Status::Main or 
-							getStatus() == MEP::Window::BaseWindow::Status::InProgress)) {
-						if (!m_executionThread) {
-							m_executionThread = new std::thread(&Loading::MainMethod, this);
-						}
-						else {
-							this->changeStatus(MEP::Window::BaseWindow::Status::Exit);
-						}
-					}	
-				}
-				~Loading() 
-				{
-					if (m_executionThread) {
-						if (m_executionThread->joinable()) {
-							m_executionThread->join();
-						}
+					catch (const MEP::ResourceException& x) {
+						exception = std::make_exception_ptr(MEP::WindowException(getID(), x));
+					}
+					catch (const MEP::WindowException& x) {
+						exception = std::make_exception_ptr(x);
 					}
 				}
-			};
-		}
+				execution = false;
+			}
+		public:
+			/**
+			* Constructor of a MEP::Template::Hub
+			* @param[in] ID : Window identifier
+			* @param[in] base : Reference to a MEP::Template::Application
+			* @param[in] todo : Methods that are going to be executed in the background.
+			*/
+			template<typename ... ToDo>
+			Loading(unsigned int ID, MEP::Template::Application& base, ToDo&& ... todo) :
+				BaseWindow(ID)
+			{
+				additionalInit();
+				addMethod(std::forward<ToDo>(todo) ...);
+				exception = nullptr;
+				execution = false;
+			}
+			virtual void afterUpdate(sf::Time&)
+			{
+				if (exception != nullptr) {
+					this->changeStatus(MEP::BaseWindow::Status::NullAction);
+					std::rethrow_exception(exception);
+				}
+				if (execution == false and
+					(getStatus() == MEP::BaseWindow::Status::Main or
+						getStatus() == MEP::BaseWindow::Status::InProgress)) {
+					if (!m_executionThread) {
+						m_executionThread = new std::thread(&Loading::MainMethod, this);
+					}
+					else {
+						this->changeStatus(MEP::BaseWindow::Status::Exit);
+					}
+				}
+			}
+			~Loading()
+			{
+				if (m_executionThread) {
+					if (m_executionThread->joinable()) {
+						m_executionThread->join();
+					}
+				}
+			}
+		};
 	}
 }
 

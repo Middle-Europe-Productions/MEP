@@ -25,8 +25,8 @@
 #ifndef MEP_BUTTON_H
 #define MEP_BUTTON_H
 
-#include"AnimationObject.h"
-#include"NonCopyable.h"
+#include<MEPGraphics/AnimationObject.h>
+
 namespace MEP {
 	/**
 	* @enum MEP::Button::ButtonStatus

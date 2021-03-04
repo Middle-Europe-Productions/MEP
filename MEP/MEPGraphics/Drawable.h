@@ -25,8 +25,8 @@
 #ifndef MEP_DRAWABLE_H
 #define MEP_DRAWABLE_H
 
-#include"Config.h"
-#include <SFML/Graphics.hpp>
+#include<MEPGraphics/Config.h>
+#include<SFML/Graphics.hpp>
 
 namespace MEP {
 	/**

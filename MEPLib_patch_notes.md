@@ -85,3 +85,7 @@
 	-Now u can use up to 4 MEP::ColorAnimation in one objects (for each individual channel) \n
 	-Now there is a possibility to add lower importance objects. In the future there are going to be layers. (newObject(object, true(lower importance))\n
 	-If you move the texture using movePosition() method it will be applyed on addMethodPos() \n
+### 3.03.2021
+## MEP lib version alpha 1.3.3
+	-Improved MEP::Loading class. \n	
+	-Deleted Window namespace. \n

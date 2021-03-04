@@ -25,9 +25,9 @@
 #ifndef MEP_FOLLOWING_H
 #define MEP_FOLLOWING_H
 
-#include"Config.h"
-#include"AnimationPosition.h"
-#include"AnimationColor.h"
+#include<MEPGraphics/Config.h>
+#include<MEPGraphics/AnimationPosition.h>
+#include<MEPGraphics/AnimationColor.h>
 namespace MEP {
 	/**
 	* \brief MEP::Following keeps track of a MEP::Object position.

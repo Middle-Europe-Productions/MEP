@@ -25,7 +25,7 @@
 #ifndef MEP_ANIMATION_COLOR_H
 #define MEP_ANIMATION_COLOR_H
 
-#include"AnimationPosition.h"
+#include<MEPGraphics/AnimationPosition.h>
 namespace MEP {
 	/**
 	* @enum MEP::ColorChannel

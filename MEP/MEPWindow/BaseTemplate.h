@@ -28,8 +28,7 @@
 #include <MEPWindow/Base.h>
 
 namespace MEP {
-	namespace Window {
-		namespace Template {
+	namespace Template {
 			/**
 			* I do recommend to use it with all of the template windows.
 			* It provides two additional methods:
@@ -52,7 +51,6 @@ namespace MEP {
 				virtual void additionalInit() {};
 			};
 		}
-	}
 }
 				
 #endif

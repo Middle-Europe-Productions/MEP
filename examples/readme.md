@@ -15,7 +15,7 @@ Secondly, you will need to properly create a constructor. MEP::Window::Template:
 First is a title of the window (const char *), second resolution of the window (sf::Vector2u), third style of the window (U_int32), fourth setting (sf::ContextSettings). At this point, I would like to highlight some things. As you can see all of those methods are strictly related to the SFML library. That is because MEP is using it to display the output. In the following example, I am using one of the futures (sf::Style::Modern_Resize) that is not available in the SFML. To get this working you will need to build SFML on your own using CMake with [this](https://github.com/Middle-Europe-Productions/MEP/tree/master/SFML_2.5.1_Changes) files replaced.
 ``` cpp
 TreeDrawer::TreeDrawer() :
-	MEP::Window::Template::Application("Tree Drawer", "resources/", { 500, 500 }, sf::Style::Modern_Resize)
+	MEP::Template::Application("Tree Drawer", "resources/", { 500, 500 }, sf::Style::Modern_Resize)
 {}
 ```
 Thirdly, you will need to override two of the MEP::Application methods.
@@ -27,15 +27,15 @@ void createResources() override;
 ``` cpp
 void TreeDrawer::createWindows()
 {
-    addWindow(new MEP::Window::Template::Hub(1, *this, sf::Color::Blue));
-    latestWindow().changeStatus(MEP::Window::BaseWindow::Status::Main);
+    addWindow(new MEP::Template::Hub(1, *this, sf::Color::Blue));
+    latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
 In the aforementioned example I am using addWindow() method which is designed to load the MEP::BaseWindow into the application memory. In the basic example we will use one of the other build in Templates a Hub. Hub class adds an interactive bar which is capable of repositioning, closing and minimizing the window. Second method latestWindow() outputs the latest added window. Third method changeStatus() changes the status of the window. In the library we have five states of the window:
- - ```MEP::Window::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry and RunAtEntryAndEnd tag and then switches the state to Main.
-- ```MEP::Window::BaseWindow::Status::Exit``` - examples of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
-- ```MEP::Window::BaseWindow::Status::InProgress``` - windows with this tag is visible but events are not processed.
-- ```MEP::Window::BaseWindow::Status::NullAction``` - windows with the tag is not visible.
+ - ```MEP::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry and RunAtEntryAndEnd tag and then switches the state to Main.
+- ```MEP::BaseWindow::Status::Exit``` - examples of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
+- ```MEP::BaseWindow::Status::InProgress``` - windows with this tag is visible but events are not processed.
+- ```MEP::BaseWindow::Status::NullAction``` - windows with the tag is not visible.
 
 ```createResources()``` is used to load resources into the memory. Resources are loaded thanks to the initResources(...) method.
 ``` cpp
@@ -73,16 +73,16 @@ This is the end of _1. Simple Window_
 
 
 ### 2. Simple Objects, Text and custom Window
-To create your custom window you will need to develop a new class and inherit ```MEP::Window::BaseWindow.```
+To create your custom window you will need to develop a new class and inherit ```MEP::BaseWindow.```
 ```cpp
-class TreeRenderer : public MEP::Window::BaseWindow {
+class TreeRenderer : public MEP::BaseWindow {
 	....
 };
 ```
-The only thing that is left is a proper constructor. ```MEP::Window::BaseWindow``` forces us to specify an ```ID``` which needs to be unique. 
+The only thing that is left is a proper constructor. ```MEP::BaseWindow``` forces us to specify an ```ID``` which needs to be unique. 
 ```cpp
-TreeRenderer::TreeRenderer(MEP::Window::Template::Application& base) :
-	MEP::Window::BaseWindow(10),
+TreeRenderer::TreeRenderer(MEP::Template::Application& base) :
+	MEP::BaseWindow(10),
 {}
 ```
 Having all of that done we can start to develop our window content. In that tutorial, I am going to create a ```MEP::TextureObject``` and a ```MEP::Text```. The first is capable of displaying a ```.png``` file and the second displays the text using ```.ttf```. Lets add them to the private members of the class.
@@ -93,8 +93,8 @@ private:
 ```
 Keep in mind that neither MEP::TextureObject nor MEP::Text have a default constructor. It means that we will need to initialize ```object``` in the constructor, ```text```  is a pointer so you can construct it whenever you would like I will do that in the constructor body.
 ```cpp
-TreeRenderer::TreeRenderer(MEP::Window::Template::Application& base) :
-	MEP::Window::BaseWindow(10),
+TreeRenderer::TreeRenderer(MEP::Template::Application& base) :
+	MEP::BaseWindow(10),
 	object(MEP::TextureObject(base.get<MEP::Object>(1), {200, 200}))
 {
     text = new MEP::Text("It is simple :)", base.get<sf::Font>(1), 40, {100, 100});
@@ -121,7 +121,7 @@ void TreeDrawer::createWindows()
 {
 	...
 	addWindow(new TreeRenderer(*this));
-	latestWindow().changeStatus(MEP::Window::BaseWindow::Status::InProgress);
+	latestWindow().changeStatus(MEP::BaseWindow::Status::InProgress);
 }
 ```
 
@@ -142,7 +142,7 @@ void TreeDrawer::createWindows()
 {
     ...
     addWindow(new TreeRenderer(*this));
-    latestWindow().changeStatus(MEP::Window::BaseWindow::Status::Main);
+    latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
 **Animations**

@@ -1,14 +1,14 @@
 ### 2. Simple Objects, Text and custom Window
-To create your custom window you will need to develop a new class and inherit ```MEP::Window::BaseWindow.```
+To create your custom window you will need to develop a new class and inherit ```MEP::BaseWindow.```
 ```cpp
-class TreeRenderer : public MEP::Window::BaseWindow {
+class TreeRenderer : public MEP::BaseWindow {
 	....
 };
 ```
-The only thing that is left is a proper constructor. ```MEP::Window::BaseWindow``` forces us to specify an ```ID``` which needs to be unique. 
+The only thing that is left is a proper constructor. ```MEP::BaseWindow``` forces us to specify an ```ID``` which needs to be unique. 
 ```cpp
-TreeRenderer::TreeRenderer(MEP::Window::Template::Application& base) :
-	MEP::Window::BaseWindow(10),
+TreeRenderer::TreeRenderer(MEP::Template::Application& base) :
+	MEP::BaseWindow(10),
 {}
 ```
 Having all of that done we can start to develop our window content. In that tutorial, I am going to create a ```MEP::TextureObject``` and a ```MEP::Text```. The first is capable of displaying a ```.png``` file and the second displays the text using ```.ttf```. Lets add them to the private members of the class.
@@ -19,8 +19,8 @@ private:
 ```
 Keep in mind that neither MEP::TextureObject nor MEP::Text have a default constructor. It means that we will need to initialize ```object``` in the constructor, ```text```  is a pointer so you can construct it whenever you would like I will do that in the constructor body.
 ```cpp
-TreeRenderer::TreeRenderer(MEP::Window::Template::Application& base) :
-	MEP::Window::BaseWindow(10),
+TreeRenderer::TreeRenderer(MEP::Template::Application& base) :
+	MEP::BaseWindow(10),
 	object(MEP::TextureObject(base.get<MEP::Object>(1), {200, 200}))
 {
     text = new MEP::Text("It is simple :)", base.get<sf::Font>(1), 40, {100, 100});
@@ -47,7 +47,7 @@ void TreeDrawer::createWindows()
 {
 	...
 	addWindow(new TreeRenderer(*this));
-	latestWindow().changeStatus(MEP::Window::BaseWindow::Status::InProgress);
+	latestWindow().changeStatus(MEP::BaseWindow::Status::InProgress);
 }
 ```
 

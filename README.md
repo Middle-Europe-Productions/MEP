@@ -3,16 +3,16 @@
 _alpha v1.3.2_
 ### Introduction
 A MEP library is designed to provide easy to use templates:
- * MEP::Window::Teamplate::Application
+ * MEP::Teamplate::Application
     * Build in resource manager.
     * Build in windows manager.
     * All of the sf::RenderWindow futures.
-* MEP::Window::Teamplate::Hub
+* MEP::Teamplate::Hub
     * Exit button.
     * Minimize button.
     * Integration with the MEP::ColorAnimation
     * Modern design.
-* MEP::Window::Teamplate::BaseWindow
+* MEP::Teamplate::BaseWindow
     * Easy to use view manager.
     * Automated animation activation.
     * Automated objects displaying.

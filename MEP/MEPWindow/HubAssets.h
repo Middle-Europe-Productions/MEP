@@ -29,8 +29,7 @@
 #include <MEPWindow/Application.h>
 #include <MEPGraphics/Assets.h>
 namespace MEP {
-	namespace Window {
-		namespace Assets {
+	namespace Assets {
 			/**
 			* \brief Holds hub assets.
 			*/
@@ -53,7 +52,6 @@ namespace MEP {
 				~HubAssets() = default;	
 			};
 		}
-	}
 }
 
 #endif

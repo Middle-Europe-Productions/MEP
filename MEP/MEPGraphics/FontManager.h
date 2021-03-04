@@ -25,7 +25,7 @@
 #define MEP_FONT_MANAGER_H
 #include<list>
 #include<SFML/Graphics/Font.hpp>
-#include"Group.h"
+#include<MEPGraphics/Group.h>
 /**
 * A class manages the fonts.
 * \brief A main sf::Font container.

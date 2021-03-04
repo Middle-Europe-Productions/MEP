@@ -24,7 +24,7 @@
 #ifndef MEP_ASSETS_H
 #define MEP_ASSETS_H
 
-#include"Config.h"
+#include<MEPGraphics/Config.h>
 namespace MEP {
 	enum AssetsGroup: U_int32 {
 		UserAssets = 4294967295,

@@ -23,8 +23,8 @@
 ////////////////////////////////////////////////////////////
 #ifndef MEP_GROUP_H
 #define MEP_GROUP_H
-#include"ResourceException.h"
-#include"Config.h"
+#include<MEPGraphics/ResourceException.h>
+#include<MEPGraphics/Config.h>
 namespace MEP {
 	/**
 * Object group manager.

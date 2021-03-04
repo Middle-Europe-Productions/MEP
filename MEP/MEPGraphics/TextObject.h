@@ -26,8 +26,8 @@
 #define MEP_TEXT_H
 
 #include<string>
-#include"Following.h"
-#include"Drawable.h"
+#include<MEPGraphics/Following.h>
+#include<MEPGraphics/Drawable.h>
 
 namespace MEP {
 	/**

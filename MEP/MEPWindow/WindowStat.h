@@ -27,50 +27,48 @@
 #include "../MEPGraphics/NonCopyable.h"
 #include <SFML/System/Time.hpp>
 namespace MEP {
-	namespace Window {
-		/**
+	/**
 		* Holds information about basic window statistics related to time in general.
 		* Avalible operations: \n
-		* Frame rate. \n 
+		* Frame rate. \n
 		* Global time. \n
 		* \brief Statistics of a window.
 		*/
-		class WindowStats: public NonCopyable {
-			sf::Time globalTime = sf::Time::Zero;
-			sf::Time mStatisticsUpdateTime = sf::Time::Zero;
-			unsigned int mStatisticsNumFrames = 0;
-		public:
-			WindowStats() = default;
-			/**
-			* Updates statistics of a main code loop
-			* @param[in] dt : Current time
-			*/
-			void updateStatistics(sf::Time dt) {
-				mStatisticsUpdateTime += dt;
-				mStatisticsNumFrames += 1;
-				if (mStatisticsUpdateTime >= sf::seconds(1.0f))
-				{
-					mStatisticsUpdateTime -= sf::seconds(1.0f);
-					mStatisticsNumFrames = 0;
-				}
+	class WindowStats : public NonCopyable {
+		sf::Time globalTime = sf::Time::Zero;
+		sf::Time mStatisticsUpdateTime = sf::Time::Zero;
+		unsigned int mStatisticsNumFrames = 0;
+	public:
+		WindowStats() = default;
+		/**
+		* Updates statistics of a main code loop
+		* @param[in] dt : Current time
+		*/
+		void updateStatistics(sf::Time dt) {
+			mStatisticsUpdateTime += dt;
+			mStatisticsNumFrames += 1;
+			if (mStatisticsUpdateTime >= sf::seconds(1.0f))
+			{
+				mStatisticsUpdateTime -= sf::seconds(1.0f);
+				mStatisticsNumFrames = 0;
 			}
-			/**
-			* Outputs number of frames in latest updateStatistics call.
-			* @return Number of frames.
-			*/
-			unsigned int getFrameRate() const { 
-				return mStatisticsNumFrames; 
-			}
-			/**
-			* Outputs current global time.
-			* @return Global time. 
-			*/
-			sf::Time& getGlobalTime() {
-				return globalTime; 
-			}
-			~WindowStats() = default;
-		};
-	}
+		}
+		/**
+		* Outputs number of frames in latest updateStatistics call.
+		* @return Number of frames.
+		*/
+		unsigned int getFrameRate() const {
+			return mStatisticsNumFrames;
+		}
+		/**
+		* Outputs current global time.
+		* @return Global time.
+		*/
+		sf::Time& getGlobalTime() {
+			return globalTime;
+		}
+		~WindowStats() = default;
+	};
 }
 
 #endif
