@@ -26,8 +26,49 @@
 #define MEP_BASE_WINDOW_H
 
 #include <MEPGraphics/MEPGraphics.h>
-
+namespace MEPtools {
+	class ToRender {
+		std::shared_ptr<bool> link;
+		MEP::Drawable* element;
+	public:	
+		ToRender(MEP::Drawable* ele) {
+			if (ele->_isLinked()) {
+				link = ele->_linkAddr();
+			}
+			else {
+				link = std::make_shared<bool>(false);
+				if (ele) {
+					*link = true;
+					ele->_link(link);
+				}
+			}
+			element = ele;
+		}
+		ToRender(MEP::Drawable& ele): ToRender(&ele) {}
+		/**
+		* Outputs the element.
+		*/
+		MEP::Drawable* get() const {
+			return element;
+		}
+		/**
+		* Outputs the activity of an object.
+		* False - object destructor was called. True - objects exists.
+		*/
+		bool isActive() {
+			if (!link)
+				return false;
+			return *link;
+		}
+	};
+}
 namespace MEP {
+	struct DataPackage {
+		MEP::Drawable* _obj;
+		MEP::U_int32 _group;
+		DataPackage(MEP::Drawable* obj, MEP::U_int32 group = 4294967295) : _obj(obj), _group(group) {}
+		DataPackage(MEP::Drawable& obj, MEP::U_int32 group = 4294967295) : _obj(&obj), _group(group) {}
+	};
 	/**
 		* \brief MEP::BaseWindow exceptions handler.
 		*/
@@ -94,7 +135,7 @@ namespace MEP {
 	* All of the Windows added to the MEP::Template::Application are expected to be a MEP::BaseWindow objects.
 	* \brief A basic class for the BaseWindow
 	*/
-	class BaseWindow {
+	class BaseWindow: public MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>> {
 	public:
 		/**
 		* @enum MEP::BaseWindow::Status
@@ -162,23 +203,20 @@ namespace MEP {
 			bool stop = true;
 			if (customView())
 				Window.setView(getView());
-			for (auto& x : m_objects) {
-				if (x->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
+			execute([&Window, this, &stop](auto& x) {
+				if (x.get()->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
 					Window.setView(getMasterView());
-					if (!x->draw(Window)) {
+					if (!x.get()->draw(Window)) {
 						stop = false;
 					}
 					Window.setView(getView());;
 				}
-				else if (x->getDrawTag() & MEP::DrawTag::Unactive) {
-					continue;
-				}
-				else {
-					if (!x->draw(Window)) {
+				else if (!(x.get()->getDrawTag() & MEP::DrawTag::Unactive)) {
+					if (!x.get()->draw(Window)) {
 						stop = false;
 					}
 				}
-			}
+				});
 			if (customView())
 				Window.setView(getMasterView());
 			return stop;
@@ -295,21 +333,25 @@ namespace MEP {
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable*
 		*/
-		void newObject(MEP::Drawable* object, bool lowerImpoertance = false) {
-			if (lowerImpoertance)
-				m_objects.push_front(object);
-			else
-				m_objects.push_back(object);
+		void newObject(DataPackage object) {
+			insert(0, object._group, object._obj);
+			m_objects.push_back(object._obj);
+		};
+		/**
+		* Adds a new MEP::Drawable to the main scope.
+		* @param[in] : MEP::Drawable*
+		*/
+		void newObject(MEP::Drawable* object) {
+			insert(0, 4294967295, object);
+			m_objects.push_back(object);
 		};
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable&
 		*/
-		void newObject(MEP::Drawable& object, bool lowerImpoertance = false) {
-			if (lowerImpoertance)
-				m_objects.push_front(&object);
-			else
-				m_objects.push_back(&object);
+		void newObject(MEP::Drawable& object) {
+			insert(0, 4294967295, object);
+			m_objects.push_back(&object);
 		}
 		/**
 		* Deletes all MEP::Objects in the MEP::Window::BaseWindow

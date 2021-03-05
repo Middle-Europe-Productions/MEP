@@ -50,8 +50,39 @@ namespace MEP {
 	* \brief MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen.
 	*/
 	class Drawable {
+		std::shared_ptr<bool> link = nullptr;
 		U_int32 m_drawTag = DrawTag::Non;
+	protected:
+		/**
+		* Notify the link.
+		*/
+		void notify() {
+			if (link) {
+				*link = false;
+			}
+		}
 	public:
+		/**
+		* Links the notification link.
+		* Boolean value output true when resource is active.
+		*/
+		void _link(std::shared_ptr<bool> _li) {
+			link = _li;
+		}
+		/**
+		* Outputs the notification link.
+		* Boolean value output true when resource is active.
+		*/
+		std::shared_ptr<bool> _linkAddr() {
+			return link;
+		}
+		/**
+		* Outputs the information about the activity of the link.
+		* Boolean value output true when resource is active.
+		*/
+		bool _isLinked() const {
+			return link != nullptr;
+		}
 		/**
 		* Outputs draw tag of a MEP::Drawable
 		* Use MEP::DrawTag here.
@@ -128,7 +159,9 @@ namespace MEP {
 		* @param[in] currentTime : Current global time.
 		*/
 		virtual bool isActive() const { return false; };
-		virtual ~Drawable() {};
+		virtual ~Drawable() {
+			notify();
+		};
 	};
 };
 

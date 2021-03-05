@@ -31,40 +31,33 @@
 * \brief A main sf::Font container.
 */
 namespace MEP{
-	class FontManager {
-	protected:
-		class Font {
-			U_int32 m_ID;
-			std::string m_name;
-			sf::Font m_font;
-		public:
-			/**
-			* Constructor of a Font
-			* @param[in] ID : Unique ID of an object.
-			* @param[in] name : Name of an objects. (Last part of the directory ex. Font.ttf).
-			* @param[in] path : Path of the font. (End it with \).
-			*/
-			Font(U_int32 ID, const std::string& name, const std::string& path): m_ID(ID), m_name(name) {
-				if (!m_font.loadFromFile(path+name))
-					throw ResourceException("path", "Could not load the font!", ResourceException::ExceptionType::CouldntLoadFont);
-			}
-			/**
-			* Outputs the ID.
-			*/
-			U_int32 getID() const { return m_ID; }
-			/**
-			* Outputs the name.
-			*/
-			const std::string& getName() const { return m_name; }
-			/**
-			* Outputs the sf::Font.
-			*/
-			sf::Font& getFont() { return m_font; }
-		};
-		//Cointainer
-		std::list<Group<Font>> fonts;
+	class Font {
+		U_int32 m_ID;
+		std::string m_name;
+		sf::Font m_font;
 	public:
-		FontManager() = default;
+		/**
+		* Constructor of a Font
+		* @param[in] ID : Unique ID of an object.
+		* @param[in] name : Name of an objects. (Last part of the directory ex. Font.ttf).
+		* @param[in] path : Path of the font. (End it with \).
+		*/
+		Font(U_int32 ID, const std::string& name, const std::string& path) : m_ID(ID), m_name(name) {
+			if (!m_font.loadFromFile(path + name))
+				throw ResourceException("path", "Could not load the font!", ResourceException::ExceptionType::CouldntLoadFont);
+		}
+		/**
+		* Outputs the ID.
+		*/
+		U_int32 getID() const { return m_ID; }
+		/**
+		* Outputs the name.
+		*/
+		const std::string& getName() const { return m_name; }
+		/**
+		* Outputs the sf::Font.
+		*/
+		sf::Font& getFont() { return m_font; }
 	};
 }
 #endif

@@ -171,7 +171,6 @@ namespace MEP {
                     catch (const MEP::WindowException& x) {
                         throw x;
                     }
-                    isLoaded = true;
                     isInit = true;
                 }
                 /**

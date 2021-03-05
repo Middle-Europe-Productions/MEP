@@ -270,7 +270,6 @@ namespace MEP {
 			}
 			for (auto x = texture->begin(); x != texture->end(); x++)
 				delete* x;
-			std::cout << ", object has been permanently deleted.";
 			delete m_nufC;
 			delete texture;
 		}
@@ -344,6 +343,7 @@ namespace MEP {
 	inline Object::~Object()
 	{
 		deleteObject();
+		notify();
 	}
 }
 

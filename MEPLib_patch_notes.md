@@ -89,3 +89,4 @@
 ## MEP lib version alpha 1.3.3
 	-Improved MEP::Loading class. \n	
 	-Deleted Window namespace. \n
+	-Recreated the Resource class. Now individual members are using GroupManager which is a map<map>. In other wards groups, manager and subgroup manager is a balancing tree. Which provides better access time O(logn + logm) instead of O(n + m). Where n is the number of groups and m is the number of elements in the n-th group. \n

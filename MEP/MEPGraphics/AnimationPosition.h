@@ -167,7 +167,9 @@ namespace MEP {
 		virtual sf::Color getFrameAsColor() const { 
 			return sf::Color(std::round(*currentFrame)); 
 		}
-		virtual ~AnimationPosition() = default;
+		virtual ~AnimationPosition() {
+			notify();
+		}
 	};
 	inline void MEP::AnimationPosition::init()
 	{

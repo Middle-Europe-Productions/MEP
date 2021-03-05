@@ -30,7 +30,7 @@
 #include<MEPGraphics/AnimationObject.h>
 #include<MEPGraphics/TextureObject.h>
 #include<MEPGraphics/NonCopyable.h>
-#include<MEPGraphics/FontManager.h>
+#include<MEPGraphics/Font.h>
 #include<MEPGraphics/Assets.h>
 namespace MEP {
 	/**
@@ -153,11 +153,9 @@ namespace MEP {
 	* Resources class is a utility which is meant to be working with all of the MEP::Drawable objects.
 	* \brief A main MEP::Drawable cointainer.
 	*/
-	class Resources: public FontManager {
+	class Resources: protected MEPtools::GroupManager<MEP::Object>, protected MEPtools::GroupManager<MEP::Font> {
 		const std::string m_path;
 		bool isInit = false;
-		//List of the objects
-		std::list<Group<Object>> objects;
 		//Method loading individual resource
 		void load(const Resource& data);
 		void loadResources() { 
@@ -166,24 +164,6 @@ namespace MEP {
 		//Forwarding method
 		template <typename First, typename ... Rest>
 		void loadResources(First&& first, Rest&& ... rest);
-
-		//finds or of creates a new group
-		template<typename Type, typename ListContent>
-		std::list<std::unique_ptr<Type>>& findOrAdd(const U_int32& group, std::list<ListContent>& container);
-
-		//adds an object to a group
-		template<typename Type>
-		void check(std::list<std::unique_ptr<Type>>& x, const U_int32& ID);
-
-		//finds an element
-		template<typename Out, typename ListContent, typename Type>
-		Out* find(const U_int32& group, Type method, const std::list<ListContent>& container);
-		
-		//removes an element
-		template<typename Out, typename ListContent, typename Type>
-		void remove(const U_int32& group, Type method, std::list<ListContent>& container);
-	protected:
-		bool isLoaded = false;
 	public:
 		/**
 		* Constructor of the resources.
@@ -199,20 +179,7 @@ namespace MEP {
 		/**
 		* Outputs the status of the resources.
 		*/
-		bool IsLoaded() const { return isLoaded; }
-		/**
-		* Outputs created MEP::Object
-		* @param[in] name : Name of a MEP::Object.
-		* @param[in] group : Group of a MEP::Object.
-		* @return Reference to MEP::Object.
-		*/
-		Object& getObject(const std::string& name, const U_int32 group = -1);
-		/**
-		* Deletes MEP::Object with agiven name.
-		* @param[in] name : Name of a MEP::Object.
-		* @param[in] group : Group of a MEP::Object.
-		*/
-		void deleteObject(const std::string& name, const U_int32 group = -1);
+		bool isLoaded() const { return isInit; }
 		/**
 		* Outputs created MEP::Object
 		* @param[in] ID : ID of a MEP::Object.
@@ -236,27 +203,32 @@ namespace MEP {
 		template <typename T>
 		T& get(const U_int32 ID, const U_int32 group = -1);
 		/**
-		* Deletes MEP::Object with agiven name.
+		* Deletes MEP::Object with a given name.
 		* @param[in] name : ID of a MEP::Object
 		* @param[in] group : Group of a MEP::Object.
 		*/
 		void deleteObject(const U_int32 ID, const U_int32 group = -1);
 		/**
-		* Deletes sf::Font with agiven name.
-		* @param[in] name : ID of a MEP::Object
+		* Deletes MEP::Object(s) within a given group.
 		* @param[in] group : Group of a MEP::Object.
 		*/
+		void deleteObjectsGroup(const U_int32 group);
+		/**
+		* Deletes sf::Font with agiven name.
+		* @param[in] name : ID of a sf::Font
+		* @param[in] group : Group of a sf::Font.
+		*/
 		void deleteFont(const U_int32 ID, const U_int32 group = -1);
+		/**
+		* Deletes sf::Font(s) within a given group.
+		* @param[in] group : Group of a sf::Font.
+		*/
+		void deleteFontGroup(const U_int32 group);
 		/**
 		* Deletes all MEP::Object.
 		* @param[in] name : Name of a MEP::Object.
 		*/
-		void deleteObjects() {
-			objects.clear();
-		}
-		virtual ~Resources() {
-			deleteObjects();
-		};
+		virtual ~Resources() {};
 	};
 
 	template<typename First, typename ...Rest>
@@ -264,53 +236,6 @@ namespace MEP {
 	{
 		load(std::forward<First>(first));
 		loadResources(std::forward<Rest>(rest) ...);
-	}
-
-	template<typename Type, typename ListContent>
-	inline std::list<std::unique_ptr<Type>>& Resources::findOrAdd(const U_int32& group, std::list<ListContent>& container)
-	{
-		for (auto& x : container)
-			if (x.group_ID == group)
-				return x.objects;
-		container.push_back(Group<Type>(group));
-		return container.back().objects;
-	}
-
-	template<typename Type>
-	inline void Resources::check(std::list<std::unique_ptr<Type>>& x, const U_int32& ID)
-	{
-		for (auto& it : x)
-			if (it.get()->getID() == ID)
-				throw ResourceException(it.get()->getName(), "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
-	}
-
-	template<typename Out, typename ListContent, typename Type>
-	inline Out* Resources::find(const U_int32& group, Type method, const std::list<ListContent>& container)
-	{
-		for (auto& it : container) {
-			if (it.getID() == group) {
-				if (Out* x = it.find(method))
-					return x;
-				throw ResourceException(std::to_string(group), "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
-			}
-		}
-		throw ResourceException(std::to_string(group), "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
-	}
-
-	template<typename Out, typename ListContent, typename Type>
-	inline void Resources::remove(const U_int32& group, Type method, std::list<ListContent>& container)
-	{
-		for (auto& it : container) {
-			if (it.getID() == group) {
-				if (it.remove(method)) {
-					return;
-				}
-				else {
-					throw ResourceException(std::to_string(group), "Could not find a resource!", ResourceException::ExceptionType::ObjectNotFound);
-				}
-			}
-		}
-		throw ResourceException(std::to_string(group), "Could not find a group!", ResourceException::ExceptionType::GroupNotFound);
 	}
 
 	template<typename ... Values>
@@ -323,11 +248,11 @@ namespace MEP {
 	{
 		if (data.m_type == ResourceType::Multi) {
 			try {
-				//finds the target group
-				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
-				//check is the resource already exists in a group
-				check<Object>(x, data.m_ID);
-				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_nofFrames, data.m_transparency));
+				if (!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID,
+					data.m_group,
+					std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_nofFrames, data.m_transparency))) {
+					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+				}
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -335,11 +260,11 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::Single) {
 			try {
-				//finds the target group
-				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
-				//check is the resource already exists in a group
-				check<Object>(x, data.m_ID);
-				x.push_back(std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_transparency ));
+				if (!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID,
+					data.m_group,
+					std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_transparency))) {
+					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+				}
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
@@ -347,60 +272,33 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::ImageArray) {
 			try {
-				//finds the target group
-				std::list<std::unique_ptr<Object>>& x = findOrAdd<MEP::Object, Group<MEP::Object>>(data.m_group, objects);
-				//check is the resource already exists in a group
-				check<Object>(x, data.m_ID);
-				x.push_back(std::make_unique<MEP::Object>(data.m_ID, *data.m_array, data.m_name, data.m_transparency ));
+				if(!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID, 
+					data.m_group, 
+					std::make_unique<MEP::Object>(data.m_ID, *data.m_array, data.m_name, data.m_transparency))) {
+					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+				}
 			}
 			catch (const char* x) {
 				throw ResourceException(data.m_name, x, ResourceException::ExceptionType::CouldntLoad);
 			}
 		}
 		else if (data.m_type == ResourceType::Font) {
-			//finds the target group
-			std::list<std::unique_ptr<Font>>& x = findOrAdd<Font, Group<Font>>(data.m_group, fonts);
-			//check is the resource already exists in a group
-			check<Font>(x, data.m_ID);
-			//initialize and add the newly created object.
-			x.push_back(std::make_unique<Font>(data.m_ID, data.m_name, m_path));
+			if (!MEPtools::GroupManager<MEP::Font>::insert(data.m_ID, 
+				data.m_group, 
+				std::make_unique<MEP::Font>(data.m_ID, data.m_name, m_path))) {
+				throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+			}
 		}
-	}
-
-	inline Object& Resources::getObject(const std::string& name, const U_int32 group)
-	{
-		std::cout << "ID:" << name << ", gourp: " << group << std::endl;
-		return find<MEP::Object>(group, [name](auto& element) -> bool
-			{
-				return element->getName() == name;
-			}, 
-			objects)->getObjectRef();
-	}
-
-	inline void Resources::deleteObject(const std::string& name, const U_int32 group)
-	{
-		remove<Object, Group<Object>>(group, [name](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
-			{
-				return element->get()->getName() == name;
-			}, objects);
 	}
 
 	inline Object& Resources::getObject(const U_int32 ID, const U_int32 group)
 	{
-		return find<MEP::Object, Group<MEP::Object>>(group, [ID](auto& element) -> bool
-			{
-				return element->getID() == ID;
-			},
-			objects)->getObjectRef();
+		return MEPtools::GroupManager<MEP::Object>::get(ID, group);
 	}
 
 	inline sf::Font& Resources::getFont(const U_int32 ID, const U_int32 group)
 	{
-		return find<Font, Group<Font>>(group, [ID](auto& element)->bool
-			{
-				return element->getID() == ID;
-			},
-			fonts)->getFont();
+		return MEPtools::GroupManager<MEP::Font>::get(ID, group).getFont();
 	}
 
 	template <typename T>
@@ -413,20 +311,25 @@ namespace MEP {
 		} else
 			throw ResourceException("ID: " + std::to_string(ID), "Incorrect type!", ResourceException::ExceptionType::IncorrectType);
 	}
+
 	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
 	{
-		remove<Object, Group<Object>>(group, [ID](std::list<std::unique_ptr<Object>>::iterator& element) -> bool
-			{
-				return element->get()->getID() == ID;
-			}, objects);
+		MEPtools::GroupManager<MEP::Object>::deleteElement(ID, group);
 	}
+
+	inline void Resources::deleteObjectsGroup(const U_int32 group)
+	{
+		MEPtools::GroupManager<MEP::Object>::deleteGroup(group);
+	}
+
 	inline void Resources::deleteFont(const U_int32 ID, const U_int32 group)
 	{
-		remove<Font, Group<Font>>(group, [ID](auto& element)->bool
-			{
-				return element->get()->getID() == ID;
-			},
-			fonts);
+		MEPtools::GroupManager<MEP::Font>::deleteElement(ID, group);
+	}
+
+	inline void Resources::deleteFontGroup(const U_int32 group)
+	{
+		MEPtools::GroupManager<MEP::Font>::deleteGroup(group);
 	}
 }
 

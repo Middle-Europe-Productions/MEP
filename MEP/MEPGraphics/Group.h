@@ -25,66 +25,105 @@
 #define MEP_GROUP_H
 #include<MEPGraphics/ResourceException.h>
 #include<MEPGraphics/Config.h>
-namespace MEP {
-	/**
-* Object group manager.
-* \brief Simple group manager.
-*/
-	template<typename X>
-	class Group {
-	public:
-		//Id of the group.
-		const MEP::U_int32 group_ID;
+#include<map>
 
-		//Container of the objects.
-		std::list<std::unique_ptr<X>> objects;
-	public:
-		//Constructor.
-		Group(const MEP::U_int32& ID) : group_ID(ID) {}
-
-		//finds an element with a given method
-		template<typename Method>
-		X* find(Method method) const {
-			for (auto& x : objects) {
-				if (method(x)) {
-					return x.get();
-				}
-			}
-			return nullptr;
+namespace MEPtools {
+	template<typename X, typename PtrType = std::unique_ptr<X>, typename SecondStructure = std::map<MEP::U_int32, PtrType>>
+	class GroupManager {
+		/**
+		* Master container.
+		*/
+		std::map<MEP::U_int32, SecondStructure> m_objects;
+		bool insert(MEP::U_int32 ID, PtrType& value, std::map<MEP::U_int32, PtrType>& input) {
+			return input.insert({ ID, std::move(value) }).second;
 		}
-
-		template<typename Method>
-		bool remove(Method method) {
-			for (auto ele = objects.begin(); ele != objects.end(); ++ele)
-				if (method(ele)) {
-					objects.remove(*ele);
-					return true;
-				}
-
+		bool insert(MEP::U_int32 ID, PtrType& value, std::list<PtrType>& input) {
+			input.push_back(std::move(value));
+			return true;
+		}
+	public:
+		GroupManager() = default;
+		/**
+		* Insert the element at a given spot.
+		* When SecondStructure is a std::set or std::map executes in O(logn + m) else  
+		* When SecondStructure is a std::list executes in O(m)
+		* Where n is a numer of elements in m-th group, and m is a number of groups.
+		*/
+		bool insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value) {
+			auto [iterator, status] = m_objects.insert({ group, SecondStructure() });
+			return insert(ID, value, iterator->second);
 			return false;
 		}
 
-		std::list<std::unique_ptr<X>>& get() {
-			return objects;
-		}
-
-		//outputs the ID of a group
-		MEP::U_int32 getID() const {
-			return group_ID;
-		}
-	};
-
-	template<typename X>
-	class GroupManager {
-		std::map<MEP::U_int32, Group<X>> m_objects;
-	public:
-		GroupManager() = default;
-
-		//add 
-		void add(MEP::U_int32 ID) {
-			if (auto& x = m_objects.find(ID)) {
-				x.get();
+		//Outputs the element.
+		X& get(MEP::U_int32 ID, MEP::U_int32 group) const {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				auto second_insert = iterator->second.find(ID);
+				if (second_insert == iterator->second.end()) {
+					throw MEP::ResourceException(std::to_string(group), "Could not find a resource!", MEP::ResourceException::ExceptionType::ObjectNotFound);
+				}
+				return *second_insert->second;
 			}
+			else {
+				throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
+			}
+		}
+
+		/**
+		* Deletes the group of objects.
+		* @return: True - group deleted. False - group not found.
+		*/
+		bool deleteGroup(MEP::U_int32 group) {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				m_objects.erase(iterator);
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		* Deletes the object.
+		* @return: True - object deleted. False - object not found.
+		*/
+		bool deleteElement(MEP::U_int32 ID, MEP::U_int32 group) {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				auto second_iter = iterator->second.find(ID);
+				if (second_iter == iterator->second.end()) {
+					return false;
+				}
+				else {
+					iterator->second.erase(second_iter);
+					return true;
+				}
+			}
+			return false;
+		}
+		/**
+		* Executes method a for all of the elements.
+		*/
+		template<typename Method>
+		void execute(Method method) {
+			for (auto& x : m_objects) {
+				for (auto& it : x.second) {
+					method(it);
+				}
+			}
+		}
+		/**
+		* Execute method for a group of objects.
+		*/
+		template<typename Method>
+		bool execute(Method method, MEP::U_int32 group) {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				for (auto& x : iterator->second)
+					method(x);
+				return true;
+			}
+			return false;
 		}
 	};
 }
