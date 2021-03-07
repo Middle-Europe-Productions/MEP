@@ -167,6 +167,19 @@ namespace MEP {
 		virtual sf::Color getFrameAsColor() const { 
 			return sf::Color(std::round(*currentFrame)); 
 		}
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "MEP::AnimationPosition";
+		}
+		/**
+		* Overrdie of the << operator for diagnostic purposes.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const AnimationPosition& x) {
+			x.debugOutput(out);
+			return out;
+		}
 		virtual ~AnimationPosition() {
 			notify();
 		}

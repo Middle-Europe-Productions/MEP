@@ -23,11 +23,12 @@
 //
 ////////////////////////////////////////////////////////////
 #ifndef MEP_LOADING_H
-#define MEP_LEADING_H
+#define MEP_LOADING_H
 
 #include<thread>
 #include <MEPWindow/BaseTemplate.h>
 #include <MEPWindow/Application.h>
+
 namespace MEP {
 	namespace Template {
 		/**

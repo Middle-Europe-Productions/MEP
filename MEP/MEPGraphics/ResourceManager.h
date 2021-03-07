@@ -153,7 +153,7 @@ namespace MEP {
 	* Resources class is a utility which is meant to be working with all of the MEP::Drawable objects.
 	* \brief A main MEP::Drawable cointainer.
 	*/
-	class Resources: protected MEPtools::GroupManager<MEP::Object>, protected MEPtools::GroupManager<MEP::Font> {
+	class Resources: private MEPtools::GroupManager<MEP::Object>, private MEPtools::GroupManager<MEP::Font> {
 		const std::string m_path;
 		bool isInit = false;
 		//Method loading individual resource
@@ -248,7 +248,7 @@ namespace MEP {
 	{
 		if (data.m_type == ResourceType::Multi) {
 			try {
-				if (!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID,
+				if (!MEPtools::GroupManager<MEP::Object>::_insert(data.m_ID,
 					data.m_group,
 					std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_nofFrames, data.m_transparency))) {
 					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
@@ -260,7 +260,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::Single) {
 			try {
-				if (!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID,
+				if (!MEPtools::GroupManager<MEP::Object>::_insert(data.m_ID,
 					data.m_group,
 					std::make_unique<MEP::Object>(data.m_ID, m_path, data.m_name, data.m_transparency))) {
 					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
@@ -272,7 +272,7 @@ namespace MEP {
 		}
 		else if (data.m_type == ResourceType::ImageArray) {
 			try {
-				if(!MEPtools::GroupManager<MEP::Object>::insert(data.m_ID, 
+				if(!MEPtools::GroupManager<MEP::Object>::_insert(data.m_ID,
 					data.m_group, 
 					std::make_unique<MEP::Object>(data.m_ID, *data.m_array, data.m_name, data.m_transparency))) {
 					throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
@@ -283,7 +283,7 @@ namespace MEP {
 			}
 		}
 		else if (data.m_type == ResourceType::Font) {
-			if (!MEPtools::GroupManager<MEP::Font>::insert(data.m_ID, 
+			if (!MEPtools::GroupManager<MEP::Font>::_insert(data.m_ID,
 				data.m_group, 
 				std::make_unique<MEP::Font>(data.m_ID, data.m_name, m_path))) {
 				throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
@@ -293,12 +293,12 @@ namespace MEP {
 
 	inline Object& Resources::getObject(const U_int32 ID, const U_int32 group)
 	{
-		return MEPtools::GroupManager<MEP::Object>::get(ID, group);
+		return MEPtools::GroupManager<MEP::Object>::_get(ID, group);
 	}
 
 	inline sf::Font& Resources::getFont(const U_int32 ID, const U_int32 group)
 	{
-		return MEPtools::GroupManager<MEP::Font>::get(ID, group).getFont();
+		return MEPtools::GroupManager<MEP::Font>::_get(ID, group).getFont();
 	}
 
 	template <typename T>
@@ -314,22 +314,22 @@ namespace MEP {
 
 	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
 	{
-		MEPtools::GroupManager<MEP::Object>::deleteElement(ID, group);
+		MEPtools::GroupManager<MEP::Object>::_deleteElement(ID, group);
 	}
 
 	inline void Resources::deleteObjectsGroup(const U_int32 group)
 	{
-		MEPtools::GroupManager<MEP::Object>::deleteGroup(group);
+		MEPtools::GroupManager<MEP::Object>::_deleteGroup(group);
 	}
 
 	inline void Resources::deleteFont(const U_int32 ID, const U_int32 group)
 	{
-		MEPtools::GroupManager<MEP::Font>::deleteElement(ID, group);
+		MEPtools::GroupManager<MEP::Font>::_deleteElement(ID, group);
 	}
 
 	inline void Resources::deleteFontGroup(const U_int32 group)
 	{
-		MEPtools::GroupManager<MEP::Font>::deleteGroup(group);
+		MEPtools::GroupManager<MEP::Font>::_deleteGroup(group);
 	}
 }
 

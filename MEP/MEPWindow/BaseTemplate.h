@@ -25,7 +25,7 @@
 #ifndef MEP_BASE_TEMPLATE_H
 #define MEP_BASE_TEMPLATE_H
 
-#include <MEPWindow/Base.h>
+#include <MEPWindow/BaseWindow.h>
 
 namespace MEP {
 	namespace Template {

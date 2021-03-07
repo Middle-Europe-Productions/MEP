@@ -76,7 +76,7 @@ namespace MEP {
 						for (int i = _break; i < _break + 6656; ++i) {
 							imageArray2[i] = imageArray[i - _break];
 						}
-						base.getWindow().setIcon(64, 64, imageArray2);
+						base.getRenderWindow().setIcon(64, 64, imageArray2);
 					}
 					catch (const ResourceException& x) {
 						throw WindowException(getID(), x);

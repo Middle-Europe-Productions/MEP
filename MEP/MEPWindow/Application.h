@@ -53,11 +53,11 @@ namespace MEP {
                 * The update method in executed only for MEP::Window::BaseWindow with a status != BaseWindow::Status::NullAction
                 */
                 virtual void update() {
-                    for (auto& x : m_windows) {
-                        if (x->getStatus() != BaseWindow::Status::NullAction) {
-                            x->update(getGlobalTime());
+                    BaseManager::execute([this](auto& x) {
+                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction) {
+                            x.second.get()->update(getGlobalTime());
                         }
-                    }
+                        });
                 }
                 /**
                 * Main update events method, all of the imputs to the program are analyzed here.
@@ -68,10 +68,10 @@ namespace MEP {
                     sf::Event event;
                     while (pollEvent(event))
                     {
-                        for (auto& x : m_windows) {
-                            if (x->getStatus() == BaseWindow::Status::Main)
-                                x->handleEvent(*this, event);
-                        }
+                        BaseManager::execute([this, &event](auto& x) {
+                            if (x.second.get()->getStatus() == BaseWindow::Status::Main)
+                                x.second.get()->handleEvent(*this, event);
+                            });
                     }
                 }
                 /**
@@ -81,20 +81,18 @@ namespace MEP {
                 virtual void render() {
                     clear(m_backgroundColor);
                     bool ready = true;
-                    for (auto& x : m_windows) {
-                        if (x->getStatus() != BaseWindow::Status::NullAction) {
-                            if (x->customView()) {
-                                if (!x->render(*this))
+                    BaseManager::execute([&ready, this](auto& x) {
+                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction) {
+                            if (x.second.get()->customView()) {
+                                if (!x.second.get()->render(*this))
                                     ready = false;
                             }
                             else {
-                                if (!x->render(*this))
+                                if (!x.second.get()->render(*this))
                                     ready = false;
                             }
-                           
                         }
-                            
-                    }
+                        });
                     if(ready)
                         display();
                 }
@@ -108,11 +106,10 @@ namespace MEP {
                     m_view.setCenter({ (float)m_resolution.x / 2, (float)m_resolution.y / 2 });
                     m_view.setSize({ (float)m_resolution.x, (float)m_resolution.y });
                     setView(m_view);
-                    for (auto& x : m_windows) {
-                        if (x->getStatus() != BaseWindow::Status::NullAction) {
-                            x->onResize(m_resolution);
-                        }
-                    }
+                    BaseManager::execute([this](auto& x) {
+                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction)
+                            x.second.get()->onResize(m_resolution);
+                        });
                 }
             public:
                 /**

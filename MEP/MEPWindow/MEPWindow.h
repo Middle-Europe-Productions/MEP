@@ -29,7 +29,7 @@
 #include <MEPWindow/Loading.h>
 #include <MEPWindow/Hub.h>
 #include <MEPWindow/BaseManager.h>
-#include <MEPWindow/Base.h>
+#include <MEPWindow/BaseWindow.h>
 #include <MEPWindow/WindowCrossPlatform.h>
 #include <MEPWindow/WindowStat.h>
 

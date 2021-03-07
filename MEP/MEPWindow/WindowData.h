@@ -87,7 +87,7 @@ namespace MEP {
         /**
         * Returns a reference to the sf::RenderWindow
         */
-        sf::RenderWindow& getWindow() { return *this; }
+        sf::RenderWindow& getRenderWindow() { return *this; }
         /**
         * Returns a reference to the sf::ContextSettings
         */

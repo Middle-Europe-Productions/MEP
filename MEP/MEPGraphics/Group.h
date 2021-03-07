@@ -49,14 +49,16 @@ namespace MEPtools {
 		* When SecondStructure is a std::list executes in O(m)
 		* Where n is a numer of elements in m-th group, and m is a number of groups.
 		*/
-		bool insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value) {
+		bool _insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value) {
 			auto [iterator, status] = m_objects.insert({ group, SecondStructure() });
 			return insert(ID, value, iterator->second);
 			return false;
 		}
 
-		//Outputs the element.
-		X& get(MEP::U_int32 ID, MEP::U_int32 group) const {
+		/**
+		* Outputs the element.
+		*/
+		X& _get(MEP::U_int32 ID, MEP::U_int32 group) const {
 			auto iterator = m_objects.find(group);
 			if (iterator != m_objects.end()) {
 				auto second_insert = iterator->second.find(ID);
@@ -74,7 +76,7 @@ namespace MEPtools {
 		* Deletes the group of objects.
 		* @return: True - group deleted. False - group not found.
 		*/
-		bool deleteGroup(MEP::U_int32 group) {
+		bool _deleteGroup(MEP::U_int32 group) {
 			auto iterator = m_objects.find(group);
 			if (iterator != m_objects.end()) {
 				m_objects.erase(iterator);
@@ -87,7 +89,7 @@ namespace MEPtools {
 		* Deletes the object.
 		* @return: True - object deleted. False - object not found.
 		*/
-		bool deleteElement(MEP::U_int32 ID, MEP::U_int32 group) {
+		bool _deleteElement(MEP::U_int32 ID, MEP::U_int32 group) {
 			auto iterator = m_objects.find(group);
 			if (iterator != m_objects.end()) {
 				auto second_iter = iterator->second.find(ID);
@@ -105,7 +107,7 @@ namespace MEPtools {
 		* Executes method a for all of the elements.
 		*/
 		template<typename Method>
-		void execute(Method method) {
+		void _execute(Method method) {
 			for (auto& x : m_objects) {
 				for (auto& it : x.second) {
 					method(it);
@@ -116,7 +118,7 @@ namespace MEPtools {
 		* Execute method for a group of objects.
 		*/
 		template<typename Method>
-		bool execute(Method method, MEP::U_int32 group) {
+		bool _execute(Method method, MEP::U_int32 group) {
 			auto iterator = m_objects.find(group);
 			if (iterator != m_objects.end()) {
 				for (auto& x : iterator->second)
@@ -124,6 +126,17 @@ namespace MEPtools {
 				return true;
 			}
 			return false;
+		}
+		/**
+		* Diagnostic tool.
+		*/
+		void _debugOutput(std::ostream& out) {
+			for (auto& x : m_objects) {
+				out << "Group: " << x.first << std::endl;
+				for (auto& it : x.second) {
+					out << it << std::endl;
+				}
+			}
 		}
 	};
 }

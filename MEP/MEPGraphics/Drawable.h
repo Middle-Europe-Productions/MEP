@@ -27,7 +27,7 @@
 
 #include<MEPGraphics/Config.h>
 #include<SFML/Graphics.hpp>
-
+#include<iostream>
 namespace MEP {
 	/**
 	* @enum MEP::Button::DrawTag defines a draw tag.
@@ -159,6 +159,19 @@ namespace MEP {
 		* @param[in] currentTime : Current global time.
 		*/
 		virtual bool isActive() const { return false; };
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "Base Class";
+		}
+		/**
+		* Overrdie of the << operator for diagnostic purposes.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const Drawable& x) {
+			x.debugOutput(out);
+			return out;
+		}
 		virtual ~Drawable() {
 			notify();
 		};

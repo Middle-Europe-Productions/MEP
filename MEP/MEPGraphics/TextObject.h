@@ -223,6 +223,19 @@ namespace MEP {
 		void setColor(const sf::Color& in) {
 			m_color = in;
 		}
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "MEP::Text, content: " << m_content;
+		}
+		/**
+		* Overrdie of the << operator for diagnostic purposes.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const Text& x) {
+			x.debugOutput(out);
+			return out;
+		}
 	};
 }
 

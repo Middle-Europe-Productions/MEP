@@ -25,7 +25,7 @@
 #ifndef MEP_BASE_WINDOW_H
 #define MEP_BASE_WINDOW_H
 
-#include <MEPGraphics/MEPGraphics.h>
+#include<MEPWindow/WindowView.h>
 namespace MEPtools {
 	class ToRender {
 		std::shared_ptr<bool> link;
@@ -55,10 +55,19 @@ namespace MEPtools {
 		* Outputs the activity of an object.
 		* False - object destructor was called. True - objects exists.
 		*/
-		bool isActive() {
+		bool isActive() const {
 			if (!link)
 				return false;
 			return *link;
+		}
+		friend std::ostream& operator<<(std::ostream& out, const ToRender& x) {
+			if (x.isActive()) {
+				out <<"|-"<< *x.get();
+			}
+			else {
+				out << "|-Unactive";
+			}
+			return out;
 		}
 	};
 }
@@ -135,7 +144,7 @@ namespace MEP {
 	* All of the Windows added to the MEP::Template::Application are expected to be a MEP::BaseWindow objects.
 	* \brief A basic class for the BaseWindow
 	*/
-	class BaseWindow: public MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>> {
+	class BaseWindow: public MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>>, public WindowView {
 	public:
 		/**
 		* @enum MEP::BaseWindow::Status
@@ -160,20 +169,6 @@ namespace MEP {
 		void newObj(First&& first, Rest&& ... rest);
 		//window unique ID
 		unsigned int m_ID;
-	protected:
-		//window movement
-		sf::Vector2i m_windowPossChange;
-		bool m_grabbedWindow = false;
-		//List of all drawable objects
-		std::list<MEP::Drawable*> m_objects;
-		//Connections to different windows around the scope
-		std::list<std::weak_ptr<BaseWindow>> m_connections;
-		const BaseWindow& getWindow(unsigned int ID);
-		//custom view
-		sf::View m_view;
-		//view of a master window
-		const sf::View* m_appView = nullptr;
-		bool isCustomViewEnabled = false;
 	public:
 		/**
 		* Constructor of a BaseWindow
@@ -189,10 +184,8 @@ namespace MEP {
 		* @patam[in] master : Main window view.
 		*/
 		BaseWindow(const unsigned int ID, const sf::View& view, const sf::View& master) :
-			m_ID(ID),
-			m_view(view),
-			m_appView(&master),
-			isCustomViewEnabled(true)
+			WindowView(view, master),
+			m_ID(ID)
 		{}
 		/**
 		* Base render method.
@@ -203,17 +196,19 @@ namespace MEP {
 			bool stop = true;
 			if (customView())
 				Window.setView(getView());
-			execute([&Window, this, &stop](auto& x) {
-				if (x.get()->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
-					Window.setView(getMasterView());
-					if (!x.get()->draw(Window)) {
-						stop = false;
+			_execute([&Window, this, &stop](auto& x) {
+				if (x.isActive()) {
+					if (x.get()->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
+						Window.setView(getMasterView());
+						if (!x.get()->draw(Window)) {
+							stop = false;
+						}
+						Window.setView(getView());;
 					}
-					Window.setView(getView());;
-				}
-				else if (!(x.get()->getDrawTag() & MEP::DrawTag::Unactive)) {
-					if (!x.get()->draw(Window)) {
-						stop = false;
+					else if (!(x.get()->getDrawTag() & MEP::DrawTag::Unactive)) {
+						if (!x.get()->draw(Window)) {
+							stop = false;
+						}
 					}
 				}
 				});
@@ -228,8 +223,10 @@ namespace MEP {
 			if (isCustomViewEnabled) {
 				m_view.setSize({ (float)new_res.x, (float)new_res.y });
 			}
-			for (auto& x : m_objects)
-				x->onResize();
+			_execute([](auto& x) {
+				if (x.isActive())
+					x.get()->onResize();
+				});
 		}
 		/**
 		* Base update method.
@@ -282,82 +279,35 @@ namespace MEP {
 			m_status = status;
 		}
 		/**
-		* Sets a new connection with a window.
-		* @param[in] window : MEP::BaseWindow
-		*/
-		void setConnection(std::shared_ptr<BaseWindow>& window) {
-			m_connections.push_back(window);
-		}
-		/**
-		* Sets a new connection with a window.
-		* @return : true if a custom view is enabled for the window, false otherwise.
-		*/
-		bool customView() const {
-			return isCustomViewEnabled and m_appView;
-		}
-		/**
-		* Outputs the view parameter.
-		* @return : const sf::View&
-		*/
-		const sf::View& getView() const {
-			return m_view;
-		}
-		/**
-		* Sets the view parameter.
-		* @param[in] : const sf::View&
-		*/
-		void setView(const sf::View& view) {
-			m_view = view;
-		}
-		/**
-		* Moves the view.
-		*/
-		virtual void moveView(sf::RenderWindow& Window) {
-			m_view.move(-(sf::Mouse::getPosition(Window).x - m_windowPossChange.x),
-				-(sf::Mouse::getPosition(Window).y - m_windowPossChange.y));
-			m_windowPossChange = sf::Mouse::getPosition(Window);
-		}
-		/**
-		* Outputs the view parameter of a main app.
-		* @param[in] : const sf::View&
-		*/
-		const sf::View& getMasterView() const {
-			return *m_appView;
-		}
-		/**
-		* Checks if the connection is established.
-		* @return : true it is, false otherwise
-		*/
-		bool isConnected(unsigned int ID) const;
-		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable*
 		*/
 		void newObject(DataPackage object) {
-			insert(0, object._group, object._obj);
-			m_objects.push_back(object._obj);
+			_insert(0, object._group, object._obj);
 		};
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable*
 		*/
 		void newObject(MEP::Drawable* object) {
-			insert(0, 4294967295, object);
-			m_objects.push_back(object);
+			_insert(0, 4294967295, object);
 		};
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable&
 		*/
 		void newObject(MEP::Drawable& object) {
-			insert(0, 4294967295, object);
-			m_objects.push_back(&object);
+			_insert(0, 4294967295, object);
 		}
 		/**
 		* Deletes all MEP::Objects in the MEP::Window::BaseWindow
 		*/
 		template<typename ... Values>
 		void newObjects(Values&& ... values);
+		void debugOutput(std::ostream& out) {
+			std::cout << "MEP::debugOutput() Window ID :" << getID() << std::endl;
+			MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>>::_debugOutput(out);
+		}
 		/**
 		* Outputs an ID of a MEP::Window::BaseWindow
 		* @return : ID
@@ -412,58 +362,40 @@ namespace MEP {
 
 	inline void BaseWindow::updateRunning(sf::Time& currentTime)
 	{
-		for (auto& x : m_objects)
-			x->update(currentTime);
+		_execute([&currentTime](auto& x) {
+			if (x.isActive())
+				x.get()->update(currentTime);
+			});
 	}
 
 	inline void BaseWindow::updateEntrance(sf::Time& currentTime)
 	{
-		for (auto& x : m_objects)
-			x->entryUpdate(currentTime);
+		_execute([&currentTime](auto& x) {
+			if(x.isActive())
+				x.get()->entryUpdate(currentTime);
+			});
 		m_status = Status::Main;
 	}
 
 	inline void BaseWindow::updateExit(sf::Time& currentTime)
 	{
 		bool isActive = false;
-		for (auto& x : m_objects) {
-			x->exitUpdate(currentTime);
-		}
-		for (auto& x : m_objects) {
-			if (x->isActive())
-				isActive = true;
-		}
+		_execute([&currentTime, &isActive](auto& x) {
+			if (x.isActive()) {
+				x.get()->exitUpdate(currentTime);
+				if (x.get()->isActive())
+					isActive = true;
+			}
+			});
 		if (!isActive) {
 			m_status = Status::NullAction;
 		}
-	}
-
-	inline const BaseWindow& BaseWindow::getWindow(unsigned int ID)
-	{
-		for (auto& x : m_connections)
-			if (auto obj = x.lock()) {
-				if (obj.get()->getID() == ID) {
-					return *obj.get();
-				}
-			}
-		throw MEP::WindowException(getID(), "Window not found!");
 	}
 
 	inline void BaseWindow::handleEvent(sf::RenderWindow& Window, sf::Event& event)
 	{
 		if (event.type == sf::Event::Closed)
 			Window.close();
-	}
-
-	inline bool BaseWindow::isConnected(unsigned int ID) const
-	{
-		for (auto& x : m_connections)
-			if (auto obj = x.lock()) {
-				if (obj.get()->getID() == ID) {
-					return true;
-				}
-			}
-		return false;
 	}
 }
 

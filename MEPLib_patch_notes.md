@@ -90,3 +90,9 @@
 	-Improved MEP::Loading class. \n	
 	-Deleted Window namespace. \n
 	-Recreated the Resource class. Now individual members are using GroupManager which is a map<map>. In other wards groups, manager and subgroup manager is a balancing tree. Which provides better access time O(logn + logm) instead of O(n + m). Where n is the number of groups and m is the number of elements in the n-th group. \n
+	-Library share the same aforementioned container. \n
+	-Diagnostic tool for the BaseWindow class is now available. debugOutput(std::osteam& out) will output information regarding the order of displaying the object of the screen every object currently available in the render queue. If the message Unavailable was displayed the object was deleted. If the message Base Class was displayed object does not have an override of the << operator. \n
+	-Deleted setting window connection in BaseWindow. \n
+	-Redesign of application window container. \n
+	-Better view manager. \n
+	-Namming: Base.h -> BaseWindow.h \n
