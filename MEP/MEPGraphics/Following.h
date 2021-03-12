@@ -28,6 +28,7 @@
 #include<MEPGraphics/Config.h>
 #include<MEPGraphics/AnimationPosition.h>
 #include<MEPGraphics/AnimationColor.h>
+#include<MEPGraphics/Group.h>
 namespace MEP {
 	/**
 	* \brief MEP::Following keeps track of a MEP::Object position.
@@ -40,121 +41,215 @@ namespace MEP {
 		*/
 		enum class FollowType {
 			/** Following not initialized.*/
-			NotInit,
+			NotInit = 0,
 			/** Following other Objects.*/
-			Objects,
+			Objects = 1,
 			/** Following with a change of X scale*/
-			X_Scale,
+			X_Scale = 2,
 			/** Following with a change of Y scale*/
-			Y_Scale,
+			Y_Scale = 3,
 			/** Following with a change of X position*/
-			X_Pos,
+			X_Pos = 4,
 			/** Following with a change of Y position*/
-			Y_Pos,
+			Y_Pos = 5,
 			/** Following with a change of a color.*/
-			Color
+			Color = 6
 		};
 	private:
 		//type of a following
 		FollowType m_followType = FollowType::NotInit;
-		struct Follow {
+		class Follow {
+			const char* __FollowType[7] = { "NotInit", "Objects", "X_Scale", "Y_Scale", "X_Pos", "Y_Pos", "Color" };
+			//Mute status
+			bool m_mute = false;
 			//Blocking color channels 
 			MEP::U_int32 m_colorsFollow;
 			//Reference to the animation
-			const AnimationPosition& m_animation;
+			std::shared_ptr<bool> link = nullptr;
+			const AnimationPosition* m_animation;
 			//Followtype of an object.
 			FollowType m_followType = FollowType::NotInit;
 			//Constructor
+		public:
 			Follow(const AnimationPosition& animation, 
 				FollowType followType = FollowType::NotInit,
 				MEP::U_int32 colorsFollow = MEP::ColorChannel::ALL) :
 				m_colorsFollow(colorsFollow),
-				m_animation(animation),
-				m_followType(followType) {}
-
-			void updateVariables(Following& object, sf::Sprite& toUpdate) {
-				if (m_followType == FollowType::X_Pos) {
-					object.m_posFixed.x = object.m_pos.x + m_animation.GetFixedVariable();
+				m_animation(&animation),
+				m_followType(followType) 
+			{
+				if (animation._isLinked()) {
+					link = animation._linkAddr();
+					*link = true;
+				}
+				else {
+					link = std::make_shared<bool>(false);
+				}
+			}
+			/**
+			* Is link active.
+			*/
+			bool isLinked() const {
+				return link and *link == true and m_animation;
+			}
+			/**
+			* Animation is active.
+			*/
+			bool isActive() const {
+				if (isLinked()) {
+					return m_animation->isActive();
+				}
+				return false;
+			}
+			/**
+			* Mutes the follower. The output will not be taken into a consideration.
+			*/
+			void mute() {
+				m_mute = true;
+			}
+			/**
+			* Unmutes the follower.
+			*/
+			void unMute() {
+				m_mute = false;
+			}
+			/**
+			* Outputs the infromation about the mute.
+			*/
+			bool isMuted() const {
+				return m_mute;
+			}
+			/**
+			* Updates the Variables.
+			* @return: True - Update successful, False - Link does not exist. You might have deleted the base animation.
+			*/
+			bool updateVariables(Following& object, sf::Sprite& toUpdate) {
+				if (!isLinked() or isMuted()) {
+					return false;
+				}
+				else if (m_followType == FollowType::X_Pos) {
+					object.m_posFixed.x = object.m_pos.x + m_animation->GetFixedVariable();
 					toUpdate.setPosition(object.m_posFixed);
 				}
 				else if (m_followType == FollowType::Y_Pos) {
-					object.m_posFixed.y = object.m_pos.y + m_animation.GetFixedVariable();
+					object.m_posFixed.y = object.m_pos.y + m_animation->GetFixedVariable();
 					toUpdate.setPosition(object.m_posFixed);
 				}
 				else if (m_followType == FollowType::X_Scale) {
-					object.m_scaleFixed.x = object.m_scale.x + m_animation.GetFixedVariable();
+					object.m_scaleFixed.x = object.m_scale.x + m_animation->GetFixedVariable();
 					toUpdate.setScale(object.m_scaleFixed);
 				}
 				else if (m_followType == FollowType::Y_Scale) {
-					object.m_scaleFixed.y = object.m_scale.y + m_animation.GetFixedVariable();
+					object.m_scaleFixed.y = object.m_scale.y + m_animation->GetFixedVariable();
 					toUpdate.setScale(object.m_scaleFixed);
 				}
 				else if (m_followType == FollowType::Color) {
 					if (m_colorsFollow == MEP::ColorChannel::ALL)
-						toUpdate.setColor(m_animation.getFrameAsColor());
+						toUpdate.setColor(m_animation->getFrameAsColor());
 					else {
 						if (m_colorsFollow != 0) {
 							sf::Uint8 RGBA[4];
 							if (m_colorsFollow & MEP::ColorChannel::R)
-								RGBA[0] = m_animation.getFrameAsColor().r;
+								RGBA[0] = m_animation->getFrameAsColor().r;
 							else
 								RGBA[0] = toUpdate.getColor().r;
 							if (m_colorsFollow & MEP::ColorChannel::G)
-								RGBA[1] = m_animation.getFrameAsColor().g;
+								RGBA[1] = m_animation->getFrameAsColor().g;
 							else
 								RGBA[1] = toUpdate.getColor().g;
 							if (m_colorsFollow & MEP::ColorChannel::B)
-								RGBA[2] = m_animation.getFrameAsColor().b;
+								RGBA[2] = m_animation->getFrameAsColor().b;
 							else
 								RGBA[2] = toUpdate.getColor().b;
 							if (m_colorsFollow & MEP::ColorChannel::A)
-								RGBA[3] = m_animation.getFrameAsColor().a;
+								RGBA[3] = m_animation->getFrameAsColor().a;
 							else
 								RGBA[3] = toUpdate.getColor().a;
 							toUpdate.setColor({ RGBA[0],RGBA[1],RGBA[2],RGBA[3] });
 						}
 					}
 				}
+				return true;
 			}
-			void updateVariables(Following& object) {
-				if (m_followType == FollowType::X_Pos) {
-					object.m_posFixed.x = object.m_pos.x + m_animation.GetFixedVariable();
+			/**
+			* Updates the Variables.
+			* @return: True - Update successful, False - Link does not exist. You might have deleted the base animation.
+			*/
+			bool updateVariables(Following& object) {
+				if (!isLinked() or isMuted()) {
+					return false;
+				}
+				else if (m_followType == FollowType::X_Pos) {
+					object.m_posFixed.x = object.m_pos.x + m_animation->GetFixedVariable();
 				}
 				else if (m_followType == FollowType::Y_Pos) {
-					object.m_posFixed.y = object.m_pos.y + m_animation.GetFixedVariable();
+					object.m_posFixed.y = object.m_pos.y + m_animation->GetFixedVariable();
 				}
 				else if (m_followType == FollowType::X_Scale) {
-					object.m_scaleFixed.x = object.m_scale.x + m_animation.GetFixedVariable();
+					object.m_scaleFixed.x = object.m_scale.x + m_animation->GetFixedVariable();
 				}
 				else if (m_followType == FollowType::Y_Scale) {
-					object.m_scaleFixed.y = object.m_scale.y + m_animation.GetFixedVariable();
+					object.m_scaleFixed.y = object.m_scale.y + m_animation->GetFixedVariable();
 				}
 				else if (m_followType == FollowType::Color) {
 					if (m_colorsFollow == MEP::ColorChannel::ALL)
-						object.setColor(m_animation.getFrameAsColor());
+						object.setColor(m_animation->getFrameAsColor());
 					else {
 						if (m_colorsFollow != 0) {
 							sf::Uint8 RGBA[4];
 							if (m_colorsFollow & MEP::ColorChannel::R)
-								RGBA[0] = m_animation.getFrameAsColor().r;
+								RGBA[0] = m_animation->getFrameAsColor().r;
 							else
 								RGBA[0] = object.getColor().r;
 							if (m_colorsFollow & MEP::ColorChannel::G)
-								RGBA[1] = m_animation.getFrameAsColor().g;
+								RGBA[1] = m_animation->getFrameAsColor().g;
 							else
 								RGBA[1] = object.getColor().g;
 							if (m_colorsFollow & MEP::ColorChannel::B)
-								RGBA[2] = m_animation.getFrameAsColor().b;
+								RGBA[2] = m_animation->getFrameAsColor().b;
 							else
 								RGBA[2] = object.getColor().b;
 							if (m_colorsFollow & MEP::ColorChannel::A)
-								RGBA[3] = m_animation.getFrameAsColor().a;
+								RGBA[3] = m_animation->getFrameAsColor().a;
 							else
 								RGBA[3] = object.getColor().a;
 							object.setColor({ RGBA[0],RGBA[1],RGBA[2],RGBA[3] });
 						}
 					}	
 				}
+				return true;
+			}
+			/**
+			* Outputs the info message.
+			*/
+			friend std::ostream& operator<<(std::ostream& out, const Follow& x) {
+				out << "FollowType: {" << x.__FollowType[(unsigned int)x.m_followType] << "}";
+				if (x.m_followType == FollowType::Color) {
+					out << ", Channel: { ";
+					if (x.m_colorsFollow & R)
+						out << "R ";
+					if (x.m_colorsFollow & G)
+						out << "G ";
+					if (x.m_colorsFollow & B)
+						out << "B ";
+					if (x.m_colorsFollow & A)
+						out << "A ";
+					out << "}";
+				}
+				out << ", Muted:";
+				if (x.isMuted()) {
+					out << " True";
+				}
+				else {
+					out << " False";
+				}
+				return out;
+			}
+			/**
+			* Assignment operator. Relative to the address on an animation.
+			*/
+			bool operator==(const Follow& x) const {
+				return &m_animation == &x.m_animation;
 			}
 		};
 	protected:
@@ -163,7 +258,7 @@ namespace MEP {
 		//[optional] formula for calculation of the scale.
 		std::function<sf::Vector2f()> calc_scale = [this]()->sf::Vector2f { return m_scale; };
 
-		std::list<std::unique_ptr<Follow>> followingList;
+		MEPtools::GroupManager<Follow, std::unique_ptr<Follow>, std::list<std::unique_ptr<Follow>>> followingListv2;
 		//texture position and scale
 		sf::Vector2f m_pos = {0.f, 0.f};
 		sf::Vector2f m_posMove = { 0.f, 0.f };
@@ -275,11 +370,8 @@ namespace MEP {
 		* @param[in] base : MEP::AnimationPosition object to follow.
 		* @param[in] type : Type of a follow.
 		*/
-		void setFollow(const AnimationPosition& base, const FollowType type) {
-			for (auto& x : followingList)
-				if (type == x->m_followType)
-					throw "This type of follow already exists!";
-			followingList.push_back(std::make_unique<Follow>(base, type));
+		void setFollow(const AnimationPosition& base, const FollowType type, MEP::U_int32 group = -1) {
+			followingListv2._insert(0, group, std::make_unique<Follow>(base, type));
 		}
 		/**
 		* Sets the object to follow using another MEP::AnimationColor instance.
@@ -288,15 +380,40 @@ namespace MEP {
 		* @param[in] type : Type of a follow.
 		* @param[in] toFollow : Channels to be followed.
 		*/
-		void setFollow(const AnimationColor& base, MEP::U_int32 toFollow = MEP::ColorChannel::ALL) {
-			for (auto& x : followingList)
-				if (FollowType::Color == x->m_followType)
-					if(((x->m_colorsFollow & MEP::ColorChannel::R) and (toFollow & MEP::ColorChannel::R)) or
-						((x->m_colorsFollow & MEP::ColorChannel::G) and (toFollow & MEP::ColorChannel::G)) or
-						((x->m_colorsFollow & MEP::ColorChannel::B) and (toFollow & MEP::ColorChannel::B)) or
-						((x->m_colorsFollow & MEP::ColorChannel::A) and (toFollow & MEP::ColorChannel::A)))
-						throw "This type of follow already exists!";	
-			followingList.push_back(std::make_unique<Follow>(base, MEP::Following::FollowType::Color, toFollow));
+		void setFollow(const AnimationColor& base, MEP::U_int32 toFollow = MEP::ColorChannel::ALL, MEP::U_int32 group = -1) {
+			followingListv2._insert(0, group, std::make_unique<Follow>(base, MEP::Following::FollowType::Color, toFollow));
+		}
+		/**
+		* Mutes a group of objects.
+		*/
+		void muteFollowGroup(MEP::U_int32 group) {
+			followingListv2._execute([](auto& x) {
+				x.get()->mute();
+				}, group);
+		}
+		/**
+		* Unmutes a group of objects.
+		*/
+		void unMuteFollowGroup(MEP::U_int32 group) {
+			followingListv2._execute([](auto& x) {
+				x.get()->unMute();
+				}, group);
+		}
+		/**
+		* Full mute of the following objects.
+		*/
+		void fullMuteFollow() {
+			followingListv2._execute([](auto& x) {
+				x.get()->mute();
+				});
+		}
+		/**
+		* Full mute of the following objects.
+		*/
+		void fullUnMuteFollow() {
+			followingListv2._execute([](auto& x) {
+				x.get()->unMute();
+				});
 		}
 		/**
 		* Sets the position and fixed position of an MEP::Following.
@@ -388,16 +505,26 @@ namespace MEP {
 		* @return true - if atleast one istance of the Follwer is active, false - otherwise.
 		*/
 		bool isFollowerActive() const {
-			for (auto& a : followingList)
-				if (a->m_animation.isActive())
-					return true;
-			return false;
+			bool active = false;
+			followingListv2._execute([&active](const auto& x) {
+				if (x.get()->isLinked()) {
+					if (x.get()->isActive())
+						active = true;
+				}
+				});
+			return active;
+		}
+		/**
+		* Following debug message.
+		*/
+		void followingDebug(std::ostream& out, const char* skipLines = "") const {
+			followingListv2._debugOutput(out, [](auto& x, std::ostream& out) { out << "  " << *x << std::endl; } );
 		}
 		/**
 		* Clears the follower list.
 		*/
 		void clearFollow() { 
-			followingList.clear(); 
+			followingListv2._clear();
 		}
 	};
 };

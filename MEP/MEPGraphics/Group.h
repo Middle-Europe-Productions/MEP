@@ -28,17 +28,32 @@
 #include<map>
 
 namespace MEPtools {
+	/**
+	* A library memory management system is built around this container.
+	*/
 	template<typename X, typename PtrType = std::unique_ptr<X>, typename SecondStructure = std::map<MEP::U_int32, PtrType>>
 	class GroupManager {
 		/**
 		* Master container.
 		*/
 		std::map<MEP::U_int32, SecondStructure> m_objects;
+		/**
+		* Size
+		*/
+		unsigned int size = 0;
+		/**
+		* Map insert.
+		*/
 		bool insert(MEP::U_int32 ID, PtrType& value, std::map<MEP::U_int32, PtrType>& input) {
+			++size;
 			return input.insert({ ID, std::move(value) }).second;
 		}
+		/**
+		* List insert
+		*/
 		bool insert(MEP::U_int32 ID, PtrType& value, std::list<PtrType>& input) {
 			input.push_back(std::move(value));
+			++size;
 			return true;
 		}
 	public:
@@ -73,12 +88,25 @@ namespace MEPtools {
 		}
 
 		/**
+		* Outputs the group of elements.
+		*/
+		SecondStructure& _getGroup(MEP::U_int32 group) {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				return iterator->second;
+			}
+			else {
+				throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
+			}
+		}
+		/**
 		* Deletes the group of objects.
 		* @return: True - group deleted. False - group not found.
 		*/
 		bool _deleteGroup(MEP::U_int32 group) {
 			auto iterator = m_objects.find(group);
 			if (iterator != m_objects.end()) {
+				size -= m_objects.size();
 				m_objects.erase(iterator);
 				return true;
 			}
@@ -97,6 +125,7 @@ namespace MEPtools {
 					return false;
 				}
 				else {
+					--size;
 					iterator->second.erase(second_iter);
 					return true;
 				}
@@ -128,15 +157,70 @@ namespace MEPtools {
 			return false;
 		}
 		/**
+		* Executes constant method a for all of the elements.
+		*/
+		template<typename Method>
+		void _execute(Method method) const {
+			for (auto& x : m_objects) {
+				for (auto& it : x.second) {
+					method(it);
+				}
+			}
+		}
+		/**
+		* Execute  constant method for a group of objects.
+		*/
+		template<typename Method>
+		bool _execute(Method method, MEP::U_int32 group) const {
+			auto iterator = m_objects.find(group);
+			if (iterator != m_objects.end()) {
+				for (auto& x : iterator->second)
+					method(x);
+				return true;
+			}
+			return false;
+		}
+		/**
 		* Diagnostic tool.
 		*/
-		void _debugOutput(std::ostream& out) {
+		void _debugOutput(std::ostream& out, const char* before = "", const char* after = "") const {
 			for (auto& x : m_objects) {
 				out << "Group: " << x.first << std::endl;
 				for (auto& it : x.second) {
-					out << it << std::endl;
+					out << before << it << after <<std::endl;
 				}
 			}
+		}
+		/**
+		* Diagnostic tool.
+		*/
+		template<typename Out>
+		void _debugOutput(std::ostream& out, Out method) const {
+			for (auto& x : m_objects) {
+				out << "Group: " << x.first << std::endl;
+				for (auto& it : x.second) {
+					method(it, out);
+				}
+			}
+		}
+		/**
+		* Number of objects.
+		*/
+		unsigned int _size() const {
+			return size;
+		}
+		/**
+		* Is constainer empty.
+		*/
+		bool _empty() const {
+			return _size() == 0;
+		}
+		/**
+		* Clears the map.
+		*/
+		void _clear() {
+			size = 0;
+			m_objects.clear();
 		}
 	};
 }

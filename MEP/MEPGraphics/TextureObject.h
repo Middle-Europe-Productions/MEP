@@ -33,10 +33,10 @@ namespace MEP {
 	*/
 	class TextureObject : public Object, public Sprite {
 		void updateSprite() override {
-			if (!followingList.empty()) {
-				for (auto& x : followingList)
-					x->updateVariables(*this, currentSprite);
-			}
+			if(followingListv2._size() != 0)
+				followingListv2._execute([&](auto& x) {
+					x.get()->updateVariables(*this, currentSprite);
+					});
 			currentSprite.setPosition(m_posFixed);
 			currentSprite.setScale(m_scaleFixed);
 		}
@@ -115,6 +115,23 @@ namespace MEP {
 		*/
 		bool isActive() const override {
 			return isFollowerActive();
+		}
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "MEP::TextureObject, Following:" << std::endl;
+			followingDebug(out, "  ");
+			out << "   \\MEP::Object, ID: " << getID() << ", name : " << getName() << std::endl;
+			out << "     \\";
+			drawTagDebug(out);
+		}
+		/**
+		* Overrdie of the << operator for diagnostic purposes.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const TextureObject& x) {
+			x.debugOutput(out);
+			return out;
 		}
 	};
 }

@@ -24,10 +24,10 @@
 ////////////////////////////////////////////////////////////
 #ifndef MEP_DRAWABLE_H
 #define MEP_DRAWABLE_H
-#include <memory>
 #include<MEPGraphics/Config.h>
 #include<SFML/Graphics.hpp>
 #include<iostream>
+#include<memory>
 namespace MEP {
 	/**
 	* @enum MEP::Button::DrawTag defines a draw tag.
@@ -50,7 +50,7 @@ namespace MEP {
 	* \brief MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen.
 	*/
 	class Drawable {
-		std::shared_ptr<bool> link = nullptr;
+		std::shared_ptr<bool> link = std::make_shared<bool>(true);
 		U_int32 m_drawTag = DrawTag::Non;
 	protected:
 		/**
@@ -60,6 +60,25 @@ namespace MEP {
 			if (link) {
 				*link = false;
 			}
+		}
+		/**
+		* DrawTag output
+		*/
+		void drawTagDebug(std::ostream& out) const {
+			out << "MEP::Drawable: { ";
+			if (m_drawTag & Non)
+				out << "Non ";
+			if (m_drawTag & ViewLock)
+				out << "ViewLock ";
+			if (m_drawTag & Unactive)
+				out << "Unactive ";
+			if (m_drawTag & Resize_Pos)
+				out << "Resize_Pos ";
+			if (m_drawTag & Resize_Scale)
+				out << "Resize_Scale ";
+			if (m_drawTag & Resize_Rect)
+				out << "Resize_Rect ";
+			out << "}";
 		}
 	public:
 		/**
@@ -74,6 +93,13 @@ namespace MEP {
 		* Boolean value output true when resource is active.
 		*/
 		std::shared_ptr<bool> _linkAddr() {
+			return link;
+		}
+		/**
+		* Outputs the notification link.
+		* Boolean value output true when resource is active.
+		*/
+		const std::shared_ptr<bool> _linkAddr() const {
 			return link;
 		}
 		/**
@@ -163,7 +189,7 @@ namespace MEP {
 		* Debug output of the class.
 		*/
 		virtual void debugOutput(std::ostream& out) const {
-			out << "Base Class";
+			drawTagDebug(out);
 		}
 		/**
 		* Overrdie of the << operator for diagnostic purposes.

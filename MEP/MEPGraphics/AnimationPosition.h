@@ -56,12 +56,8 @@ namespace MEP {
 		double m_entry = 0;
 		double m_exit = 0;
 		void init();
-		//run with the delay
-		sf::Time m_delay = sf::Time::Zero;
-		bool delayInit = false;
 		/**
 		* Core updates for position animation.
-		* This method is needed in order to avoid CTRL-C/V.
 		*/
 		void updatePositionAnimation(sf::Time& currentTime);
 	public:
@@ -107,9 +103,16 @@ namespace MEP {
 				throw "[AnimationPosition] end point needs to be grater than begin point";
 		}
 		/**
-		* Sets the delay of an animation. Delay is a time to wait from starting the animation.
+		* Sets the running tag to true and changes the direction of a movement, furthermore,
+		* it is capable of setting a current time.
+		* @param[in] direc : MEP::Animation::Direction.
+		* @param[in] currentTime : sf::Time = sf::Time::Zero.
 		*/
-		void setDelay(const sf::Time& delay, const Direction& dir = Direction::Backwards);
+		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero) {
+			direction = direc;
+			updateTime = currentTime;
+			isRunning = true;
+		};
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position.
@@ -167,11 +170,20 @@ namespace MEP {
 		virtual sf::Color getFrameAsColor() const { 
 			return sf::Color(std::round(*currentFrame)); 
 		}
+		void delayOutput(std::ostream& out) const {
+			if (delay() != sf::Time::Zero)
+				out << ", Delay: [" << delay().asSeconds() << "]";
+		}
 		/**
 		* Debug output of the class.
 		*/
 		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::AnimationPosition";
+			out << "MEP::AnimationPosition { Start: [" << m_entry 
+				<< "], End: [" << m_exit 
+				<< "], Current: [" << current_frame << "]";
+			delayOutput(out);
+			out << "}";
+			animationDebug(out);
 		}
 		/**
 		* Overrdie of the << operator for diagnostic purposes.
@@ -205,14 +217,6 @@ namespace MEP {
 		currentFrame = frames.begin();
 	}
 
-	inline void MEP::AnimationPosition::setDelay(const sf::Time& delay, const Direction& dir)
-	{
-		if (isRunning)
-			throw "[AnimationPosition]You cannot delay running animation!";
-		m_delay = delay;
-		direction = dir;
-	}
-
 	inline void MEP::AnimationPosition::update(sf::Time& currentTime)
 	{
 		updatePositionAnimation(currentTime);
@@ -222,58 +226,56 @@ namespace MEP {
 	* This method is needed in order to avoid CTRL-C/V.
 	*/
 	inline void MEP::AnimationPosition::updatePositionAnimation(sf::Time& currentTime) {
-		if (isRunning and (isInit == AnimationInit::PositionAnimation)) {
-			if (currentTime - updateTime >= toWait) {
-				if (direction == Direction::Forward) {
-					if (currentFrame == --frames.end()) {
-						isRunning = false;
+		if (isRunning) {
+			if (updateDelay(currentTime) and isInit == AnimationInit::PositionAnimation) {
+				if (currentTime - updateTime >= toWait) {
+					if (direction == Direction::Forward) {
+						if (currentFrame == --frames.end()) {
+							isRunning = false;
+							newCycle();
+						}
+						else {
+							currentFrame++;
+							current_frame++;
+						}
 					}
-					else {
-						currentFrame++;
-						current_frame++;
+					else if (direction == Direction::Backwards) {
+						if (currentFrame == frames.begin()) {
+							isRunning = false;
+							newCycle();
+						}
+						else {
+							currentFrame--;
+							current_frame--;
+						}
 					}
+					updateTime = currentTime;
 				}
-				else if (direction == Direction::Backwards) {
-					if (currentFrame == frames.begin()) {
-						isRunning = false;
-					}
-					else {
-						currentFrame--;
-						current_frame--;
-					}
-				}
-				updateTime = currentTime;
-			}
-		}
-		else if (m_delay != sf::Time::Zero) {
-			if (!delayInit) {
-				updateTime = currentTime;
-				delayInit = true;
-			}
-			else if (currentTime - updateTime > m_delay) {
-				run(direction);
-				m_delay = sf::Time::Zero;
-				delayInit = false;
 			}
 		}
 	}
 	inline void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
+		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd) {
+			changeState(State::Entry);
 			run(Direction::Forward);
+		}
+			
 		update(currentTime);
 	}
 
 	inline void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
+		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd) {
+			changeState(State::Exit);
 			run(Direction::Backwards);
+		}
 		update(currentTime);
 	}
 
-	inline bool MEP::AnimationPosition::isActive() const
+	inline bool AnimationPosition::isActive() const
 	{
-		return getStatus();
+		return isRunning;
 	}
 
 	inline bool AnimationPosition::reset()

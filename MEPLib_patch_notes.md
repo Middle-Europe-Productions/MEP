@@ -96,3 +96,8 @@
 	-Redesign of application window container. \n
 	-Better view manager. \n
 	-Namming: Base.h -> BaseWindow.h \n
+	-Now you can apply unlimited nummber of animations on the Object. \n
+	-New setDelay(const sf::Time&, bool = false) method. Now does not activate the animation and inputs two arguments delay(time, bool = false) where boolean one set to true the delay is activated every time we use run(). If an animation has a tag RunAtEnd or RunAtEntry there is also a possibility of delaying the Entrance and Exit thanks to the setEntryDelay() and setExitDelay(). \n
+	-Objects and Animations are now Delete safe. If you delete any of the MEP::Drawable, Window and Following lists will ignore it instead of throwing an error. \n
+	-You can now divide animations following into groups. \n
+	-You can mute follow of the group of animations. \n

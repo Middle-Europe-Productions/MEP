@@ -174,6 +174,23 @@ namespace MEP {
 		* @return : MEP::AnimationObject.
 		*/
 		const AnimationObject& getAnimationObject() { return *this; }
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "MEP::AnimationObject, Following:" << std::endl;
+			followingDebug(out, "  ");
+			out << "   \\MEP::Object, ID: " << getID() << ", name : " << getName() << std::endl;
+			out << "     \\";
+			drawTagDebug(out);
+		}
+		/**
+		* Overrdie of the << operator for diagnostic purposes.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const AnimationObject& x) {
+			x.debugOutput(out);
+			return out;
+		}
 		virtual ~AnimationObject() = default;
 	};
 
@@ -260,7 +277,7 @@ namespace MEP {
 				updateSprite(**currentFrame);
 			}
 		}
-		if (!followingList.empty()) {
+		if (followingListv2._size() != 0) {
 			updateSprite();
 		}
 	}
@@ -281,7 +298,7 @@ namespace MEP {
 
 	inline bool MEP::AnimationObject::isActive() const
 	{
-		return getStatus() or isFollowerActive();
+		return isRunning or isFollowerActive();
 	}
 
 	inline bool MEP::AnimationObject::isTansparent(unsigned int, unsigned int)

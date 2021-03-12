@@ -34,6 +34,7 @@ namespace MEPtools {
 		ToRender(MEP::Drawable* ele) {
 			if (ele->_isLinked()) {
 				link = ele->_linkAddr();
+				*link = true;
 			}
 			else {
 				link = std::make_shared<bool>(false);
@@ -305,8 +306,10 @@ namespace MEP {
 		template<typename ... Values>
 		void newObjects(Values&& ... values);
 		void debugOutput(std::ostream& out) {
+			std::cout << "|-Display-Queue-------------------------------------------"<< std::endl;
 			std::cout << "MEP::debugOutput() Window ID :" << getID() << std::endl;
-			MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>>::_debugOutput(out);
+			MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>>::_debugOutput(out, "", "\n");
+			std::cout << "|---------------------------------------------------------" << std::endl;
 		}
 		/**
 		* Outputs an ID of a MEP::Window::BaseWindow

@@ -48,8 +48,9 @@ namespace MEP {
 		*/
 		virtual void updateSprite()
 		{
-			for (auto& x : followingList)
-				x->updateVariables(*this, currentSprite);
+			followingListv2._execute([&](auto& x) {
+				x.get()->updateVariables(*this, currentSprite);
+				});
 		}
 		/**
 		* Sets the position

@@ -34,7 +34,7 @@ namespace MEP {
     */
     class BaseManager: private MEPtools::GroupManager<BaseWindow, std::shared_ptr<BaseWindow>> {
         BaseWindow* mostRecentAccess = nullptr;
-        MEP::U_int32 mostRecentGroup;
+        MEP::U_int32 mostRecentGroup = 0;
     public:
         BaseManager() = default;
         /**
@@ -53,6 +53,20 @@ namespace MEP {
                     mostRecentGroup = group;
                 }
                 return *mostRecentAccess;
+            }
+            catch (const MEP::ResourceException& x) {
+                if (x.exceptionType == MEP::ResourceException::ExceptionType::GroupNotFound)
+                    throw MEP::WindowException("Window group not found!");
+                else
+                    throw MEP::WindowException("Window not found!");
+            }
+        }
+        /**
+        * Outputs a group of Windows. O(logn). Where n - a number of groups.
+        */
+        std::map<MEP::U_int32, std::shared_ptr<BaseWindow>>& getWindowGroup(MEP::U_int32 group = -1) {
+            try {
+                return _getGroup(group);
             }
             catch (const MEP::ResourceException& x) {
                 if (x.exceptionType == MEP::ResourceException::ExceptionType::GroupNotFound)

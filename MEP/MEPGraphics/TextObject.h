@@ -142,8 +142,9 @@ namespace MEP {
 		* Override of a MEP::Drawable update.
 		*/
 		void update(sf::Time&) override {
-			for (auto& x : followingList)
-				x->updateVariables(*this);
+			followingListv2._execute([&](auto& x) {
+				x.get()->updateVariables(*this);
+				});
 			text.setPosition(getPosition());
 			text.setScale(getScale());
 			text.setFillColor(getColor());
@@ -227,7 +228,10 @@ namespace MEP {
 		* Debug output of the class.
 		*/
 		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::Text, content: " << m_content;
+			out << "MEP::Text, content: " << m_content << std::endl;
+			followingDebug(out, "  "); 
+			out << "   \\";
+			drawTagDebug(out);
 		}
 		/**
 		* Overrdie of the << operator for diagnostic purposes.

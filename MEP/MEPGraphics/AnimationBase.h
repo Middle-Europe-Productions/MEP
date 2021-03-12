@@ -27,6 +27,7 @@
 
 #include<SFML/Graphics.hpp>
 #include<MEPGraphics/NonCopyable.h>
+#include<MEPGraphics/AnimationDelay.h>
 
 namespace MEP {
 	/**
@@ -42,7 +43,13 @@ namespace MEP {
 	/**
 	* \brief MEP::Animation base definition of an animation. 
 	*/
-	class Animation: public NonCopyable {
+	class Animation : public NonCopyable, public MEPtools::AnimationDelay {
+		/**
+		* Tags to char for the debug purposes.
+		*/
+		const char* __Direction[2] = { "Forward", "Backwards" };
+		const char* __AnimationInit[4] = { "NotInit", "Follow", "ObjectAnimation", "PositionAnimation" };
+		const char* __AdditionalTag[4] = {"Non", "RunAtEntry", "RunAtEnd", "RunAtEntryAndEnd"};
 	public:
 		/**
 		* @enum MEP::Animation::AnimationInit
@@ -50,13 +57,13 @@ namespace MEP {
 		*/
 		enum class AnimationInit {
 			/** Animation is not initialized.*/
-			NotInit,
+			NotInit = 0,
 			/** Animation will be following the Animation.*/
-			Follow,
+			Follow = 1,
 			/** Animation will be animating Object type of variable.*/
-			ObjectAnimation,
+			ObjectAnimation = 2,
 			/** Animation will be animating Position type of variable.*/
-			PositionAnimation
+			PositionAnimation = 3
 		};
 		/**
 		* @enum MEP::Animation::AdditionalTag
@@ -64,13 +71,13 @@ namespace MEP {
 		*/
 		enum class AdditionalTag {
 			/** There no additional tag.*/
-			Non,
+			Non = 0,
 			/** Animation will be automatically activated at MEP::Window::BaseWindow entry.*/
-			RunAtEntry,
+			RunAtEntry = 1,
 			/** Animation will be automatically activated at MEP::Window::BaseWindow exit.*/
-			RunAtEnd,
+			RunAtEnd = 2,
 			/** Animation will be automatically activated at MEP::Window::BaseWindow entry and exit.*/
-			RunAtEntryAndEnd
+			RunAtEntryAndEnd = 3
 		};
 	protected:
 		AdditionalTag m_tag = AdditionalTag::Non;
@@ -84,7 +91,17 @@ namespace MEP {
 		bool isRunning = false;
 		//direction of an animation movement
 		Direction direction = Direction::Backwards;
+		//Debug information about the class state
+		void animationDebug(std::ostream& out) const {
+			out <<"\n  \\" << "MEP::AnimationBase { AnimationInit: " << __AnimationInit[(int)isInit]
+			    << ", Direction: " << __Direction[(int)direction] 
+				<< ", AdditionalTag: " << __AdditionalTag[(int)m_tag] << " }";
+		}
 	public:
+		/**
+		* Default constructor.
+		*/
+		Animation() = default;
 		/**
 		* Constructor of an base animation.
 		* @param[in] initType : Initialization type.

@@ -213,7 +213,7 @@ namespace MEP {
 				}
 			}
 		}
-		if (!followingList.empty()) {
+		if (!followingListv2._empty()) {
 			updateSprite();
 		}
 	}
@@ -223,7 +223,7 @@ namespace MEP {
 		if (m_block)
 			return false;
 		bool isTran = isTansparent(pos.x, pos.y);
-		if (event.type == sf::Event::MouseMoved or !followingList.empty()) {
+		if (event.type == sf::Event::MouseMoved or !followingListv2._empty()) {
 			if (!isTran)
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					changeStatus(ButtonStatus::Pressed);

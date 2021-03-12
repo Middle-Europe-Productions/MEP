@@ -175,6 +175,20 @@ namespace MEP {
 		virtual sf::Color getFrameAsColor() const override {	
 			return sf::Color(r, g, b, a);
 		}
+		/**
+		* Debug output of the class.
+		*/
+		virtual void debugOutput(std::ostream& out) const {
+			out << "MEP::AnimationColor {[R,G,B,A]  Entry: [" 
+				<< (int)entry_r << "," << (int)entry_g << "," << (int)entry_b << "," << (int)entry_a << "]" << 
+				", Exit: [" 
+				<< (int)exit_r << "," << (int)exit_g << "," << (int)exit_b << "," << (int)exit_a << "]" <<
+				", Current: ["
+				<< (int)r << "," << (int)g << "," << (int)b << "," << (int)a << "]";
+			delayOutput(out);
+			out << "}";
+			animationDebug(out);
+		}
 	};
 }
 
