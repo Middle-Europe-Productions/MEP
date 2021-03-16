@@ -85,7 +85,7 @@
 	-Now u can use up to 4 MEP::ColorAnimation in one objects (for each individual channel) \n
 	-Now there is a possibility to add lower importance objects. In the future there are going to be layers. (newObject(object, true(lower importance))\n
 	-If you move the texture using movePosition() method it will be applyed on addMethodPos() \n
-### 3.03.2021
+### 16.03.2021
 ## MEP lib version alpha 1.3.3
 	-Improved MEP::Loading class. \n	
 	-Deleted Window namespace. \n
@@ -97,7 +97,10 @@
 	-Better view manager. \n
 	-Namming: Base.h -> BaseWindow.h \n
 	-Now you can apply unlimited nummber of animations on the Object. \n
-	-New setDelay(const sf::Time&, bool = false) method. Now does not activate the animation and inputs two arguments delay(time, bool = false) where boolean one set to true the delay is activated every time we use run(). If an animation has a tag RunAtEnd or RunAtEntry there is also a possibility of delaying the Entrance and Exit thanks to the setEntryDelay() and setExitDelay(). \n
+	-New setDelay(const sf::Time&, bool = false) method. Now does not activate the animation and inputs two arguments delay(time, bool = false) where boolean one set to true the delay is activated every time we use run(). If an animation has a tag RunAtEnd or RunAtEntry there is also a possibility of delaying the Entrance and Exit thanks to the setEntryDelay() and setExitDelay() in the case of RunAtLowEnd or RunAtLowEntry you will have to use setLowEntryDelay() and setLowExitDelay() in order to delay Low Entrance and Low Exit. \n
 	-Objects and Animations are now Delete safe. If you delete any of the MEP::Drawable, Window and Following lists will ignore it instead of throwing an error. \n
 	-You can now divide animations following into groups. \n
 	-You can mute follow of the group of animations. \n
+	-New animation manager was added. Thanks to that container you can divide animations into groups and execute commands directly on them. Managers run on the shared container. \n
+	-Two new window states are added. LowEntry and LowExit. LowEntry menu activates every animation with the RunAtLowEntry tag and then enters the *InProgress state*!. LowExit executes every animation with RunAtLowExit tag and then enters null. \n
+	-MEP::Animation::AdditionalTag -> MEP::AdditionalTag & AdditionalTag is now Bitwise \n
