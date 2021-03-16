@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -98,43 +98,41 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;../MEPGraphics/NonCopyable.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;SFML/System/Time.hpp&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">namespace </span>Window {</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html">   38</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html">WindowStats</a>: <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            sf::Time globalTime = sf::Time::Zero;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            sf::Time mStatisticsUpdateTime = sf::Time::Zero;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mStatisticsNumFrames = 0;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html#a45e5815a03c73de7f3693aad82ae840e">   43</a></span>&#160;            <a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html#a45e5815a03c73de7f3693aad82ae840e">WindowStats</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html#a3f15dfb18069729ada2b1353d55aa1fd">   48</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html#a3f15dfb18069729ada2b1353d55aa1fd">updateStatistics</a>(sf::Time dt) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                mStatisticsUpdateTime += dt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                mStatisticsNumFrames += 1;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">if</span> (mStatisticsUpdateTime &gt;= sf::seconds(1.0f))</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    mStatisticsUpdateTime -= sf::seconds(1.0f);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    mStatisticsNumFrames = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            }</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html#ab5e6a9c709328894435c56f5a6a3f316">   61</a></span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html#ab5e6a9c709328894435c56f5a6a3f316">getFrameRate</a>()<span class="keyword"> const </span>{ </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keywordflow">return</span> mStatisticsNumFrames; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html#a9217c6c24d71bab004acb76eb3c3be98">   68</a></span>&#160;            sf::Time&amp; <a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html#a9217c6c24d71bab004acb76eb3c3be98">getGlobalTime</a>() {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="keywordflow">return</span> globalTime; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_1_1_window_stats.html#a84007631eaf6da331ad1661823c8bede">   71</a></span>&#160;            <a class="code" href="class_m_e_p_1_1_window_1_1_window_stats.html#a84007631eaf6da331ad1661823c8bede">~WindowStats</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        };</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html">   37</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_m_e_p_1_1_window_stats.html">WindowStats</a> : <span class="keyword">public</span> <a class="code" href="class_m_e_p_1_1_non_copyable.html">NonCopyable</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        sf::Time globalTime = sf::Time::Zero;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        sf::Time mStatisticsUpdateTime = sf::Time::Zero;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mStatisticsNumFrames = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html#ad9a1dd79930c9219017082e3e1a5c2bd">   42</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_window_stats.html#ad9a1dd79930c9219017082e3e1a5c2bd">WindowStats</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html#a2680643b19ce8db7a4faef9d8073c0a7">   47</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_window_stats.html#a2680643b19ce8db7a4faef9d8073c0a7">updateStatistics</a>(sf::Time dt) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            mStatisticsUpdateTime += dt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            mStatisticsNumFrames += 1;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (mStatisticsUpdateTime &gt;= sf::seconds(1.0f))</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                mStatisticsUpdateTime -= sf::seconds(1.0f);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                mStatisticsNumFrames = 0;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html#a4862c4037580c2a2b9d0709eb8a03077">   60</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_m_e_p_1_1_window_stats.html#a4862c4037580c2a2b9d0709eb8a03077">getFrameRate</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">return</span> mStatisticsNumFrames;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html#a748a3cf2d24ee9486192f71ba896ee1b">   67</a></span>&#160;        sf::Time&amp; <a class="code" href="class_m_e_p_1_1_window_stats.html#a748a3cf2d24ee9486192f71ba896ee1b">getGlobalTime</a>() {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">return</span> globalTime;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_window_stats.html#a6105dd72f3da7df4830d980b06bf265f">   70</a></span>&#160;        <a class="code" href="class_m_e_p_1_1_window_stats.html#a6105dd72f3da7df4830d980b06bf265f">~WindowStats</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    };</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_m_e_p_1_1_non_copyable_html"><div class="ttname"><a href="class_m_e_p_1_1_non_copyable.html">MEP::NonCopyable</a></div><div class="ttdoc">Deletes the copy constructor and assign operator.</div><div class="ttdef"><b>Definition:</b> NonCopyable.h:32</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html_a3f15dfb18069729ada2b1353d55aa1fd"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html#a3f15dfb18069729ada2b1353d55aa1fd">MEP::Window::WindowStats::updateStatistics</a></div><div class="ttdeci">void updateStatistics(sf::Time dt)</div><div class="ttdef"><b>Definition:</b> WindowStat.h:48</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html_a84007631eaf6da331ad1661823c8bede"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html#a84007631eaf6da331ad1661823c8bede">MEP::Window::WindowStats::~WindowStats</a></div><div class="ttdeci">~WindowStats()=default</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html_ab5e6a9c709328894435c56f5a6a3f316"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html#ab5e6a9c709328894435c56f5a6a3f316">MEP::Window::WindowStats::getFrameRate</a></div><div class="ttdeci">unsigned int getFrameRate() const</div><div class="ttdef"><b>Definition:</b> WindowStat.h:61</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html">MEP::Window::WindowStats</a></div><div class="ttdoc">Statistics of a window.</div><div class="ttdef"><b>Definition:</b> WindowStat.h:38</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html_a9217c6c24d71bab004acb76eb3c3be98"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html#a9217c6c24d71bab004acb76eb3c3be98">MEP::Window::WindowStats::getGlobalTime</a></div><div class="ttdeci">sf::Time &amp; getGlobalTime()</div><div class="ttdef"><b>Definition:</b> WindowStat.h:68</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_window_1_1_window_stats_html_a45e5815a03c73de7f3693aad82ae840e"><div class="ttname"><a href="class_m_e_p_1_1_window_1_1_window_stats.html#a45e5815a03c73de7f3693aad82ae840e">MEP::Window::WindowStats::WindowStats</a></div><div class="ttdeci">WindowStats()=default</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html_a6105dd72f3da7df4830d980b06bf265f"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html#a6105dd72f3da7df4830d980b06bf265f">MEP::WindowStats::~WindowStats</a></div><div class="ttdeci">~WindowStats()=default</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html_a748a3cf2d24ee9486192f71ba896ee1b"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html#a748a3cf2d24ee9486192f71ba896ee1b">MEP::WindowStats::getGlobalTime</a></div><div class="ttdeci">sf::Time &amp; getGlobalTime()</div><div class="ttdef"><b>Definition:</b> WindowStat.h:67</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html_a2680643b19ce8db7a4faef9d8073c0a7"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html#a2680643b19ce8db7a4faef9d8073c0a7">MEP::WindowStats::updateStatistics</a></div><div class="ttdeci">void updateStatistics(sf::Time dt)</div><div class="ttdef"><b>Definition:</b> WindowStat.h:47</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:32</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html_a4862c4037580c2a2b9d0709eb8a03077"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html#a4862c4037580c2a2b9d0709eb8a03077">MEP::WindowStats::getFrameRate</a></div><div class="ttdeci">unsigned int getFrameRate() const</div><div class="ttdef"><b>Definition:</b> WindowStat.h:60</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html_ad9a1dd79930c9219017082e3e1a5c2bd"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html#ad9a1dd79930c9219017082e3e1a5c2bd">MEP::WindowStats::WindowStats</a></div><div class="ttdeci">WindowStats()=default</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_window_stats_html"><div class="ttname"><a href="class_m_e_p_1_1_window_stats.html">MEP::WindowStats</a></div><div class="ttdoc">Statistics of a window.</div><div class="ttdef"><b>Definition:</b> WindowStat.h:37</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

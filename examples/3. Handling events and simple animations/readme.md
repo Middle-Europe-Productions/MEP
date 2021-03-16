@@ -12,7 +12,22 @@ Remember that u need to change the status of the window. InProgress and NullActi
 void TreeDrawer::createWindows()
 {
     ...
-    addWindow(new TreeRenderer(*this));
+    addWindow(new TreeRenderer(*this), 0);
+    latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
+}
+```
+At this stage let's stop for a moment to talk about slightly extended functionalities of an addWindow() method. To avoid the mess in larger projects it is possible to group windows by adding a MEP::U_int32 argument as a second parameter. This type of solution is especially friendly with Enumeration types. In conclusion, while developing larger projects you can create enum type:
+```cpp
+enum WindowGroup: MEP::U_int32{
+    First = 1
+}
+```
+and then add it like that:
+```cpp
+void TreeDrawer::createWindows()
+{
+    ...
+    addWindow(new TreeRenderer(*this), WindowGroup::First);
     latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
@@ -51,7 +66,14 @@ Thanks to the **toFollow** u can pick up the channel which you would like to app
 ```cpp
 object.setFollow(*color_animation, MEP::ColorChannel::R | MEP::ColorChannel::A);
 ```
-Finally, your animation will not work if you do not add it to the objects list.
+Furthermore, __setFollow()__ have a pretty useful third argument. MEP::U_int32 type can specify a group of follow. The idea is the same as in the case of the aforementioned window management. You pick the group to which the given animation will be assigned. You can do it like that:
+```cpp
+object.setFollow(*color_animation, MEP::ColorChannel::R | MEP::ColorChannel::A, MyGroup::GroupA);
+```
+*Where MyGroup is a declared enum type*.
+Thanks to that approche you will be able to quickly mute groups: __muteFollowGroup()__ and execute instruction of the memebers: __execute()__.
+
+Finally, your animation will not work if you do not add it to the objects list. At this point, I will answer the question you surely asked. Yes, you can group your __newObjects()__. I will describe that process in the future.
 ```
 newObjects(animation, color_animation);
 ```

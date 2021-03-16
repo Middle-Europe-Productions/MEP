@@ -1,24 +1,7 @@
 var searchData=
 [
-  ['r_237',['R',['../namespace_m_e_p.html#a94e412441f9defd170aaa06300fca996aae710b90385321cbfe7bed7112b83e8d',1,'MEP']]],
-  ['release_238',['release',['../class_m_e_p_1_1_button.html#aadaec14dcfdef2ebca5db6f75476f1e6',1,'MEP::Button']]],
-  ['remove_239',['remove',['../class_m_e_p_1_1_group.html#a2086e3351df3d3dfdb0aebf6bf2b42d6',1,'MEP::Group']]],
-  ['removedrawtag_240',['removeDrawTag',['../class_m_e_p_1_1_drawable.html#afa0914d6321ec10b3de77cb4803a34dc',1,'MEP::Drawable']]],
-  ['render_241',['render',['../class_m_e_p_1_1_window_1_1_template_1_1_application.html#a9bb4850e02a8c310a2539550cff51928',1,'MEP::Window::Template::Application::render()'],['../class_m_e_p_1_1_window_1_1_base_window.html#ab55b7bddaa3f6ae6613a58d295b50613',1,'MEP::Window::BaseWindow::render()']]],
-  ['reset_242',['reset',['../class_m_e_p_1_1_animation_position.html#a2001565761545fe2a6544114cf99c2d5',1,'MEP::AnimationPosition']]],
-  ['resize_5fpos_243',['Resize_Pos',['../namespace_m_e_p.html#a9cc9b6dd820efed0b095305a7397b64ca1cf5ea21e4465af0bcfe97cd07eed147',1,'MEP']]],
-  ['resize_5frect_244',['Resize_Rect',['../namespace_m_e_p.html#a9cc9b6dd820efed0b095305a7397b64ca3bce15aa9c30135229c50ef08bc9238b',1,'MEP']]],
-  ['resize_5fscale_245',['Resize_Scale',['../namespace_m_e_p.html#a9cc9b6dd820efed0b095305a7397b64ca8a982eed281c1c9339747b3470cd9b72',1,'MEP']]],
-  ['resource_246',['Resource',['../struct_m_e_p_1_1_resource.html',1,'MEP::Resource'],['../struct_m_e_p_1_1_resource.html#a8829e01893281560a0fe70bf890f3435',1,'MEP::Resource::Resource(const ResourceType type, const U_int32 ID, const std::string &amp;name, unsigned int nofFrames=1, bool transparency=false)'],['../struct_m_e_p_1_1_resource.html#a3abe22c5926836696109720d4ff78d85',1,'MEP::Resource::Resource(const ResourceType type, const U_int32 ID, const U_int32 group, const std::string &amp;name, unsigned int nofFrames=1, bool transparency=false)'],['../struct_m_e_p_1_1_resource.html#a1e34cbf098866ae2f4547a4bfa0f666e',1,'MEP::Resource::Resource(const U_int32 ID, const std::string &amp;name, unsigned int nofFrames=1, bool transparency=false)'],['../struct_m_e_p_1_1_resource.html#a552b17fcd1be17eaa849732c4afed62d',1,'MEP::Resource::Resource(const U_int32 ID, const U_int32 group, const std::string &amp;name, unsigned int nofFrames=1, bool transparency=false)'],['../struct_m_e_p_1_1_resource.html#a57917ab73112bca3fa05a672aedb8293',1,'MEP::Resource::Resource(const U_int32 ID, std::list&lt; sf::Image &gt; &amp;images, const std::string &amp;name, bool transparency=false)'],['../struct_m_e_p_1_1_resource.html#a61b19bd3cf310015fd34049480e447ff',1,'MEP::Resource::Resource(const U_int32 ID, const U_int32 group, std::list&lt; sf::Image &gt; &amp;images, const std::string &amp;name, bool transparency=false)']]],
-  ['resourcealreadyexists_247',['ResourceAlreadyExists',['../struct_m_e_p_1_1_resource_exception.html#afac720dd080f1cd129b1a5a8c28a8aa7a035716ab0be3c51efb5b51d8ce9bac70',1,'MEP::ResourceException']]],
-  ['resourceexception_248',['ResourceException',['../struct_m_e_p_1_1_resource_exception.html',1,'MEP::ResourceException'],['../struct_m_e_p_1_1_resource_exception.html#a528e4218ed8f629142d1a83d52848b45',1,'MEP::ResourceException::ResourceException(const std::string &amp;name, const std::string &amp;msg, const ExceptionType &amp;type)'],['../struct_m_e_p_1_1_resource_exception.html#a02504c79d31477a3b3b687d793754341',1,'MEP::ResourceException::ResourceException(const char *name, const char *msg, const ExceptionType &amp;type)']]],
-  ['resourcename_249',['ResourceName',['../struct_m_e_p_1_1_resource_exception.html#ad35f9d710ef6f7e195d402c49ddc2aba',1,'MEP::ResourceException']]],
-  ['resources_250',['Resources',['../class_m_e_p_1_1_resources.html',1,'MEP::Resources'],['../class_m_e_p_1_1_resources.html#add520849311a87f15075f2fd9bd20d95',1,'MEP::Resources::Resources()']]],
-  ['resourcetype_251',['ResourceType',['../namespace_m_e_p.html#a3b45e2e31d398d928d922f34cd9a4224',1,'MEP']]],
-  ['run_252',['run',['../class_m_e_p_1_1_animation.html#a4c40b7152c181df1dd59d9c629c28253',1,'MEP::Animation::run()'],['../class_m_e_p_1_1_window_1_1_template_1_1_application.html#a42c7739e580f930a6f1d8fc01847be9f',1,'MEP::Window::Template::Application::run()']]],
-  ['runatend_253',['RunAtEnd',['../class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa15a1ddf91bfee43fd65a01473bf0b005',1,'MEP::Animation']]],
-  ['runatentry_254',['RunAtEntry',['../class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa07bb0873678479bce9509ffac12db34a',1,'MEP::Animation']]],
-  ['runatentryandend_255',['RunAtEntryAndEnd',['../class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aab8d153bf7e7939eafc4bc865a9ad4bcf',1,'MEP::Animation']]],
-  ['runbackward_256',['runBackward',['../class_m_e_p_1_1_animation_object.html#a4c025d04c097bc3a44ae8c2ba28c7727',1,'MEP::AnimationObject']]],
-  ['runforward_257',['runForward',['../class_m_e_p_1_1_animation_object.html#a8ed907174a77dcd3737d2abe494be534',1,'MEP::AnimationObject']]]
+  ['patch_20notes_267',['Patch notes',['../md__c___users__piotr__desktop__middle__europe__productions__m_e_p_libraries_test__m_e_p_lib_patch_notes.html',1,'']]],
+  ['positionanimation_268',['PositionAnimation',['../class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a8f62108e197bc47e1d42e727bd127a7a',1,'MEP::Animation']]],
+  ['positiontag_269',['PositionTag',['../class_m_e_p_1_1_text.html#a0bb160179b8967e96c5256822141505f',1,'MEP::Text']]],
+  ['pressed_270',['Pressed',['../namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ead78a68f6a85421ae121c2cb5b73a1040',1,'MEP']]]
 ];

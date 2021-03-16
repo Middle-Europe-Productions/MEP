@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -67,36 +67,50 @@ $(function() {
 <div class="title">Middle Europe Productions Library Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_C__Users_Piotr_Desktop_Middle_Europe_Productions_MEPLibrariesTest_README"></a><em>alpha v1.3.2</em> </p>
+<div class="textblock"><p><a class="anchor" id="md_C__Users_Piotr_Desktop_Middle_Europe_Productions_MEPLibrariesTest_README"></a><em>alpha v1.3.3</em> </p>
 <h3><a class="anchor" id="autotoc_md0"></a>
 Introduction</h3>
 <p>A <a class="el" href="namespace_m_e_p.html" title="A main sf::Font container.">MEP</a> library is designed to provide easy to use templates:</p><ul>
-<li>MEP::Window::Teamplate::Application<ul>
+<li>MEP::Teamplate::Application<ul>
 <li>Build in resource manager.</li>
 <li>Build in windows manager.</li>
 <li>All of the sf::RenderWindow futures.</li>
 </ul>
 </li>
 </ul>
-<p>MEP::Window::Teamplate::Hub</p><ul>
+<p>MEP::Teamplate::Hub</p><ul>
 <li>Exit button.</li>
 <li>Minimize button.</li>
 <li>Integration with the MEP::ColorAnimation</li>
 <li>Modern design.</li>
 </ul>
-<p>MEP::Window::Teamplate::BaseWindow</p><ul>
+<p>MEP::Teamplate::BaseWindow</p><ul>
 <li>Easy to use view manager.</li>
 <li>Automated animation activation.</li>
 <li>Automated objects displaying.</li>
 <li>Events handling.</li>
 </ul>
-<p>Variety of Objects and Animations:</p><ul>
+<p><a class="el" href="class_m_e_p_1_1_template_1_1_loading.html" title="Template of a custom Middle Europe Productions loading window.">MEP::Template::Loading</a></p><ul>
+<li>Multithreaded operation.</li>
+<li>Same properities as BaseWindow.</li>
+</ul>
+<p>Variety of Objects:</p><ul>
 <li><a class="el" href="class_m_e_p_1_1_texture_object.html" title="Basic MEP::Drawable element based on a single texture.">MEP::TextureObject</a></li>
 <li><a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">MEP::Text</a></li>
-<li><a class="el" href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation.">MEP::AnimationObject</a></li>
 <li><a class="el" href="class_m_e_p_1_1_button.html" title="MEP::Button provides a basic implementation of an object with the ability of display it on a screen.">MEP::Button</a></li>
+<li><a class="el" href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation.">MEP::AnimationObject</a></li>
+</ul>
+<p>And Animations:</p><ul>
 <li><a class="el" href="class_m_e_p_1_1_animation_position.html" title="MEP::AnimationPosition provides a basic implementation of a modification of the position.">MEP::AnimationPosition</a></li>
 <li><a class="el" href="class_m_e_p_1_1_animation_color.html" title="Class is responsible for the sf::Color transitions.">MEP::AnimationColor</a></li>
+<li><a class="el" href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation.">MEP::AnimationObject</a></li>
+</ul>
+<p>With the powerful control over them:</p><ul>
+<li><a class="el" href="class_m_e_p_1_1_animation_manager.html" title="Designed to control a set of animations.">MEP::AnimationManager</a><ul>
+<li>Animations groups.</li>
+<li>Simple execution of the instructions on them.</li>
+</ul>
+</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md1"></a>
 Platforms information and installation</h3>
@@ -110,7 +124,11 @@ Platforms information and installation</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Linux  </td><td class="markdownTableBodyNone">Ubuntu 20.o4  </td><td class="markdownTableBodyNone">✔️  </td><td class="markdownTableBodyNone">❌   </td></tr>
 </table>
-<p>In order to install the <a class="el" href="namespace_m_e_p.html" title="A main sf::Font container.">MEP</a> library download SFML 2.5.1 from <a href="https://www.sfml-dev.org/download/sfml/2.5.1/">official webside</a>. Then include the <a href="https://github.com/Middle-Europe-Productions/MEP/tree/master/MEP">MEP</a> file. <b>Additional features</b> First of all, I would like to highlight that the lack of installation of the additional features will not make the library stopped working. The only thing that you are going to miss is the resizable custom window. Unfortunately, SFML does not provide any support for that solution in a result I had to change some of the files listed in <code>SFML_2.5.1_Changes</code>. In order to make it work, you will need to download the SFML 2.5.1 source switch the files, and then build the library using CMake. <b>Keep in mind that I do not own any rights to the files in the</b> <code>SFML_2.5.1_Changes</code>. All of the changes are marked in the following way: </p><div class="fragment"><div class="line">/// &lt;MEP Modification&gt;</div>
+<p>In order to install the <a class="el" href="namespace_m_e_p.html" title="A main sf::Font container.">MEP</a> library download SFML 2.5.1 from <a href="https://www.sfml-dev.org/download/sfml/2.5.1/">official webside</a>. Then include the <a href="https://github.com/Middle-Europe-Productions/MEP/tree/master/MEP">MEP</a> file.</p>
+<p><b>Additional features</b></p>
+<p>First of all, I would like to highlight that the lack of installation of the additional features will not make the library stopped working. The only thing that you are going to miss is the resizable custom window. Unfortunately, SFML does not provide any support for that solution in a result I had to change some of the files listed in <code>SFML_2.5.1_Changes</code>. In order to make it work, you will need to download the SFML 2.5.1 source switch the files, and then build the library using CMake.</p>
+<p><b>Keep in mind that I do not own any rights to the files in the</b> <code>SFML_2.5.1_Changes</code>.</p>
+<p>All of the changes are marked in the following way: </p><div class="fragment"><div class="line">/// &lt;MEP Modification&gt;</div>
 <div class="line">Implementation</div>
 <div class="line">/// &lt;/MEP Modification&gt;</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md2"></a>

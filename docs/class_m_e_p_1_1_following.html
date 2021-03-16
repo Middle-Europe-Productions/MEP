@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -99,14 +99,14 @@ Inheritance diagram for MEP::Following:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:af7c054b0039410f44e0af93576599a3a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> { <br />
-&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa46dbb2fe48fe1beb6a7f2893c6ae56e5">FollowType::NotInit</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aac8308b1eba7ba926a61b8fd802194386">FollowType::Objects</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aada23aad563e137be979af9efb5e8606d">FollowType::X_Scale</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810">FollowType::Y_Scale</a>, 
+&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa46dbb2fe48fe1beb6a7f2893c6ae56e5">FollowType::NotInit</a> = 0, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aac8308b1eba7ba926a61b8fd802194386">FollowType::Objects</a> = 1, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aada23aad563e137be979af9efb5e8606d">FollowType::X_Scale</a> = 2, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810">FollowType::Y_Scale</a> = 3, 
 <br />
-&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa3df68b85d23637a7c82d111a000d2b80">FollowType::X_Pos</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aacb5feb1b7314637725a2e73bdc9f7295">FollowType::Color</a>
+&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa3df68b85d23637a7c82d111a000d2b80">FollowType::X_Pos</a> = 4, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a> = 5, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aacb5feb1b7314637725a2e73bdc9f7295">FollowType::Color</a> = 6
 <br />
  }</td></tr>
 <tr class="separator:af7c054b0039410f44e0af93576599a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,10 +129,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9602f062b555f89f3a470064c877a066"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c596f1fdf4aa3d68f9ae4bad874622b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c596f1fdf4aa3d68f9ae4bad874622b">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a9c596f1fdf4aa3d68f9ae4bad874622b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c81007da8335561e08e1d5d73104a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a28c81007da8335561e08e1d5d73104a4">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
-<tr class="separator:a28c81007da8335561e08e1d5d73104a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae7b8c72d2e1a2b4b37a2770809c91a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aae7b8c72d2e1a2b4b37a2770809c91a9">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> &amp;base, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> toFollow=MEP::ColorChannel::ALL)</td></tr>
-<tr class="separator:aae7b8c72d2e1a2b4b37a2770809c91a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88482237b59b8fb3eeb1ca8cf4114112"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a88482237b59b8fb3eeb1ca8cf4114112">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group=-1)</td></tr>
+<tr class="separator:a88482237b59b8fb3eeb1ca8cf4114112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe3d060b85e4112a9b73b34bd44ea8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6fe3d060b85e4112a9b73b34bd44ea8e">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> &amp;base, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> toFollow=MEP::ColorChannel::ALL, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group=-1)</td></tr>
+<tr class="separator:a6fe3d060b85e4112a9b73b34bd44ea8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf63b29de6c78552444b4128a02a916b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#abf63b29de6c78552444b4128a02a916b">muteFollowGroup</a> (<a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group)</td></tr>
+<tr class="separator:abf63b29de6c78552444b4128a02a916b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80912695614c3f59d53d0e9b90db0b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af80912695614c3f59d53d0e9b90db0b9">unMuteFollowGroup</a> (<a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group)</td></tr>
+<tr class="separator:af80912695614c3f59d53d0e9b90db0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433b2f621103eaa591a77596364e3c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a433b2f621103eaa591a77596364e3c0a">fullMuteFollow</a> ()</td></tr>
+<tr class="separator:a433b2f621103eaa591a77596364e3c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fa69040cc65ef89dac430597d05fd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a42fa69040cc65ef89dac430597d05fd4">fullUnMuteFollow</a> ()</td></tr>
+<tr class="separator:a42fa69040cc65ef89dac430597d05fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e89ae336d4f8f01e7332dc0dc6d66b5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a8e89ae336d4f8f01e7332dc0dc6d66b5">setPosition</a> (const sf::Vector2f pos)</td></tr>
 <tr class="separator:a8e89ae336d4f8f01e7332dc0dc6d66b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96a7d93171b1e9f053e0ad76b4b497d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a96a7d93171b1e9f053e0ad76b4b497d6">setPosition</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
@@ -157,6 +165,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4c550cc3aa1eb64e2526f8716dbea7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a5d47a3fc29c73533c51a01b11519e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af9a5d47a3fc29c73533c51a01b11519e">isFollowerActive</a> () const</td></tr>
 <tr class="separator:af9a5d47a3fc29c73533c51a01b11519e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc0c0a11ee39312a933f8dfc7d6b960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aacc0c0a11ee39312a933f8dfc7d6b960">followingDebug</a> (std::ostream &amp;out, const char *skipLines=&quot;&quot;) const</td></tr>
+<tr class="separator:aacc0c0a11ee39312a933f8dfc7d6b960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae517c33753f1c813c6b6827fc2bcc0dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ae517c33753f1c813c6b6827fc2bcc0dc">clearFollow</a> ()</td></tr>
 <tr class="separator:ae517c33753f1c813c6b6827fc2bcc0dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -166,8 +176,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a6277f689ed50b319442f787812bb8b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa010b9851b2fc3085d04cb5dc4d6ccdb"><td class="memItemLeft" align="right" valign="top">std::function&lt; sf::Vector2f()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aa010b9851b2fc3085d04cb5dc4d6ccdb">calc_scale</a> = [this]()-&gt;sf::Vector2f { return <a class="el" href="class_m_e_p_1_1_following.html#aa204b2a2b4f1b98652b8dc8fc321095f">m_scale</a>; }</td></tr>
 <tr class="separator:aa010b9851b2fc3085d04cb5dc4d6ccdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f1fb8b755d44375b723f591d910b62b"><td class="memItemLeft" align="right" valign="top">std::list&lt; std::unique_ptr&lt; Follow &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">followingList</a></td></tr>
-<tr class="separator:a6f1fb8b755d44375b723f591d910b62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78eaab4a9eefcdc95f656ea4fcb67cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_ptools_1_1_group_manager.html">MEPtools::GroupManager</a>&lt; Follow, std::unique_ptr&lt; Follow &gt;, std::list&lt; std::unique_ptr&lt; Follow &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a78eaab4a9eefcdc95f656ea4fcb67cb0">followingListv2</a></td></tr>
+<tr class="separator:a78eaab4a9eefcdc95f656ea4fcb67cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1359b1ea309834062aec84c77fd21e"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a> = {0.f, 0.f}</td></tr>
 <tr class="separator:adc1359b1ea309834062aec84c77fd21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47dbfa57b6c3229f54e37f36006999d7"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a47dbfa57b6c3229f54e37f36006999d7">m_posMove</a> = { 0.f, 0.f }</td></tr>
@@ -469,6 +479,95 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aacc0c0a11ee39312a933f8dfc7d6b960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc0c0a11ee39312a933f8dfc7d6b960">&#9670;&nbsp;</a></span>followingDebug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::followingDebug </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>skipLines</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position.">Following</a> debug message. </p>
+
+</div>
+</div>
+<a id="a433b2f621103eaa591a77596364e3c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a433b2f621103eaa591a77596364e3c0a">&#9670;&nbsp;</a></span>fullMuteFollow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::fullMuteFollow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Full mute of the following objects. </p>
+
+</div>
+</div>
+<a id="a42fa69040cc65ef89dac430597d05fd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42fa69040cc65ef89dac430597d05fd4">&#9670;&nbsp;</a></span>fullUnMuteFollow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::fullUnMuteFollow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Full mute of the following objects. </p>
+
+</div>
+</div>
 <a id="a99b1de43071cd67845aedc49c6b0e3de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99b1de43071cd67845aedc49c6b0e3de">&#9670;&nbsp;</a></span>getColor()</h2>
 
@@ -659,6 +758,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abf63b29de6c78552444b4128a02a916b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf63b29de6c78552444b4128a02a916b">&#9670;&nbsp;</a></span>muteFollowGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::muteFollowGroup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Mutes a group of objects. </p>
+
+</div>
+</div>
 <a id="a9c596f1fdf4aa3d68f9ae4bad874622b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c596f1fdf4aa3d68f9ae4bad874622b">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
 
@@ -725,8 +851,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aae7b8c72d2e1a2b4b37a2770809c91a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae7b8c72d2e1a2b4b37a2770809c91a9">&#9670;&nbsp;</a></span>setFollow() <span class="overload">[1/2]</span></h2>
+<a id="a6fe3d060b85e4112a9b73b34bd44ea8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe3d060b85e4112a9b73b34bd44ea8e">&#9670;&nbsp;</a></span>setFollow() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +870,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td>
-          <td class="paramname"><em>toFollow</em> = <code>MEP::ColorChannel::ALL</code>&#160;</td>
+          <td class="paramname"><em>toFollow</em> = <code>MEP::ColorChannel::ALL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -769,8 +901,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a28c81007da8335561e08e1d5d73104a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28c81007da8335561e08e1d5d73104a4">&#9670;&nbsp;</a></span>setFollow() <span class="overload">[2/2]</span></h2>
+<a id="a88482237b59b8fb3eeb1ca8cf4114112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88482237b59b8fb3eeb1ca8cf4114112">&#9670;&nbsp;</a></span>setFollow() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -788,7 +920,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -948,6 +1086,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af80912695614c3f59d53d0e9b90db0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80912695614c3f59d53d0e9b90db0b9">&#9670;&nbsp;</a></span>unMuteFollowGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Following::unMuteFollowGroup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Unmutes a group of objects. </p>
+
+</div>
+</div>
 <a id="abeda088403795e9610f49507840566da"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abeda088403795e9610f49507840566da">&#9670;&nbsp;</a></span>updatePosition()</h2>
 
@@ -1045,8 +1210,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6f1fb8b755d44375b723f591d910b62b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f1fb8b755d44375b723f591d910b62b">&#9670;&nbsp;</a></span>followingList</h2>
+<a id="a78eaab4a9eefcdc95f656ea4fcb67cb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78eaab4a9eefcdc95f656ea4fcb67cb0">&#9670;&nbsp;</a></span>followingListv2</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1055,7 +1220,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::list&lt;std::unique_ptr&lt;Follow&gt; &gt; MEP::Following::followingList</td>
+          <td class="memname"><a class="el" href="class_m_e_ptools_1_1_group_manager.html">MEPtools::GroupManager</a>&lt;Follow, std::unique_ptr&lt;Follow&gt;, std::list&lt;std::unique_ptr&lt;Follow&gt; &gt; &gt; MEP::Following::followingListv2</td>
         </tr>
       </table>
   </td>

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -96,11 +96,11 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span><span class="preprocessor">#ifndef MEP_BUTTON_H</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define MEP_BUTTON_H</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&quot;AnimationObject.h&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include&quot;NonCopyable.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include&lt;MEPGraphics/AnimationObject.h&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_m_e_p.html">MEP</a> {</div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92e">   34</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92e">ButtonStatus</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        Base = (int)0,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">Base</a> = (int)0,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        Active = (<span class="keywordtype">int</span>)1,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">Pressed</a> = (int)2</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    };</div>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_base;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_active;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_pressed;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92e">ButtonStatus</a> m_status = ButtonStatus::Base;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92e">ButtonStatus</a> m_status = <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_m_e_p_1_1_button.html#a78637e085b15c02cddc2f031c554fdf6">Button</a>(<span class="keyword">const</span> <a class="code" href="class_m_e_p_1_1_object.html">Object</a>&amp; x,</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> active_breakpoint,</div>
@@ -187,7 +187,7 @@ $(function() {
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                    }</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                    updateSprite(**currentFrame);</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                }</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_status == ButtonStatus::Base and index_currentFrame != m_base) {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (m_status == <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a> and index_currentFrame != m_base) {</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    <span class="keywordflow">if</span> (index_currentFrame &gt; m_active) {</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                        <span class="keywordflow">while</span> (index_currentFrame != m_base) {</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                            index_currentFrame--;</div>
@@ -207,7 +207,7 @@ $(function() {
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                }</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            }</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">if</span> (!followingList.empty()) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">if</span> (!followingListv2._empty()) {</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            updateSprite();</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        }</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    }</div>
@@ -217,7 +217,7 @@ $(function() {
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">if</span> (m_block)</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keywordtype">bool</span> isTran = isTansparent(pos.x, pos.y);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> (event.type == sf::Event::MouseMoved or !followingList.empty()) {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> (event.type == sf::Event::MouseMoved or !followingListv2._empty()) {</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">if</span> (!isTran)</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                <span class="keywordflow">if</span> (sf::Mouse::isButtonPressed(sf::Mouse::Left))</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                    changeStatus(<a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Pressed</a>);</div>
@@ -229,7 +229,7 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        changeStatus(ButtonStatus::Active);</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                changeStatus(ButtonStatus::Base);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                changeStatus(<a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a>);</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        }</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.type == sf::Event::MouseButtonPressed) {</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">if</span> (event.mouseButton.button == sf::Mouse::Left) {</div>
@@ -293,20 +293,20 @@ $(function() {
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            }</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <a class="code" href="class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae">changeStatus</a>(ButtonStatus::Base);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <a class="code" href="class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae">changeStatus</a>(<a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a>);</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        }</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
 <div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_button.html#abfd1ffd204820ca2f1a2fce5a68c5203">  307</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="class_m_e_p_1_1_button.html#abfd1ffd204820ca2f1a2fce5a68c5203">Button::forceRelease</a>()</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        m_status = ButtonStatus::Base;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        m_status = <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a>;</div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
 <div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="class_m_e_p_1_1_button.html#a5792277c85b9f76d9a0970b8b9b09130">  312</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_m_e_p_1_1_button.html#a5792277c85b9f76d9a0970b8b9b09130">Button::forceReleased</a>() {</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_m_e_p_1_1_animation.html#aaa66c896894c67bd4d937074bed4dcd4">isRunning</a>)</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        m_status = ButtonStatus::Base;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        m_status = <a class="code" href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">ButtonStatus::Base</a>;</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <a class="code" href="class_m_e_p_1_1_animation.html#ad281f63f6e0eb482c4d6145147e026f7">direction</a> = <a class="code" href="namespace_m_e_p.html#a380e67c81cd7adab1af647419de91f91a67d2f6740a8eaebf4d5c6f79be8da481">Direction::Backwards</a>;</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="class_m_e_p_1_1_animation_object.html#aa483f139a88f599c465e1916db744841">currentFrame</a> = <a class="code" href="class_m_e_p_1_1_object.html#ace306b628059ad36bf2094b51143b1cf">texture</a>-&gt;begin();</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <a class="code" href="class_m_e_p_1_1_animation_object.html#a8617e84821b3f00e1a9fec6d5a532fd7">index_currentFrame</a> = 0;</div>
@@ -347,7 +347,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_m_e_p_1_1_animation_object_html_a8617e84821b3f00e1a9fec6d5a532fd7"><div class="ttname"><a href="class_m_e_p_1_1_animation_object.html#a8617e84821b3f00e1a9fec6d5a532fd7">MEP::AnimationObject::index_currentFrame</a></div><div class="ttdeci">unsigned int index_currentFrame</div><div class="ttdef"><b>Definition:</b> AnimationObject.h:42</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a5792277c85b9f76d9a0970b8b9b09130"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a5792277c85b9f76d9a0970b8b9b09130">MEP::Button::forceReleased</a></div><div class="ttdeci">bool forceReleased()</div><div class="ttdef"><b>Definition:</b> Button.h:312</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_object_html_ace306b628059ad36bf2094b51143b1cf"><div class="ttname"><a href="class_m_e_p_1_1_object.html#ace306b628059ad36bf2094b51143b1cf">MEP::Object::texture</a></div><div class="ttdeci">std::list&lt; sf::Texture * &gt; * texture</div><div class="ttdef"><b>Definition:</b> Object.h:73</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_object_html_ace306b628059ad36bf2094b51143b1cf"><div class="ttname"><a href="class_m_e_p_1_1_object.html#ace306b628059ad36bf2094b51143b1cf">MEP::Object::texture</a></div><div class="ttdeci">std::list&lt; sf::Texture * &gt; * texture</div><div class="ttdef"><b>Definition:</b> Object.h:72</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a7c45d7fa747472a506b56878f930684b"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a7c45d7fa747472a506b56878f930684b">MEP::Button::isBlocked</a></div><div class="ttdeci">bool isBlocked() const</div><div class="ttdef"><b>Definition:</b> Button.h:347</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_abd90699e4217da6560e62a0bd948fcc0"><div class="ttname"><a href="class_m_e_p_1_1_button.html#abd90699e4217da6560e62a0bd948fcc0">MEP::Button::mouseActivity</a></div><div class="ttdeci">bool mouseActivity(const sf::Vector2i &amp;pos)</div><div class="ttdef"><b>Definition:</b> Button.h:288</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html"><div class="ttname"><a href="class_m_e_p_1_1_button.html">MEP::Button</a></div><div class="ttdoc">MEP::Button provides a basic implementation of an object with the ability of display it on a screen.</div><div class="ttdef"><b>Definition:</b> Button.h:45</div></div>
@@ -356,24 +356,24 @@ $(function() {
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a2af07d2bd8cb20f1a83132b57d85cb0a"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a2af07d2bd8cb20f1a83132b57d85cb0a">MEP::Button::changeStatus</a></div><div class="ttdeci">void changeStatus(const ButtonStatus &amp;status)</div><div class="ttdef"><b>Definition:</b> Button.h:89</div></div>
 <div class="ttc" id="anamespace_m_e_p_html_a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49"><div class="ttname"><a href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92ea095a1b43effec73955e31e790438de49">MEP::ButtonStatus::Base</a></div><div class="ttdeci">@ Base</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a820f3c6cebdfdac05b09f26be6e1bb61"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a820f3c6cebdfdac05b09f26be6e1bb61">MEP::Button::getStatus</a></div><div class="ttdeci">const ButtonStatus &amp; getStatus() const</div><div class="ttdef"><b>Definition:</b> Button.h:94</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_object_html_a51c0fbc67a123c6fd08f4195fbca142b"><div class="ttname"><a href="class_m_e_p_1_1_object.html#a51c0fbc67a123c6fd08f4195fbca142b">MEP::Object::getNufTextures</a></div><div class="ttdeci">unsigned long getNufTextures() const</div><div class="ttdef"><b>Definition:</b> Object.h:142</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_html_a47013707e6e636ae293f5ddb2193d5ae"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae">MEP::Animation::changeStatus</a></div><div class="ttdeci">void changeStatus()</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:128</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_object_html_a51c0fbc67a123c6fd08f4195fbca142b"><div class="ttname"><a href="class_m_e_p_1_1_object.html#a51c0fbc67a123c6fd08f4195fbca142b">MEP::Object::getNufTextures</a></div><div class="ttdeci">unsigned long getNufTextures() const</div><div class="ttdef"><b>Definition:</b> Object.h:141</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_html_a47013707e6e636ae293f5ddb2193d5ae"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae">MEP::Animation::changeStatus</a></div><div class="ttdeci">void changeStatus()</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:182</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_ab997781d738365c6dead52bca3aff65b"><div class="ttname"><a href="class_m_e_p_1_1_button.html#ab997781d738365c6dead52bca3aff65b">MEP::Button::handleEvent</a></div><div class="ttdeci">bool handleEvent(sf::Event &amp;event, sf::Vector2i &amp;pos)</div><div class="ttdef"><b>Definition:</b> Button.h:221</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_sprite_html_a3b2b67a59a37785661d2484f62c34578"><div class="ttname"><a href="class_m_e_p_1_1_sprite.html#a3b2b67a59a37785661d2484f62c34578">MEP::Sprite::updateSprite</a></div><div class="ttdeci">virtual void updateSprite()</div><div class="ttdef"><b>Definition:</b> Sprite.h:49</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_ab40b816e8cafd2cbe7632e5a8b197394"><div class="ttname"><a href="class_m_e_p_1_1_button.html#ab40b816e8cafd2cbe7632e5a8b197394">MEP::Button::update</a></div><div class="ttdeci">void update(sf::Time &amp;currentTime) override</div><div class="ttdef"><b>Definition:</b> Button.h:179</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_abfd1ffd204820ca2f1a2fce5a68c5203"><div class="ttname"><a href="class_m_e_p_1_1_button.html#abfd1ffd204820ca2f1a2fce5a68c5203">MEP::Button::forceRelease</a></div><div class="ttdeci">void forceRelease()</div><div class="ttdef"><b>Definition:</b> Button.h:307</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a878cde3beab4d69349e0c3f9f3114922"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a878cde3beab4d69349e0c3f9f3114922">MEP::Button::forcePress</a></div><div class="ttdeci">void forcePress()</div><div class="ttdef"><b>Definition:</b> Button.h:323</div></div>
 <div class="ttc" id="anamespace_m_e_p_html_a970ea6afc635ab884060d7c3630ac92e"><div class="ttname"><a href="namespace_m_e_p.html#a970ea6afc635ab884060d7c3630ac92e">MEP::ButtonStatus</a></div><div class="ttdeci">ButtonStatus</div><div class="ttdef"><b>Definition:</b> Button.h:34</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_html_ad281f63f6e0eb482c4d6145147e026f7"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#ad281f63f6e0eb482c4d6145147e026f7">MEP::Animation::direction</a></div><div class="ttdeci">Direction direction</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:86</div></div>
-<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:31</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_object_html"><div class="ttname"><a href="class_m_e_p_1_1_object.html">MEP::Object</a></div><div class="ttdoc">MEP::Object is a container of a sf::Texture it also have built in memory management.</div><div class="ttdef"><b>Definition:</b> Object.h:41</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_html_ad281f63f6e0eb482c4d6145147e026f7"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#ad281f63f6e0eb482c4d6145147e026f7">MEP::Animation::direction</a></div><div class="ttdeci">Direction direction</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:99</div></div>
+<div class="ttc" id="anamespace_m_e_p_html"><div class="ttname"><a href="namespace_m_e_p.html">MEP</a></div><div class="ttdoc">A main sf::Font container.</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:32</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_object_html"><div class="ttname"><a href="class_m_e_p_1_1_object.html">MEP::Object</a></div><div class="ttdoc">MEP::Object is a container of a sf::Texture it also have built in memory management.</div><div class="ttdef"><b>Definition:</b> Object.h:40</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_aadaec14dcfdef2ebca5db6f75476f1e6"><div class="ttname"><a href="class_m_e_p_1_1_button.html#aadaec14dcfdef2ebca5db6f75476f1e6">MEP::Button::release</a></div><div class="ttdeci">void release()</div><div class="ttdef"><b>Definition:</b> Button.h:343</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_abbe604c922ef6e80d7c9a7c9bdc7a2af"><div class="ttname"><a href="class_m_e_p_1_1_button.html#abbe604c922ef6e80d7c9a7c9bdc7a2af">MEP::Button::block</a></div><div class="ttdeci">void block()</div><div class="ttdef"><b>Definition:</b> Button.h:339</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a78637e085b15c02cddc2f031c554fdf6"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a78637e085b15c02cddc2f031c554fdf6">MEP::Button::Button</a></div><div class="ttdeci">Button(const Object &amp;x, unsigned int active_breakpoint, sf::Vector2f pos={ 0, 0 }, sf::Vector2f scale={ 1, 1 })</div><div class="ttdef"><b>Definition:</b> Button.h:147</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a621917217c0883994c59e33ba5ad78e5"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a621917217c0883994c59e33ba5ad78e5">MEP::Button::isTansparent</a></div><div class="ttdeci">bool isTansparent(unsigned int x, unsigned int y) override</div><div class="ttdef"><b>Definition:</b> Button.h:257</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_object_html_aa483f139a88f599c465e1916db744841"><div class="ttname"><a href="class_m_e_p_1_1_animation_object.html#aa483f139a88f599c465e1916db744841">MEP::AnimationObject::currentFrame</a></div><div class="ttdeci">std::list&lt; sf::Texture * &gt;::iterator currentFrame</div><div class="ttdef"><b>Definition:</b> AnimationObject.h:40</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_animation_object_html"><div class="ttname"><a href="class_m_e_p_1_1_animation_object.html">MEP::AnimationObject</a></div><div class="ttdoc">MEP::AnimationObject is a sprite with the ability to dislay an animation.</div><div class="ttdef"><b>Definition:</b> AnimationObject.h:37</div></div>
-<div class="ttc" id="aclass_m_e_p_1_1_animation_html_aaa66c896894c67bd4d937074bed4dcd4"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#aaa66c896894c67bd4d937074bed4dcd4">MEP::Animation::isRunning</a></div><div class="ttdeci">bool isRunning</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:84</div></div>
+<div class="ttc" id="aclass_m_e_p_1_1_animation_html_aaa66c896894c67bd4d937074bed4dcd4"><div class="ttname"><a href="class_m_e_p_1_1_animation.html#aaa66c896894c67bd4d937074bed4dcd4">MEP::Animation::isRunning</a></div><div class="ttdeci">bool isRunning</div><div class="ttdef"><b>Definition:</b> AnimationBase.h:97</div></div>
 <div class="ttc" id="anamespace_m_e_p_html_a380e67c81cd7adab1af647419de91f91a67d2f6740a8eaebf4d5c6f79be8da481"><div class="ttname"><a href="namespace_m_e_p.html#a380e67c81cd7adab1af647419de91f91a67d2f6740a8eaebf4d5c6f79be8da481">MEP::Direction::Forward</a></div><div class="ttdeci">@ Forward</div></div>
 <div class="ttc" id="aclass_m_e_p_1_1_button_html_a235d78de30481f6cbcd6170029b0812f"><div class="ttname"><a href="class_m_e_p_1_1_button.html#a235d78de30481f6cbcd6170029b0812f">MEP::Button::forcePressed</a></div><div class="ttdeci">bool forcePressed()</div><div class="ttdef"><b>Definition:</b> Button.h:328</div></div>
 <!-- start footer part -->

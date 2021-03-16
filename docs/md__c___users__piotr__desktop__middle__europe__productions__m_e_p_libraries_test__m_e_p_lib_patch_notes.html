@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ MEP Lib version alpha 1.2:</h1>
  -Implementation of a <a class="el" href="class_m_e_p_1_1_animation_color.html" title="Class is responsible for the sf::Color transitions.">MEP::AnimationColor</a> it works with the use of <a class="el" href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position.">MEP::Following</a>. Generally it is another type of a FollowType. Enjoy :) <br  />
  -DrawTag has been added to the <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> object. Currently only ViewLock is avalible. If window is using custom view an object with the tag will be rendered using master app view. <br  />
  -Added &lt;&lt; operator for all <a class="el" href="class_m_e_p_1_1_sprite.html" title="Basically the SFML sprite with the support for the MEP functionalities.">MEP::Sprite(MEP::TextureObject, MEP::Button, MEP::AnimationObject)</a> and <a class="el" href="class_m_e_p_1_1_text.html" title="A basic Text class.">MEP::Text</a>. The operator copies position, scale and color (Following attributes) to a left object. <br  />
- -When ID of a <a class="el" href="struct_m_e_p_1_1_window_1_1_window_exception.html" title="MEP::Window::BaseWindow exceptions handler.">MEP::Window::WindowException</a> is not specified exception will ba a master exception. -better naming &amp; getLastAccess(); in base manager. </p>
+ -When ID of a MEP::Window::WindowException is not specified exception will ba a master exception. -better naming &amp; getLastAccess(); in base manager. </p>
 <h2><a class="anchor" id="autotoc_md12"></a>
 1.01.2021</h2>
 <h1><a class="anchor" id="autotoc_md13"></a>
@@ -162,6 +162,29 @@ MEP lib version alpha 1.3.2</h1>
  -Now u can use up to 4 MEP::ColorAnimation in one objects (for each individual channel) <br  />
  -Now there is a possibility to add lower importance objects. In the future there are going to be layers. (newObject(object, true(lower importance))<br  />
  -If you move the texture using movePosition() method it will be applyed on addMethodPos() <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md18"></a>
+16.03.2021</h2>
+<h1><a class="anchor" id="autotoc_md19"></a>
+MEP lib version alpha 1.3.3</h1>
+<p>-Improved MEP::Loading class. <br  />
+ <br  />
+ -Deleted Window namespace. <br  />
+ -Recreated the Resource class. Now individual members are using GroupManager which is a map&lt;map&gt;. In other wards groups, manager and subgroup manager is a balancing tree. Which provides better access time O(logn + logm) instead of O(n + m). Where n is the number of groups and m is the number of elements in the n-th group. <br  />
+ -Library share the same aforementioned container. <br  />
+ -Diagnostic tool for the BaseWindow class is now available. debugOutput(std::osteam&amp; out) will output information regarding the order of displaying the object of the screen every object currently available in the render queue. If the message Unavailable was displayed the object was deleted. If the message Base Class was displayed object does not have an override of the &lt;&lt; operator. <br  />
+ -Deleted setting window connection in BaseWindow. <br  />
+ -Redesign of application window container. <br  />
+ -Better view manager. <br  />
+ -Namming: Base.h -&gt; <a class="el" href="_base_window_8h_source.html">BaseWindow.h</a> <br  />
+ -Now you can apply unlimited nummber of animations on the Object. <br  />
+ -New setDelay(const sf::Time&amp;, bool = false) method. Now does not activate the animation and inputs two arguments delay(time, bool = false) where boolean one set to true the delay is activated every time we use run(). If an animation has a tag RunAtEnd or RunAtEntry there is also a possibility of delaying the Entrance and Exit thanks to the setEntryDelay() and setExitDelay() in the case of RunAtLowEnd or RunAtLowEntry you will have to use setLowEntryDelay() and setLowExitDelay() in order to delay Low Entrance and Low Exit. <br  />
+ -Objects and Animations are now Delete safe. If you delete any of the <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a>, Window and Following lists will ignore it instead of throwing an error. <br  />
+ -You can now divide animations following into groups. <br  />
+ -You can mute follow of the group of animations. <br  />
+ -New animation manager was added. Thanks to that container you can divide animations into groups and execute commands directly on them. Managers run on the shared container. <br  />
+ -Two new window states are added. LowEntry and LowExit. LowEntry menu activates every animation with the RunAtLowEntry tag and then enters the <em>InProgress state</em>!. LowExit executes every animation with RunAtLowExit tag and then enters null. <br  />
+ -MEP::Animation::AdditionalTag -&gt; <a class="el" href="namespace_m_e_p.html#a679567e35c1bb79a6e76b0d2c80ab25c">MEP::AdditionalTag</a> &amp; AdditionalTag is now Bitwise <br  />
 </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

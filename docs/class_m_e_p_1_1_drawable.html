@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -69,6 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="class_m_e_p_1_1_drawable-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MEP::Drawable Class Reference</div>  </div>
@@ -97,6 +99,14 @@ Inheritance diagram for MEP::Drawable:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a0c9a4f00a1dbeacd3df2b363364ab017"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a0c9a4f00a1dbeacd3df2b363364ab017">_link</a> (std::shared_ptr&lt; bool &gt; _li)</td></tr>
+<tr class="separator:a0c9a4f00a1dbeacd3df2b363364ab017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59980fd411972b9a681b882a6af21508"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a59980fd411972b9a681b882a6af21508">_linkAddr</a> ()</td></tr>
+<tr class="separator:a59980fd411972b9a681b882a6af21508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f845af3201f45b5303e039b9e0833c6"><td class="memItemLeft" align="right" valign="top">const std::shared_ptr&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a1f845af3201f45b5303e039b9e0833c6">_linkAddr</a> () const</td></tr>
+<tr class="separator:a1f845af3201f45b5303e039b9e0833c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909682640134aa768048112c786ed9b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a909682640134aa768048112c786ed9b4">_isLinked</a> () const</td></tr>
+<tr class="separator:a909682640134aa768048112c786ed9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bd2226a40238d30a3a713e747a614c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a8bd2226a40238d30a3a713e747a614c6">getDrawTag</a> () const</td></tr>
 <tr class="separator:a8bd2226a40238d30a3a713e747a614c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae18b64d0aa33648673d5263ca4bcbf14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae18b64d0aa33648673d5263ca4bcbf14">setDrawTag</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> tag)</td></tr>
@@ -113,14 +123,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a127ce6205d605cb7701dd65216799641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a414509a099f09dd1e02e25f79a6ef05a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a414509a099f09dd1e02e25f79a6ef05a">update</a> (sf::Time &amp;)</td></tr>
 <tr class="separator:a414509a099f09dd1e02e25f79a6ef05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a477b47c638f6b6f9f48aa14ba5bc8bcf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a477b47c638f6b6f9f48aa14ba5bc8bcf">entryUpdate</a> (sf::Time &amp;currentTime)</td></tr>
-<tr class="separator:a477b47c638f6b6f9f48aa14ba5bc8bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0570882fc96c96fd1adf316b319146"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a2b0570882fc96c96fd1adf316b319146">exitUpdate</a> (sf::Time &amp;currentTime)</td></tr>
-<tr class="separator:a2b0570882fc96c96fd1adf316b319146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c7dd9eacabdebc4482305cafd95738"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a36c7dd9eacabdebc4482305cafd95738">entryUpdate</a> (sf::Time &amp;currentTime, bool low=false)</td></tr>
+<tr class="separator:a36c7dd9eacabdebc4482305cafd95738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514ede63f397a7fc965552a4c484eb1a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a514ede63f397a7fc965552a4c484eb1a">exitUpdate</a> (sf::Time &amp;currentTime, bool low=false)</td></tr>
+<tr class="separator:a514ede63f397a7fc965552a4c484eb1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a5e089ef0c013202668665457a71be9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a6a5e089ef0c013202668665457a71be9">isActive</a> () const</td></tr>
 <tr class="separator:a6a5e089ef0c013202668665457a71be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed05c54ef038f1fef8b2385c0689fe66"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#aed05c54ef038f1fef8b2385c0689fe66">debugOutput</a> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:aed05c54ef038f1fef8b2385c0689fe66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e3510eb4e5f1780ce147e2c33846e9e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a5e3510eb4e5f1780ce147e2c33846e9e">~Drawable</a> ()</td></tr>
 <tr class="separator:a5e3510eb4e5f1780ce147e2c33846e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad0954f4068d3ddf813a0423aaf117918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ad0954f4068d3ddf813a0423aaf117918">notify</a> ()</td></tr>
+<tr class="separator:ad0954f4068d3ddf813a0423aaf117918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568804decba518c6d0ebcf2ab869322a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a568804decba518c6d0ebcf2ab869322a">drawTagDebug</a> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:a568804decba518c6d0ebcf2ab869322a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ae095b3433c91a1b1e85a6b5b0ef467cb"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae095b3433c91a1b1e85a6b5b0ef467cb">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="class_m_e_p_1_1_drawable.html">Drawable</a> &amp;x)</td></tr>
+<tr class="separator:ae095b3433c91a1b1e85a6b5b0ef467cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> provides a basic implementation of an object with the ability of display it on a screen. </p>
@@ -177,6 +201,111 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a909682640134aa768048112c786ed9b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a909682640134aa768048112c786ed9b4">&#9670;&nbsp;</a></span>_isLinked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MEP::Drawable::_isLinked </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the information about the activity of the link. Boolean value output true when resource is active. </p>
+
+</div>
+</div>
+<a id="a0c9a4f00a1dbeacd3df2b363364ab017"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c9a4f00a1dbeacd3df2b363364ab017">&#9670;&nbsp;</a></span>_link()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Drawable::_link </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; bool &gt;&#160;</td>
+          <td class="paramname"><em>_li</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Links the notification link. Boolean value output true when resource is active. </p>
+
+</div>
+</div>
+<a id="a59980fd411972b9a681b882a6af21508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59980fd411972b9a681b882a6af21508">&#9670;&nbsp;</a></span>_linkAddr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;bool&gt; MEP::Drawable::_linkAddr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the notification link. Boolean value output true when resource is active. </p>
+
+</div>
+</div>
+<a id="a1f845af3201f45b5303e039b9e0833c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f845af3201f45b5303e039b9e0833c6">&#9670;&nbsp;</a></span>_linkAddr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::shared_ptr&lt;bool&gt; MEP::Drawable::_linkAddr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Outputs the notification link. Boolean value output true when resource is active. </p>
+
+</div>
+</div>
 <a id="a1aabfdbeca0804c79bbe8cda9e554954"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1aabfdbeca0804c79bbe8cda9e554954">&#9670;&nbsp;</a></span>addDrawTag()</h2>
 
@@ -207,6 +336,35 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>: True - draw tag was added. False - draw tag is already added. </dd></dl>
+
+</div>
+</div>
+<a id="aed05c54ef038f1fef8b2385c0689fe66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed05c54ef038f1fef8b2385c0689fe66">&#9670;&nbsp;</a></span>debugOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void MEP::Drawable::debugOutput </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Debug output of the class. </p>
+
+<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_texture_object.html#af80a64c8386b8285a5c46c6a5f7257ff">MEP::TextureObject</a>, <a class="el" href="class_m_e_p_1_1_text.html#ad9972f3e6bdffd9fdeb94e5494d60dac">MEP::Text</a>, <a class="el" href="class_m_e_p_1_1_object.html#a36ccf8e71ec3ce1c654c24fe97e07046">MEP::Object</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#a6f17789852abdc566fedc7537c37bb1a">MEP::AnimationPosition</a>, <a class="el" href="class_m_e_p_1_1_animation_object.html#a128f77363e3d15ec24d58f97b04f5623">MEP::AnimationObject</a>, and <a class="el" href="class_m_e_p_1_1_animation_color.html#a0dbcd7e88a3407f1e80227786895e9b7">MEP::AnimationColor</a>.</p>
 
 </div>
 </div>
@@ -245,8 +403,35 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a477b47c638f6b6f9f48aa14ba5bc8bcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a477b47c638f6b6f9f48aa14ba5bc8bcf">&#9670;&nbsp;</a></span>entryUpdate()</h2>
+<a id="a568804decba518c6d0ebcf2ab869322a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568804decba518c6d0ebcf2ab869322a">&#9670;&nbsp;</a></span>drawTagDebug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Drawable::drawTagDebug </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>DrawTag output </p>
+
+</div>
+</div>
+<a id="a36c7dd9eacabdebc4482305cafd95738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36c7dd9eacabdebc4482305cafd95738">&#9670;&nbsp;</a></span>entryUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,8 +443,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void MEP::Drawable::entryUpdate </td>
           <td>(</td>
           <td class="paramtype">sf::Time &amp;&#160;</td>
-          <td class="paramname"><em>currentTime</em></td><td>)</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>low</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -275,12 +470,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_object.html#a04215bd7a8b12c03b0330cb7b9e24d17">MEP::Object</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#ac7d4561e291fc865e71274f614f94590">MEP::AnimationPosition</a>, and <a class="el" href="class_m_e_p_1_1_animation_object.html#a858516642aea5e3b754b4092acddbbc6">MEP::AnimationObject</a>.</p>
+<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_object.html#ade15096fee24d8455c8f67596e2711ab">MEP::Object</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#a8dfa9980cab4b8d51b31d2eb25fef0dc">MEP::AnimationPosition</a>, and <a class="el" href="class_m_e_p_1_1_animation_object.html#aece3c4f1cf2915a2cffac8c10d707821">MEP::AnimationObject</a>.</p>
 
 </div>
 </div>
-<a id="a2b0570882fc96c96fd1adf316b319146"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b0570882fc96c96fd1adf316b319146">&#9670;&nbsp;</a></span>exitUpdate()</h2>
+<a id="a514ede63f397a7fc965552a4c484eb1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514ede63f397a7fc965552a4c484eb1a">&#9670;&nbsp;</a></span>exitUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,8 +487,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void MEP::Drawable::exitUpdate </td>
           <td>(</td>
           <td class="paramtype">sf::Time &amp;&#160;</td>
-          <td class="paramname"><em>currentTime</em></td><td>)</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>low</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -309,7 +514,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_object.html#a78c601c998a43a041bac46d4c5823e13">MEP::Object</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#aa76d0fd7ecc79b64716704cb7b598a8f">MEP::AnimationPosition</a>, and <a class="el" href="class_m_e_p_1_1_animation_object.html#a46b71540d0bb50b30c42a7726f5e3389">MEP::AnimationObject</a>.</p>
+<p>Reimplemented in <a class="el" href="class_m_e_p_1_1_object.html#a3bcc5b2f08c5db6eecca39c7f2c40293">MEP::Object</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#a84154ef4d266036097659b61af4def11">MEP::AnimationPosition</a>, and <a class="el" href="class_m_e_p_1_1_animation_object.html#aa452ba557490fab6288914e8ede6d613">MEP::AnimationObject</a>.</p>
 
 </div>
 </div>
@@ -369,6 +574,32 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Reimplemented in <a class="el" href="class_m_e_p_1_1_texture_object.html#afe1fac598511fe251bc38a9330a1d34e">MEP::TextureObject</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#a3e2053d000f37142bc83e616188d30c5">MEP::AnimationPosition</a>, <a class="el" href="class_m_e_p_1_1_animation_object.html#a695aa1a686721462c9aa88bb78bc58ac">MEP::AnimationObject</a>, and <a class="el" href="class_m_e_p_1_1_object.html#a3977a5db01a69feb308ae39e620ef537">MEP::Object</a>.</p>
+
+</div>
+</div>
+<a id="ad0954f4068d3ddf813a0423aaf117918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0954f4068d3ddf813a0423aaf117918">&#9670;&nbsp;</a></span>notify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MEP::Drawable::notify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Notify the link. </p>
 
 </div>
 </div>
@@ -496,6 +727,44 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Reimplemented in <a class="el" href="class_m_e_p_1_1_button.html#ab40b816e8cafd2cbe7632e5a8b197394">MEP::Button</a>, <a class="el" href="class_m_e_p_1_1_animation_object.html#a63bb16190f3bd863a841888162397597">MEP::AnimationObject</a>, <a class="el" href="class_m_e_p_1_1_animation_color.html#a71e82d81f659811f88c9869492a8e807">MEP::AnimationColor</a>, <a class="el" href="class_m_e_p_1_1_animation_position.html#a8776a1db8fe1a5d698c6707150f50cd2">MEP::AnimationPosition</a>, <a class="el" href="class_m_e_p_1_1_texture_object.html#aa8146111041d9d9c0194990f19b66b75">MEP::TextureObject</a>, <a class="el" href="class_m_e_p_1_1_text.html#af7f80af0001454c53f0624def85c6549">MEP::Text</a>, and <a class="el" href="class_m_e_p_1_1_object.html#a5f613551fcdc739144819bba51ce8e8f">MEP::Object</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ae095b3433c91a1b1e85a6b5b0ef467cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae095b3433c91a1b1e85a6b5b0ef467cb">&#9670;&nbsp;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_drawable.html">Drawable</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Overrdie of the &lt;&lt; operator for diagnostic purposes. </p>
 
 </div>
 </div>

@@ -1,6 +1,6 @@
 <a href="url"><img src="https://github.com/Middle-Europe-Productions/MEP/blob/master/docs/mepdoc.png" align="center" height="159" width="392" ></a>
 
-_alpha v1.3.2_
+_alpha v1.3.3_
 ### Introduction
 A MEP library is designed to provide easy to use templates:
  * MEP::Teamplate::Application
@@ -17,14 +17,25 @@ A MEP library is designed to provide easy to use templates:
     * Automated animation activation.
     * Automated objects displaying.
     * Events handling.
+* MEP::Template::Loading
+    * Multithreaded operation.
+    * Same properities as BaseWindow.
 
-Variety of Objects and Animations:
+Variety of Objects:
 * MEP::TextureObject
 * MEP::Text
-* MEP::AnimationObject
 * MEP::Button
+* MEP::AnimationObject
+
+And Animations:
 * MEP::AnimationPosition
 * MEP::AnimationColor
+* MEP::AnimationObject
+
+With the powerful control over them:
+* MEP::AnimationManager
+    * Animations groups.
+    * Simple execution of the instructions on them.
 
 ### Platforms information and installation
 | Platform    |Test platform | Support |Additional features | 

@@ -25,11 +25,20 @@ void TreeDrawer::createWindows()
     latestWindow().changeStatus(MEP::BaseWindow::Status::Main);
 }
 ```
-In the aforementioned example I am using addWindow() method which is designed to load the MEP::BaseWindow into the application memory. In the basic example we will use one of the other build in Templates a Hub. Hub class adds an interactive bar which is capable of repositioning, closing and minimizing the window. Second method latestWindow() outputs the latest added window. Third method changeStatus() changes the status of the window. In the library we have five states of the window:
- - ```MEP::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry and RunAtEntryAndEnd tag and then switches the state to Main.
-- ```MEP::BaseWindow::Status::Exit``` - examples of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
-- ```MEP::BaseWindow::Status::InProgress``` - windows with this tag is visible but events are not processed.
-- ```MEP::BaseWindow::Status::NullAction``` - windows with the tag is not visible.
+In the aforementioned example I am using addWindow() method which is designed to load the MEP::BaseWindow into the application memory. In the basic example we will use one of the other build in Templates a Hub. Hub class adds an interactive bar which is capable of repositioning, closing and minimizing the window. Second method latestWindow() outputs the latest added window. Third method changeStatus() changes the status of the window. In the library we have seven states of the window:
+ - ```MEP::BaseWindow::Status::Entrance``` - enables all of the animations with the RunAtEntry tag and then switches the state to Main.
+- ```MEP::BaseWindow::Status::LowEntrance``` - enables all of the animations with the RunAtLowEntry tag and then switches the state to InProgress.
+- ```MEP::BaseWindow::Status::Exit``` - enables all of the animations with the RunAtEnd and RunAtEntryAndEnd tag waits for them to finish the execution and then changes the tag to NullAction
+- ```MEP::BaseWindow::Status::LowExit``` - enables all of the animations with the RunAtLowEnd tag waits for them to finish the execution and then changes the tag to NullAction
+- ```MEP::BaseWindow::Status::Main``` - window with this tag is visible and all of the evenets are precessed.
+- ```MEP::BaseWindow::Status::InProgress``` - window with this tag is visible but events are not processed.
+- ```MEP::BaseWindow::Status::NullAction``` - window with the tag is not visible.
+
+While developing your first app it is crucial to follow the following window operation diagram:
+    *`Status::Entrance` -> `Status::Main` -> `Status::Exit`* 
+    or 
+    *`Status::LowEntrance` -> `Status::InProgress` -> `Status::LowExit`*
+Thanks to that approach you will be able to easily animate your window without worrying about activating the animation. MEP Library will do that for you!
 
 ```createResources()``` is used load resources into the memory. Resources are loaded thanks to the initResources(...) method.
 ``` cpp

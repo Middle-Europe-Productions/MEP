@@ -1,16 +1,9 @@
 var searchData=
 [
-  ['changecolor_380',['changeColor',['../class_m_e_p_1_1_window_1_1_template_1_1_hub.html#a6455240262e78a38ba4048c19f3daabd',1,'MEP::Window::Template::Hub']]],
-  ['changeendpointcolor_381',['changeEndPointColor',['../class_m_e_p_1_1_animation_color.html#af884a088ad687b799b3ddb64ff789d0e',1,'MEP::AnimationColor']]],
-  ['changeentrycolor_382',['changeEntryColor',['../class_m_e_p_1_1_animation_color.html#ae0194ffcd5e7ac954444c24a0fb0086c',1,'MEP::AnimationColor']]],
-  ['changeexitcolor_383',['changeExitColor',['../class_m_e_p_1_1_animation_color.html#ab8c89763a59d5fcda31c4a282ab8fd7b',1,'MEP::AnimationColor']]],
-  ['changepositiontag_384',['changePositionTag',['../class_m_e_p_1_1_text.html#ac82ef1fb2fd827231ad8f779d8574f35',1,'MEP::Text']]],
-  ['changeresolution_385',['changeResolution',['../class_m_e_p_1_1_window_1_1_window_data.html#a5182edbd58bf22c2b52888b9df5501d6',1,'MEP::Window::WindowData']]],
-  ['changestatus_386',['changeStatus',['../class_m_e_p_1_1_animation.html#a47013707e6e636ae293f5ddb2193d5ae',1,'MEP::Animation::changeStatus()'],['../class_m_e_p_1_1_button.html#a2af07d2bd8cb20f1a83132b57d85cb0a',1,'MEP::Button::changeStatus()'],['../class_m_e_p_1_1_window_1_1_base_window.html#a49a26f79556e5f10bc2275474d3b1ac0',1,'MEP::Window::BaseWindow::changeStatus()']]],
-  ['changetag_387',['changeTag',['../class_m_e_p_1_1_animation.html#aeb6a787f72a5ad18d15e072dab36b3d5',1,'MEP::Animation']]],
-  ['clearfollow_388',['clearFollow',['../class_m_e_p_1_1_following.html#ae517c33753f1c813c6b6827fc2bcc0dc',1,'MEP::Following']]],
-  ['correctobject_389',['correctObject',['../class_m_e_p_1_1_animation_object.html#a027400116015a31f8b651e1c12c4c07b',1,'MEP::AnimationObject']]],
-  ['createresources_390',['createResources',['../class_m_e_p_1_1_window_1_1_template_1_1_application.html#aa01e54cd4f0ec13225a5b1a72194184a',1,'MEP::Window::Template::Application']]],
-  ['createwindows_391',['createWindows',['../class_m_e_p_1_1_window_1_1_template_1_1_application.html#a118ee5fa96bff43aca2a347aac5a36c0',1,'MEP::Window::Template::Application']]],
-  ['customview_392',['customView',['../class_m_e_p_1_1_window_1_1_base_window.html#a36da969f5c4877ddaabd940972ff517d',1,'MEP::Window::BaseWindow']]]
+  ['basemanager_448',['BaseManager',['../class_m_e_p_1_1_base_manager.html#af4ec325f7e4debdc25ed11f6bcdef9ae',1,'MEP::BaseManager']]],
+  ['basetemplate_449',['BaseTemplate',['../class_m_e_p_1_1_template_1_1_base_template.html#a82c6cea01a267a4d50219c7713b18c42',1,'MEP::Template::BaseTemplate']]],
+  ['basewindow_450',['BaseWindow',['../class_m_e_p_1_1_base_window.html#a11d370e3138656eadf441d2ff896c349',1,'MEP::BaseWindow::BaseWindow(const unsigned int ID)'],['../class_m_e_p_1_1_base_window.html#a2b60f928c43522807919a40f56940cf0',1,'MEP::BaseWindow::BaseWindow(const unsigned int ID, const sf::View &amp;view, const sf::View &amp;master)']]],
+  ['beforeupdate_451',['beforeUpdate',['../class_m_e_p_1_1_base_window.html#ae3c6094ad76e12811c2cbb4d8293c26a',1,'MEP::BaseWindow']]],
+  ['block_452',['block',['../class_m_e_p_1_1_button.html#abbe604c922ef6e80d7c9a7c9bdc7a2af',1,'MEP::Button']]],
+  ['button_453',['Button',['../class_m_e_p_1_1_button.html#a78637e085b15c02cddc2f031c554fdf6',1,'MEP::Button::Button(const Object &amp;x, unsigned int active_breakpoint, sf::Vector2f pos={ 0, 0 }, sf::Vector2f scale={ 1, 1 })'],['../class_m_e_p_1_1_button.html#a8c7357fc950550598785fb11dc69c604',1,'MEP::Button::Button(const float frameRate, const Object &amp;x, unsigned int active_breakpoint, sf::Vector2f pos={ 0, 0 }, sf::Vector2f scale={ 1, 1 })']]]
 ];

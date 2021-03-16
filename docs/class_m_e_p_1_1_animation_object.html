@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="mepdoc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Middle Europe Productions Library
-   &#160;<span id="projectnumber">alpha 1.3.2</span>
+   &#160;<span id="projectnumber">alpha 1.3.3</span>
    </div>
   </td>
  </tr>
@@ -71,6 +71,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="class_m_e_p_1_1_animation_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">MEP::AnimationObject Class Reference</div>  </div>
@@ -87,13 +88,13 @@ Inheritance diagram for MEP::AnimationObject:</div>
  <div class="center">
   <img src="class_m_e_p_1_1_animation_object.png" usemap="#MEP::AnimationObject_map" alt=""/>
   <map id="MEP::AnimationObject_map" name="MEP::AnimationObject_map">
-<area href="class_m_e_p_1_1_animation.html" title="MEP::Animation base definition of an animation." alt="MEP::Animation" shape="rect" coords="0,56,137,80"/>
-<area href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management." alt="MEP::Object" shape="rect" coords="147,56,284,80"/>
-<area href="class_m_e_p_1_1_sprite.html" title="Basically the SFML sprite with the support for the MEP functionalities." alt="MEP::Sprite" shape="rect" coords="294,56,431,80"/>
-<area href="class_m_e_p_1_1_non_copyable.html" title="Deletes the copy constructor and assign operator." alt="MEP::NonCopyable" shape="rect" coords="0,0,137,24"/>
-<area href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen..." alt="MEP::Drawable" shape="rect" coords="147,0,284,24"/>
-<area href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position." alt="MEP::Following" shape="rect" coords="294,0,431,24"/>
-<area href="class_m_e_p_1_1_button.html" title="MEP::Button provides a basic implementation of an object with the ability of display it on a screen." alt="MEP::Button" shape="rect" coords="147,168,284,192"/>
+<area href="class_m_e_p_1_1_animation.html" title="MEP::Animation base definition of an animation." alt="MEP::Animation" shape="rect" coords="0,56,159,80"/>
+<area href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management." alt="MEP::Object" shape="rect" coords="169,56,328,80"/>
+<area href="class_m_e_p_1_1_sprite.html" title="Basically the SFML sprite with the support for the MEP functionalities." alt="MEP::Sprite" shape="rect" coords="338,56,497,80"/>
+<area href="class_m_e_ptools_1_1_animation_delay.html" alt="MEPtools::AnimationDelay" shape="rect" coords="0,0,159,24"/>
+<area href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen..." alt="MEP::Drawable" shape="rect" coords="169,0,328,24"/>
+<area href="class_m_e_p_1_1_following.html" title="MEP::Following keeps track of a MEP::Object position." alt="MEP::Following" shape="rect" coords="338,0,497,24"/>
+<area href="class_m_e_p_1_1_button.html" title="MEP::Button provides a basic implementation of an object with the ability of display it on a screen." alt="MEP::Button" shape="rect" coords="169,168,328,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -101,8 +102,6 @@ Inheritance diagram for MEP::AnimationObject:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a94fd178de23e5fdb1e63561d1f273b81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a94fd178de23e5fdb1e63561d1f273b81">AnimationObject</a> (const float frameRate, const <a class="el" href="class_m_e_p_1_1_object.html">Object</a> &amp;x, sf::Vector2f pos={ 0.f, 0.f }, sf::Vector2f scale={ 1.f, 1.f })</td></tr>
 <tr class="separator:a94fd178de23e5fdb1e63561d1f273b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7aaa25b3d3c6c4cf45172705ca63bcf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#ae7aaa25b3d3c6c4cf45172705ca63bcf">AnimationObject</a> (const <a class="el" href="class_m_e_p_1_1_object.html">Object</a> &amp;x, const <a class="el" href="class_m_e_p_1_1_animation_object.html">AnimationObject</a> &amp;animation, sf::Vector2f pos={ 0.f, 0.f }, sf::Vector2f scale={ 1.f, 1.f })</td></tr>
-<tr class="separator:ae7aaa25b3d3c6c4cf45172705ca63bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf86df15ab14ab38cb00a94c49282a1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#aaf86df15ab14ab38cb00a94c49282a1d">onResize</a> () override</td></tr>
 <tr class="separator:aaf86df15ab14ab38cb00a94c49282a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c6b3691d46d0019bfeb1dee81850bec"><td class="memItemLeft" align="right" valign="top">virtual const sf::Vector2u &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a9c6b3691d46d0019bfeb1dee81850bec">getSize</a> () const</td></tr>
@@ -119,19 +118,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a081bda2244988603cc6e1495319dc627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63bb16190f3bd863a841888162397597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a63bb16190f3bd863a841888162397597">update</a> (sf::Time &amp;currentTime) override</td></tr>
 <tr class="separator:a63bb16190f3bd863a841888162397597"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a858516642aea5e3b754b4092acddbbc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a858516642aea5e3b754b4092acddbbc6">entryUpdate</a> (sf::Time &amp;currentTime) override</td></tr>
-<tr class="separator:a858516642aea5e3b754b4092acddbbc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46b71540d0bb50b30c42a7726f5e3389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a46b71540d0bb50b30c42a7726f5e3389">exitUpdate</a> (sf::Time &amp;currentTime) override</td></tr>
-<tr class="separator:a46b71540d0bb50b30c42a7726f5e3389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece3c4f1cf2915a2cffac8c10d707821"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#aece3c4f1cf2915a2cffac8c10d707821">entryUpdate</a> (sf::Time &amp;currentTime, bool low=false) override</td></tr>
+<tr class="separator:aece3c4f1cf2915a2cffac8c10d707821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa452ba557490fab6288914e8ede6d613"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#aa452ba557490fab6288914e8ede6d613">exitUpdate</a> (sf::Time &amp;currentTime, bool low=false) override</td></tr>
+<tr class="separator:aa452ba557490fab6288914e8ede6d613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a695aa1a686721462c9aa88bb78bc58ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a695aa1a686721462c9aa88bb78bc58ac">isActive</a> () const override</td></tr>
 <tr class="separator:a695aa1a686721462c9aa88bb78bc58ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c789d200c4dc12840404abe23f5f454"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a2c789d200c4dc12840404abe23f5f454">isTansparent</a> (unsigned int x, unsigned int y) override</td></tr>
 <tr class="separator:a2c789d200c4dc12840404abe23f5f454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22aeefb5aedcdbba83f37fb7c3ad4816"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_m_e_p_1_1_animation_object.html">AnimationObject</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a22aeefb5aedcdbba83f37fb7c3ad4816">getAnimationObject</a> ()</td></tr>
 <tr class="separator:a22aeefb5aedcdbba83f37fb7c3ad4816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a128f77363e3d15ec24d58f97b04f5623"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a128f77363e3d15ec24d58f97b04f5623">debugOutput</a> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:a128f77363e3d15ec24d58f97b04f5623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dfbab68b000c88a1f161c4e1bffce8b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a4dfbab68b000c88a1f161c4e1bffce8b">~AnimationObject</a> ()=default</td></tr>
 <tr class="separator:a4dfbab68b000c88a1f161c4e1bffce8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_m_e_p_1_1_animation"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_animation')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_animation.html">MEP::Animation</a></td></tr>
+<tr class="memitem:aeae1d20ed787734882acb2a3089462ad inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aeae1d20ed787734882acb2a3089462ad">Animation</a> ()=default</td></tr>
+<tr class="separator:aeae1d20ed787734882acb2a3089462ad inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a338e8ac80a0ce69655b1557bb476bfb6 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a338e8ac80a0ce69655b1557bb476bfb6">Animation</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> initType, const float frameRate)</td></tr>
 <tr class="separator:a338e8ac80a0ce69655b1557bb476bfb6 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2f1f46d1d2a6d0df8e44fc60f569c8f inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ab2f1f46d1d2a6d0df8e44fc60f569c8f">Animation</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> initType, const sf::Time towait)</td></tr>
@@ -144,8 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a47013707e6e636ae293f5ddb2193d5ae inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39919ddde07094550d7179f1260de34d inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a39919ddde07094550d7179f1260de34d">getStatus</a> () const</td></tr>
 <tr class="separator:a39919ddde07094550d7179f1260de34d inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb6a787f72a5ad18d15e072dab36b3d5 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aeb6a787f72a5ad18d15e072dab36b3d5">changeTag</a> (const <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a> &amp;tag)</td></tr>
-<tr class="separator:aeb6a787f72a5ad18d15e072dab36b3d5 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076e8d6b54872eecc48596f4c31649f9 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a076e8d6b54872eecc48596f4c31649f9">changeTag</a> (<a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> tag)</td></tr>
+<tr class="separator:a076e8d6b54872eecc48596f4c31649f9 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cef913ffb34aed34001111cc135acaa inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">sf::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a2cef913ffb34aed34001111cc135acaa">getToWait</a> () const</td></tr>
 <tr class="separator:a2cef913ffb34aed34001111cc135acaa inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1792adee093607535898adf01099e27 inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ac1792adee093607535898adf01099e27">getInit</a> () const</td></tr>
@@ -154,6 +157,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7ca25dc3955185a37f36acd3bfba207d inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f52d82f69a14e25b3e61b049b51ebff inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a7f52d82f69a14e25b3e61b049b51ebff">setDirection</a> (<a class="el" href="namespace_m_e_p.html#a380e67c81cd7adab1af647419de91f91">MEP::Direction</a> dir)</td></tr>
 <tr class="separator:a7f52d82f69a14e25b3e61b049b51ebff inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15bc4db21a1d064946b5d9685bd937e inherit pub_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ac15bc4db21a1d064946b5d9685bd937e">reset</a> ()</td></tr>
+<tr class="separator:ac15bc4db21a1d064946b5d9685bd937e inherit pub_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_m_e_ptools_1_1_animation_delay"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_ptools_1_1_animation_delay')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_ptools_1_1_animation_delay.html">MEPtools::AnimationDelay</a></td></tr>
+<tr class="memitem:a74af210919bcda43d465f6417d803338 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a74af210919bcda43d465f6417d803338">setDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>, bool permaDelay=false)</td></tr>
+<tr class="separator:a74af210919bcda43d465f6417d803338 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a4c98bb813bc5b82830d420722dd6f inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a67a4c98bb813bc5b82830d420722dd6f">setEntryDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>)</td></tr>
+<tr class="separator:a67a4c98bb813bc5b82830d420722dd6f inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeadce0a370dd40b6f57a812e8b75305 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#adeadce0a370dd40b6f57a812e8b75305">setExitDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>)</td></tr>
+<tr class="separator:adeadce0a370dd40b6f57a812e8b75305 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5278f55aeda3a1aa45c8767116745259 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a5278f55aeda3a1aa45c8767116745259">setLowEntryDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>)</td></tr>
+<tr class="separator:a5278f55aeda3a1aa45c8767116745259 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d94acaac3c0aedb641a63ce6c8a397 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#ae6d94acaac3c0aedb641a63ce6c8a397">setLowExitDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>)</td></tr>
+<tr class="separator:ae6d94acaac3c0aedb641a63ce6c8a397 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37dcee077b2fac92934d694209b9b1b9 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a37dcee077b2fac92934d694209b9b1b9">setGeneralDelay</a> (const sf::Time &amp;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a>, bool permaDelay=false)</td></tr>
+<tr class="separator:a37dcee077b2fac92934d694209b9b1b9 inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75629b41d2d8c292f5d308644a7f53cc inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a75629b41d2d8c292f5d308644a7f53cc">resetDelay</a> ()</td></tr>
+<tr class="separator:a75629b41d2d8c292f5d308644a7f53cc inherit pub_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_m_e_p_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_object.html">MEP::Object</a></td></tr>
 <tr class="memitem:abdfdb31db673d416b0aae10073c92593 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#abdfdb31db673d416b0aae10073c92593">Object</a> ()=delete</td></tr>
 <tr class="separator:abdfdb31db673d416b0aae10073c92593 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,10 +191,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab585174646b24cb34aa3cc922a1ce231 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f613551fcdc739144819bba51ce8e8f inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a5f613551fcdc739144819bba51ce8e8f">update</a> (sf::Time &amp;) override</td></tr>
 <tr class="separator:a5f613551fcdc739144819bba51ce8e8f inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04215bd7a8b12c03b0330cb7b9e24d17 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a04215bd7a8b12c03b0330cb7b9e24d17">entryUpdate</a> (sf::Time &amp;currentTime) override</td></tr>
-<tr class="separator:a04215bd7a8b12c03b0330cb7b9e24d17 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78c601c998a43a041bac46d4c5823e13 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a78c601c998a43a041bac46d4c5823e13">exitUpdate</a> (sf::Time &amp;currentTime) override</td></tr>
-<tr class="separator:a78c601c998a43a041bac46d4c5823e13 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade15096fee24d8455c8f67596e2711ab inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#ade15096fee24d8455c8f67596e2711ab">entryUpdate</a> (sf::Time &amp;currentTime, bool low=false) override</td></tr>
+<tr class="separator:ade15096fee24d8455c8f67596e2711ab inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bcc5b2f08c5db6eecca39c7f2c40293 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a3bcc5b2f08c5db6eecca39c7f2c40293">exitUpdate</a> (sf::Time &amp;currentTime, bool low=false) override</td></tr>
+<tr class="separator:a3bcc5b2f08c5db6eecca39c7f2c40293 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2595ab451d1d3e9a784d9ef9dca8c692 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a2595ab451d1d3e9a784d9ef9dca8c692">getObjectPoint</a> ()</td></tr>
 <tr class="separator:a2595ab451d1d3e9a784d9ef9dca8c692 inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad6332b536ce65880045e76a7eab0e94 inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#aad6332b536ce65880045e76a7eab0e94">getObjectRef</a> ()</td></tr>
@@ -196,6 +216,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c4115ef1cef83f4a294d6e5a54723dd inherit pub_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a7c4115ef1cef83f4a294d6e5a54723dd">~Object</a> () override</td></tr>
 <tr class="separator:a7c4115ef1cef83f4a294d6e5a54723dd inherit pub_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_m_e_p_1_1_drawable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_m_e_p_1_1_drawable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a></td></tr>
+<tr class="memitem:a0c9a4f00a1dbeacd3df2b363364ab017 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a0c9a4f00a1dbeacd3df2b363364ab017">_link</a> (std::shared_ptr&lt; bool &gt; _li)</td></tr>
+<tr class="separator:a0c9a4f00a1dbeacd3df2b363364ab017 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59980fd411972b9a681b882a6af21508 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a59980fd411972b9a681b882a6af21508">_linkAddr</a> ()</td></tr>
+<tr class="separator:a59980fd411972b9a681b882a6af21508 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f845af3201f45b5303e039b9e0833c6 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">const std::shared_ptr&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a1f845af3201f45b5303e039b9e0833c6">_linkAddr</a> () const</td></tr>
+<tr class="separator:a1f845af3201f45b5303e039b9e0833c6 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909682640134aa768048112c786ed9b4 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a909682640134aa768048112c786ed9b4">_isLinked</a> () const</td></tr>
+<tr class="separator:a909682640134aa768048112c786ed9b4 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bd2226a40238d30a3a713e747a614c6 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a8bd2226a40238d30a3a713e747a614c6">getDrawTag</a> () const</td></tr>
 <tr class="separator:a8bd2226a40238d30a3a713e747a614c6 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae18b64d0aa33648673d5263ca4bcbf14 inherit pub_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ae18b64d0aa33648673d5263ca4bcbf14">setDrawTag</a> (const <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">U_int32</a> tag)</td></tr>
@@ -254,10 +282,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9602f062b555f89f3a470064c877a066 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a9c596f1fdf4aa3d68f9ae4bad874622b">operator&lt;&lt;</a> (const <a class="el" href="class_m_e_p_1_1_following.html">Following</a> &amp;x)</td></tr>
 <tr class="separator:a9c596f1fdf4aa3d68f9ae4bad874622b inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c81007da8335561e08e1d5d73104a4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a28c81007da8335561e08e1d5d73104a4">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type)</td></tr>
-<tr class="separator:a28c81007da8335561e08e1d5d73104a4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae7b8c72d2e1a2b4b37a2770809c91a9 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aae7b8c72d2e1a2b4b37a2770809c91a9">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> &amp;base, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> toFollow=MEP::ColorChannel::ALL)</td></tr>
-<tr class="separator:aae7b8c72d2e1a2b4b37a2770809c91a9 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88482237b59b8fb3eeb1ca8cf4114112 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a88482237b59b8fb3eeb1ca8cf4114112">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_position.html">AnimationPosition</a> &amp;base, const <a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> type, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group=-1)</td></tr>
+<tr class="separator:a88482237b59b8fb3eeb1ca8cf4114112 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe3d060b85e4112a9b73b34bd44ea8e inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6fe3d060b85e4112a9b73b34bd44ea8e">setFollow</a> (const <a class="el" href="class_m_e_p_1_1_animation_color.html">AnimationColor</a> &amp;base, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> toFollow=MEP::ColorChannel::ALL, <a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group=-1)</td></tr>
+<tr class="separator:a6fe3d060b85e4112a9b73b34bd44ea8e inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf63b29de6c78552444b4128a02a916b inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#abf63b29de6c78552444b4128a02a916b">muteFollowGroup</a> (<a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group)</td></tr>
+<tr class="separator:abf63b29de6c78552444b4128a02a916b inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80912695614c3f59d53d0e9b90db0b9 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af80912695614c3f59d53d0e9b90db0b9">unMuteFollowGroup</a> (<a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a> group)</td></tr>
+<tr class="separator:af80912695614c3f59d53d0e9b90db0b9 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433b2f621103eaa591a77596364e3c0a inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a433b2f621103eaa591a77596364e3c0a">fullMuteFollow</a> ()</td></tr>
+<tr class="separator:a433b2f621103eaa591a77596364e3c0a inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fa69040cc65ef89dac430597d05fd4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a42fa69040cc65ef89dac430597d05fd4">fullUnMuteFollow</a> ()</td></tr>
+<tr class="separator:a42fa69040cc65ef89dac430597d05fd4 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4be1334f37ca8e4dfba4cbc1f76e7799 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a4be1334f37ca8e4dfba4cbc1f76e7799">movePosition</a> (const sf::Vector2f pos)</td></tr>
 <tr class="separator:a4be1334f37ca8e4dfba4cbc1f76e7799 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85285733cb038fcabe17b08c3f7c078 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ab85285733cb038fcabe17b08c3f7c078">getPosition</a> () const</td></tr>
@@ -270,6 +306,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4c550cc3aa1eb64e2526f8716dbea7e0 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a5d47a3fc29c73533c51a01b11519e inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af9a5d47a3fc29c73533c51a01b11519e">isFollowerActive</a> () const</td></tr>
 <tr class="separator:af9a5d47a3fc29c73533c51a01b11519e inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc0c0a11ee39312a933f8dfc7d6b960 inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aacc0c0a11ee39312a933f8dfc7d6b960">followingDebug</a> (std::ostream &amp;out, const char *skipLines=&quot;&quot;) const</td></tr>
+<tr class="separator:aacc0c0a11ee39312a933f8dfc7d6b960 inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae517c33753f1c813c6b6827fc2bcc0dc inherit pub_methods_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ae517c33753f1c813c6b6827fc2bcc0dc">clearFollow</a> ()</td></tr>
 <tr class="separator:ae517c33753f1c813c6b6827fc2bcc0dc inherit pub_methods_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -281,14 +319,26 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a027400116015a31f8b651e1c12c4c07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d7a5cd980cba14d1fe328220f2abbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a46d7a5cd980cba14d1fe328220f2abbf">updateSize</a> ()</td></tr>
 <tr class="separator:a46d7a5cd980cba14d1fe328220f2abbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_class_m_e_p_1_1_non_copyable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_p_1_1_non_copyable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_p_1_1_non_copyable.html">MEP::NonCopyable</a></td></tr>
-<tr class="memitem:a6c6d626afeb530339a1624ed34652a1e inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_non_copyable.html#a6c6d626afeb530339a1624ed34652a1e">NonCopyable</a> ()=default</td></tr>
-<tr class="separator:a6c6d626afeb530339a1624ed34652a1e inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab41cf3102b79e136f160e2940598da1d inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_non_copyable.html#ab41cf3102b79e136f160e2940598da1d">~NonCopyable</a> ()=default</td></tr>
-<tr class="separator:ab41cf3102b79e136f160e2940598da1d inherit pro_methods_class_m_e_p_1_1_non_copyable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_m_e_p_1_1_animation"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_p_1_1_animation')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_p_1_1_animation.html">MEP::Animation</a></td></tr>
+<tr class="memitem:aef23b6e9e06f1010d6bd90b404326138 inherit pro_methods_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aef23b6e9e06f1010d6bd90b404326138">animationDebug</a> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:aef23b6e9e06f1010d6bd90b404326138 inherit pro_methods_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_m_e_ptools_1_1_animation_delay"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_ptools_1_1_animation_delay')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_ptools_1_1_animation_delay.html">MEPtools::AnimationDelay</a></td></tr>
+<tr class="memitem:a8f709d24299988fbb01a2d9b9c9e568d inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">const sf::Time &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a8f709d24299988fbb01a2d9b9c9e568d">delay</a> () const</td></tr>
+<tr class="separator:a8f709d24299988fbb01a2d9b9c9e568d inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82f5f2024e93cc450a97e0a632fc947a inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a82f5f2024e93cc450a97e0a632fc947a">updateDelay</a> (const sf::Time &amp;currentTime)</td></tr>
+<tr class="separator:a82f5f2024e93cc450a97e0a632fc947a inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa88d1aeff80de1a193ce01c2d2f6bd inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a9fa88d1aeff80de1a193ce01c2d2f6bd">newCycle</a> ()</td></tr>
+<tr class="separator:a9fa88d1aeff80de1a193ce01c2d2f6bd inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d691e7e5b9b4cba032e72b562749343 inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a5d691e7e5b9b4cba032e72b562749343">changeState</a> (<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766d">State</a> newState)</td></tr>
+<tr class="separator:a5d691e7e5b9b4cba032e72b562749343 inherit pro_methods_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_m_e_p_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_p_1_1_object')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_p_1_1_object.html">MEP::Object</a></td></tr>
 <tr class="memitem:a33a1e54b151498ea68aad0bb7f6801bf inherit pro_methods_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#a33a1e54b151498ea68aad0bb7f6801bf">deleteObject</a> ()</td></tr>
 <tr class="separator:a33a1e54b151498ea68aad0bb7f6801bf inherit pro_methods_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_m_e_p_1_1_drawable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_m_e_p_1_1_drawable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_m_e_p_1_1_drawable.html">MEP::Drawable</a></td></tr>
+<tr class="memitem:ad0954f4068d3ddf813a0423aaf117918 inherit pro_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#ad0954f4068d3ddf813a0423aaf117918">notify</a> ()</td></tr>
+<tr class="separator:ad0954f4068d3ddf813a0423aaf117918 inherit pro_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568804decba518c6d0ebcf2ab869322a inherit pro_methods_class_m_e_p_1_1_drawable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_drawable.html#a568804decba518c6d0ebcf2ab869322a">drawTagDebug</a> (std::ostream &amp;out) const</td></tr>
+<tr class="separator:a568804decba518c6d0ebcf2ab869322a inherit pro_methods_class_m_e_p_1_1_drawable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -301,8 +351,8 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a96ec7a4829879d01e3c5d587f823e5f9"><td class="memItemLeft" align="right" valign="top">sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a96ec7a4829879d01e3c5d587f823e5f9">fixSize</a></td></tr>
 <tr class="separator:a96ec7a4829879d01e3c5d587f823e5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_m_e_p_1_1_animation"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_m_e_p_1_1_animation')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_m_e_p_1_1_animation.html">MEP::Animation</a></td></tr>
-<tr class="memitem:a7becf5a8d38508bbc4cd5b38358caeb0 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a7becf5a8d38508bbc4cd5b38358caeb0">m_tag</a> = <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa6679e65c932b2c5ad98080ee21a4f0d4">AdditionalTag::Non</a></td></tr>
-<tr class="separator:a7becf5a8d38508bbc4cd5b38358caeb0 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f97af7d344a112b420f23e091c24e38 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_m_e_p.html#a42f9b3b66d1a5e6eda27432d8163b33e">MEP::U_int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a5f97af7d344a112b420f23e091c24e38">m_tag</a> = AdditionalTag::AdditionalTagDisabled</td></tr>
+<tr class="separator:a5f97af7d344a112b420f23e091c24e38 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b71c9c261e7cabf095e57573940daee inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#a8b71c9c261e7cabf095e57573940daee">isInit</a> = <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a46dbb2fe48fe1beb6a7f2893c6ae56e5">AnimationInit::NotInit</a></td></tr>
 <tr class="separator:a8b71c9c261e7cabf095e57573940daee inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad785953a085d832edb078a264af70f0b inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">sf::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ad785953a085d832edb078a264af70f0b">updateTime</a> = sf::Time::Zero</td></tr>
@@ -313,6 +363,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaa66c896894c67bd4d937074bed4dcd4 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad281f63f6e0eb482c4d6145147e026f7 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_m_e_p.html#a380e67c81cd7adab1af647419de91f91">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ad281f63f6e0eb482c4d6145147e026f7">direction</a> = <a class="el" href="namespace_m_e_p.html#a380e67c81cd7adab1af647419de91f91a67d2f6740a8eaebf4d5c6f79be8da481">Direction::Backwards</a></td></tr>
 <tr class="separator:ad281f63f6e0eb482c4d6145147e026f7 inherit pro_attribs_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_m_e_ptools_1_1_animation_delay"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_m_e_ptools_1_1_animation_delay')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_m_e_ptools_1_1_animation_delay.html">MEPtools::AnimationDelay</a></td></tr>
+<tr class="memitem:acac4cd3f2281b60a7bcb57546f9d71ae inherit pro_attribs_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766d">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#acac4cd3f2281b60a7bcb57546f9d71ae">state</a> = <a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766da095a1b43effec73955e31e790438de49">State::Base</a></td></tr>
+<tr class="separator:acac4cd3f2281b60a7bcb57546f9d71ae inherit pro_attribs_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_m_e_p_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_m_e_p_1_1_object')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_m_e_p_1_1_object.html">MEP::Object</a></td></tr>
 <tr class="memitem:aeb3fd4230a90f364e02648bb18e9fd58 inherit pro_attribs_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#aeb3fd4230a90f364e02648bb18e9fd58">transparency</a> = false</td></tr>
 <tr class="separator:aeb3fd4230a90f364e02648bb18e9fd58 inherit pro_attribs_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -332,8 +385,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a6277f689ed50b319442f787812bb8b61 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa010b9851b2fc3085d04cb5dc4d6ccdb inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">std::function&lt; sf::Vector2f()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#aa010b9851b2fc3085d04cb5dc4d6ccdb">calc_scale</a> = [this]()-&gt;sf::Vector2f { return <a class="el" href="class_m_e_p_1_1_following.html#aa204b2a2b4f1b98652b8dc8fc321095f">m_scale</a>; }</td></tr>
 <tr class="separator:aa010b9851b2fc3085d04cb5dc4d6ccdb inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f1fb8b755d44375b723f591d910b62b inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">std::list&lt; std::unique_ptr&lt; Follow &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a6f1fb8b755d44375b723f591d910b62b">followingList</a></td></tr>
-<tr class="separator:a6f1fb8b755d44375b723f591d910b62b inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78eaab4a9eefcdc95f656ea4fcb67cb0 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_e_ptools_1_1_group_manager.html">MEPtools::GroupManager</a>&lt; Follow, std::unique_ptr&lt; Follow &gt;, std::list&lt; std::unique_ptr&lt; Follow &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a78eaab4a9eefcdc95f656ea4fcb67cb0">followingListv2</a></td></tr>
+<tr class="separator:a78eaab4a9eefcdc95f656ea4fcb67cb0 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1359b1ea309834062aec84c77fd21e inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#adc1359b1ea309834062aec84c77fd21e">m_pos</a> = {0.f, 0.f}</td></tr>
 <tr class="separator:adc1359b1ea309834062aec84c77fd21e inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47dbfa57b6c3229f54e37f36006999d7 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#a47dbfa57b6c3229f54e37f36006999d7">m_posMove</a> = { 0.f, 0.f }</td></tr>
@@ -349,21 +402,19 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ada9a0a3743bcb7ee31cc6f4a579ca0f2 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#ada9a0a3743bcb7ee31cc6f4a579ca0f2">m_colorFixed</a></td></tr>
 <tr class="separator:ada9a0a3743bcb7ee31cc6f4a579ca0f2 inherit pro_attribs_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a1bb2a0bc8d944ba8d6ff1aff4f086ddd"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation_object.html#a1bb2a0bc8d944ba8d6ff1aff4f086ddd">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="class_m_e_p_1_1_animation_object.html">AnimationObject</a> &amp;x)</td></tr>
+<tr class="separator:a1bb2a0bc8d944ba8d6ff1aff4f086ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_class_m_e_p_1_1_animation"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_m_e_p_1_1_animation')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_m_e_p_1_1_animation.html">MEP::Animation</a></td></tr>
-<tr class="memitem:ad4a796fd3d92330aa4ba98b86c2b73c3 inherit pub_types_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> { <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a46dbb2fe48fe1beb6a7f2893c6ae56e5">AnimationInit::NotInit</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a3903aab323863bd2e9b68218a7a65ebd">AnimationInit::Follow</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a7c13a1fd543ebc1c362b7eb08be9ac12">AnimationInit::ObjectAnimation</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a8f62108e197bc47e1d42e727bd127a7a">AnimationInit::PositionAnimation</a>
+<tr class="memitem:ad4a796fd3d92330aa4ba98b86c2b73c3 inherit pub_types_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3">AnimationInit</a> { <a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a46dbb2fe48fe1beb6a7f2893c6ae56e5">AnimationInit::NotInit</a> = 0, 
+<a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a7c13a1fd543ebc1c362b7eb08be9ac12">AnimationInit::ObjectAnimation</a> = 1, 
+<a class="el" href="class_m_e_p_1_1_animation.html#ad4a796fd3d92330aa4ba98b86c2b73c3a8f62108e197bc47e1d42e727bd127a7a">AnimationInit::PositionAnimation</a> = 2
  }</td></tr>
 <tr class="separator:ad4a796fd3d92330aa4ba98b86c2b73c3 inherit pub_types_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba23d7f557f70231e9a0277cfa216c5a inherit pub_types_class_m_e_p_1_1_animation"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5a">AdditionalTag</a> { <a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa6679e65c932b2c5ad98080ee21a4f0d4">AdditionalTag::Non</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa07bb0873678479bce9509ffac12db34a">AdditionalTag::RunAtEntry</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aa15a1ddf91bfee43fd65a01473bf0b005">AdditionalTag::RunAtEnd</a>, 
-<a class="el" href="class_m_e_p_1_1_animation.html#aba23d7f557f70231e9a0277cfa216c5aab8d153bf7e7939eafc4bc865a9ad4bcf">AdditionalTag::RunAtEntryAndEnd</a>
- }</td></tr>
-<tr class="separator:aba23d7f557f70231e9a0277cfa216c5a inherit pub_types_class_m_e_p_1_1_animation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_m_e_p_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_m_e_p_1_1_object')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_m_e_p_1_1_object.html">MEP::Object</a></td></tr>
 <tr class="memitem:ae6ad87db253ceaa39e633a6c4fe36c71 inherit pub_types_class_m_e_p_1_1_object"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_object.html#ae6ad87db253ceaa39e633a6c4fe36c71">ObjectType</a> { <a class="el" href="class_m_e_p_1_1_object.html#ae6ad87db253ceaa39e633a6c4fe36c71a46dbb2fe48fe1beb6a7f2893c6ae56e5">ObjectType::NotInit</a>, 
 <a class="el" href="class_m_e_p_1_1_object.html#ae6ad87db253ceaa39e633a6c4fe36c71a66ba162102bbf6ae31b522aec561735e">ObjectType::Single</a>, 
@@ -372,23 +423,34 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae6ad87db253ceaa39e633a6c4fe36c71 inherit pub_types_class_m_e_p_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_m_e_p_1_1_following"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_m_e_p_1_1_following')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_m_e_p_1_1_following.html">MEP::Following</a></td></tr>
 <tr class="memitem:af7c054b0039410f44e0af93576599a3a inherit pub_types_class_m_e_p_1_1_following"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3a">FollowType</a> { <br />
-&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa46dbb2fe48fe1beb6a7f2893c6ae56e5">FollowType::NotInit</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aac8308b1eba7ba926a61b8fd802194386">FollowType::Objects</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aada23aad563e137be979af9efb5e8606d">FollowType::X_Scale</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810">FollowType::Y_Scale</a>, 
+&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa46dbb2fe48fe1beb6a7f2893c6ae56e5">FollowType::NotInit</a> = 0, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aac8308b1eba7ba926a61b8fd802194386">FollowType::Objects</a> = 1, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aada23aad563e137be979af9efb5e8606d">FollowType::X_Scale</a> = 2, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa7c4805207ed17ed484d81075bd6d2810">FollowType::Y_Scale</a> = 3, 
 <br />
-&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa3df68b85d23637a7c82d111a000d2b80">FollowType::X_Pos</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a>, 
-<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aacb5feb1b7314637725a2e73bdc9f7295">FollowType::Color</a>
+&#160;&#160;<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa3df68b85d23637a7c82d111a000d2b80">FollowType::X_Pos</a> = 4, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aa0354cd11b1461259278c8d881cc30492">FollowType::Y_Pos</a> = 5, 
+<a class="el" href="class_m_e_p_1_1_following.html#af7c054b0039410f44e0af93576599a3aacb5feb1b7314637725a2e73bdc9f7295">FollowType::Color</a> = 6
 <br />
  }</td></tr>
 <tr class="separator:af7c054b0039410f44e0af93576599a3a inherit pub_types_class_m_e_p_1_1_following"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_types_class_m_e_ptools_1_1_animation_delay"><td colspan="2" onclick="javascript:toggleInherit('pro_types_class_m_e_ptools_1_1_animation_delay')"><img src="closed.png" alt="-"/>&#160;Protected Types inherited from <a class="el" href="class_m_e_ptools_1_1_animation_delay.html">MEPtools::AnimationDelay</a></td></tr>
+<tr class="memitem:a4d189503de274e62e85b030ec82d766d inherit pro_types_class_m_e_ptools_1_1_animation_delay"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766d">State</a> { <br />
+&#160;&#160;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766dab948e8a02a7f8dc9f098c89e8df9892c">State::Entry</a>, 
+<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766dafef46e5063ce3dc78b8ae64fa474241d">State::Exit</a>, 
+<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766da095a1b43effec73955e31e790438de49">State::Base</a>, 
+<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766da3c82fa06f2fe9aa89fcbeb7e92861d2f">State::LowExit</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_m_e_ptools_1_1_animation_delay.html#a4d189503de274e62e85b030ec82d766daaa8b17ba9c9ee686c054add1ab3820c8">State::LowEntry</a>
+<br />
+ }</td></tr>
+<tr class="separator:a4d189503de274e62e85b030ec82d766d inherit pro_types_class_m_e_ptools_1_1_animation_delay"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_m_e_p_1_1_animation_object.html" title="MEP::AnimationObject is a sprite with the ability to dislay an animation.">MEP::AnimationObject</a> is a sprite with the ability to dislay an animation. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a94fd178de23e5fdb1e63561d1f273b81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94fd178de23e5fdb1e63561d1f273b81">&#9670;&nbsp;</a></span>AnimationObject() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a94fd178de23e5fdb1e63561d1f273b81">&#9670;&nbsp;</a></span>AnimationObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -436,63 +498,6 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">frameRate</td><td>: Frame rate of an animation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">Object</a> with the animation frames. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>: Position of an animation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>: Scale of an animation. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae7aaa25b3d3c6c4cf45172705ca63bcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7aaa25b3d3c6c4cf45172705ca63bcf">&#9670;&nbsp;</a></span>AnimationObject() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">MEP::AnimationObject::AnimationObject </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_object.html">Object</a> &amp;&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_animation_object.html">AnimationObject</a> &amp;&#160;</td>
-          <td class="paramname"><em>animation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Vector2f&#160;</td>
-          <td class="paramname"><em>pos</em> = <code>{&#160;0.f,&#160;0.f&#160;}</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Vector2f&#160;</td>
-          <td class="paramname"><em>scale</em> = <code>{&#160;1.f,&#160;1.f&#160;}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Constructor of an animation. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: <a class="el" href="class_m_e_p_1_1_object.html" title="MEP::Object is a container of a sf::Texture it also have built in memory management.">Object</a> with the animation frames. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">animation</td><td>: Different instance of the animation whose movement will be followed. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>: Position of an animation. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>: Scale of an animation. </td></tr>
   </table>
@@ -553,6 +558,35 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a128f77363e3d15ec24d58f97b04f5623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a128f77363e3d15ec24d58f97b04f5623">&#9670;&nbsp;</a></span>debugOutput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void MEP::AnimationObject::debugOutput </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Debug output of the class. </p>
+
+<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_object.html#a36ccf8e71ec3ce1c654c24fe97e07046">MEP::Object</a>.</p>
+
+</div>
+</div>
 <a id="a081bda2244988603cc6e1495319dc627"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a081bda2244988603cc6e1495319dc627">&#9670;&nbsp;</a></span>draw()</h2>
 
@@ -582,8 +616,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a858516642aea5e3b754b4092acddbbc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a858516642aea5e3b754b4092acddbbc6">&#9670;&nbsp;</a></span>entryUpdate()</h2>
+<a id="aece3c4f1cf2915a2cffac8c10d707821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece3c4f1cf2915a2cffac8c10d707821">&#9670;&nbsp;</a></span>entryUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,8 +629,18 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">void MEP::AnimationObject::entryUpdate </td>
           <td>(</td>
           <td class="paramtype">sf::Time &amp;&#160;</td>
-          <td class="paramname"><em>currentTime</em></td><td>)</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>low</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -607,12 +651,12 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Override of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> entryUpdate. </p>
 
-<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a477b47c638f6b6f9f48aa14ba5bc8bcf">MEP::Drawable</a>.</p>
+<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a36c7dd9eacabdebc4482305cafd95738">MEP::Drawable</a>.</p>
 
 </div>
 </div>
-<a id="a46b71540d0bb50b30c42a7726f5e3389"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46b71540d0bb50b30c42a7726f5e3389">&#9670;&nbsp;</a></span>exitUpdate()</h2>
+<a id="aa452ba557490fab6288914e8ede6d613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa452ba557490fab6288914e8ede6d613">&#9670;&nbsp;</a></span>exitUpdate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -624,8 +668,18 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">void MEP::AnimationObject::exitUpdate </td>
           <td>(</td>
           <td class="paramtype">sf::Time &amp;&#160;</td>
-          <td class="paramname"><em>currentTime</em></td><td>)</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>low</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -636,7 +690,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Override of a <a class="el" href="class_m_e_p_1_1_drawable.html" title="MEP::Drawable provides a basic implementation of an object with the ability of display it on a screen...">MEP::Drawable</a> exitUpdate. </p>
 
-<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a2b0570882fc96c96fd1adf316b319146">MEP::Drawable</a>.</p>
+<p>Reimplemented from <a class="el" href="class_m_e_p_1_1_drawable.html#a514ede63f397a7fc965552a4c484eb1a">MEP::Drawable</a>.</p>
 
 </div>
 </div>
@@ -1001,6 +1055,44 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a1bb2a0bc8d944ba8d6ff1aff4f086ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb2a0bc8d944ba8d6ff1aff4f086ddd">&#9670;&nbsp;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_m_e_p_1_1_animation_object.html">AnimationObject</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Overrdie of the &lt;&lt; operator for diagnostic purposes. </p>
 
 </div>
 </div>
