@@ -41,15 +41,37 @@ namespace MEP {
 		Backwards = 1
 	};
 	/**
+	* @enum MEP::Animation::AdditionalTag
+	* Provides a support for automatic activation.
+	*/
+	enum AdditionalTag : MEP::U_int32 {
+		/** There no additional tag.*/
+		AdditionalTagDisabled = 0,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow entry.*/
+		RunAtEntry = 1,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow LowEntry.*/
+		RunAtLowEntry = 1 << 2,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow exit.*/
+		RunAtEnd = 1 << 3,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow LowExit.*/
+		RunAtLowEnd = 1 << 4,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow entry and exit.*/
+		RunAtEntryAndEnd = RunAtEntry | RunAtEnd,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow lowEntry and lowExit.*/
+		RunAtLowEntryAndEnd = RunAtLowEntry | RunAtLowEnd,
+		/** Animation will be automatically activated at MEP::Window::BaseWindow entry, lowEntry, loeExit and exit.*/
+		RunAlways = RunAtLowEntry | RunAtEntry | RunAtEnd | RunAtLowEnd
+	};
+	/**
 	* \brief MEP::Animation base definition of an animation. 
 	*/
-	class Animation : public NonCopyable, public MEPtools::AnimationDelay {
+	class Animation : public MEPtools::AnimationDelay {
 		/**
 		* Tags to char for the debug purposes.
 		*/
 		const char* __Direction[2] = { "Forward", "Backwards" };
 		const char* __AnimationInit[4] = { "NotInit", "Follow", "ObjectAnimation", "PositionAnimation" };
-		const char* __AdditionalTag[4] = {"Non", "RunAtEntry", "RunAtEnd", "RunAtEntryAndEnd"};
+		const char* __AdditionalTag[8] = {"Non", "RunAtEntry", "RunAtLowEntry", "RunAtEnd", "RunAtLowEnd", "RunAtEntryAndEnd", "RunAtLowEntryAndEnd", "RunAlways"};
 	public:
 		/**
 		* @enum MEP::Animation::AnimationInit
@@ -58,29 +80,13 @@ namespace MEP {
 		enum class AnimationInit {
 			/** Animation is not initialized.*/
 			NotInit = 0,
-			/** Animation will be following the Animation.*/
-			Follow = 1,
 			/** Animation will be animating Object type of variable.*/
-			ObjectAnimation = 2,
+			ObjectAnimation = 1,
 			/** Animation will be animating Position type of variable.*/
-			PositionAnimation = 3
-		};
-		/**
-		* @enum MEP::Animation::AdditionalTag
-		* Provides a support for automatic activation. 
-		*/
-		enum class AdditionalTag {
-			/** There no additional tag.*/
-			Non = 0,
-			/** Animation will be automatically activated at MEP::Window::BaseWindow entry.*/
-			RunAtEntry = 1,
-			/** Animation will be automatically activated at MEP::Window::BaseWindow exit.*/
-			RunAtEnd = 2,
-			/** Animation will be automatically activated at MEP::Window::BaseWindow entry and exit.*/
-			RunAtEntryAndEnd = 3
+			PositionAnimation = 2
 		};
 	protected:
-		AdditionalTag m_tag = AdditionalTag::Non;
+		MEP::U_int32 m_tag = AdditionalTag::AdditionalTagDisabled;
 		//initialization of a current object
 		AnimationInit isInit = AnimationInit::NotInit;
 		//time of a last update
@@ -93,9 +99,40 @@ namespace MEP {
 		Direction direction = Direction::Backwards;
 		//Debug information about the class state
 		void animationDebug(std::ostream& out) const {
-			out <<"\n  \\" << "MEP::AnimationBase { AnimationInit: " << __AnimationInit[(int)isInit]
-			    << ", Direction: " << __Direction[(int)direction] 
-				<< ", AdditionalTag: " << __AdditionalTag[(int)m_tag] << " }";
+			out << "\n  \\" << "MEP::AnimationBase { AnimationInit: " << __AnimationInit[(int)isInit]
+				<< ", Direction: " << __Direction[(int)direction]
+				<< ", AdditionalTag:";
+			if (m_tag & RunAtLowEntry and m_tag & RunAtEntry and m_tag & RunAtEnd and m_tag & RunAtLowEnd) {
+				out << " " << __AdditionalTag[7];
+			}
+			else {
+				if (m_tag & RunAtLowEntry and m_tag & RunAtLowEnd) {
+					out << " " << __AdditionalTag[6];
+				}
+				else {
+					if (m_tag & RunAtLowEnd) {
+						out << " " << __AdditionalTag[4];
+					}
+					if (m_tag & RunAtLowEntry) {
+						out << " " << __AdditionalTag[3];
+					}
+				}
+				if (m_tag & RunAtEntry and m_tag & RunAtEnd) {
+					out << " " << __AdditionalTag[5];
+				}
+				else {
+					if (m_tag & RunAtEnd) {
+						out << " " << __AdditionalTag[2];
+					}
+					if (m_tag & RunAtEntry) {
+						out << " " << __AdditionalTag[1];
+					}
+				}
+				if (m_tag & AdditionalTagDisabled) {
+					out << " " << __AdditionalTag[0];
+				}
+			}
+			out << " }";
 		}
 	public:
 		/**
@@ -156,7 +193,7 @@ namespace MEP {
 		* Changes the additional tag of an animation.
 		* @param[in] tag MEP::Animation::AdditionalTag.
 		*/
-		void changeTag(const AdditionalTag& tag) { 
+		void changeTag(MEP::U_int32 tag) {
 			m_tag = tag; 
 		}
 		/**
@@ -186,6 +223,12 @@ namespace MEP {
 		void setDirection(MEP::Direction dir) {
 			direction = dir;
 		}
+		/**
+		* Resets the parameters of the animation if the animation is not active.
+		* Reset means changing it's current frame to begin or end depending of the direction.
+		* If direction is forward changes to begin otherwise to end.
+		*/
+		virtual bool reset() { return false; };
 	};
 };
 

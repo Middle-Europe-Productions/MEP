@@ -128,19 +128,19 @@ namespace MEP {
 					return false;
 				}
 				else if (m_followType == FollowType::X_Pos) {
-					object.m_posFixed.x = object.m_pos.x + m_animation->GetFixedVariable();
+					object.m_posFixed.x = object.m_pos.x + m_animation->getFixedVariable();
 					toUpdate.setPosition(object.m_posFixed);
 				}
 				else if (m_followType == FollowType::Y_Pos) {
-					object.m_posFixed.y = object.m_pos.y + m_animation->GetFixedVariable();
+					object.m_posFixed.y = object.m_pos.y + m_animation->getFixedVariable();
 					toUpdate.setPosition(object.m_posFixed);
 				}
 				else if (m_followType == FollowType::X_Scale) {
-					object.m_scaleFixed.x = object.m_scale.x + m_animation->GetFixedVariable();
+					object.m_scaleFixed.x = object.m_scale.x + m_animation->getFixedVariable();
 					toUpdate.setScale(object.m_scaleFixed);
 				}
 				else if (m_followType == FollowType::Y_Scale) {
-					object.m_scaleFixed.y = object.m_scale.y + m_animation->GetFixedVariable();
+					object.m_scaleFixed.y = object.m_scale.y + m_animation->getFixedVariable();
 					toUpdate.setScale(object.m_scaleFixed);
 				}
 				else if (m_followType == FollowType::Color) {
@@ -180,16 +180,16 @@ namespace MEP {
 					return false;
 				}
 				else if (m_followType == FollowType::X_Pos) {
-					object.m_posFixed.x = object.m_pos.x + m_animation->GetFixedVariable();
+					object.m_posFixed.x = object.m_pos.x + m_animation->getFixedVariable();
 				}
 				else if (m_followType == FollowType::Y_Pos) {
-					object.m_posFixed.y = object.m_pos.y + m_animation->GetFixedVariable();
+					object.m_posFixed.y = object.m_pos.y + m_animation->getFixedVariable();
 				}
 				else if (m_followType == FollowType::X_Scale) {
-					object.m_scaleFixed.x = object.m_scale.x + m_animation->GetFixedVariable();
+					object.m_scaleFixed.x = object.m_scale.x + m_animation->getFixedVariable();
 				}
 				else if (m_followType == FollowType::Y_Scale) {
-					object.m_scaleFixed.y = object.m_scale.y + m_animation->GetFixedVariable();
+					object.m_scaleFixed.y = object.m_scale.y + m_animation->getFixedVariable();
 				}
 				else if (m_followType == FollowType::Color) {
 					if (m_colorsFollow == MEP::ColorChannel::ALL)

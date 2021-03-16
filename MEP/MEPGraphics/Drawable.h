@@ -174,12 +174,12 @@ namespace MEP {
 		* Default virtual entry update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void entryUpdate(sf::Time& currentTime) { update(currentTime); };
+		virtual void entryUpdate(sf::Time& currentTime, bool low = false) { update(currentTime); };
 		/**
 		* Default virtual exit update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void exitUpdate(sf::Time & currentTime) { update(currentTime); };
+		virtual void exitUpdate(sf::Time & currentTime, bool low = false) { update(currentTime); };
 		/**
 		* Default virtual activation status method.
 		* @param[in] currentTime : Current global time.

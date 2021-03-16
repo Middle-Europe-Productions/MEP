@@ -73,26 +73,6 @@ namespace MEP {
 			init();
 		}
 		/**
-		* Constructor of an animation.
-		* @param[in] x : Object with the animation frames.
-		* @param[in] animation : Different instance of the animation whose movement will be followed.
-		* @param[in] pos : Position of an animation.
-		* @param[in] scale : Scale of an animation.
-		*/
-		AnimationObject(const Object& x, 
-			const AnimationObject& animation, 
-			sf::Vector2f pos = { 0.f, 0.f }, 
-			sf::Vector2f scale = { 1.f, 1.f }) :
-			Animation(AnimationInit::Follow, animation.getToWait()),
-			Object(x),
-			Sprite(FollowType::Objects, pos, scale),
-			toFollowOBJ(&animation)
-		{
-			if (x.getNufTextures() != animation.getNufTextures())
-				throw "[AnimationObject] Follow animation needs to have the same number of frames!";
-			init();
-		}
-		/**
 		* On resize we want to update the position.
 		*/
 		void onResize() override {
@@ -153,11 +133,11 @@ namespace MEP {
 		/**
 		* Override of a MEP::Drawable entryUpdate.
 		*/
-		void entryUpdate(sf::Time& currentTime) override;
+		void entryUpdate(sf::Time& currentTime, bool low = false) override;
 		/**
 		* Override of a MEP::Drawable exitUpdate.
 		*/
-		void exitUpdate(sf::Time& currentTime) override;
+		void exitUpdate(sf::Time& currentTime, bool low = false) override;
 		/**
 		* Outputs the activation status of an animation.
 		* @return True - active, False - unactive
@@ -228,53 +208,30 @@ namespace MEP {
 
 	inline void MEP::AnimationObject::update(sf::Time& currentTime)
 	{
-		if (isRunning and (isInit == AnimationInit::ObjectAnimation)) {
-			if (currentTime - updateTime >= toWait) {
-				if (direction == Direction::Forward) {
-					if (currentFrame == --texture->end()) {
-						isRunning = false;
-					}
-					else {
-						currentFrame++;
-						index_currentFrame++;
-					}
-				}
-				else if (direction == Direction::Backwards) {
-					currentFrame--;
-					index_currentFrame++;
-					if (currentFrame == texture->begin()) {
-						isRunning = false;
-					}
-				}
-				updateTime = currentTime;
-				updateSprite(**currentFrame);
-			}
-		}
-		if (isInit == AnimationInit::Follow) {
-			if (toFollowOBJ->getInit() != AnimationInit::Follow) {
-				while (toFollowOBJ->index_currentFrame != index_currentFrame) {
-					if (toFollowOBJ->index_currentFrame > index_currentFrame) {
+		if (isRunning) {
+			if (updateDelay(currentTime) and isInit == AnimationInit::ObjectAnimation) {
+				if (currentTime - updateTime >= toWait) {
+					if (direction == Direction::Forward) {
 						if (currentFrame == --texture->end()) {
-							break;
+							isRunning = false;
+							newCycle();
 						}
-						index_currentFrame++;
-						currentFrame++;
+						else {
+							currentFrame++;
+							index_currentFrame++;
+						}
 					}
-					else {
-						if (currentFrame == texture->begin()) {
-							break;
-						}
-						index_currentFrame--;
+					else if (direction == Direction::Backwards) {
 						currentFrame--;
+						index_currentFrame++;
+						if (currentFrame == texture->begin()) {
+							isRunning = false;
+							newCycle();
+						}
 					}
+					updateTime = currentTime;
+					updateSprite(**currentFrame);
 				}
-				if (toFollowOBJ->getPosition() != getPosition()) {
-					m_posFixed = toFollowOBJ->getPosition();
-				}
-				if (toFollowOBJ->getScale() != getScale()) {
-					m_scaleFixed = toFollowOBJ->getScale();
-				}
-				updateSprite(**currentFrame);
 			}
 		}
 		if (followingListv2._size() != 0) {
@@ -282,17 +239,37 @@ namespace MEP {
 		}
 	}
 
-	inline void MEP::AnimationObject::entryUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationObject::entryUpdate(sf::Time& currentTime, bool low)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			run(Direction::Forward, currentTime);
+		if (low) {
+			if (m_tag & AdditionalTag::RunAtLowEntry) {
+				changeState(State::LowEntry);
+				run(Direction::Backwards, currentTime);
+			}
+		}
+		else {
+			if (m_tag & AdditionalTag::RunAtEntry) {
+				changeState(State::Entry);
+				run(Direction::Backwards, currentTime);
+			}
+		}
 		update(currentTime);
 	}
 
-	inline void MEP::AnimationObject::exitUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationObject::exitUpdate(sf::Time& currentTime, bool low)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd)
-			run(Direction::Backwards, currentTime);
+		if (low) {
+			if(m_tag & AdditionalTag::RunAtLowEnd) {
+				changeState(State::LowExit);
+				run(Direction::Backwards, currentTime);
+			}
+		}
+		else {
+			if (m_tag & AdditionalTag::RunAtEnd) {
+				changeState(State::Exit);
+				run(Direction::Backwards, currentTime);
+			}
+		}
 		update(currentTime);
 	}
 

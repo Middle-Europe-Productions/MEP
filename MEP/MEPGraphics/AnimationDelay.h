@@ -9,6 +9,8 @@ namespace MEPtools {
 		sf::Time m_delay = sf::Time::Zero;
 		sf::Time exit_delay = sf::Time::Zero;
 		sf::Time entry_delay = sf::Time::Zero;
+		sf::Time L_exit_delay = sf::Time::Zero;
+		sf::Time L_entry_delay = sf::Time::Zero;
 		/**
 		* Local update time
 		*/
@@ -55,7 +57,9 @@ namespace MEPtools {
 		enum class State {
 			Entry,
 			Exit,
-			Base
+			Base,
+			LowExit,
+			LowEntry
 		};
 		/**
 		* Delay state.
@@ -77,8 +81,14 @@ namespace MEPtools {
 			else if (state == State::Exit) {
 				return updateDelay(currentTime, exit_delay, true);
 			}
-			else {
+			else if (state == State::LowExit) {
+				return updateDelay(currentTime, L_exit_delay, true);
+			}
+			else if (state == State::Entry) {
 				return updateDelay(currentTime, entry_delay, true);
+			}
+			else {
+				return updateDelay(currentTime, L_entry_delay, true);
 			}
 		}
 		/**
@@ -122,12 +132,44 @@ namespace MEPtools {
 			newCycle();
 		}
 		/**
+		* Sets the delay of an animation then Entrance state. Delay is a time to wait from starting the animation.
+		* @param[in] delay: Delay to be applied on the animation on Entrance.
+		*/
+		void setLowEntryDelay(const sf::Time& delay) {
+			L_entry_delay = delay;
+			newCycle();
+		}
+		/**
+		* Sets the delay of an animation then Exit state. Delay is a time to wait from starting the animation.
+		* @param[in] delay: Delay to be applied on the animation on Exit.
+		*/
+		void setLowExitDelay(const sf::Time& delay) {
+			L_exit_delay = delay;
+			newCycle();
+		}
+		/**
+		* Sets the delay of an animation in every state of the window. Delay is a time to wait from starting the animation.
+		* @param[in] delay: Delay to be applied on the animation on every state.
+		* @param[in] premaDelay: If false the delay will be applied once otherwise it will be applied always when run() is called (Only in Base state).
+		*/
+		void setGeneralDelay(const sf::Time& delay, bool permaDelay = false) {
+			entry_delay = delay;
+			exit_delay = delay;
+			L_entry_delay = delay;
+			L_exit_delay = delay;
+			m_delay = delay;
+			permanentDelay = permaDelay;
+			newCycle();
+		}
+		/**
 		* Resetes the delays.
 		*/
 		void resetDelay() {
 			m_delay = sf::Time::Zero;
 			exit_delay = sf::Time::Zero;
 			entry_delay = sf::Time::Zero;
+			L_exit_delay = sf::Time::Zero;
+			L_entry_delay = sf::Time::Zero;
 			permanentDelay = false; 
 			newCycle();
 		}

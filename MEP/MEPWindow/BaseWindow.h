@@ -152,16 +152,20 @@ namespace MEP {
 		* Definition of a status of the window.
 		*/
 		enum class Status {
-			/** In this state all of the MEP::Animation with RunAtEntry or RunAtEntryAndEnd are activated.*/
+			/** In this state all of the MEP::Animation with RunAtLowEntry or RunAtLowEntryAndEnd are activated. Then window enters InProgress state.*/
+			LowEntrance = 0,
+			/** In this state all of the MEP::Animation with RunAtEntry or RunAtEntryAndEnd are activated. Then window enters Main state.*/
 			Entrance = -1,
 			/** In this state all of the MEP::Objects with RunAtEnd or RunAtEntryAndEnd are activated and Window wait for them to finish. */
 			Exit = -2,
+			/** In this state all of the MEP::Animation with RunAtLowEntry or RunAtLowEntryAndEnd are activated and Window wait for them to finish. */
+			LowExit = -3,
 			/** In this state window is being rendered.*/
-			InProgress = -3,
+			InProgress = -4,
 			/** In this state window is being rendered and events from it are handled.*/
-			Main = -4,
+			Main = -5,
 			/** In this state window is not doing anything.*/
-			NullAction = -5
+			NullAction = -6
 		};
 	private:
 		Status m_status = Status::NullAction;
@@ -347,10 +351,10 @@ namespace MEP {
 			if (m_status == Status::InProgress or m_status == Status::Main) {
 				updateRunning(currentTime);
 			}
-			else if (m_status == Status::Entrance) {
+			else if (m_status == Status::Entrance or m_status == Status::LowEntrance) {
 				updateEntrance(currentTime);
 			}
-			else if (m_status == Status::Exit) {
+			else if (m_status == Status::Exit or m_status == Status::LowExit) {
 				updateExit(currentTime);
 			}
 			afterUpdate(currentTime);
@@ -373,23 +377,43 @@ namespace MEP {
 
 	inline void BaseWindow::updateEntrance(sf::Time& currentTime)
 	{
-		_execute([&currentTime](auto& x) {
-			if(x.isActive())
-				x.get()->entryUpdate(currentTime);
-			});
-		m_status = Status::Main;
+		if (m_status == Status::Entrance) {
+			_execute([&currentTime](auto& x) {
+				if (x.isActive())
+					x.get()->entryUpdate(currentTime);
+				});
+			m_status = Status::Main;
+		}
+		else {
+			_execute([&currentTime](auto& x) {
+				if (x.isActive())
+					x.get()->entryUpdate(currentTime, true);
+				});
+			m_status = Status::InProgress;
+		}
 	}
 
 	inline void BaseWindow::updateExit(sf::Time& currentTime)
 	{
 		bool isActive = false;
-		_execute([&currentTime, &isActive](auto& x) {
-			if (x.isActive()) {
-				x.get()->exitUpdate(currentTime);
-				if (x.get()->isActive())
-					isActive = true;
-			}
-			});
+		if (m_status == Status::Exit) {
+			_execute([&currentTime, &isActive](auto& x) {
+				if (x.isActive()) {
+					x.get()->exitUpdate(currentTime);
+					if (x.get()->isActive())
+						isActive = true;
+				}
+				});
+		}
+		else {
+			_execute([&currentTime, &isActive](auto& x) {
+				if (x.isActive()) {
+					x.get()->exitUpdate(currentTime, true);
+					if (x.get()->isActive())
+						isActive = true;
+				}
+				});
+		}
 		if (!isActive) {
 			m_status = Status::NullAction;
 		}

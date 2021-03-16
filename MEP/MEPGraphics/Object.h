@@ -154,13 +154,13 @@ namespace MEP {
 		/**
 		* Override of a MEP::Drawable entryUpdate.
 		*/
-		void entryUpdate(sf::Time& currentTime) override { 
+		void entryUpdate(sf::Time& currentTime, bool low = false) override { 
 			update(currentTime); 
 		};
 		/**
 		* Override of a MEP::Drawable exitUpdate.
 		*/
-		void exitUpdate(sf::Time& currentTime) override { 
+		void exitUpdate(sf::Time& currentTime, bool low = false) override {
 			update(currentTime);  
 		};
 		/**

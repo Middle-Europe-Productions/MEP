@@ -117,12 +117,12 @@ namespace MEP {
 		* Outputs the current position of an animation.
 		* @return Current position.
 		*/
-		const double& GetFixedVariable() const { return *currentFrame; }
+		const double& getFixedVariable() const { return *currentFrame; }
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position as unsigned int.
 		*/
-		unsigned int GetFixedUintVariable() const { 
+		unsigned int getFixedUintVariable() const { 
 			return (unsigned int)round(*currentFrame); 
 		}
 		/**
@@ -146,11 +146,11 @@ namespace MEP {
 		/**
 		* Override of a MEP::Drawable entryUpdate.
 		*/
-		void entryUpdate(sf::Time& currentTime) override;
+		void entryUpdate(sf::Time& currentTime, bool low = false) override;
 		/**
 		* Override of a MEP::Drawable exitUpate.
 		*/
-		void exitUpdate(sf::Time& currentTime) override;
+		void exitUpdate(sf::Time& currentTime, bool low = false) override;
 		/**
 		* Outputs the activation status of an animation.
 		* @return True - active, False - unactive
@@ -161,7 +161,7 @@ namespace MEP {
 		* Reset means changing it's current frame to begin or end depending of the direction.
 		* If direction is forward changes to begin otherwise to end.
 		*/
-		bool reset();
+		bool reset() override;
 		/**
 		* Outputs the current frame as a Color
 		* *Warning* For color animation it is recommended to use MEP::AnimationColor
@@ -254,21 +254,36 @@ namespace MEP {
 			}
 		}
 	}
-	inline void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime, bool low)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEntry or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd) {
-			changeState(State::Entry);
-			run(Direction::Forward);
+		if (low) {
+			if (m_tag & AdditionalTag::RunAtLowEntry) {
+				changeState(State::LowEntry);
+				run(Direction::Forward);
+			}
 		}
-			
+		else {
+			if (m_tag & AdditionalTag::RunAtEntry) {
+				changeState(State::Entry);
+				run(Direction::Forward);
+			}
+		}		
 		update(currentTime);
 	}
 
-	inline void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime)
+	inline void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime, bool low)
 	{
-		if (m_tag == Animation::AdditionalTag::RunAtEnd or m_tag == Animation::AdditionalTag::RunAtEntryAndEnd) {
-			changeState(State::Exit);
-			run(Direction::Backwards);
+		if (low) {
+			if (m_tag & AdditionalTag::RunAtLowEnd) {
+				changeState(State::LowExit);
+				run(Direction::Backwards);
+			}
+		}
+		else {
+			if (m_tag & AdditionalTag::RunAtEnd) {
+				changeState(State::Exit);
+				run(Direction::Backwards);
+			}	
 		}
 		update(currentTime);
 	}
