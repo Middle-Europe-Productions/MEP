@@ -25,6 +25,7 @@
 #define MEP_WINDOW_DATA_H
 
 #include<SFML/Graphics.hpp>
+#include<MEPGraphics/Config.h>
 namespace MEP {
     /**
         * Holds information about window.
@@ -69,77 +70,50 @@ namespace MEP {
         WindowData(const char* title, const
             sf::Vector2u& mainResolution = { 1280, 720 },
             U_int32 style = sf::Style::Default,
-            sf::ContextSettings settings = sf::ContextSettings()) :
-            m_resolution(mainResolution),
-            m_launchResolution(mainResolution),
-            m_settings(settings),
-            m_title(title),
-            m_style(style)
-        {
-        }
+            sf::ContextSettings settings = sf::ContextSettings());
         /**
         * Creates the window.
         */
-        void initWindow() {
-            create(sf::VideoMode(m_resolution.x, m_resolution.y), m_title, m_style, m_settings);
-            m_view = getView();
-        }
+        void initWindow();
         /**
         * Returns a reference to the sf::RenderWindow
         */
-        sf::RenderWindow& getRenderWindow() { return *this; }
+        sf::RenderWindow& getRenderWindow();
         /**
         * Returns a reference to the sf::ContextSettings
         */
-        sf::ContextSettings& getContext() { return m_settings; }
+        sf::ContextSettings& getContext();
         /**
         * Returns a reference to the master sf::View
         */
-        sf::View& getMepView() { return m_view; }
+        sf::View& getMepView();
         /**
         * Changes the resolution of a window.
         * @param[in] newRes : sf::Vector2u
         */
-        void changeResolution(const sf::Vector2u& newRes) {
-            setSize(newRes);
-        }
+        void changeResolution(const sf::Vector2u& newRes);
         /**
         * Outputs the lunch re
         */
-        const sf::Vector2u& getLaunchResolution() const {
-            return m_launchResolution;
-        }
+        const sf::Vector2u& getLaunchResolution() const;
         /**
             * Returns the actual size of a window if you are using MEP::Template::Hub size == resolution.
             */
-        const sf::Vector2u getWindowSize() const { return getSize(); }
+        const sf::Vector2u getWindowSize() const;
         /**
         * Sets the resolution of a window.
         * *Warning* setResolution does not update the resolution use updateResolution() if you want to commit changes.
         */
-        void setResolution(const sf::Vector2u& res) {
-            m_resolution = res;
-            setSize(m_resolution);
-            m_view.setCenter({ (float)m_resolution.x / 2, (float)m_resolution.y / 2 });
-            m_view.setSize({ (float)m_resolution.x, (float)m_resolution.y });
-            setView(m_view);
-        }
+        void setResolution(const sf::Vector2u& res);
         /**
         * Output the current resolution of a window.
         * @return : sf::Vector2u.
         */
-        sf::Vector2u getResolution() const {
-            return m_resolution;
-        }
+        sf::Vector2u getResolution() const;
         /**
         * A method from sf::Window.
         */
-        virtual void onResize() {
-            m_resolution = getSize();
-            m_view.setCenter({ (float)m_resolution.x / 2, (float)m_resolution.y / 2 });
-            m_view.setSize({ (float)m_resolution.x, (float)m_resolution.y });
-            setView(m_view);
-        }
+        virtual void onResize();
     };
 }
 

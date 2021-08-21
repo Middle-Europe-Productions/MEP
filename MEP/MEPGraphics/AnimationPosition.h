@@ -66,16 +66,7 @@ namespace MEP {
 		* Vopy constructor of an animation.
 		* @param[in] x : MEP::AnimationPosition object
 		*/
-		AnimationPosition(const AnimationPosition& x) :
-			Animation(x),
-			m_function(x.m_function),
-			nofFrames(x.nofFrames),
-			frames(x.frames),
-			currentFrame(frames.begin()),
-			m_begin(x.m_begin),
-			m_end(x.m_end),
-			m_entry(x.m_entry),
-			m_exit(x.m_exit) {}
+		AnimationPosition(const AnimationPosition& x);
 		/**
 		* Contructor of an animation. It is taking a part of a from f(begin) to f(end) then calculation the position accoring to the formula.
 		* Fmax(F(begin), F(end)) = exit, and Fmin(F(begin), F(end) = min.
@@ -87,58 +78,44 @@ namespace MEP {
 		* @param[in] exit : Exit position of an Object (after the animation)
 		* @param[in] fun : Function graph. Method with the return type double. 
 		*/
-		AnimationPosition(const double entry, const double exit, sf::Time length, const float frameRate = 120, const double begin = 0, const double end = 100, std::function<double(double x)> function = [](double x)->double{ return x; }) :
-			Animation(AnimationInit::PositionAnimation, sf::Time(sf::milliseconds(1000) / frameRate)),
-			m_function(function),
-			nofFrames(length / toWait),
-			m_begin(begin),
-			m_end(end),
-			m_entry(entry),
-			m_exit(exit)
-		{
-			init();
-			if (nofFrames <= 0 or end - begin <= 0)
-				throw "[AnimationPosition] Number of frames lower then zero! Check entry variables!";
-			if (end - begin <= 0)
-				throw "[AnimationPosition] end point needs to be grater than begin point";
-		}
+		AnimationPosition(const double entry,
+			const double exit,
+			sf::Time length,
+			const float frameRate = 120,
+			const double begin = 0,
+			const double end = 100,
+			std::function<double(double x)> function = [](double x)->double { return x; });
 		/**
 		* Sets the running tag to true and changes the direction of a movement, furthermore,
 		* it is capable of setting a current time.
 		* @param[in] direc : MEP::Animation::Direction.
 		* @param[in] currentTime : sf::Time = sf::Time::Zero.
 		*/
-		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero) {
-			direction = direc;
-			updateTime = currentTime;
-			isRunning = true;
-		};
+		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero);
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position.
 		*/
-		const double& getFixedVariable() const { return *currentFrame; }
+		const double& getFixedVariable() const;
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position as unsigned int.
 		*/
-		unsigned int getFixedUintVariable() const { 
-			return (unsigned int)round(*currentFrame); 
-		}
+		unsigned int getFixedUintVariable() const;
 		/**
 		* Outputs the entry position of an animation.
 		* @return Entry position.
 		*/
-		const double& getEntry() const { return m_entry; }
+		const double& getEntry() const;
 		/**
 		* Outputs the exit position of an animation.
 		* @return Exit position.
 		*/
-		const double& getExit() const { return m_exit; }
+		const double& getExit() const;
 		/**
 		* Override of a MEP::Drawable draw.
 		*/
-		bool draw(sf::RenderWindow&) override { return true; }
+		bool draw(sf::RenderWindow&) override;
 		/**
 		* Override of a MEP::Drawable update.
 		*/
@@ -167,147 +144,22 @@ namespace MEP {
 		* *Warning* For color animation it is recommended to use MEP::AnimationColor
 		* @return : sf::Color
 		*/
-		virtual sf::Color getFrameAsColor() const { 
-			return sf::Color(std::round(*currentFrame)); 
-		}
-		void delayOutput(std::ostream& out) const {
-			if (delay() != sf::Time::Zero)
-				out << ", Delay: [" << delay().asSeconds() << "]";
-		}
+		virtual sf::Color getFrameAsColor() const;
+
+		void delayOutput(std::ostream& out) const;
 		/**
 		* Debug output of the class.
 		*/
-		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::AnimationPosition { Start: [" << m_entry 
-				<< "], End: [" << m_exit 
-				<< "], Current: [" << current_frame << "]";
-			delayOutput(out);
-			out << "}";
-			animationDebug(out);
-		}
+		virtual void debugOutput(std::ostream& out) const;
 		/**
 		* Overrdie of the << operator for diagnostic purposes.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const AnimationPosition& x) {
-			x.debugOutput(out);
-			return out;
-		}
-		virtual ~AnimationPosition() {
-			notify();
-		}
+		friend std::ostream& operator<<(std::ostream & out, const AnimationPosition & x);
+		/**
+		* Destructor.
+		*/
+		virtual ~AnimationPosition();
 	};
-	inline void MEP::AnimationPosition::init()
-	{
-		double jump = (m_end - m_begin) / nofFrames;
-		double min = sizeof(double), max = 0;
-		for (double x = m_begin; x < m_end; x += jump) {
-			frames.push_back(m_function(x));
-			if (frames.back() > max)
-				max = frames.back();
-			if (frames.back() < min)
-				min = frames.back();
-		}
-		if (min < 0)
-			for (auto& x : frames)
-				x += abs(min);
-		double multiplication = (m_exit - m_entry) / (max - min);
-		for (auto& x : frames) {
-			x = (m_entry + ((x)*multiplication));
-		}
-		currentFrame = frames.begin();
-	}
-
-	inline void MEP::AnimationPosition::update(sf::Time& currentTime)
-	{
-		updatePositionAnimation(currentTime);
-	}
-	/**
-	* Core updates for position animation.
-	* This method is needed in order to avoid CTRL-C/V.
-	*/
-	inline void MEP::AnimationPosition::updatePositionAnimation(sf::Time& currentTime) {
-		if (isRunning) {
-			if (updateDelay(currentTime) and isInit == AnimationInit::PositionAnimation) {
-				if (currentTime - updateTime >= toWait) {
-					if (direction == Direction::Forward) {
-						if (currentFrame == --frames.end()) {
-							isRunning = false;
-							newCycle();
-						}
-						else {
-							currentFrame++;
-							current_frame++;
-						}
-					}
-					else if (direction == Direction::Backwards) {
-						if (currentFrame == frames.begin()) {
-							isRunning = false;
-							newCycle();
-						}
-						else {
-							currentFrame--;
-							current_frame--;
-						}
-					}
-					updateTime = currentTime;
-				}
-			}
-		}
-	}
-	inline void MEP::AnimationPosition::entryUpdate(sf::Time& currentTime, bool low)
-	{
-		if (low) {
-			if (m_tag & AdditionalTag::RunAtLowEntry) {
-				changeState(State::LowEntry);
-				run(Direction::Forward);
-			}
-		}
-		else {
-			if (m_tag & AdditionalTag::RunAtEntry) {
-				changeState(State::Entry);
-				run(Direction::Forward);
-			}
-		}		
-		update(currentTime);
-	}
-
-	inline void MEP::AnimationPosition::exitUpdate(sf::Time& currentTime, bool low)
-	{
-		if (low) {
-			if (m_tag & AdditionalTag::RunAtLowEnd) {
-				changeState(State::LowExit);
-				run(Direction::Backwards);
-			}
-		}
-		else {
-			if (m_tag & AdditionalTag::RunAtEnd) {
-				changeState(State::Exit);
-				run(Direction::Backwards);
-			}	
-		}
-		update(currentTime);
-	}
-
-	inline bool AnimationPosition::isActive() const
-	{
-		return isRunning;
-	}
-
-	inline bool AnimationPosition::reset()
-	{
-		if(isRunning)
-			return false;
-		if (direction == Direction::Forward) {
-			currentFrame = frames.begin();
-			current_frame = 0;
-		}
-		else {
-			currentFrame = --frames.end();
-			current_frame = frames.size()-1;
-		}
-		return true;
-	}
-
 };
 
 #endif

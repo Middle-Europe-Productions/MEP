@@ -28,7 +28,7 @@
 #include<string>
 #include<MEPGraphics/Following.h>
 #include<MEPGraphics/Drawable.h>
-
+#include<MEPGraphics/Sprite.h>
 namespace MEP {
 	/**
 	* Type only very important feature here is the ability of displaying the text with a position tag.
@@ -83,18 +83,7 @@ namespace MEP {
 			sf::Font& font,
 			unsigned int fontSize = 40,
 			sf::Vector2f position = { 0, 0 },
-			PositionTag tag = PositionTag::Non) :
-			Following(position, position),
-			m_tag(tag),
-			m_content(content)
-		{
-			setPosition(position);
-			text.setFont(font);
-			text.setString(content); 
-			text.setCharacterSize(fontSize);
-			//By default its black. We are using it here.
-			text.setFillColor(getColor());
-		}
+			PositionTag tag = PositionTag::Non);
 		/**
 		* Constructor of a text.
 		* @param[in] context : This goes on your screen.
@@ -107,18 +96,8 @@ namespace MEP {
 			sf::Font& font,
 			const Following& follow,
 			unsigned int fontSize = 40,
-			PositionTag tag = PositionTag::Non) :
-			Following(follow),
-			m_tag(tag),
-			m_content(content)
-		{
-			setPosition(m_posFixed);
-			text.setFont(font);
-			text.setString(content);
-			text.setCharacterSize(fontSize);
-			//By default its black. We are using it here.
-			text.setFillColor(getColor());
-		}
+			PositionTag tag = PositionTag::Non);
+
 		Text& operator<<(const Sprite& x) {
 			(Following&)(*this) << x;
 			return *this;
@@ -132,29 +111,13 @@ namespace MEP {
 		/**
 		* On resize we want to update the position.
 		*/
-		void onResize() override {
-			if (getDrawTag() & DrawTag::Resize_Scale)
-				updateScale();
-			if (getDrawTag() & DrawTag::Resize_Pos)
-				updatePosition();
-		}
+		void onResize() override;
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time&) override {
-			followingListv2._execute([&](auto& x) {
-				x.get()->updateVariables(*this);
-				});
-			text.setPosition(getPosition());
-			text.setScale(getScale());
-			text.setFillColor(getColor());
-		}
-		void changePositionTag(const PositionTag& x) {
-			if (x != m_tag) {
-				m_tag = x;
-				tagApplied = false;
-			}
-		}
+		void update(sf::Time&) override;
+
+		void changePositionTag(const PositionTag& x);
 		/**
 		*	The implementation of this draw method is slightly different than the other ones.
 		*	It does some update job. The reason for that is rather straightforward, in order to get text bound we do need to render it.
@@ -164,82 +127,35 @@ namespace MEP {
 		*	to avoid text without MEP::TextObject::PositionTag applied.
 		*	@param[in] window : Classic sf::RenderWindow
 		*/
-		bool draw(sf::RenderWindow& window) override {
-			window.draw(text); 
-			if (!tagApplied and m_tag != PositionTag::Non) {
-				if (m_tag == PositionTag::Middle) {
-					text.setOrigin({ text.getLocalBounds().width / 2,
-						 (float)text.getCharacterSize()/2 + ((float)text.getCharacterSize() - text.getLocalBounds().height)/2});
-					text.setPosition(getPosition());
-					tagApplied = true;
-					return false;
-				}
-				else if (m_tag == PositionTag::XMiddle) {
-					text.setOrigin({ text.getLocalBounds().width / 2,
-						 0 });
-					text.setPosition(getPosition());
-					tagApplied = true;
-					return false;
-				}
-				else if (m_tag == PositionTag::YMiddle) {
-					text.setOrigin({ 0,
-						 (float)text.getCharacterSize() / 2 + ((float)text.getCharacterSize() - text.getLocalBounds().height) / 2 });
-					text.setPosition(getPosition());
-					tagApplied = true;
-					return false;
-				}
-			}
-			return true;
-		}
+		bool draw(sf::RenderWindow& window) override;
 		/**
 		*	Outputs the content of a string of the text
 		*	@return : Text as std::string
 		*/
-		const std::string& getString() const { 
-			return m_content; 
-		}
+		const std::string& getString() const;
 		/**
 		*	Outputs the content of a sf::Text
 		*	@return : sf::Text
 		*/
-		sf::Text& getText() {
-			return text;
-		}
+		sf::Text& getText();
 		/**
 		*	Changes the main string.
 		*	@param[in] in : New string.
 		*/
-		void setText(const std::string& in) {
-			if (in != m_content) {
-				m_content = in;
-				text.setString(in);
-				tagApplied = false;
-			}
-			
-		}
+		void setText(const std::string& in);
 		/**
 		*	Changes the main string.
 		*	@param[in] in : New string.
 		*/
-		void setColor(const sf::Color& in) {
-			m_color = in;
-		}
+		void setColor(const sf::Color& in);
 		/**
 		* Debug output of the class.
 		*/
-		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::Text, content: " << m_content << std::endl;
-			followingDebug(out, "  "); 
-			out << "   \\";
-			drawTagDebug(out);
-		}
+		virtual void debugOutput(std::ostream& out) const;
 		/**
 		* Overrdie of the << operator for diagnostic purposes.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const Text& x) {
-			x.debugOutput(out);
-			return out;
-		}
+		friend std::ostream& operator<<(std::ostream& out, const Text& x);
 	};
 }
 

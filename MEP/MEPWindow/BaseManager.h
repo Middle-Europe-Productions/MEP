@@ -43,56 +43,21 @@ namespace MEP {
         * Otherwise O(1)
         * @param[in] window : unsigned int ID
         */
-        BaseWindow& getWindow(MEP::U_int32 ID, MEP::U_int32 group = -1) {
-            try {
-                if (mostRecentAccess and mostRecentAccess->getID() == ID and mostRecentGroup == group) {
-                    return *mostRecentAccess;
-                }
-                else {
-                    mostRecentAccess = &_get(ID, group);
-                    mostRecentGroup = group;
-                }
-                return *mostRecentAccess;
-            }
-            catch (const MEP::ResourceException& x) {
-                if (x.exceptionType == MEP::ResourceException::ExceptionType::GroupNotFound)
-                    throw MEP::WindowException("Window group not found!");
-                else
-                    throw MEP::WindowException("Window not found!");
-            }
-        }
+        BaseWindow& getWindow(MEP::U_int32 ID, MEP::U_int32 group = -1);
         /**
         * Outputs a group of Windows. O(logn). Where n - a number of groups.
         */
-        std::map<MEP::U_int32, std::shared_ptr<BaseWindow>>& getWindowGroup(MEP::U_int32 group = -1) {
-            try {
-                return _getGroup(group);
-            }
-            catch (const MEP::ResourceException& x) {
-                if (x.exceptionType == MEP::ResourceException::ExceptionType::GroupNotFound)
-                    throw MEP::WindowException("Window group not found!");
-                else
-                    throw MEP::WindowException("Window not found!");
-            }
-        }
+        std::map<MEP::U_int32, std::shared_ptr<BaseWindow>>& getWindowGroup(MEP::U_int32 group = -1);
         /**
         * Deletes the window with a given id.
         * @param[in] window : unsigned int ID
         */
-        void deleteWindow(MEP::U_int32 ID, MEP::U_int32 group = -1)
-        {
-            _deleteElement(ID, group);
-            mostRecentAccess = nullptr;
-        }
+        void deleteWindow(MEP::U_int32 ID, MEP::U_int32 group = -1);
         /**
         * Deletes a group of windows.
         * @param[in] window : unsigned int ID
         */
-        void deleteWindowGroup(MEP::U_int32 group = -1)
-        {
-            _deleteGroup(group);
-            mostRecentAccess = nullptr;
-        }
+        void deleteWindowGroup(MEP::U_int32 group = -1);
         /**
         * Adds a new window to back of the m_windows render list. \n
         * Window is being renderd only if its Type != NullAction. \n
@@ -100,27 +65,24 @@ namespace MEP {
         * It is added at the end of the list.
         * @param[in] window : MEP::BaseWindow
         */
-        void addWindow(BaseWindow* window, MEP::U_int32 group = -1) {
-            mostRecentAccess = window;
-            mostRecentGroup = group;
-            _insert(window->getID(), group, std::move(std::shared_ptr<BaseWindow>{window}));
-        }
+        void addWindow(BaseWindow* window, MEP::U_int32 group = -1);
 
-        BaseWindow& latestWindow() {
-            if (mostRecentAccess)
-                return *mostRecentAccess;
-            throw MEP::WindowException("Most recent access deleted the window/most recent window does not exist!");
-        }
+        BaseWindow& latestWindow();
         template<typename Method>
-        void execute(Method method) {
-            MEPtools::GroupManager<BaseWindow, std::shared_ptr<BaseWindow>>::_execute(method);
-        }
+        void execute(Method method);
         template<typename Method>
-        void execute(Method method, MEP::U_int32 group) {
-            MEPtools::GroupManager<BaseWindow, std::shared_ptr<BaseWindow>>::_execute(method, group);
-        }
+        void execute(Method method, MEP::U_int32 group);
     };
 
+    template<typename Method>
+    void BaseManager::execute(Method method) {
+        MEPtools::GroupManager<BaseWindow, std::shared_ptr<BaseWindow>>::_execute(method);
+    }
+
+    template<typename Method>
+    void BaseManager::execute(Method method, MEP::U_int32 group) {
+        MEPtools::GroupManager<BaseWindow, std::shared_ptr<BaseWindow>>::_execute(method, group);
+    }
 }
 
 #endif

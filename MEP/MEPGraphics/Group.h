@@ -44,18 +44,11 @@ namespace MEPtools {
 		/**
 		* Map insert.
 		*/
-		bool insert(MEP::U_int32 ID, PtrType& value, std::map<MEP::U_int32, PtrType>& input) {
-			++size;
-			return input.insert({ ID, std::move(value) }).second;
-		}
+		bool insert(MEP::U_int32 ID, PtrType& value, std::map<MEP::U_int32, PtrType>& input);
 		/**
 		* List insert
 		*/
-		bool insert(MEP::U_int32 ID, PtrType& value, std::list<PtrType>& input) {
-			input.push_back(std::move(value));
-			++size;
-			return true;
-		}
+		bool insert(MEP::U_int32 ID, PtrType& value, std::list<PtrType>& input);
 	public:
 		GroupManager() = default;
 		/**
@@ -64,165 +57,219 @@ namespace MEPtools {
 		* When SecondStructure is a std::list executes in O(m)
 		* Where n is a numer of elements in m-th group, and m is a number of groups.
 		*/
-		bool _insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value) {
-			auto [iterator, status] = m_objects.insert({ group, SecondStructure() });
-			return insert(ID, value, iterator->second);
-			return false;
-		}
-
+		bool _insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value);
 		/**
 		* Outputs the element.
 		*/
-		X& _get(MEP::U_int32 ID, MEP::U_int32 group) const {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				auto second_insert = iterator->second.find(ID);
-				if (second_insert == iterator->second.end()) {
-					throw MEP::ResourceException(std::to_string(group), "Could not find a resource!", MEP::ResourceException::ExceptionType::ObjectNotFound);
-				}
-				return *second_insert->second;
-			}
-			else {
-				throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
-			}
-		}
-
+		X& _get(MEP::U_int32 ID, MEP::U_int32 group) const;
 		/**
 		* Outputs the group of elements.
 		*/
-		SecondStructure& _getGroup(MEP::U_int32 group) {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				return iterator->second;
-			}
-			else {
-				throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
-			}
-		}
+		SecondStructure& _getGroup(MEP::U_int32 group);
 		/**
 		* Deletes the group of objects.
 		* @return: True - group deleted. False - group not found.
 		*/
-		bool _deleteGroup(MEP::U_int32 group) {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				size -= m_objects.size();
-				m_objects.erase(iterator);
-				return true;
-			}
-			return false;
-		}
-
+		bool _deleteGroup(MEP::U_int32 group);
 		/**
 		* Deletes the object.
 		* @return: True - object deleted. False - object not found.
 		*/
-		bool _deleteElement(MEP::U_int32 ID, MEP::U_int32 group) {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				auto second_iter = iterator->second.find(ID);
-				if (second_iter == iterator->second.end()) {
-					return false;
-				}
-				else {
-					--size;
-					iterator->second.erase(second_iter);
-					return true;
-				}
-			}
-			return false;
-		}
+		bool _deleteElement(MEP::U_int32 ID, MEP::U_int32 group);
 		/**
 		* Executes method a for all of the elements.
 		*/
 		template<typename Method>
-		void _execute(Method method) {
-			for (auto& x : m_objects) {
-				for (auto& it : x.second) {
-					method(it);
-				}
-			}
-		}
+		void _execute(Method method);
 		/**
 		* Execute method for a group of objects.
 		*/
 		template<typename Method>
-		bool _execute(Method method, MEP::U_int32 group) {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				for (auto& x : iterator->second)
-					method(x);
-				return true;
-			}
-			return false;
-		}
+		bool _execute(Method method, MEP::U_int32 group);
 		/**
 		* Executes constant method a for all of the elements.
 		*/
 		template<typename Method>
-		void _execute(Method method) const {
-			for (auto& x : m_objects) {
-				for (auto& it : x.second) {
-					method(it);
-				}
-			}
-		}
+		void _execute(Method method) const;
 		/**
 		* Execute  constant method for a group of objects.
 		*/
 		template<typename Method>
-		bool _execute(Method method, MEP::U_int32 group) const {
-			auto iterator = m_objects.find(group);
-			if (iterator != m_objects.end()) {
-				for (auto& x : iterator->second)
-					method(x);
-				return true;
-			}
-			return false;
-		}
+		bool _execute(Method method, MEP::U_int32 group) const;
 		/**
 		* Diagnostic tool.
 		*/
-		void _debugOutput(std::ostream& out, const char* before = "", const char* after = "") const {
-			for (auto& x : m_objects) {
-				out << "Group: " << x.first << std::endl;
-				for (auto& it : x.second) {
-					out << before << it << after <<std::endl;
-				}
-			}
-		}
+		void _debugOutput(std::ostream& out, const char* before = "", const char* after = "") const;
 		/**
 		* Diagnostic tool.
 		*/
 		template<typename Out>
-		void _debugOutput(std::ostream& out, Out method) const {
-			for (auto& x : m_objects) {
-				out << "Group: " << x.first << std::endl;
-				for (auto& it : x.second) {
-					method(it, out);
-				}
-			}
-		}
+		void _debugOutput(std::ostream& out, Out method) const;
 		/**
 		* Number of objects.
 		*/
-		unsigned int _size() const {
-			return size;
-		}
+		unsigned int _size() const;
 		/**
 		* Is constainer empty.
 		*/
-		bool _empty() const {
-			return _size() == 0;
-		}
+		bool _empty() const;
 		/**
 		* Clears the map.
 		*/
-		void _clear() {
-			size = 0;
-			m_objects.clear();
-		}
+		void _clear();
 	};
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::insert(MEP::U_int32 ID, PtrType& value, std::map<MEP::U_int32, PtrType>& input) {
+		++size;
+		return input.insert({ ID, std::move(value) }).second;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::insert(MEP::U_int32 ID, PtrType& value, std::list<PtrType>& input) {
+		input.push_back(std::move(value));
+		++size;
+		return true;
+	}
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::_insert(MEP::U_int32 ID, MEP::U_int32 group, PtrType value) {
+		auto [iterator, status] = m_objects.insert({ group, SecondStructure() });
+		return insert(ID, value, iterator->second);
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	X& GroupManager<X, PtrType, SecondStructure>::_get(MEP::U_int32 ID, MEP::U_int32 group) const {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			auto second_insert = iterator->second.find(ID);
+			if (second_insert == iterator->second.end()) {
+				throw MEP::ResourceException(std::to_string(group), "Could not find a resource!", MEP::ResourceException::ExceptionType::ObjectNotFound);
+			}
+			return *second_insert->second;
+		}
+		else {
+			throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
+		}
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	SecondStructure& GroupManager<X, PtrType, SecondStructure>::_getGroup(MEP::U_int32 group) {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			return iterator->second;
+		}
+		else {
+			throw MEP::ResourceException(std::to_string(group), "Could not find a group!", MEP::ResourceException::ExceptionType::GroupNotFound);
+		}
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::_deleteGroup(MEP::U_int32 group) {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			size -= m_objects.size();
+			m_objects.erase(iterator);
+			return true;
+		}
+		return false;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::_deleteElement(MEP::U_int32 ID, MEP::U_int32 group) {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			auto second_iter = iterator->second.find(ID);
+			if (second_iter == iterator->second.end()) {
+				return false;
+			}
+			else {
+				--size;
+				iterator->second.erase(second_iter);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	template<typename Method>
+	void GroupManager<X, PtrType, SecondStructure>::_execute(Method method) {
+		for (auto& x : m_objects) {
+			for (auto& it : x.second) {
+				method(it);
+			}
+		}
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	template<typename Method>
+	bool GroupManager<X, PtrType, SecondStructure>::_execute(Method method, MEP::U_int32 group) {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			for (auto& x : iterator->second)
+				method(x);
+			return true;
+		}
+		return false;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	template<typename Method>
+	void GroupManager<X, PtrType, SecondStructure>::_execute(Method method) const {
+		for (auto& x : m_objects) {
+			for (auto& it : x.second) {
+				method(it);
+			}
+		}
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	template<typename Method>
+	bool GroupManager<X, PtrType, SecondStructure>::_execute(Method method, MEP::U_int32 group) const {
+		auto iterator = m_objects.find(group);
+		if (iterator != m_objects.end()) {
+			for (auto& x : iterator->second)
+				method(x);
+			return true;
+		}
+		return false;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	void GroupManager<X, PtrType, SecondStructure>::_debugOutput(std::ostream& out, const char* before, const char* after) const {
+		for (auto& x : m_objects) {
+			out << "Group: " << x.first << std::endl;
+			for (auto& it : x.second) {
+				out << before << it << after << std::endl;
+			}
+		}
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	template<typename Out>
+	void GroupManager<X, PtrType, SecondStructure>::_debugOutput(std::ostream& out, Out method) const {
+		for (auto& x : m_objects) {
+			out << "Group: " << x.first << std::endl;
+			for (auto& it : x.second) {
+				method(it, out);
+			}
+		}
+	}
+	template<typename X, typename PtrType, typename SecondStructure>
+	unsigned int GroupManager<X, PtrType, SecondStructure>::_size() const {
+		return size;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	bool GroupManager<X, PtrType, SecondStructure>::_empty() const {
+		return _size() == 0;
+	}
+
+	template<typename X, typename PtrType, typename SecondStructure>
+	void GroupManager<X, PtrType, SecondStructure>::_clear() {
+		size = 0;
+		m_objects.clear();
+	}
 }
 
 #endif

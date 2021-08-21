@@ -65,10 +65,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const ResourceType type, const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-			Resource(type, ID, AssetsGroup::UserAssets, name, nofFrames, transparency)
-		{
-		}
+		Resource(const ResourceType type, const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false);
 		/**
 		* Resource contructor. It creates the font.
 		* @param[in] ID : An ID of a resource.
@@ -76,17 +73,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const ResourceType type, const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-			m_ID(ID),
-			m_group(group),
-			m_name(name),
-			m_type(type),
-			m_transparency(transparency)
-		{
-			if (nofFrames == 0)
-				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
-			m_nofFrames = nofFrames;
-		}
+		Resource(const ResourceType type, const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false);
 		/**
 		* Resource contructor. It is capable of creating Single and Multi resource.
 		* @param[in] ID : An ID of a resource.
@@ -94,10 +81,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-			//by default we are assigning it to the MEP::UserAssets (-1)
-			Resource(ID, -1, name, nofFrames, transparency)
-		{}
+		Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames = 1, bool transparency = false);
 		/**
 		* Resource contructor. It is capable of creating Single and Multi resource.
 		* @param[in] ID : An ID of a resource.
@@ -106,19 +90,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false) :
-			m_ID(ID),
-			m_group(group),
-			m_name(name),
-			m_type(ResourceType::Single),
-			m_transparency(transparency)
-		{
-			if (nofFrames == 0)
-				throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
-			if (nofFrames > 1)
-				m_type = ResourceType::Multi;
-			m_nofFrames = nofFrames;
-		}
+		Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames = 1, bool transparency = false);
 		/**
 		* Resource contructor. It is capable of creating ImageArray resource.
 		* @param[in] ID : An ID of a resource.
@@ -126,11 +98,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
-			//by default we are assigning it to the MEP::UserAssets (-1)
-			Resource(ID, -1, images, name, transparency)
-		{
-		}
+		Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency = false);
 		/**
 		* Resource contructor. It is capable of creating ImageArray resource.
 		* @param[in] ID : An ID of a resource.
@@ -139,15 +107,7 @@ namespace MEP {
 		* @param[in] nofFrames : Number of textures. 1 by default.
 		* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
 		*/
-		Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency = false) :
-			m_ID(ID),
-			m_group(group),
-			m_name(name),
-			m_transparency(transparency),
-			m_array(&images)
-		{
-			m_type = ResourceType::ImageArray;
-		}
+		Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency = false);
 	};
 	/**
 	* Resources class is a utility which is meant to be working with all of the MEP::Drawable objects.
@@ -158,9 +118,7 @@ namespace MEP {
 		bool isInit = false;
 		//Method loading individual resource
 		void load(const Resource& data);
-		void loadResources() { 
-			isInit = true; 
-		};
+		void loadResources();
 		//Forwarding method
 		template <typename First, typename ... Rest>
 		void loadResources(First&& first, Rest&& ... rest);
@@ -169,7 +127,7 @@ namespace MEP {
 		* Constructor of the resources.
 		* @param[in] path : Path of the resource folder.
 		*/
-		Resources(const std::string& path) : m_path(path) {};
+		Resources(const std::string& path);
 		/**
 		* Initialization of the resources.
 		* @param[in] values : Inputs ... number of MEP::Resources::Resource. 
@@ -179,7 +137,7 @@ namespace MEP {
 		/**
 		* Outputs the status of the resources.
 		*/
-		bool isLoaded() const { return isInit; }
+		bool isLoaded() const;
 		/**
 		* Outputs created MEP::Object
 		* @param[in] ID : ID of a MEP::Object.
@@ -228,7 +186,7 @@ namespace MEP {
 		* Deletes all MEP::Object.
 		* @param[in] name : Name of a MEP::Object.
 		*/
-		virtual ~Resources() {};
+		virtual ~Resources();
 	};
 
 	template<typename First, typename ...Rest>
@@ -291,16 +249,6 @@ namespace MEP {
 		}
 	}
 
-	inline Object& Resources::getObject(const U_int32 ID, const U_int32 group)
-	{
-		return MEPtools::GroupManager<MEP::Object>::_get(ID, group);
-	}
-
-	inline sf::Font& Resources::getFont(const U_int32 ID, const U_int32 group)
-	{
-		return MEPtools::GroupManager<MEP::Font>::_get(ID, group).getFont();
-	}
-
 	template <typename T>
 	inline T& Resources::get(const U_int32 ID, const U_int32 group) {
 		if (std::is_same<T, MEP::Object>()) {
@@ -310,26 +258,6 @@ namespace MEP {
 			return (T&)getFont(ID, group);
 		} else
 			throw ResourceException("ID: " + std::to_string(ID), "Incorrect type!", ResourceException::ExceptionType::IncorrectType);
-	}
-
-	inline void Resources::deleteObject(const U_int32 ID, const U_int32 group)
-	{
-		MEPtools::GroupManager<MEP::Object>::_deleteElement(ID, group);
-	}
-
-	inline void Resources::deleteObjectsGroup(const U_int32 group)
-	{
-		MEPtools::GroupManager<MEP::Object>::_deleteGroup(group);
-	}
-
-	inline void Resources::deleteFont(const U_int32 ID, const U_int32 group)
-	{
-		MEPtools::GroupManager<MEP::Font>::_deleteElement(ID, group);
-	}
-
-	inline void Resources::deleteFontGroup(const U_int32 group)
-	{
-		MEPtools::GroupManager<MEP::Font>::_deleteGroup(group);
 	}
 }
 

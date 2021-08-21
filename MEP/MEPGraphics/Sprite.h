@@ -17,120 +17,71 @@ namespace MEP {
 	public:
 		Sprite(const FollowType& followType,
 			sf::Vector2f pos = { 0.f, 0.f },
-			sf::Vector2f scale = { 1.f, 1.f }) :
-		Following(followType, pos, pos, scale, scale)
-		{}
+			sf::Vector2f scale = { 1.f, 1.f });
+
 		Sprite(sf::Vector2f pos = { 0.f, 0.f },
-			sf::Vector2f scale = { 1.f, 1.f }) :
-			Following(pos, pos, scale, scale)
-		{}
-		Sprite& operator<<(const Sprite& x) {
-			if (this != &x) {
-				(Following&)(*this) << x;
-			}
-			return *this;
-		}
+			sf::Vector2f scale = { 1.f, 1.f });
+		Sprite& operator<<(const Sprite& x);
 		/**
 		* Outputs the sf::Sprite objects in case you want to commit any advanced changes which are not supported by the MEP.
 		* @return : sf::Sprite
 		*/
-		sf::Sprite& getSprite() { return currentSprite; }
+		sf::Sprite& getSprite();
 		/**
 		* Updates the set of sprite variables and it's texture according to the following elements and given texture.
 		*/
-		void updateSprite(sf::Texture& texture)
-		{
-			currentSprite.setTexture(texture);
-			updateSprite();
-		}
+		void updateSprite(sf::Texture& texture);
 		/**
 		* Updates the set of sprite variables according to the following elements.
 		*/
-		virtual void updateSprite()
-		{
-			followingListv2._execute([&](auto& x) {
-				x.get()->updateVariables(*this, currentSprite);
-				});
-		}
+		virtual void updateSprite();
 		/**
 		* Sets the position
 		* @param[in] pos : Position.
 		*/
-		void setPosition(const sf::Vector2f pos) override { 
-			m_pos = pos; 
-			m_posFixed = pos; 
-			currentSprite.setPosition(m_posFixed);
-			updateSprite(); 
-		}
+		void setPosition(const sf::Vector2f pos) override;
 		/**
 		* Sets the position
 		* @param[in] x : MEP::Following object.
 		*/
-		void setPosition(const Following& x) override { 
-			m_pos = x.getOriginPosition(); 
-			m_posFixed = x.getPosition(); 
-			currentSprite.setPosition(m_posFixed);
-			updateSprite(); 
-		}
+		void setPosition(const Following& x) override;
 		/**
 		* Sets the scale.
 		* @param[in] scale : Scale.
 		*/
-		virtual void setScale(const sf::Vector2f scale) { 
-			m_scale = scale; 
-			m_scaleFixed = scale; 
-			currentSprite.setScale(m_scaleFixed);
-			updateSprite(); 
-		}
+		virtual void setScale(const sf::Vector2f scale);
 		/**
 		* Sets the scale.
 		* @param[in] pos : MEP::Following object.
 		*/
-		virtual void setScale(const Following& x) { 
-			m_scale = x.getOriginScale(); 
-			m_scaleFixed = x.getScale(); 
-			currentSprite.setScale(m_scaleFixed);
-			updateSprite(); 
-		}
+		virtual void setScale(const Following& x);
 		/**
 		* Changes the color of a master sprite.
 		* @param[in] color : Color.
 		*/
-		void setColor(const sf::Color& color) override { 
-			currentSprite.setColor(color); 
-		}
+		void setColor(const sf::Color& color) override;
 		/**
 		* Sets the main sprite Rect
 		*/
-		void setRect(const sf::IntRect& rect) {
-			currentSprite.setTextureRect(rect);
-		}
+		void setRect(const sf::IntRect& rect);
 		/**
 		* Adds a method of calculation the scale.
 		* @param[in] method : A method of calculating the position.
 		*/
-		void addMethodRect(std::function<sf::IntRect()> method) {
-			calc_rect = method;
-		}
+		void addMethodRect(std::function<sf::IntRect()> method);
 		/**
 		* Updates the rect of the Sprite
 		*/
-		void updateRect() {
-			currentSprite.setTextureRect(calc_rect());
-		}
+		void updateRect();
 		/**
 		* Outputs the rect.
 		*/
-		const sf::IntRect& getRect() const {
-			return currentSprite.getTextureRect();
-		}
+		const sf::IntRect& getRect() const;
 		/**
 		* Outputs the color of a master sprite.
 		* @return : Color.
 		*/
-		const sf::Color& getColor() const override { 
-			return currentSprite.getColor(); 
-		}
+		const sf::Color& getColor() const override;
 	};
 }
 

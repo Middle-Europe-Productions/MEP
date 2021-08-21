@@ -32,20 +32,8 @@ namespace MEP {
 	* \brief Basic MEP::Drawable element based on a single texture.
 	*/
 	class TextureObject : public Object, public Sprite {
-		void updateSprite() override {
-			if(followingListv2._size() != 0)
-				followingListv2._execute([&](auto& x) {
-					x.get()->updateVariables(*this, currentSprite);
-					});
-			currentSprite.setPosition(m_posFixed);
-			currentSprite.setScale(m_scaleFixed);
-		}
-		void init() {
-			currentSprite.setTexture(*texture->front());
-			currentSprite.setPosition(m_posFixed);
-			currentSprite.setScale(m_scaleFixed);
-			isInit = true;
-		}
+		void updateSprite() override;
+		void init();
 		bool isInit = false;
 	public:
 		/**
@@ -56,83 +44,47 @@ namespace MEP {
 		*/
 		TextureObject(const Object& x,
 			sf::Vector2f pos = { 0.f, 0.f },
-			sf::Vector2f scale = { 1.f, 1.f }) :
-			Object(x),
-			Sprite(pos, scale) 
-		{ 
-			init(); 
-		};
+			sf::Vector2f scale = { 1.f, 1.f });
 		/**
 		* On resize we want to update the position.
 		*/
-		void onResize() override {
-			if(getDrawTag() & DrawTag::Resize_Scale)
-				updateScale();
-			if(getDrawTag() & DrawTag::Resize_Pos)
-				updatePosition();
-			if (getDrawTag() & DrawTag::Resize_Rect)
-				updateRect();
-		}
+		void onResize() override;
 		/**
 		* Override of a MEP::Drawable draw.
 		*/
-		bool draw(sf::RenderWindow& window) override {
-			if (isInit) {
-				window.draw(currentSprite);
-			}
-			return true;
-		}
+		bool draw(sf::RenderWindow& window) override;
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time&) override {
-			updateSprite();
-		}
+		void update(sf::Time&) override;
 		/**
 		* Outputs the color of a main sprite.
 		* @return sf::Color
 		*/
-		void setColor(const sf::Color& color) { 
-			currentSprite.setColor(color); 
-		}
+		void setColor(const sf::Color& color);
 		/**
 		* Sets the rotation of an object.
 		* param[in] angle : angle of n rotation.
 		*/
-		void setRotation(const float angle) {
-			currentSprite.setRotation(angle);
-		}
+		void setRotation(const float angle);
 		/**
 		* Outputs the color of a main sprite.
 		* @return sf::Color
 		*/
-		const sf::Color& getColor() const { 
-			return currentSprite.getColor(); 
-		}
+		const sf::Color& getColor() const;
 		/**
 		* Outputs activity of a texture. It is related to associated animations.
 		* @return true - is active, false - otherwise.
 		*/
-		bool isActive() const override {
-			return isFollowerActive();
-		}
+		bool isActive() const override;
 		/**
 		* Debug output of the class.
 		*/
-		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::TextureObject, Following:" << std::endl;
-			followingDebug(out, "  ");
-			out << "   \\MEP::Object, ID: " << getID() << ", name : " << getName() << std::endl;
-			out << "     \\";
-			drawTagDebug(out);
-		}
+		virtual void debugOutput(std::ostream& out) const;
 		/**
 		* Overrdie of the << operator for diagnostic purposes.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const TextureObject& x) {
-			x.debugOutput(out);
-			return out;
-		}
+		friend std::ostream& operator<<(std::ostream& out, const TextureObject& x);
 	};
 }
 

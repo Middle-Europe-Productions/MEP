@@ -31,53 +31,29 @@ namespace MEPtools {
 		std::shared_ptr<bool> link;
 		MEP::Drawable* element;
 	public:	
-		ToRender(MEP::Drawable* ele) {
-			if (ele->_isLinked()) {
-				link = ele->_linkAddr();
-				*link = true;
-			}
-			else {
-				link = std::make_shared<bool>(false);
-				if (ele) {
-					*link = true;
-					ele->_link(link);
-				}
-			}
-			element = ele;
-		}
-		ToRender(MEP::Drawable& ele): ToRender(&ele) {}
+		ToRender(MEP::Drawable* ele);
+		ToRender(MEP::Drawable& ele);
 		/**
 		* Outputs the element.
 		*/
-		MEP::Drawable* get() const {
-			return element;
-		}
+		MEP::Drawable* get() const;
 		/**
 		* Outputs the activity of an object.
 		* False - object destructor was called. True - objects exists.
 		*/
-		bool isActive() const {
-			if (!link)
-				return false;
-			return *link;
-		}
-		friend std::ostream& operator<<(std::ostream& out, const ToRender& x) {
-			if (x.isActive()) {
-				out <<"|-"<< *x.get();
-			}
-			else {
-				out << "|-Unactive";
-			}
-			return out;
-		}
+		bool isActive() const;
+		/**
+		* << operator.
+		*/
+		friend std::ostream& operator<<(std::ostream& out, const ToRender& x);
 	};
 }
 namespace MEP {
 	struct DataPackage {
 		MEP::Drawable* _obj;
 		MEP::U_int32 _group;
-		DataPackage(MEP::Drawable* obj, MEP::U_int32 group = 4294967295) : _obj(obj), _group(group) {}
-		DataPackage(MEP::Drawable& obj, MEP::U_int32 group = 4294967295) : _obj(&obj), _group(group) {}
+		DataPackage(MEP::Drawable* obj, MEP::U_int32 group = 4294967295);
+		DataPackage(MEP::Drawable& obj, MEP::U_int32 group = 4294967295);
 	};
 	/**
 		* \brief MEP::BaseWindow exceptions handler.
@@ -91,55 +67,39 @@ namespace MEP {
 		* @param[in] ID : Identification of a w MEP::BaseWindow
 		* @param[in] msg : Message
 		*/
-		explicit WindowException(const unsigned int ID, const std::string& msg) : WindowID(ID), Message(msg)
-		{}
+		explicit WindowException(const unsigned int ID, const std::string& msg);
 		/**
 		* Constructor of a WindowException
 		* @param[in] ID : Identification of a w MEP::BaseWindow
 		* @param[in] msg : Message
 		*/
-		explicit WindowException(const unsigned int ID, const char* msg) : WindowID(ID), Message(msg)
-		{}
+		explicit WindowException(const unsigned int ID, const char* msg);
 		/**
 		* Constructor of a WindowException
 		* @param[in] ID : Identification of a w MEP::BaseWindow
 		* @param[in] x : A MEP::ResourceException that caused the MEP::WindowException
 		*/
-		explicit WindowException(const unsigned int ID, const MEP::ResourceException& x) : WindowID(ID)
-		{
-			Message = "caused by ResourceException ResourceName: " + x.ResourceName + ", Message: " + x.Message;
-		}
+		explicit WindowException(const unsigned int ID, const MEP::ResourceException& x);
 		/**
 		* Constructor of a WindowException
 		* @param[in] ID : Identification of a w MEP::BaseWindow
 		* @param[in] msg : Message
 		*/
-		explicit WindowException(const std::string& msg) : master(true), Message(msg)
-		{}
+		explicit WindowException(const std::string& msg);
 		/**
 		* Constructor of a WindowException
 		* @param[in] msg : Message
 		*/
-		explicit WindowException(const char* msg) : master(true), Message(msg)
-		{}
+		explicit WindowException(const char* msg);
 		/**
 		* Constructor of a WindowException
 		* @param[in] x : A MEP::ResourceException that caused the MEP::WindowException
 		*/
-		explicit WindowException(const MEP::ResourceException& x) : master(true)
-		{
-			Message = "caused by ResourceException ResourceName: " + x.ResourceName + ", Message: " + x.Message;
-		}
+		explicit WindowException(const MEP::ResourceException& x);
 		/**
 		* Overloading the << operator.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const WindowException& x) {
-			if (x.master)
-				out << "WindowException, ID: MASTER, Message:" << x.Message << std::endl;
-			else
-				out << "WindowException, ID:" << x.WindowID << ", Message:" << x.Message << std::endl;
-			return out;
-		}
+		friend std::ostream& operator<<(std::ostream& out, const WindowException& x);
 	};
 	/**
 	* All of the Windows added to the MEP::Template::Application are expected to be a MEP::BaseWindow objects.
@@ -179,60 +139,24 @@ namespace MEP {
 		* Constructor of a BaseWindow
 		* @param[in] id : Window identifier
 		*/
-		BaseWindow(const unsigned int ID) :
-			m_ID(ID)
-		{}
+		BaseWindow(const unsigned int ID);
 		/**
 		* Constructor of a BaseWindow
 		* @param[in] id : Window identifier
 		* @patam[in] view : Input view of the window.
 		* @patam[in] master : Main window view.
 		*/
-		BaseWindow(const unsigned int ID, const sf::View& view, const sf::View& master) :
-			WindowView(view, master),
-			m_ID(ID)
-		{}
+		BaseWindow(const unsigned int ID, const sf::View& view, const sf::View& master);
 		/**
 		* Base render method.
 		* @param[in] Window : RenderWindow object.
 		* @return True if non of the window elements need a rebuild, false when atleast one element could not be rendered.
 		*/
-		virtual bool render(sf::RenderWindow& Window) {
-			bool stop = true;
-			if (customView())
-				Window.setView(getView());
-			_execute([&Window, this, &stop](auto& x) {
-				if (x.isActive()) {
-					if (x.get()->getDrawTag() & MEP::DrawTag::ViewLock and customView()) {
-						Window.setView(getMasterView());
-						if (!x.get()->draw(Window)) {
-							stop = false;
-						}
-						Window.setView(getView());;
-					}
-					else if (!(x.get()->getDrawTag() & MEP::DrawTag::Unactive)) {
-						if (!x.get()->draw(Window)) {
-							stop = false;
-						}
-					}
-				}
-				});
-			if (customView())
-				Window.setView(getMasterView());
-			return stop;
-		}
+		virtual bool render(sf::RenderWindow& Window);
 		/**
 		* Updates the position when window is resized.
 		*/
-		void onResize(const sf::Vector2u& new_res) {
-			if (isCustomViewEnabled) {
-				m_view.setSize({ (float)new_res.x, (float)new_res.y });
-			}
-			_execute([](auto& x) {
-				if (x.isActive())
-					x.get()->onResize();
-				});
-		}
+		void onResize(const sf::Vector2u& new_res);
 		/**
 		* Base update method.
 		* @param[in] currontTime : Current global time.
@@ -273,62 +197,44 @@ namespace MEP {
 		* Outputs the status of a window.
 		* @return MEP::Status
 		*/
-		const Status& getStatus() {
-			return m_status;
-		}
+		const Status& getStatus();
 		/**
 		* Changes the status of a window.
 		* @param[in] status : MEP::Status
 		*/
-		void changeStatus(const Status status) {
-			m_status = status;
-		}
+		void changeStatus(const Status status);
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable*
 		*/
-		void newObject(DataPackage object) {
-			_insert(0, object._group, object._obj);
-		};
+		void newObject(DataPackage object);
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable*
 		*/
-		void newObject(MEP::Drawable* object) {
-			_insert(0, 4294967295, object);
-		};
+		void newObject(MEP::Drawable* object);
 		/**
 		* Adds a new MEP::Drawable to the main scope.
 		* @param[in] : MEP::Drawable&
 		*/
-		void newObject(MEP::Drawable& object) {
-			_insert(0, 4294967295, object);
-		}
+		void newObject(MEP::Drawable& object);
 		/**
 		* Deletes all MEP::Objects in the MEP::Window::BaseWindow
 		*/
 		template<typename ... Values>
 		void newObjects(Values&& ... values);
-		void debugOutput(std::ostream& out) {
-			std::cout << "|-Display-Queue-------------------------------------------"<< std::endl;
-			std::cout << "MEP::debugOutput() Window ID :" << getID() << std::endl;
-			MEPtools::GroupManager<MEPtools::ToRender, MEPtools::ToRender, std::list<MEPtools::ToRender>>::_debugOutput(out, "", "\n");
-			std::cout << "|---------------------------------------------------------" << std::endl;
-		}
+		/**
+		* Debug output method. 
+		*/
+		void debugOutput(std::ostream& out);
 		/**
 		* Outputs an ID of a MEP::Window::BaseWindow
 		* @return : ID
 		*/
-		unsigned int getID() const {
-			return m_ID;
-		}
-		bool operator==(const unsigned int ID) const {
-			return m_ID == ID;
-		}
-		bool operator==(const BaseWindow& x) const {
-			return getID() == x.getID();
-		}
-		virtual ~BaseWindow() {};
+		unsigned int getID() const;
+		bool operator==(const unsigned int ID) const;
+		bool operator==(const BaseWindow& x) const;
+		virtual ~BaseWindow();
 	};
 
 	template<typename First, typename ...Rest>
@@ -344,86 +250,6 @@ namespace MEP {
 		newObj(std::forward<Values>(values) ...);
 	}
 
-	inline void BaseWindow::update(sf::Time& currentTime)
-	{
-		try {
-			beforeUpdate(currentTime);
-			if (m_status == Status::InProgress or m_status == Status::Main) {
-				updateRunning(currentTime);
-			}
-			else if (m_status == Status::Entrance or m_status == Status::LowEntrance) {
-				updateEntrance(currentTime);
-			}
-			else if (m_status == Status::Exit or m_status == Status::LowExit) {
-				updateExit(currentTime);
-			}
-			afterUpdate(currentTime);
-		}
-		catch (const MEP::WindowException& x) {
-			throw x;
-		}
-		catch (const MEP::ResourceException& x) {
-			throw x;
-		}
-	}
-
-	inline void BaseWindow::updateRunning(sf::Time& currentTime)
-	{
-		_execute([&currentTime](auto& x) {
-			if (x.isActive())
-				x.get()->update(currentTime);
-			});
-	}
-
-	inline void BaseWindow::updateEntrance(sf::Time& currentTime)
-	{
-		if (m_status == Status::Entrance) {
-			_execute([&currentTime](auto& x) {
-				if (x.isActive())
-					x.get()->entryUpdate(currentTime);
-				});
-			m_status = Status::Main;
-		}
-		else {
-			_execute([&currentTime](auto& x) {
-				if (x.isActive())
-					x.get()->entryUpdate(currentTime, true);
-				});
-			m_status = Status::InProgress;
-		}
-	}
-
-	inline void BaseWindow::updateExit(sf::Time& currentTime)
-	{
-		bool isActive = false;
-		if (m_status == Status::Exit) {
-			_execute([&currentTime, &isActive](auto& x) {
-				if (x.isActive()) {
-					x.get()->exitUpdate(currentTime);
-					if (x.get()->isActive())
-						isActive = true;
-				}
-				});
-		}
-		else {
-			_execute([&currentTime, &isActive](auto& x) {
-				if (x.isActive()) {
-					x.get()->exitUpdate(currentTime, true);
-					if (x.get()->isActive())
-						isActive = true;
-				}
-				});
-		}
-		if (!isActive) {
-			m_status = Status::NullAction;
-		}
-	}
-
-	inline void BaseWindow::handleEvent(sf::RenderWindow& Window, sf::Event& event)
-	{
-		if (event.type == sf::Event::Closed)
-			Window.close();
-	}
 }
 
 #endif

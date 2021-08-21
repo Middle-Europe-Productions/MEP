@@ -56,105 +56,62 @@ namespace MEP {
 		/**
 		* Notify the link.
 		*/
-		void notify() {
-			if (link) {
-				*link = false;
-			}
-		}
+		void notify();
 		/**
 		* DrawTag output
 		*/
-		void drawTagDebug(std::ostream& out) const {
-			out << "MEP::Drawable: { ";
-			if (m_drawTag & Non)
-				out << "Non ";
-			if (m_drawTag & ViewLock)
-				out << "ViewLock ";
-			if (m_drawTag & Unactive)
-				out << "Unactive ";
-			if (m_drawTag & Resize_Pos)
-				out << "Resize_Pos ";
-			if (m_drawTag & Resize_Scale)
-				out << "Resize_Scale ";
-			if (m_drawTag & Resize_Rect)
-				out << "Resize_Rect ";
-			out << "}";
-		}
+		void drawTagDebug(std::ostream& out) const;
 	public:
 		/**
 		* Links the notification link.
 		* Boolean value output true when resource is active.
 		*/
-		void _link(std::shared_ptr<bool> _li) {
-			link = _li;
-		}
+		void _link(std::shared_ptr<bool> _li);
 		/**
 		* Outputs the notification link.
 		* Boolean value output true when resource is active.
 		*/
-		std::shared_ptr<bool> _linkAddr() {
-			return link;
-		}
+		std::shared_ptr<bool> _linkAddr();
 		/**
 		* Outputs the notification link.
 		* Boolean value output true when resource is active.
 		*/
-		const std::shared_ptr<bool> _linkAddr() const {
-			return link;
-		}
+		const std::shared_ptr<bool> _linkAddr() const;
 		/**
 		* Outputs the information about the activity of the link.
 		* Boolean value output true when resource is active.
 		*/
-		bool _isLinked() const {
-			return link != nullptr;
-		}
+		bool _isLinked() const;
 		/**
 		* Outputs draw tag of a MEP::Drawable
 		* Use MEP::DrawTag here.
 		* @return : MEP::Drawable::DrawTag.
 		*/
-		U_int32 getDrawTag() const {
-			return m_drawTag; 
-		}
+		U_int32 getDrawTag() const;
 		/**
 		* Sets the draw tag of a MEP::Drawable.
 		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		*/
-		void setDrawTag(const U_int32 tag) { 
-			m_drawTag = tag; 
-		}
+		void setDrawTag(const U_int32 tag);
 		/**
 		* Adds the draw tag of a MEP::Drawable.
 		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		* @return : True - draw tag was added. False - draw tag is already added.
 		*/
-		bool addDrawTag(const U_int32 tag) {
-			if (tag & m_drawTag)
-				return false;
-			else
-				m_drawTag |= tag;
-			return true;
-		}
+		bool addDrawTag(const U_int32 tag);
 		/**
 		* Removes the draw tag of a MEP::Drawable.
 		* Use MEP::DrawTag here.
 		* @param[in] : MEP::Drawable::DrawTag.
 		* @return : True - draw tag was deleted. False - draw tag was not set.
 		*/
-		bool removeDrawTag(const U_int32 tag) {
-			if (!(tag & m_drawTag))
-				return false;
-			else
-				m_drawTag ^= tag;
-			return true;
-		}
+		bool removeDrawTag(const U_int32 tag);
 		/**
 		* Instructions on what to do when window is being resized.
 		*/
-		virtual void onResize() {}
+		virtual void onResize();
 		/**
 		* Default contructor.
 		*/
@@ -164,43 +121,37 @@ namespace MEP {
 		* @param[in] window : Reference to a window.
 		* @return True if the drawing was successful, or false if there is something wrong with an object and it must be redrawn.
 		*/
-		virtual bool draw(sf::RenderWindow&) { return false; };
+		virtual bool draw(sf::RenderWindow&);
 		/**
 		* Default virtual update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void update(sf::Time&) {};
+		virtual void update(sf::Time&);
 		/**
 		* Default virtual entry update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void entryUpdate(sf::Time& currentTime, bool low = false) { update(currentTime); };
+		virtual void entryUpdate(sf::Time& currentTime, bool low = false);
 		/**
 		* Default virtual exit update function.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual void exitUpdate(sf::Time & currentTime, bool low = false) { update(currentTime); };
+		virtual void exitUpdate(sf::Time& currentTime, bool low = false);
 		/**
 		* Default virtual activation status method.
 		* @param[in] currentTime : Current global time.
 		*/
-		virtual bool isActive() const { return false; };
+		virtual bool isActive() const;
 		/**
 		* Debug output of the class.
 		*/
-		virtual void debugOutput(std::ostream& out) const {
-			drawTagDebug(out);
-		}
+		virtual void debugOutput(std::ostream& out) const;
 		/**
 		* Overrdie of the << operator for diagnostic purposes.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const Drawable& x) {
-			x.debugOutput(out);
-			return out;
-		}
-		virtual ~Drawable() {
-			notify();
-		};
+		virtual ~Drawable();
+		
+		friend std::ostream& operator<<(std::ostream & out, const Drawable & x);
 	};
 };
 

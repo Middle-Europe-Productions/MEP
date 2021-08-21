@@ -62,21 +62,8 @@ namespace MEP {
 		* Current values.
 		*/
 		sf::Uint8 r, g, b, a;
-		sf::Uint8 value(sf::Uint8 r, const sf::Uint8& entry, const sf::Uint8& exit) const {
-			if (entry - exit < 0) {
-				return entry + *currentFrame * abs(entry - exit) / 100;
-			}
-			else if (entry - exit > 0) {
-				return entry - *currentFrame * abs(entry - exit) / 100;
-			}
-			return r;
-		}
-		void updateRGBA() {
-			r = value(r, entry_r, exit_r);
-			g = value(g, entry_g, exit_g);
-			b = value(b, entry_b, exit_b);
-			a = value(a, entry_a, exit_a);
-		}
+		sf::Uint8 value(sf::Uint8 r, const sf::Uint8& entry, const sf::Uint8& exit) const;
+		void updateRGBA();
 	public:
 		/**
 		* Constructor of an animation color.
@@ -94,101 +81,38 @@ namespace MEP {
 			const float frameRate = 120,
 			const double begin = 0,
 			const double end = 10,
-			std::function<double(double x)> function = [](double x)->double { return x; }) :
-			AnimationPosition(0, 100, length, frameRate, begin, end, function),
-			entry_r(entry.r), 
-			entry_g(entry.g), 
-			entry_b(entry.b), 
-			entry_a(entry.a),
-			exit_r(exit.r),
-			exit_g(exit.g),
-			exit_b(exit.b),
-			exit_a(exit.a),
-			r(entry.r),
-			g(entry.g),
-			b(entry.b),
-			a(entry.a)
-		{}
+			std::function<double(double x)> function = [](double x)->double { return x; });
 		/**
 		* Changes the exit color. Exit means targeted color (after the iterations).
 		* @param[in] newColor : sf::Color
 		* @return : True - if changes were applied. False - if they were rejected.
 		*/
-		bool changeExitColor(const sf::Color& newColor) {
-			if (!isRunning) {
-				exit_r = newColor.r;
-				exit_g = newColor.g;
-				exit_b = newColor.b;
-				exit_a = newColor.a;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+		bool changeExitColor(const sf::Color& newColor);
 		/**
 		* Changes the entry color. Entry means basic color (before the iterations).
 		* @param[in] newColor : sf::Color
 		* @return : True - if changes were applied. False - if they were rejected.
 		*/
-		bool changeEntryColor(const sf::Color& newColor) {
-			if (!isRunning) {
-				entry_r = newColor.r;
-				entry_g = newColor.g;
-				entry_b = newColor.b;
-				entry_a = newColor.a;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+		bool changeEntryColor(const sf::Color& newColor);
 		/**
 		* Changes the current endpoint color. Current endpoint is defined as the opposite of a current color.
 		* @param[in] newColor : sf::Color
 		* @return : True - if changes were applied. False - if they were rejected.
 		*/
-		bool changeEndPointColor(const sf::Color& newColor) {
-			if (!isRunning) {
-				if (*currentFrame == frames.front()) {
-					changeExitColor(newColor);
-				}
-				else {
-					changeEntryColor(newColor);
-				}
-			}
-			else {
-				return false;
-			}
-		}
+		bool changeEndPointColor(const sf::Color& newColor);
 		/**
 		* Override of a MEP::Drawable update.
 		*/
-		void update(sf::Time& currentTime) override {
-			updatePositionAnimation(currentTime);
-			updateRGBA();
-		}
+		void update(sf::Time& currentTime) override;
 		/**
 		* Outputs the current sf::Color.
 		* @return : Current sf::Color
 		*/
-		virtual sf::Color getFrameAsColor() const override {	
-			return sf::Color(r, g, b, a);
-		}
+		virtual sf::Color getFrameAsColor() const override;
 		/**
 		* Debug output of the class.
 		*/
-		virtual void debugOutput(std::ostream& out) const {
-			out << "MEP::AnimationColor {[R,G,B,A]  Entry: [" 
-				<< (int)entry_r << "," << (int)entry_g << "," << (int)entry_b << "," << (int)entry_a << "]" << 
-				", Exit: [" 
-				<< (int)exit_r << "," << (int)exit_g << "," << (int)exit_b << "," << (int)exit_a << "]" <<
-				", Current: ["
-				<< (int)r << "," << (int)g << "," << (int)b << "," << (int)a << "]";
-			delayOutput(out);
-			out << "}";
-			animationDebug(out);
-		}
+		virtual void debugOutput(std::ostream& out) const;
 	};
 }
 

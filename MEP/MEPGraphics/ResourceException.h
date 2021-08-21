@@ -54,29 +54,18 @@ namespace MEP {
 		* @param[in] msg : Description of an error.
 		* @param[in] type : MEP::ResourceException::ExceptionType
 		*/
-		explicit ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type) :
-			exceptionType(type),
-			ResourceName(name),
-			Message(msg)
-		{}
+		explicit ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type);
 		/**
 		* explicit contructor
 		* @param[in] name : Name of the MEP::Object.
 		* @param[in] msg : Description of an error.
 		* @param[in] type : MEP::ResourceException::ExceptionType
 		*/
-		explicit ResourceException(const char* name, const char* msg, const ExceptionType& type) :
-			exceptionType(type),
-			ResourceName(name),
-			Message(msg)
-		{}
+		explicit ResourceException(const char* name, const char* msg, const ExceptionType& type);
 		/**
 		* Overloading the << operator.
 		*/
-		friend std::ostream& operator<<(std::ostream& out, const ResourceException& x) {
-			out << "ResourceException ResourceName: " << x.ResourceName << ", Message: " << x.Message << std::endl;
-			return out;
-		}
+		friend std::ostream& operator<<(std::ostream& out, const ResourceException& x);
 	};
 }
 #endif

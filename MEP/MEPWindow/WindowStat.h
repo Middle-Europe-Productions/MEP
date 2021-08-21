@@ -24,7 +24,7 @@
 ////////////////////////////////////////////////////////////
 #ifndef MEP_WINDOW_STATS_H
 #define MEP_WINDOW_STATS_H
-#include "../MEPGraphics/NonCopyable.h"
+#include <MEPGraphics/NonCopyable.h>
 #include <SFML/System/Time.hpp>
 namespace MEP {
 	/**
@@ -44,29 +44,17 @@ namespace MEP {
 		* Updates statistics of a main code loop
 		* @param[in] dt : Current time
 		*/
-		void updateStatistics(sf::Time dt) {
-			mStatisticsUpdateTime += dt;
-			mStatisticsNumFrames += 1;
-			if (mStatisticsUpdateTime >= sf::seconds(1.0f))
-			{
-				mStatisticsUpdateTime -= sf::seconds(1.0f);
-				mStatisticsNumFrames = 0;
-			}
-		}
+		void updateStatistics(sf::Time dt);
 		/**
 		* Outputs number of frames in latest updateStatistics call.
 		* @return Number of frames.
 		*/
-		unsigned int getFrameRate() const {
-			return mStatisticsNumFrames;
-		}
+		unsigned int getFrameRate() const;
 		/**
 		* Outputs current global time.
 		* @return Global time.
 		*/
-		sf::Time& getGlobalTime() {
-			return globalTime;
-		}
+		sf::Time& getGlobalTime();
 		~WindowStats() = default;
 	};
 }

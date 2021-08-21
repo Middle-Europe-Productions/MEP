@@ -25,7 +25,6 @@
 #ifndef MEP_APPLICATION_H
 #define MEP_APPLICATION_H
 
-#include <list>
 #include <MEPWindow/WindowCrossPlatform.h>
 #include <MEPWindow/WindowStat.h>
 #include <MEPWindow/BaseManager.h>
@@ -52,65 +51,24 @@ namespace MEP {
                 * Main update method, all of the program logic is executed here.
                 * The update method in executed only for MEP::Window::BaseWindow with a status != BaseWindow::Status::NullAction
                 */
-                virtual void update() {
-                    BaseManager::execute([this](auto& x) {
-                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction) {
-                            x.second.get()->update(getGlobalTime());
-                        }
-                        });
-                }
+                virtual void update();
                 /**
                 * Main update events method, all of the imputs to the program are analyzed here.
                 * The update method in executed only for MEP::Window::BaseWindow with a status == BaseWindow::Status::Main
                 * furthermore, the individual imput will be handled separately for all of the BaseWindow::Status::Main windows.
                 */
-                virtual void handleEvents() {
-                    sf::Event event;
-                    while (pollEvent(event))
-                    {
-                        BaseManager::execute([this, &event](auto& x) {
-                            if (x.second.get()->getStatus() == BaseWindow::Status::Main)
-                                x.second.get()->handleEvent(*this, event);
-                            });
-                    }
-                }
+                virtual void handleEvents();
                 /**
                 * Main render method, all of the drawing are done here.
                 * Method is supporting custom views from the MEP::Window::BaseWindow and it renders all of the  MEP::Window::BaseWindow with a status == BaseWindow::Status::Main
                 */
-                virtual void render() {
-                    clear(m_backgroundColor);
-                    bool ready = true;
-                    BaseManager::execute([&ready, this](auto& x) {
-                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction) {
-                            if (x.second.get()->customView()) {
-                                if (!x.second.get()->render(*this))
-                                    ready = false;
-                            }
-                            else {
-                                if (!x.second.get()->render(*this))
-                                    ready = false;
-                            }
-                        }
-                        });
-                    if(ready)
-                        display();
-                }
+                virtual void render();
                 /**
                 * Overrides the on resize method.
                 * A little hint is that SFML only executes this method when actual size of the window was changed so
                 * you dont need to check that.
                 */
-                virtual void onResize() {
-                    m_resolution = getSize();
-                    m_view.setCenter({ (float)m_resolution.x / 2, (float)m_resolution.y / 2 });
-                    m_view.setSize({ (float)m_resolution.x, (float)m_resolution.y });
-                    setView(m_view);
-                    BaseManager::execute([this](auto& x) {
-                        if (x.second.get()->getStatus() != BaseWindow::Status::NullAction)
-                            x.second.get()->onResize(m_resolution);
-                        });
-                }
+                virtual void onResize();
             public:
                 /**
                 * Base constructor for the Application.
@@ -123,29 +81,18 @@ namespace MEP {
                 Application(const char* title,
                     const char* resPath,
                     const sf::Vector2u& mainResolution = { 1280, 720 },
-                    U_int32 style = sf::Style::Default, 
-                    sf::ContextSettings settings = sf::ContextSettings())
-                    : 
-                    WindowData(title, mainResolution, style, settings),
-                    Resources(resPath),
-                    BaseManager()
-                {
-                }
-                virtual ~Application() {}
+                    U_int32 style = sf::Style::Default,
+                    sf::ContextSettings settings = sf::ContextSettings());
                 /**
                 * Method sets the sf::Color::Transparent to a real transparent color.
                 * It is a PLATFORM dependent method.
                 */
-                void setWindowTransparent() {
-                    PLATFORM::transparent(getSystemHandle());
-                }
+                void setWindowTransparent();
                 /**
                 * Method changes the transparency level up to 255 of a window.
                 * It is a PLATFORM dependent method.
                 */
-                void setWindowTransparency(unsigned char alpha) {
-                    PLATFORM::transparency(getSystemHandle(), alpha);
-                }
+                void setWindowTransparency(unsigned char alpha);
                 /**
                 * Initialization of an Application
                 * Two methods are executed:
@@ -154,47 +101,12 @@ namespace MEP {
                 * (in the following order)
                 * The method can throw a MEP::Window::WindowException exception if something is not right inside of the aforementioned methods.
                 */
-                void initApp() {
-                    try {
-                        createResources();
-                        initWindow();
-                    }
-                    catch (const MEP::ResourceException& x) {
-                        throw MEP::WindowException(-1, x);
-                    }
-                    try {
-                        createWindows();
-                    }
-                    catch (const MEP::WindowException& x) {
-                        throw x;
-                    }
-                    isInit = true;
-                }
+                void initApp();
                 /**
                 * Main loop. Just use it to run an application.
                 * The method can throw a MEP::Window::WindowException.
                 */
-                virtual bool run() {
-                    if (isInit == false) {
-                        throw MEP::WindowException("Appliaction is not initialized!");
-                    }
-                    sf::Clock clock;
-                    while (isOpen())
-                    {
-                        sf::Time dt = clock.restart();
-                        getGlobalTime() += dt;
-                        handleEvents();
-                        try {
-                            update();
-                        }
-                        catch (const MEP::WindowException& x) {
-                            throw x;
-                        }
-                        render();
-                        updateStatistics(dt);
-                    }
-                    return false;
-                }
+                virtual bool run();
                 /**
                 * Creates the game resources. Method needs to be overwritten
                 */
@@ -203,6 +115,10 @@ namespace MEP {
                 * Creates the game resources. Method needs to be overwritten
                 */
                 virtual void createWindows() = 0;
+                /**
+                * Destructor.
+                */
+                virtual ~Application();
             };
         }
 }

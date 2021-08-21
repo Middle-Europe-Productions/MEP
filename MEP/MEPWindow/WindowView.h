@@ -18,58 +18,46 @@ namespace MEP {
 		/**
 		* Enables WindowView class.
 		*/
-		WindowView(const sf::View& view, const sf::View& master) :
-			m_view(view),
-			m_appView(&master),
-			isCustomViewEnabled(true) {}
-		void grabWindow() {
-			m_grabbedWindow = true;
-		}
-		void releaseWindow() {
-			m_grabbedWindow = false;
-		}
-		void moveViewChange(const sf::Vector2i& change) {
-			m_windowPossChange = change;
-		}
-		bool isGrabbed() const {
-			return m_grabbedWindow;
-		}
+		WindowView(const sf::View& view, const sf::View& master);
+		/**
+		* Grabs the window.
+		*/
+		void grabWindow();
+		/**
+		* Releases the window.
+		*/
+		void releaseWindow();
+
+		void moveViewChange(const sf::Vector2i& change);
+		/**
+		* Information about window grab status.
+		* @return : true grabbed, false otherwise
+		*/
+		bool isGrabbed() const;
 		/**
 		* Sets a new connection with a window.
 		* @return : true if a custom view is enabled for the window, false otherwise.
 		*/
-		bool customView() const {
-			return isCustomViewEnabled and m_appView;
-		}
+		bool customView() const;
 		/**
 		* Outputs the view parameter.
 		* @return : const sf::View&
 		*/
-		const sf::View& getView() const {
-			return m_view;
-		}
+		const sf::View& getView() const;
 		/**
 		* Sets the view parameter.
 		* @param[in] : const sf::View&
 		*/
-		void setView(const sf::View& view) {
-			m_view = view;
-		}
+		void setView(const sf::View& view);
 		/**
 		* Moves the view.
 		*/
-		virtual void moveView(sf::RenderWindow& Window) {
-			m_view.move(-(sf::Mouse::getPosition(Window).x - m_windowPossChange.x),
-				-(sf::Mouse::getPosition(Window).y - m_windowPossChange.y));
-			m_windowPossChange = sf::Mouse::getPosition(Window);
-		}
+		virtual void moveView(sf::RenderWindow& Window);
 		/**
 		* Outputs the view parameter of a main app.
 		* @param[in] : const sf::View&
 		*/
-		const sf::View& getMasterView() const {
-			return *m_appView;
-		}
+		const sf::View& getMasterView() const;
 	};
 }
 

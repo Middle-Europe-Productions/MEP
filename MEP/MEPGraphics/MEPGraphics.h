@@ -26,43 +26,43 @@
 #define MEP_GRAPHICS_H
 
 //core classes
-#include"Drawable.h"
+#include<MEPGraphics/Drawable.h>
 /*
 Pure virtual class.
 Provides core attributes designed to provide basic and easy to use rendering and updathing mechanisms.
 */
-#include"Object.h"
+#include<MEPGraphics/Object.h>
 /*
 Inheritance: Drawable
 Provides basic object definition. 
 It is also capable of creating alpha channel map as well as storage of memory limited number of sf::Texture objects.
 */
-#include"Following.h"
+#include<MEPGraphics/Following.h>
 /*
 Provides following definition.
 */
-#include"AnimationBase.h"
+#include<MEPGraphics/AnimationBase.h>
 /*
 Defines basic animation attributes and time control with the use of sf::Time
 */
 //to use classes
-#include"AnimationObject.h"
+#include<MEPGraphics/AnimationObject.h>
 /*
 Inheritance: Animation, Object, Following
 Enables animation and display of a set of the objects.
 Simple animation displaying.
 */
-#include"TextureObject.h"
+#include<MEPGraphics/TextureObject.h>
 /*
 Inheritance: Object, Following
 Enables display of a single texture. 
 */
-#include"Button.h"
+#include<MEPGraphics/Button.h>
 /*
 Inheritance: AnimationObject
 Defines simple button with the use of at least a set o three objects with the MEP::Object.
 */
-#include"AnimationPosition.h"
+#include<MEPGraphics/AnimationPosition.h>
 /*
 Inheritance: Drawable, Animation
 Simple definition of a possition animation with the use of lambda function.
@@ -70,14 +70,14 @@ Possition is beeing defined following the shape of a given function.
 f(x) or -f(x) according to the given values
 */
 //management classes
-#include"ResourceManager.h"
+#include<MEPGraphics/ResourceManager.h>
 /*
 Enables automation data loading. Using MEP::Object and sf::Texture
 */
-#include"TextObject.h"
+#include<MEPGraphics/TextObject.h>
 
-#include"AnimationColor.h"
+#include<MEPGraphics/AnimationColor.h>
 
-#include"Assets.h"
+#include<MEPGraphics/Assets.h>
 
 #endif
