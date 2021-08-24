@@ -197,7 +197,7 @@ namespace MEP {
 						Window.close();
 					}
 					else if (buttons[1]->mouseRelease(pos)) {
-						PLATFORM::minimalize(Window.getSystemHandle());
+						PLATFORM::TOOLS::minimalize(Window.getSystemHandle());
 						buttons[1]->forceRelease();
 					}
 					m_grabbedWindow = false;
@@ -214,7 +214,7 @@ namespace MEP {
 
 			}
 			else if (event.type == sf::Event::GainedFocus) {
-				PLATFORM::maximalize(Window.getSystemHandle());
+				PLATFORM::TOOLS::maximalize(Window.getSystemHandle());
 			}
 			additionalEvents(Window, event);
 		}

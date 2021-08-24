@@ -29,61 +29,32 @@
 #include <MEPWindow/OSSetUp.h>
 #if defined (MEP_WINDOWS)
 #include <windows.h>
-#include <Dwmapi.h>
-#pragma comment (lib, "Dwmapi.lib")
 namespace PLATFORM {
-    /**
-    * Makes the window open for alpha channel and deletes the WS_CAPTION tag. 
-    * Background of a window is now transparent if m_backgroundColor is transparent.
-    */
-    inline bool transparent(HWND hWnd) {
-        MARGINS margins = {-1};
-        DwmExtendFrameIntoClientArea(hWnd, &margins);
-        return true;
-    }
-    inline bool blurBehind(HWND hWnd) {
-        HRESULT hr = S_OK;
-
-        // Create and populate the blur-behind structure.
-        DWM_BLURBEHIND bb = { 0 };
-
-        // Specify blur-behind and blur region.
-        bb.dwFlags = DWM_BB_ENABLE;
-        bb.fEnable = true;
-        bb.hRgnBlur = NULL;
-
-        // Enable blur-behind.
-        hr = DwmEnableBlurBehindWindow(hWnd, &bb);
-        if (SUCCEEDED(hr))
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    /**
-    * Provides an ability to manipulate general transparency of a window.
-    * @param[in] alpha : Value of a alpha channel.
-    */
-    inline bool transparency(HWND hWnd, unsigned char alpha)
+    class TOOLS
     {
-        SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-        SetLayeredWindowAttributes(hWnd, 0, alpha, LWA_ALPHA);
-        return true;
-    }
-    /**
-    * Gives an abillity to minimalize a window on a call.
-    * Usefull with the use of mep HUB
-    */
-    inline bool minimalize(HWND hWnd) {
-        ShowWindow(hWnd, SW_MINIMIZE);
-        //AnimateWindow(hWnd, 100, AW_SLIDE | AW_HIDE);
-        return 0;
-    }
-    inline void maximalize(HWND hWnd) {
-        //customWindow(hWnd);
-    }
+    public:
+        TOOLS() = delete;
+        TOOLS(const TOOLS&) = delete;
+        TOOLS(TOOLS&&) = delete;
+        ~TOOLS() = delete;
+        /**
+        * Makes the window open for alpha channel and deletes the WS_CAPTION tag.
+        * Background of a window is now transparent if m_backgroundColor is transparent.
+        */
+        static bool transparent(HWND hWnd);
+        static bool blurBehind(HWND hWnd);
+        /**
+        * Provides an ability to manipulate general transparency of a window.
+        * @param[in] alpha : Value of a alpha channel.
+        */
+        static bool transparency(HWND hWnd, unsigned char alpha);
+        /**
+        * Gives an abillity to minimalize a window on a call.
+        * Usefull with the use of mep HUB
+        */
+        static bool minimalize(HWND hWnd);
+        static void maximalize(HWND hWnd);
+    };
 }
 #elif defined (MEP_LINUX)
 

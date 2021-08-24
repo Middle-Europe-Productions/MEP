@@ -66,12 +66,14 @@ namespace MEP
         Application::~Application() 
         {}
 
-        void Application::setWindowTransparent() {
-            PLATFORM::transparent(getSystemHandle());
+        void Application::setWindowTransparent()
+        {
+            PLATFORM::TOOLS::transparent(getSystemHandle());
         }
 
-        void Application::setWindowTransparency(unsigned char alpha) {
-            PLATFORM::transparency(getSystemHandle(), alpha);
+        void Application::setWindowTransparency(unsigned char alpha)
+        {
+            PLATFORM::TOOLS::transparency(getSystemHandle(), alpha);
         }
 
         void Application::initApp() {
