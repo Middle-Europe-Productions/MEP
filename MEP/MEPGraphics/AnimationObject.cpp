@@ -1,7 +1,7 @@
 
 ////////////////////////////////////////////////////////////
 //
-//	AnimationObject.h created with the use of SFML
+//	AnimationObject.cpp created with the use of SFML
 //	MEP - Middle Europe Productions
 //  Work in progress. 
 //

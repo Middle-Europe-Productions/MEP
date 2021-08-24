@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 //
-//	AnimationBase created with the use of SFML
+//	AnimationManager.cpp created with the use of SFML
 //	MEP - Middle Europe Productions
 //  Work in progress. 
 //
