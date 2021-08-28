@@ -22,7 +22,7 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPWindow/Hub.h>
-
+#include<MEPWindow/Log.h>
 namespace MEP {
 	namespace Template {
 		Hub::Hub(unsigned int ID, MEP::Template::Application& base, const sf::Color& color) : BaseWindow(ID)
@@ -35,7 +35,7 @@ namespace MEP {
 				std::list<sf::Image> list;
 				list.push_back(imLogo);
 				base.initResources(MEP::Resource(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB, list, "HUB/mepblack"));
-				std::cout << "[MEP_HUB] A new object has been added to the resources. Name: HUB/mepblack" << std::endl;
+				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/mepblack";
 				textures[0] = new MEP::TextureObject(base.getObject(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB));
 				sf::Uint8 imageArray2[16384];
 				for (int i = 0; i < 16384; ++i) {
@@ -58,7 +58,7 @@ namespace MEP {
 				std::list<sf::Image> list;
 				list.push_back(imTop);
 				base.initResources(MEP::Resource(MEP::HUB::Box, MEP::AssetsGroup::HUB, list, "HUB/top"));
-				std::cout << "[MEP_HUB] A new object has been added to the resources. Name: HUB/top" << std::endl;
+				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/top";
 				textures[1] = new MEP::TextureObject(base.getObject(MEP::HUB::Box, MEP::AssetsGroup::HUB));
 			}
 			catch (const ResourceException& x) {
@@ -83,7 +83,7 @@ namespace MEP {
 				list.push_back(imExit); list.push_back(imB1); list.push_back(imB2);
 
 				base.initResources(MEP::Resource(MEP::HUB::Exit, MEP::AssetsGroup::HUB, list, "HUB/exit"));
-				std::cout << "[MEP_HUB] A new object has been added to the resources. Name: HUB/exit" << std::endl;
+				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/exit";
 				textures[2] = new MEP::TextureObject(base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB));
 				buttons[0] = new MEP::Button(
 					base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB),
@@ -108,8 +108,7 @@ namespace MEP {
 				list.push_front(imMin);
 
 				base.initResources(MEP::Resource(MEP::HUB::Minimize, MEP::AssetsGroup::HUB, list, "HUB/min"));
-				std::cout << "[MEP_HUB] A new object has been added to the resources. Name: HUB/min" << std::endl;
-
+				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources.Name: HUB/min";
 				textures[3] = new MEP::TextureObject(base.getObject(MEP::HUB::Minimize, MEP::AssetsGroup::HUB));
 				buttons[1] = new MEP::Button(base.getObject(MEP::HUB::Minimize, MEP::AssetsGroup::HUB),
 					1,

@@ -32,5 +32,5 @@
 #include <MEPWindow/BaseWindow.h>
 #include <MEPWindow/WindowCrossPlatform.h>
 #include <MEPWindow/WindowStat.h>
-
+#include <MEPWindow/Log.h>
 #endif

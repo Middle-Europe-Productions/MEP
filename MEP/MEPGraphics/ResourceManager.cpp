@@ -25,17 +25,18 @@
 
 namespace MEP
 {
+	Resource::Resource(const U_int32 group, Object&& object):
+		m_ID(object.getID()),
+		m_group(group),
+		local(&object)
+	{
+		m_type = ResourceType::Move;
+	}
 	Resource::Resource(const ResourceType type, const U_int32 ID, const std::string& name, unsigned int nofFrames, bool transparency) :
 		Resource(type, ID, AssetsGroup::UserAssets, name, nofFrames, transparency)
 	{
 	}
-	/**
-	* Resource contructor. It creates the font.
-	* @param[in] ID : An ID of a resource.
-	* @param[in] name : Name of a resource.
-	* @param[in] nofFrames : Number of textures. 1 by default.
-	* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-	*/
+
 	Resource::Resource(const ResourceType type, const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames, bool transparency) :
 		m_ID(ID),
 		m_group(group),
@@ -47,25 +48,12 @@ namespace MEP
 			throw ResourceException(name, "Number of frames!", ResourceException::ExceptionType::WrongResourceConstructor);
 		m_nofFrames = nofFrames;
 	}
-	/**
-	* Resource contructor. It is capable of creating Single and Multi resource.
-	* @param[in] ID : An ID of a resource.
-	* @param[in] name : Name of a resource.
-	* @param[in] nofFrames : Number of textures. 1 by default.
-	* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-	*/
+
 	Resource::Resource(const U_int32 ID, const std::string& name, unsigned int nofFrames, bool transparency) :
 		//by default we are assigning it to the MEP::UserAssets (-1)
 		Resource(ID, -1, name, nofFrames, transparency)
 	{}
-	/**
-	* Resource contructor. It is capable of creating Single and Multi resource.
-	* @param[in] ID : An ID of a resource.
-	* @param[in] group : A group of a resource.
-	* @param[in] name : Name of a resource.
-	* @param[in] nofFrames : Number of textures. 1 by default.
-	* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-	*/
+
 	Resource::Resource(const U_int32 ID, const U_int32 group, const std::string& name, unsigned int nofFrames, bool transparency) :
 		m_ID(ID),
 		m_group(group),
@@ -79,26 +67,13 @@ namespace MEP
 			m_type = ResourceType::Multi;
 		m_nofFrames = nofFrames;
 	}
-	/**
-	* Resource contructor. It is capable of creating ImageArray resource.
-	* @param[in] ID : An ID of a resource.
-	* @param[in] name : Name of a resource.
-	* @param[in] nofFrames : Number of textures. 1 by default.
-	* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-	*/
+
 	Resource::Resource(const U_int32 ID, std::list<sf::Image>& images, const std::string& name, bool transparency) :
 		//by default we are assigning it to the MEP::UserAssets (-1)
 		Resource(ID, -1, images, name, transparency)
 	{
 	}
-	/**
-	* Resource contructor. It is capable of creating ImageArray resource.
-	* @param[in] ID : An ID of a resource.
-	* @param[in] group : A group of a resource.
-	* @param[in] name : Name of a resource.
-	* @param[in] nofFrames : Number of textures. 1 by default.
-	* @param[in] transparency : True if we want an object to generate alpha channel table. False by default.
-	*/
+
 	Resource::Resource(const U_int32 ID, const U_int32 group, std::list<sf::Image>& images, const std::string& name, bool transparency) :
 		m_ID(ID),
 		m_group(group),

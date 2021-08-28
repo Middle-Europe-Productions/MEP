@@ -59,7 +59,7 @@ namespace MEP {
 		//name of an object
 		const std::string m_name;
 		//function creats transparency table
-		void loadTransparancy(sf::Image& surface);
+		void loadTransparancy(const sf::Image& surface);
 		//function which loads single texture
 		void load(const std::string& fulladdress, bool transparencyM, bool masterSize);
 	protected:
@@ -74,19 +74,30 @@ namespace MEP {
 		ObjectType m_type = Object::ObjectType::NotInit;
 		//deletes the MEP::Object
 		void deleteObject();
+		//Alocates the transparency table.
+		void allocateTable(const sf::Vector2u& size);
+		//Creates a table of transparency according to given formula.
+		//Input method should output true/false.
+		template<typename X>
+		void createTable(const sf::Vector2u& size, X method);
 	public:
 		/**
 		* Default constructor.
 		*/
 		Object() = delete;
 		/**
+		* Move constructor.
+		*/
+		Object(Object&& x) noexcept;
+		/**
 		* Copy constructor.
 		*/
 		Object(const Object& x);
 		/**
 		* Constructor of an object.
+		* @param[in] ID : ID on an Object.
 		* @param[in] path : Path to the resources.
-		* @param[in] name : Name of a resource.
+		* @param[in] filename : Name of a resource.
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
 		Object(const U_int32 ID,
@@ -95,8 +106,9 @@ namespace MEP {
 			bool transparencyM = false);
 		/**
 		* Constructor of an object.
+		* @param[in] ID : ID on an Object.
 		* @param[in] path : Path to the resources.
-		* @param[in] name : Name of a resource.
+		* @param[in] filename : Name of a resource.
 		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1. 
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
@@ -107,14 +119,27 @@ namespace MEP {
 			bool transparencyM = false);
 		/**
 		* Constructor of an object.
-		* @param[in] path : Path to the resources.
-		* @param[in] name : Name of a resource.
+		* @param[in] ID : ID on an Object.
+		* @param[in] images : Table of the images.
+		* @param[in] filename : Name of a resource.
 		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1.
 		* @param[in] transparencyM : Transparency of a resource.
 		*/
 		Object(const U_int32 ID,
 			std::list<sf::Image>& images,
 			const std::string& filename,
+			bool transparencyM = false);
+		/**
+		* Constructor of an object.
+		* @param[in] ID : ID on an Object.
+		* @param[in] image : Image.
+		* @param[in] filename : Name of a resource.
+		* @param[in] frames : Number of textures. Loading starts from the texture name0 to nameN where N is a number of frames - 1.
+		* @param[in] transparencyM : Transparency of a resource.
+		*/
+		Object(const U_int32 ID,
+			const sf::Image& image,
+			const std::string& filename = "",
 			bool transparencyM = false);
 		/**
 		* Outputs the size of a master MEP::Object

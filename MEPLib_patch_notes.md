@@ -104,3 +104,10 @@
 	-New animation manager was added. Thanks to that container you can divide animations into groups and execute commands directly on them. Managers run on the shared container. \n
 	-Two new window states are added. LowEntry and LowExit. LowEntry menu activates every animation with the RunAtLowEntry tag and then enters the *InProgress state*!. LowExit executes every animation with RunAtLowExit tag and then enters null. \n
 	-MEP::Animation::AdditionalTag -> MEP::AdditionalTag & AdditionalTag is now Bitwise \n
+## MEP lib version alpha 1.3.4
+	-Due to increased compilie times library is exiting header only environment. Now in order to use it you will need to compile it on your own or use one of the presets.
+	-MEP::Image library, currently support version of the sf::Image library. It will be capable of generating images.
+	-MEP::NonCreatable when inherite it wont be posible to instanceiete a class.
+	-ResourceManager now inputs MEP::Objects
+	-Simple logging class was added MEP::Log.
+	-Logging Object class.

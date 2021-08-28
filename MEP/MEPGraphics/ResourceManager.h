@@ -45,12 +45,16 @@ namespace MEP {
 		/** When there is only a single texture to create a MEP::Object*/
 		Single = 1,
 		/** When there is a set of texture on an input to create a MEP::Object*/
-		Multi = 0
+		Multi = 0,
+		/** When a resource already exists in the code.*/
+		Move = -1
 	};
+	class Resources;
 	/**
 	* \brief A deffinition of an individual resource.
 	*/
-	struct Resource : public NonCopyable {
+	class Resource : public NonCopyable {
+		friend class Resources;
 		const U_int32 m_ID;
 		const U_int32 m_group;
 		const std::string m_name;
@@ -58,6 +62,9 @@ namespace MEP {
 		unsigned int m_nofFrames = 0;
 		bool m_transparency = false;
 		std::list<sf::Image>* m_array = nullptr;
+		Object* local = nullptr;
+	public:
+		Resource(const U_int32 group, Object&& object);
 		/**
 		* Resource contructor. It creates the font.
 		* @param[in] ID : An ID of a resource.
@@ -244,6 +251,16 @@ namespace MEP {
 			if (!MEPtools::GroupManager<MEP::Font>::_insert(data.m_ID,
 				data.m_group, 
 				std::make_unique<MEP::Font>(data.m_ID, data.m_name, m_path))) {
+				throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
+			}
+		}
+		else if (data.m_type == ResourceType::Move)
+		{
+			std::cout << data.local->getSize().x << std::endl;
+			std::cout << data.local->getSize().y << std::endl;
+			if (!MEPtools::GroupManager<MEP::Object>::_insert(data.m_ID,
+				data.m_group,
+				std::make_unique<MEP::Object>(std::move(*data.local)))) {
 				throw ResourceException(data.m_name, "Resource already exists in that group!", ResourceException::ExceptionType::ResourceAlreadyExists);
 			}
 		}

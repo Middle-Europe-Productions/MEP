@@ -34,6 +34,7 @@ namespace MEP {
 		NonCopyable() = default;
 		~NonCopyable() = default;
 	private:
+		NonCopyable(NonCopyable&& x) = delete;
 		NonCopyable(const NonCopyable& x) = delete;
 		NonCopyable& operator=(const NonCopyable& x) = delete;
 	};

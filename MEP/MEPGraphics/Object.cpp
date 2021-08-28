@@ -22,35 +22,51 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPGraphics/Object.h>
-
+#include<MEPWindow/Log.h>
 namespace MEP
 {
-	void Object::loadTransparancy(sf::Image& surface)
+	void Object::allocateTable(const sf::Vector2u& size)
 	{
-		//allocate table
-		table = new bool* [surface.getSize().x];
-		for (unsigned int i = 0; i < surface.getSize().x; ++i)
-			table[i] = new bool[surface.getSize().y];
-		//fill table
+		Log(Info, "MEP::Object") << "Allocating transparency table";
+		table = new bool* [size.x];
+		for (unsigned int i = 0; i < size.x; ++i)
+			table[i] = new bool[size.y];
+	}
+	template<typename X>
+	void Object::createTable(const sf::Vector2u& size, X method)
+	{
+		Log(Info, "MEP::Object") << "Creating transparency table";
 		if (table) {
-			for (unsigned int i = 0; i < surface.getSize().x; i++) {
-				for (unsigned int j = 0; j < surface.getSize().y; j++) {
-					table[i][j] = surface.getPixel(i, j).a < 100;
+			for (unsigned int i = 0; i < size.x; i++) {
+				for (unsigned int j = 0; j < size.y; j++) {
+					table[i][j] = method(i, j);//surface.getPixel(i, j).a < 100;
 				}
 			}
 			transparency = true;
 		}
 	}
+	void Object::loadTransparancy(const sf::Image& surface)
+	{
+		//allocate table
+		allocateTable(surface.getSize());
+		//fill table
+		createTable(surface.getSize(), [&surface](const auto& x, const auto& y) {
+			return surface.getPixel(x, y).a < 100;
+			});
+	}
 
 	void Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
+		Log(Info, "MEP::Object") << "Loading texture from address: " << fulladdress;
 		texture->push_back(new sf::Texture());
 		if (!texture->back()->loadFromFile(fulladdress)) {
+			Log(Fatal) << "Could not load a texture! Address: " << fulladdress;
 			throw "Texture not loaded!";
 		}
 		texture->back()->setSmooth(true);
 		if (transparencyM) {
 			sf::Image x;
 			if (!x.loadFromFile(fulladdress)) {
+				Log(Fatal, "MEP::Object") << "Could not load a transparency mask! Address: " << fulladdress;
 				throw "Transparency mask not loaded!";
 			}
 			loadTransparancy(x);
@@ -73,20 +89,28 @@ namespace MEP
 
 	void Object::deleteObject()
 	{
-		if (*m_nufC == 0) {
-			if (table != nullptr) {
-				for (unsigned int i = 0; i < m_size.x; i++) {
-					delete[] table[i];
+		Log(DInfo, "MEP::Object") << "Object deleting process, Name: " << m_name << ", ID: " << m_ID;
+		if (m_nufC)
+		{
+			if (*m_nufC == 0) {
+				if (table != nullptr) {
+					for (unsigned int i = 0; i < m_size.x; i++) {
+						delete[] table[i];
+					}
+					delete[] table;
 				}
-				delete[] table;
+				for (auto x = texture->begin(); x != texture->end(); x++)
+					delete* x;
+				delete m_nufC;
+				delete texture;
 			}
-			for (auto x = texture->begin(); x != texture->end(); x++)
-				delete* x;
-			delete m_nufC;
-			delete texture;
+			else {
+				*m_nufC -= 1;
+			}
 		}
-		else {
-			*m_nufC -= 1;
+		else
+		{
+			Log(DInfo, "MEP::Object") << "Object, Name: " << m_name << ", ID: " << m_ID << " does not own any copies, probably as shallow copy";
 		}
 	}
 
@@ -129,6 +153,22 @@ namespace MEP
 		return true;
 	}
 
+	Object::Object(Object&& x) noexcept:
+		m_ID(x.m_ID),
+		m_name(x.m_name),
+		transparency(x.transparency),
+		table(x.table),
+		m_size(x.m_size),
+		texture(std::move(x.texture)),
+		m_type(x.m_type)
+	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", move constructor. ";
+		m_nufC = x.m_nufC;
+		*m_nufC = 1;
+		x.table = nullptr;
+		x.m_nufC = nullptr;
+	}
+
 	Object::Object(const Object& x) :
 		m_ID(x.m_ID),
 		m_name(x.m_name),
@@ -138,6 +178,7 @@ namespace MEP
 		texture(x.texture),
 		m_type(x.m_type)
 	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", copy constructor. ";
 		m_nufC = x.m_nufC;
 		*m_nufC += 1;
 	}
@@ -149,6 +190,7 @@ namespace MEP
 		texture(nullptr),
 		m_type(ObjectType::Single)
 	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", single constructor. ";
 		texture = new std::list<sf::Texture*>;
 		load(path + filename + ".png", transparencyM, true);
 	}
@@ -160,6 +202,7 @@ namespace MEP
 		texture(nullptr),
 		m_type(ObjectType::Multi)
 	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", multi constructor. ";
 		texture = new std::list<sf::Texture*>;
 		for (unsigned int i = 0; i < frames; i++) {
 			load(path + filename + std::to_string(i) + ".png", transparencyM and i == 0, i == 0);
@@ -173,6 +216,7 @@ namespace MEP
 		transparency(false),
 		texture(nullptr)
 	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", images table ready constructor. ";
 		texture = new std::list<sf::Texture*>;
 		for (auto& i : images) {
 			texture->push_back(new sf::Texture());
@@ -187,6 +231,27 @@ namespace MEP
 			m_type = ObjectType::Multi;
 		else
 			m_type = ObjectType::Single;
+		m_size.x = texture->front()->getSize().x;
+		m_size.y = texture->front()->getSize().y;
+	}
+
+	Object::Object(const U_int32 ID, const sf::Image& image, const std::string& filename, bool transparencyM) :
+		m_nufC(new int(0)),
+		m_ID(ID),
+		m_name(filename),
+		transparency(false),
+		texture(nullptr)
+	{
+		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", image ready constructor. ";
+		texture = new std::list<sf::Texture*>;
+		texture->push_back(new sf::Texture());
+		if (!texture->back()->loadFromImage(image)) {
+			throw "Texture not loaded!";
+		}
+		texture->back()->setSmooth(true);
+		if (transparencyM)
+			loadTransparancy(image);
+		m_type = ObjectType::Single;
 		m_size.x = texture->front()->getSize().x;
 		m_size.y = texture->front()->getSize().y;
 	}
