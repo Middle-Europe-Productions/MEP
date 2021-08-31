@@ -41,53 +41,37 @@ enum LogLevel
 	/** Information log inside of the destructor. */
 	DInfo = 5
 };
+
 namespace MEP
 {
+	/**
+	* \brief Simple build in logging class.
+	*/
 	class Log
 	{
 		std::ostringstream _buffer;
 	public:
-		Log(LogLevel __lvl = Info, const char* className = "")
-		{
-			switch (__lvl) {
-				case Fatal:
-					_buffer << "Fatal : ";
-					break;
-				case Error:
-					_buffer << "Error : ";
-					break;
-				case Warning:
-					_buffer << "Warning : ";
-					break;
-				case Info:
-					_buffer << "Info : ";
-					break;
-				case CInfo:
-					_buffer << "CInfo : ";
-					break;
-				case DInfo:
-					_buffer << "DInfo : ";
-					break;
-				default:
-					break;
-			}
-			if (className != "")
-			{
-				_buffer << className << ", msg: ";
-			}
-		}
+		/**
+		* @param[in] __lvl : Info level of the log.
+		* @param[in] className : Name of the class from which the log occured.
+		*/
+		Log(LogLevel __lvl = Info, const char* className = "");
+		/**
+		* Overload of the << operator.
+		*/
 		template<typename T>		
-		Log& operator<<(T const & out)
-		{
-			_buffer << out;
-			return *this;
-		}
-		~Log()
-		{
-			_buffer << std::endl;
-			std::cout << _buffer.str();
-		}
+		Log& operator<<(T const& out);
+		/**
+		* The line ends with destruction.
+		*/
+		~Log();
 	};
-}
 
+	template<typename T>
+	Log& Log::operator<<(T const& out)
+	{
+		_buffer << out;
+		return *this;
+	}
+}
 #endif
