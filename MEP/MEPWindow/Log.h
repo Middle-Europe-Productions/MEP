@@ -24,10 +24,16 @@
 ////////////////////////////////////////////////////////////
 #ifndef MEP_LOG_H
 #define MEP_LOG_H
+#define MAX_VERBOSE_LVL 10
+#define Log(...) __Log(__FILE__, __LINE__, __VA_ARGS__)
+
 #include <iostream>
 #include <sstream>
+#include <list>
 enum LogLevel
 {
+	/** Debug level message. */
+	Debug = -1,
 	/** When execution of the code will be terminated. */
 	Fatal = 0,
 	/** When there is an error but code can still be executed. */
@@ -35,42 +41,102 @@ enum LogLevel
 	/** When there is a warning. */
 	Warning = 2,
 	/** Information log outside the constructor and destructor of na object. */
-	Info = 3,
-	/** Information log inside of the constructor. */
-	CInfo = 4,
-	/** Information log inside of the destructor. */
-	DInfo = 5
+	Info = 3
 };
+namespace
+{
+	/**
+	* Verbose logging:
+	* 1 - importnant events.
+	* 3 - object construction.
+	* 7 - method info.
+	* 10 - spamming methods info.
+	*/
+	struct VerboseSetup
+	{
+		const char* m_name;
+		unsigned int m_lvl;
+		VerboseSetup(const char* name, unsigned int lvl) : m_name(name), m_lvl(lvl) {}
+		bool operator==(const char* name)
+		{
+			return std::strcmp(m_name, name) == 0;
+		}
+		bool operator==(const VerboseSetup& in)
+		{
+			return m_name == in.m_name;
+		}
+		bool operator!=(const VerboseSetup& in)
+		{
+			return !(*this == in);
+		}
+		bool operator<(unsigned int in)
+		{
+			return m_lvl < in;
+		}
+		bool operator<(const VerboseSetup& in)
+		{
+			return m_lvl < in.m_lvl;
+		}
+	};
+}
 
 namespace MEP
 {
+	namespace LOG_SETUP
+	{
+		class Verbose
+		{
+			static std::list<VerboseSetup> __setup;
+		public:
+			Verbose() = delete;
+			static void add(const char* m_name, unsigned int lvl);
+			static int contains(const char* m_name);
+		};
+	}
 	/**
 	* \brief Simple build in logging class.
 	*/
-	class Log
+	class __Log
 	{
 		std::ostringstream _buffer;
+		bool _block = false;
+		/**
+		* Outputs information about
+		*/
+		std::string getName(const char* FILE) const;
 	public:
 		/**
 		* @param[in] __lvl : Info level of the log.
 		* @param[in] className : Name of the class from which the log occured.
 		*/
-		Log(LogLevel __lvl = Info, const char* className = "");
+		explicit __Log(const char* FILE, unsigned int LINE);
+		/**
+		* @param[in] __lvl : Info level of the log.
+		* @param[in] className : Name of the class from which the log occured.
+		*/
+		explicit __Log(const char* FILE, unsigned int LINE, LogLevel __lvl);
+		/**
+		* @param[in] __lvl : Info level of the log.
+		* @param[in] className : Name of the class from which the log occured.
+		*/
+		explicit __Log(const char* FILE, unsigned int LINE, int __lvl);
 		/**
 		* Overload of the << operator.
 		*/
 		template<typename T>		
-		Log& operator<<(T const& out);
+		__Log& operator<<(T const& out);
 		/**
 		* The line ends with destruction.
 		*/
-		~Log();
+		~__Log();
 	};
 
 	template<typename T>
-	Log& Log::operator<<(T const& out)
+	__Log& __Log::operator<<(T const& out)
 	{
+#ifdef _DEBUG
 		_buffer << out;
+#endif
 		return *this;
 	}
 }

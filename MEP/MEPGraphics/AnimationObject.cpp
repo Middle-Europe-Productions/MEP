@@ -52,7 +52,7 @@ namespace MEP
 		return fixSize;
 	};
 
-	void AnimationObject::setScale(const sf::Vector2f scale) {
+	void AnimationObject::setScale(const sf::Vector2f& scale) {
 		m_scale = scale;
 		m_scaleFixed = scale;
 		currentSprite.setScale(m_scaleFixed);

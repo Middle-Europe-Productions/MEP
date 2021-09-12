@@ -61,7 +61,7 @@ namespace MEP
 			});
 	}
 
-	void Sprite::setPosition(const sf::Vector2f pos) {
+	void Sprite::setPosition(const sf::Vector2f& pos) {
 		m_pos = pos;
 		m_posFixed = pos;
 		currentSprite.setPosition(m_posFixed);
@@ -75,7 +75,7 @@ namespace MEP
 		updateSprite();
 	}
 
-	void Sprite::setScale(const sf::Vector2f scale) {
+	void Sprite::setScale(const sf::Vector2f& scale) {
 		m_scale = scale;
 		m_scaleFixed = scale;
 		currentSprite.setScale(m_scaleFixed);

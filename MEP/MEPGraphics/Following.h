@@ -69,8 +69,8 @@ namespace MEP {
 			const AnimationPosition* m_animation;
 			//Followtype of an object.
 			FollowType m_followType = FollowType::NotInit;
-			//Constructor
 		public:
+			//Constructor
 			Follow(const AnimationPosition& animation,
 				FollowType followType = FollowType::NotInit,
 				MEP::U_int32 colorsFollow = MEP::ColorChannel::ALL);
@@ -142,14 +142,20 @@ namespace MEP {
 		std::function<sf::Vector2f()> calc_scale = [this]()->sf::Vector2f { return m_scale; };
 
 		MEPtools::GroupManager<Follow, std::unique_ptr<Follow>, std::list<std::unique_ptr<Follow>>> followingListv2;
+		//Origin of an object.
+		sf::Vector2f m_origin = { 0.f, 0.f };
+		mutable bool m_originChange = true;
 		//texture position and scale
-		sf::Vector2f m_pos = {0.f, 0.f};
+		sf::Vector2f m_pos = { 0.f, 0.f };
 		sf::Vector2f m_posMove = { 0.f, 0.f };
 		sf::Vector2f m_posFixed = { 0.f, 0.f };
+		mutable bool m_posChange = true;
 		sf::Vector2f m_scale = { 1.f, 1.f };
 		sf::Vector2f m_scaleFixed = { 1.f, 1.f };
-		sf::Color m_color;
-		sf::Color m_colorFixed;
+		mutable bool m_scaleChange = true;
+		sf::Color m_color = { 0, 0, 0, 0 };
+		sf::Color m_colorFixed = { 0, 0, 0, 0 };
+		mutable bool m_colorChange = true;
 	public:
 		/**
 		* Constructor of a following type.
@@ -240,35 +246,71 @@ namespace MEP {
 		*/
 		void fullUnMuteFollow();
 		/**
+		* Sets the origin of an object. Relative to the 0, 0 point.
+		*/
+		virtual void setOrigin(const sf::Vector2f& org);
+		/**
+		* Outputs the status of the origin.
+		*/
+		bool originStatus() const;
+		/**
+		* Resets the status of the origin.
+		*/
+		void resetOriginStatus() const;
+		/**
 		* Sets the position and fixed position of an MEP::Following.
 		* @param[in] pos : Position.
 		*/
-		virtual void setPosition(const sf::Vector2f pos);
+		virtual void setPosition(const sf::Vector2f& pos);
 		/**
 		* Sets the position and fixed position of an MEP::Following.
 		* @param[in] x : MEP::Following object.
 		*/
 		virtual void setPosition(const Following& x);
 		/**
+		* Ouputs information regarding position change status.
+		*/
+		bool positionStatus() const;
+		/**
+		* Resets status of the position.
+		*/
+		void resetPositionStatus() const;
+		/**
 		* Moves the position by given value.
 		* @param[in] pos : Position change.
 		*/
-		virtual void movePosition(const sf::Vector2f pos);
+		virtual void movePosition(const sf::Vector2f& pos);
 		/**
 		* Sets the scale and fixed scale of the MEP::Following.
 		* @param[in] scale : Scale.
 		*/
-		virtual void setScale(const sf::Vector2f scale);
+		virtual void setScale(const sf::Vector2f& scale);
 		/**
 		* Sets the scale and fixed scale of the MEP::Following.
 		* @param[in] x : MEP::Following object.
 		*/
 		virtual void setScale(const Following& x);
 		/**
+		* Ouputs information regarding scale change status.
+		*/
+		bool scaleStatus() const;
+		/**
+		* Resets status of the scale.
+		*/
+		void resetScaleStatus() const;
+		/**
 		* Changes the color of a master sprite.
 		* @param[in] color : Color.
 		*/
 		virtual void setColor(const sf::Color& color);
+		/**
+		* Ouputs information regarding scale change color.
+		*/
+		bool colorStatus() const;
+		/**
+		* Resets status of the color.
+		*/
+		void resetColorStatus() const;
 		/**
 		* Outputs the color of a master sprite.
 		* @return : Color.
@@ -278,22 +320,27 @@ namespace MEP {
 		* Outputs the current position of the MEP::Folowing
 		* @return Fixed position.
 		*/
-		sf::Vector2f getPosition() const;
+		const sf::Vector2f& getOrigin() const;
+		/**
+		* Outputs the current position of the MEP::Folowing
+		* @return Fixed position.
+		*/
+		const sf::Vector2f& getPosition() const;
 		/**
 		* Outputs the current scale of the MEP::Folowing
 		* @return Fixed scale.
 		*/
-		sf::Vector2f getScale() const;
+		const sf::Vector2f& getScale() const;
 		/**
 		* Outputs the position of the MEP::Folowing
 		* @return Position.
 		*/
-		sf::Vector2f getOriginPosition() const;
+		const sf::Vector2f& getOriginPosition() const;
 		/**
 		* Outputs the scale of the MEP::Folowing
 		* @return Scale.
 		*/
-		sf::Vector2f getOriginScale() const;
+		const sf::Vector2f& getOriginScale() const;
 		/**
 		* Outputs the information about MEP::Following activity.
 		* @return true - if atleast one istance of the Follwer is active, false - otherwise.

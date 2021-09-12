@@ -75,7 +75,7 @@ namespace MEP {
 		* Sets the scale.
 		* @param[in] scale : Scale.
 		*/
-		void setScale(const sf::Vector2f scale) override;
+		void setScale(const sf::Vector2f& scale) override;
 		/**
 		* Sets the scale.
 		* @param[in] pos : MEP::Following object.

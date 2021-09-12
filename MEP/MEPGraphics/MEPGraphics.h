@@ -82,4 +82,6 @@ Enables automation data loading. Using MEP::Object and sf::Texture
 
 #include<MEPGraphics/Image.h>
 
+#include<MEPGraphics/Text.h>
+
 #endif

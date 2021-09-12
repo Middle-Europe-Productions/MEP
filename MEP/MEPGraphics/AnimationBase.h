@@ -29,7 +29,7 @@
 #include<MEPGraphics/Config.h>
 #include<MEPGraphics/NonCopyable.h>
 #include<MEPGraphics/AnimationDelay.h>
-
+#include<MEPWindow/Log.h>
 namespace MEP {
 	/**
 	* @enum MEP::Animation::Direction
@@ -128,7 +128,7 @@ namespace MEP {
 		* @param[in] direc : MEP::Animation::Direction.
 		* @param[in] currentTime : sf::Time = sf::Time::Zero.
 		*/
-		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero);
+		virtual void run(const Direction direc = MEP::Direction::Forward, sf::Time currentTime = sf::Time::Zero);
 		/**
 		* Changes current status to !status
 		*/

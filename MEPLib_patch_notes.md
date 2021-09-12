@@ -111,3 +111,5 @@
 	-ResourceManager now inputs MEP::Objects
 	-Simple logging class was added MEP::Log.
 	-Logging Object class.
+	-Following now itroduces origin object & tracking of the position, scale, color, origin and chanegs.
+	-New Text class is a upgraded version of the SFML text class. 

@@ -39,7 +39,7 @@ namespace MEP {
 		* Sets the position
 		* @param[in] pos : Position.
 		*/
-		void setPosition(const sf::Vector2f pos) override;
+		void setPosition(const sf::Vector2f& pos) override;
 		/**
 		* Sets the position
 		* @param[in] x : MEP::Following object.
@@ -49,7 +49,7 @@ namespace MEP {
 		* Sets the scale.
 		* @param[in] scale : Scale.
 		*/
-		virtual void setScale(const sf::Vector2f scale);
+		virtual void setScale(const sf::Vector2f& scale);
 		/**
 		* Sets the scale.
 		* @param[in] pos : MEP::Following object.

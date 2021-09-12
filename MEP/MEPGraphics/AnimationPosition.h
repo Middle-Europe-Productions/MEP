@@ -91,7 +91,7 @@ namespace MEP {
 		* @param[in] direc : MEP::Animation::Direction.
 		* @param[in] currentTime : sf::Time = sf::Time::Zero.
 		*/
-		virtual void run(const Direction direc, sf::Time currentTime = sf::Time::Zero);
+		virtual void run(const Direction direc = MEP::Direction::Forward, sf::Time currentTime = sf::Time::Zero);
 		/**
 		* Outputs the current position of an animation.
 		* @return Current position.

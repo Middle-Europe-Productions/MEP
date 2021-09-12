@@ -27,7 +27,7 @@ namespace MEP
 {
 	void Object::allocateTable(const sf::Vector2u& size)
 	{
-		Log(Info, "MEP::Object") << "Allocating transparency table";
+		Log(Info) << "Allocating transparency table";
 		table = new bool* [size.x];
 		for (unsigned int i = 0; i < size.x; ++i)
 			table[i] = new bool[size.y];
@@ -35,7 +35,7 @@ namespace MEP
 	template<typename X>
 	void Object::createTable(const sf::Vector2u& size, X method)
 	{
-		Log(Info, "MEP::Object") << "Creating transparency table";
+		Log(Info) << "Creating transparency table";
 		if (table) {
 			for (unsigned int i = 0; i < size.x; i++) {
 				for (unsigned int j = 0; j < size.y; j++) {
@@ -56,7 +56,7 @@ namespace MEP
 	}
 
 	void Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
-		Log(Info, "MEP::Object") << "Loading texture from address: " << fulladdress;
+		Log(Info) << "Loading texture from address: " << fulladdress;
 		texture->push_back(new sf::Texture());
 		if (!texture->back()->loadFromFile(fulladdress)) {
 			Log(Fatal) << "Could not load a texture! Address: " << fulladdress;
@@ -66,7 +66,7 @@ namespace MEP
 		if (transparencyM) {
 			sf::Image x;
 			if (!x.loadFromFile(fulladdress)) {
-				Log(Fatal, "MEP::Object") << "Could not load a transparency mask! Address: " << fulladdress;
+				Log(Fatal) << "Could not load a transparency mask! Address: " << fulladdress;
 				throw "Transparency mask not loaded!";
 			}
 			loadTransparancy(x);
@@ -89,7 +89,7 @@ namespace MEP
 
 	void Object::deleteObject()
 	{
-		Log(DInfo, "MEP::Object") << "Object deleting process, Name: " << m_name << ", ID: " << m_ID;
+		Log(3) << "Object deleting process, Name: " << m_name << ", ID: " << m_ID;
 		if (m_nufC)
 		{
 			if (*m_nufC == 0) {
@@ -110,7 +110,7 @@ namespace MEP
 		}
 		else
 		{
-			Log(DInfo, "MEP::Object") << "Object, Name: " << m_name << ", ID: " << m_ID << " does not own any copies, probably as shallow copy";
+			Log(5) << "Object, Name: " << m_name << ", ID: " << m_ID << " does not own any copies, probably a shallow copy";
 		}
 	}
 
@@ -162,7 +162,7 @@ namespace MEP
 		texture(std::move(x.texture)),
 		m_type(x.m_type)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", move constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", move constructor. ";
 		m_nufC = x.m_nufC;
 		*m_nufC = 1;
 		x.table = nullptr;
@@ -178,7 +178,7 @@ namespace MEP
 		texture(x.texture),
 		m_type(x.m_type)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", copy constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", copy constructor. ";
 		m_nufC = x.m_nufC;
 		*m_nufC += 1;
 	}
@@ -190,7 +190,7 @@ namespace MEP
 		texture(nullptr),
 		m_type(ObjectType::Single)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", single constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", single constructor. ";
 		texture = new std::list<sf::Texture*>;
 		load(path + filename + ".png", transparencyM, true);
 	}
@@ -202,7 +202,7 @@ namespace MEP
 		texture(nullptr),
 		m_type(ObjectType::Multi)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", multi constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", multi constructor. ";
 		texture = new std::list<sf::Texture*>;
 		for (unsigned int i = 0; i < frames; i++) {
 			load(path + filename + std::to_string(i) + ".png", transparencyM and i == 0, i == 0);
@@ -216,7 +216,7 @@ namespace MEP
 		transparency(false),
 		texture(nullptr)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", images table ready constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", images table ready constructor. ";
 		texture = new std::list<sf::Texture*>;
 		for (auto& i : images) {
 			texture->push_back(new sf::Texture());
@@ -242,7 +242,7 @@ namespace MEP
 		transparency(false),
 		texture(nullptr)
 	{
-		Log(CInfo, "MEP::Object") << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", image ready constructor. ";
+		Log(3) << "Creating MEP::Object, ID: " << m_ID << ", Name: " << m_name << ", image ready constructor. ";
 		texture = new std::list<sf::Texture*>;
 		texture->push_back(new sf::Texture());
 		if (!texture->back()->loadFromImage(image)) {

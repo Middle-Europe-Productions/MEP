@@ -35,8 +35,9 @@ namespace MEP {
 				std::list<sf::Image> list;
 				list.push_back(imLogo);
 				base.initResources(MEP::Resource(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB, list, "HUB/mepblack"));
-				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/mepblack";
+				Log(3) << "A new object has been added to the resources. Name: HUB/mepblack";
 				textures[0] = new MEP::TextureObject(base.getObject(MEP::HUB::MEPLogo, MEP::AssetsGroup::HUB));
+
 				sf::Uint8 imageArray2[16384];
 				for (int i = 0; i < 16384; ++i) {
 					imageArray2[i] = (char)0;
@@ -58,7 +59,7 @@ namespace MEP {
 				std::list<sf::Image> list;
 				list.push_back(imTop);
 				base.initResources(MEP::Resource(MEP::HUB::Box, MEP::AssetsGroup::HUB, list, "HUB/top"));
-				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/top";
+				Log(1) << "A new object has been added to the resources. Name: HUB/top";
 				textures[1] = new MEP::TextureObject(base.getObject(MEP::HUB::Box, MEP::AssetsGroup::HUB));
 			}
 			catch (const ResourceException& x) {
@@ -83,7 +84,7 @@ namespace MEP {
 				list.push_back(imExit); list.push_back(imB1); list.push_back(imB2);
 
 				base.initResources(MEP::Resource(MEP::HUB::Exit, MEP::AssetsGroup::HUB, list, "HUB/exit"));
-				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources. Name: HUB/exit";
+				Log(1) << "A new object has been added to the resources. Name: HUB/exit";
 				textures[2] = new MEP::TextureObject(base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB));
 				buttons[0] = new MEP::Button(
 					base.getObject(MEP::HUB::Exit, MEP::AssetsGroup::HUB),
@@ -108,7 +109,7 @@ namespace MEP {
 				list.push_front(imMin);
 
 				base.initResources(MEP::Resource(MEP::HUB::Minimize, MEP::AssetsGroup::HUB, list, "HUB/min"));
-				Log(CInfo, "MEP::Hub") << "A new object has been added to the resources.Name: HUB/min";
+				Log(1) << "A new object has been added to the resources.Name: HUB/min";
 				textures[3] = new MEP::TextureObject(base.getObject(MEP::HUB::Minimize, MEP::AssetsGroup::HUB));
 				buttons[1] = new MEP::Button(base.getObject(MEP::HUB::Minimize, MEP::AssetsGroup::HUB),
 					1,
@@ -160,6 +161,7 @@ namespace MEP {
 			textures[3]->setColor(color);
 		}
 		void Hub::setFollow(const MEP::AnimationColor& animation, HubElements element, MEP::U_int32 x) {
+			Log(7) << "Setting a follow.";
 			if (element & HubElements::MEPLogo) {
 				textures[0]->setFollow(animation, x);
 			}
@@ -177,6 +179,7 @@ namespace MEP {
 		}
 
 		void Hub::setFollow(const MEP::AnimationPosition& base, const MEP::Following::FollowType type, HubElements element) {
+			Log(7) << "Setting a follow.";
 			if (element & HubElements::MEPLogo) {
 				textures[0]->setFollow(base, type);
 			}
@@ -207,6 +210,7 @@ namespace MEP {
 					else if (buttons[1]->mousePress(pos)) {
 					}
 					else if (sf::Mouse::getPosition().y - Window.getPosition().y < 35) {
+						Log(1) << "Window grabbed.";
 						m_windowPossChange = Window.getPosition() - sf::Mouse::getPosition();
 						m_grabbedWindow = true;
 					}
@@ -222,6 +226,7 @@ namespace MEP {
 						PLATFORM::TOOLS::minimalize(Window.getSystemHandle());
 						buttons[1]->forceRelease();
 					}
+					Log(1) << "Window released.";
 					m_grabbedWindow = false;
 				}
 			}
@@ -233,7 +238,7 @@ namespace MEP {
 					buttons[0]->mouseActivity(pos);
 					buttons[1]->mouseActivity(pos);
 				}
-
+				Log(10) << "Mouse position changed, x: " << pos.x << ", y: " << pos.y;
 			}
 			else if (event.type == sf::Event::GainedFocus) {
 				PLATFORM::TOOLS::maximalize(Window.getSystemHandle());
