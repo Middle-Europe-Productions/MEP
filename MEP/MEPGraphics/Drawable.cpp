@@ -22,12 +22,14 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPGraphics/Drawable.h>
+#include<MEPTools/Log.h>
 
 namespace MEP
 {
 	void Drawable::notify() {
 		if (link) {
 			*link = false;
+			Log(1) << "Breaking the link with the object.";
 		}
 	}
 

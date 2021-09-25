@@ -22,19 +22,24 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPGraphics/ResourceException.h>
+#include<MEPTools/Log.h>
 namespace MEP
 {
 	ResourceException::ResourceException(const std::string& name, const std::string& msg, const ExceptionType& type) :
 		exceptionType(type),
 		ResourceName(name),
 		Message(msg)
-	{}
+	{
+		Log(Error) << "Resource exception occured: " << *this;
+	}
 
 	ResourceException::ResourceException(const char* name, const char* msg, const ExceptionType& type) :
 		exceptionType(type),
 		ResourceName(name),
 		Message(msg)
-	{}
+	{
+		Log(Error) << "Resource exception occured: " << *this;
+	}
 
 	std::ostream& operator<<(std::ostream& out, const ResourceException& x) {
 		out << "ResourceException ResourceName: " << x.ResourceName << ", Message: " << x.Message << std::endl;

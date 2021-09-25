@@ -39,7 +39,7 @@
 #include<MEPGraphics/Following.h>
 #include<MEPGraphics/Drawable.h>
 #include<MEPGraphics/Config.h>									
-#include<MEPWindow/Log.h>
+#include<MEPTools/Log.h>
 
 namespace MEPdev
 {
@@ -191,6 +191,14 @@ namespace MEPdev
         */
         float backgroundYBounds = 0;
         /**
+        * Start index of background.
+        */
+        mutable std::size_t m_beginBackgroundIndex;
+        /**
+        * End index of background.
+        */
+        mutable std::size_t m_endBackgroundIndex;
+        /**
         * Updates the origin status.
         */
         void updateTag()
@@ -229,7 +237,7 @@ namespace MEPdev
             m_font(&font),
             m_characterSize(fontSize),
             m_letterSpacingFactor(1.f),
-            m_lineSpacingFactor(1.f),
+            m_lineSpacingFactor(1.05f),
             m_style(Regular),
             m_outlineColor(0, 0, 0),
             m_outlineThickness(0),
@@ -238,7 +246,9 @@ namespace MEPdev
             m_backgroundVertices(sf::Triangles),
             m_bounds(),
             m_geometryNeedUpdate(true),
-            m_fontTextureId(0)
+            m_fontTextureId(0),
+            m_beginBackgroundIndex(0),
+            m_endBackgroundIndex(8)
 		{
             updateTag();
 		}
@@ -260,7 +270,7 @@ namespace MEPdev
             m_font(&font),
             m_characterSize(fontSize),
             m_letterSpacingFactor(1.f),
-            m_lineSpacingFactor(1.f),
+            m_lineSpacingFactor(1.05f),
             m_style(Regular),
             m_outlineColor(0, 0, 0),
             m_outlineThickness(0),
@@ -269,7 +279,9 @@ namespace MEPdev
             m_backgroundVertices(sf::Triangles),
             m_bounds(),
             m_geometryNeedUpdate(true),
-            m_fontTextureId(0)
+            m_fontTextureId(0),
+            m_beginBackgroundIndex(0),
+            m_endBackgroundIndex(8)
 		{
             updateTag();
 		}
@@ -628,7 +640,7 @@ namespace MEPdev
             // Recompute the combined transform if needed
             if (originStatus() or positionStatus() or scaleStatus())
             {
-                Log(Info) << "Updating text transform: " 
+                Log(1) << "Updating text transform: " 
                     << std::string(getString()) 
                     << ", parameters changed: originStatus(): " << (originStatus() ? "true": "false")
                     << ", positionStatus(): " << (positionStatus() ? "true" : "false")
@@ -652,6 +664,10 @@ namespace MEPdev
 
             return m_transform;
         }
+        void ensureBackgroudUpdate()
+        {
+
+        }
         /**
         * \brief Modified SFML Text method.
 		* 
@@ -667,6 +683,7 @@ namespace MEPdev
             if (!m_geometryNeedUpdate)// && m_font->getTexture(m_characterSize).m_cacheId == m_fontTextureId)
                 return;
 
+            Log(1) << "Updating geometry: " << m_string.toAnsiString();
             // Save the current fonts texture id
             //m_fontTextureId = m_font->getTexture(m_characterSize).m_cacheId;
 
@@ -705,7 +722,8 @@ namespace MEPdev
             float lineSpacing = m_font->getLineSpacing(m_characterSize) * m_lineSpacingFactor;
             float x = 0.f;
             float y = static_cast<float>(m_characterSize);
-
+            float x_buffor = x;
+            float y_buffor = y;
             // Create one quad for each character
             float minX = static_cast<float>(m_characterSize);
             float minY = static_cast<float>(m_characterSize);
@@ -715,7 +733,9 @@ namespace MEPdev
             for (std::size_t i = 0; i < m_string.getSize(); ++i)
             {
                 MEP::U_int32 curChar = m_string[i];
-
+                x_buffor = x;
+                y_buffor = y;
+                Log(Info) << (char)m_string[i] << ", " << x_buffor << " " << y_buffor;
                 // Skip the \r char to avoid weird graphical issues
                 if (curChar == '\r')
                     continue;
@@ -743,7 +763,7 @@ namespace MEPdev
 
                 if (isBackground and (curChar == L'\n' && prevChar != L'\n'))
                 {
-                    Log(Debug) << strikeThroughOffset;
+                    Log(Error) << "Here";
                     addLine(m_backgroundVertices, x, y, getFillColor(), strikeThroughOffset, backgroundThickness);
                 }
                 prevChar = curChar;
@@ -766,6 +786,7 @@ namespace MEPdev
                     maxX = std::max(maxX, x);
                     maxY = std::max(maxY, y);
 
+                    Log(Error) << (char)m_string[i] << ", " << x << " " << y;
                     // Next glyph, no need to create a quad for whitespace
                     continue;
                 }
@@ -809,9 +830,10 @@ namespace MEPdev
                     minY = std::min(minY, y + top);
                     maxY = std::max(maxY, y + bottom);
                 }
-
                 // Advance to the next character
                 x += glyph.advance + letterSpacing;
+
+                Log(Error) << (char)m_string[i] << ", " << x << " " << y;
             }
 
             // If we're using the underlined style, add the last line

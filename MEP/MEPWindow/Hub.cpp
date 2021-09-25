@@ -22,7 +22,7 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPWindow/Hub.h>
-#include<MEPWindow/Log.h>
+#include<MEPTools/Log.h>
 namespace MEP {
 	namespace Template {
 		Hub::Hub(unsigned int ID, MEP::Template::Application& base, const sf::Color& color) : BaseWindow(ID)
@@ -220,13 +220,15 @@ namespace MEP {
 			{
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					if (buttons[0]->mouseRelease(pos)) {
+						Log(Info) << "Closing window.";
 						Window.close();
 					}
 					else if (buttons[1]->mouseRelease(pos)) {
 						PLATFORM::TOOLS::minimalize(Window.getSystemHandle());
+						Log(1) << "Minimizing window.";
 						buttons[1]->forceRelease();
 					}
-					Log(1) << "Window released.";
+					Log(1) << "Left button released.";
 					m_grabbedWindow = false;
 				}
 			}
