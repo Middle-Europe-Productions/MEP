@@ -1,2 +1,4 @@
 Flask
+flask-socketio
+apscheduler
 sqlite3
