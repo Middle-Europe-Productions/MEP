@@ -18,14 +18,15 @@
 //	limitations under the License.
 //
 //
-//	Created by Piotr Skibiñski
-//	Copyright © Middle Europe Productions. All rights reserved.
+//	Created by Piotr Skibiï¿½ski
+//	Copyright ï¿½ Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
 #ifndef MEP_WINDOW_H
 #define MEP_WINDOW_H
 
 #include<MEPTools/Log.h>
+#include<MEPTools/TimerContainer.h>
 #include<MEPTools/Timer.h>
 
 #endif

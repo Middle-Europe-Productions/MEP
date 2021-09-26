@@ -18,36 +18,51 @@
 //	limitations under the License.
 //
 //
-//	Created by Piotr Skibiñski
-//	Copyright © Middle Europe Productions. All rights reserved.
+//	Created by Piotr Skibiï¿½ski
+//	Copyright ï¿½ Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
 #ifndef MEP_TIMER_H
 #define MEP_TIMER_H
-#ifndef ENABLE_TIMER
+#if defined(MEP_ALLOW_TIMER)
+#include<MEPTools/TimerContainer.h>
 #include<chrono>
-
-#define TIMER() MEP::__Timer timer__LINE__("", __LINE__, __FILE__);
-#define TIMER(method) MEP::__Timer timer__LINE__(method, __LINE__, __FILE__);
+#include<string>
+#define __NAME_FINAL(name, id) name##id
+#define __NAME_DEC(name, id) __NAME_FINAL(name, id)
+#define TIMER() __TIMER(__NAME_DEC(timer, __LINE__), "")
+#define TIMER(method) __TIMER(__NAME_DEC(timer, __LINE__), method)
+#define __TIMER(name, method) MEP::__Timer name(method, __LINE__, __FILE__); 
+#define GENERATE MEP::__TimerContainer::generate();
+#define RESET MEP::__TimerContainer::reset();
 
 namespace MEP
 {
 	class __Timer
 	{
-		const std::string& __FILE;
-		const std::string& __NAME;
+		std::string __FILE;
+		std::string __NAME;
 		unsigned int __LINE;
+		std::chrono::time_point<std::chrono::high_resolution_clock> __START;
 	public:
 		explicit __Timer(const std::string& NAME, unsigned int LINE, const std::string& FILE) :
 			__FILE(FILE),
 			__NAME(NAME),
 			__LINE(LINE)
 		{
-
+			__START = std::chrono::high_resolution_clock::now();
 		}
 		void stop()
 		{
-
+			auto __STOP = std::chrono::high_resolution_clock::now();
+			auto start = std::chrono::time_point_cast<std::chrono::microseconds>(__START).time_since_epoch().count();
+			auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(__STOP).time_since_epoch().count();
+			auto duration = stop - start;
+#if defined(MEP_ALLOW_LIVE_VIEW)
+			MEP::__TimerContainer::add(DataBase(__NAME, __FILE, __LINE, static_cast<double>(duration) * 0.001));
+#else
+			Log(Info) << "Name:" <<__NAME << ", Time:"<< static_cast<double>(duration) * 0.001 <<"ms, File:" << __FILE;
+#endif
 		}
 		~__Timer()
 		{
@@ -58,6 +73,8 @@ namespace MEP
 #else
 #define TIMER() ;
 #define TIMER(method) ;
+#define GENERATE ;
+#define RESET ;
 #endif
 
 #endif

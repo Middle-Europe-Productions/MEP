@@ -21,7 +21,6 @@
 //	Copyright © Middle Europe Productions. All rights reserved.
 //
 ////////////////////////////////////////////////////////////
-
 #include<MEPTools/Log.h>
 #include<iostream>
 #include<string>
