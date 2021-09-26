@@ -28,5 +28,6 @@
 
 #include<MEPWindow/MEPWindow.h>
 #include<MEPGraphics/MEPGraphics.h>
+#include<MEPTools/MEPTools.h>
 
 #endif

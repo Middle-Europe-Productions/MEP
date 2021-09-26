@@ -29,7 +29,7 @@
 #include<MEPGraphics/Config.h>
 #include<MEPGraphics/NonCopyable.h>
 #include<MEPGraphics/AnimationDelay.h>
-#include<MEPWindow/Log.h>
+#include<MEPTools/Log.h>
 namespace MEP {
 	/**
 	* @enum MEP::Animation::Direction

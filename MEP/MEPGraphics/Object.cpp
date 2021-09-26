@@ -22,12 +22,12 @@
 //
 ////////////////////////////////////////////////////////////
 #include<MEPGraphics/Object.h>
-#include<MEPWindow/Log.h>
+#include<MEPTools/Log.h>
 namespace MEP
 {
 	void Object::allocateTable(const sf::Vector2u& size)
 	{
-		Log(Info) << "Allocating transparency table";
+		Log(3) << "Allocating transparency table";
 		table = new bool* [size.x];
 		for (unsigned int i = 0; i < size.x; ++i)
 			table[i] = new bool[size.y];
@@ -35,7 +35,7 @@ namespace MEP
 	template<typename X>
 	void Object::createTable(const sf::Vector2u& size, X method)
 	{
-		Log(Info) << "Creating transparency table";
+		Log(1) << "Creating transparency table";
 		if (table) {
 			for (unsigned int i = 0; i < size.x; i++) {
 				for (unsigned int j = 0; j < size.y; j++) {
@@ -56,7 +56,7 @@ namespace MEP
 	}
 
 	void Object::load(const std::string& fulladdress, bool transparencyM, bool masterSize) {
-		Log(Info) << "Loading texture from address: " << fulladdress;
+		Log(3) << "Loading texture from address: " << fulladdress;
 		texture->push_back(new sf::Texture());
 		if (!texture->back()->loadFromFile(fulladdress)) {
 			Log(Fatal) << "Could not load a texture! Address: " << fulladdress;
@@ -150,6 +150,7 @@ namespace MEP
 	{
 		if (transparency and x < m_size.x and y < m_size.y)
 			return table[x][y];
+		Log(Warning) << "Transparency table was not created for this object.";
 		return true;
 	}
 
