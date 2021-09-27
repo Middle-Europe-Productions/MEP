@@ -1,26 +1,13 @@
 {% extends "layout.html" %} {% block main %}
 
-<title>WebSockets Example</title>
+<title>Live View</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
   type="text/javascript"
   src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.0/socket.io.min.js"
 ></script>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function () {
-    var socket = io.connect("http://" + document.domain + ":" + location.port);
-
-    socket.on("connect", function () {
-      socket.emit("am up", { data: "I'm connected!" });
-    });
-    //listens to 'price update' message on socket
-    socket.on("update", function (msg) {
-      console.log(msg);
-      $("#price_info").text(msg.length);
-    });
-  });
-</script>
+<script src="{{url_for('static', filename='updater.js')}}"></script>
 <body>
-  <div id="price_info">Hi</div>
+  <div id="number_of_records">0</div>
 </body>
 {% endblock %}

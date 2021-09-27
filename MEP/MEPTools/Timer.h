@@ -30,7 +30,6 @@
 #include<string>
 #define __NAME_FINAL(name, id) name##id
 #define __NAME_DEC(name, id) __NAME_FINAL(name, id)
-#define TIMER() __TIMER(__NAME_DEC(timer, __LINE__), "")
 #define TIMER(method) __TIMER(__NAME_DEC(timer, __LINE__), method)
 #define __TIMER(name, method) MEP::__Timer name(method, __LINE__, __FILE__); 
 #define GENERATE MEP::__TimerContainer::generate();
