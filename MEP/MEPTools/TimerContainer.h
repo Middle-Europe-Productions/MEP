@@ -4,7 +4,10 @@
 #include<iostream>
 #include<filesystem>
 #include<list>
-#include<MEPTools/SQLite.hpp>
+#include<MEPTools/TSQueue.h>
+#include<thread>
+#include<SFML/Network.hpp>
+
 namespace MEP
 {
 	struct DataBase
@@ -16,45 +19,114 @@ namespace MEP
 		DataBase(const std::string& name,
 			const std::string& path,
 			int line,
-			double LastTime);
-	};
-	struct DataPackage: public DataBase
-	{
-		int __execNumber;
-		double __TotalTime;
-		DataPackage() = delete;
-		DataPackage(const std::string& name,
-			const std::string& path,
-			int line,
-			double LastTime);
-		DataPackage(const DataBase& x);
-		void update(const DataBase& x);
-		bool operator==(const DataPackage& x);
-		bool operator==(const DataBase& x);
-		bool operator<(const DataPackage& x);
+			double LastTime):
+			__name(name),
+			__path(path),
+			__line(line),
+			__LastTime(LastTime)
+		{}
 	};
 
-	class __TimerContainer;
-	class __Connection
+	struct DataTask : public DataBase
 	{
-		int __ID;
-		Connection connection;
+		const char* TypeChar[4] = { "Add", "Generate", "Reset", "Shutdown" };
 	public:
-		__Connection();
-		void generate();
+		enum class Type
+		{
+			Add = 0,
+			Generate = 1,
+			Reset = 2,
+			Shutdown = 3
+		};
+		void init(std::string& input)
+		{
+			input += "{";
+		}
+		void close(std::string& input)
+		{
+			input += "}";
+		}
+		void addAttribute(std::string& input, const std::string& name, const std::string& content)
+		{
+			input += "\"" + name + "\":\"" + content + "\"";
+		}
+		void finishLine(std::string& input)
+		{
+			input += ", ";
+		}
+	private:
+		const Type __type;
+	public:
+		DataTask(Type taskType, const std::string& name = "", const std::string& path = "", int line = 0, double lastTime = 0.f):
+			DataBase(name, path, line, lastTime),
+			__type(taskType)
+		{}
+		std::string jsonify()
+		{
+			std::string local;
+			init(local);
+			addAttribute(local, "type", TypeChar[static_cast<int>(__type)]);
+			if (__type == Type::Add)
+			{
+				finishLine(local);
+				addAttribute(local, "name", __name);
+				finishLine(local);
+				addAttribute(local, "path", __path);
+				finishLine(local);
+				addAttribute(local, "line", std::to_string(__line));
+				finishLine(local);
+				addAttribute(local, "lastTime", std::to_string(__LastTime));
+			}
+			close(local);
+			return local;
+		}
 	};
 	class __TimerContainer
 	{
-		friend __Connection;
-		static unsigned int __Generate_Version_ID;	
-		static __Connection __connection;
-		static std::list<DataPackage> __local;
+		std::thread __taskManager;
+		MEP::TSQueue<DataTask> __tasks;
+		bool __status;
+		bool __forceStop;
+		void process()
+		{
+			while (__status or (!__forceStop and __tasks.size() != 0))
+			{
+				auto task = __tasks.pop();
+				if (task.has_value())
+				{
+					std::cout << task.value().jsonify() << "\n";
+				}
+			}
+		}
 	public:
-		static void add(const DataBase& in);
-		static void reset();
-		static void generate();
-		static const std::list<DataPackage>& getData();
+		__TimerContainer() :
+			__taskManager(&__TimerContainer::process, this),
+			__status(true),
+			__forceStop(false)
+		{
+		}
+		~__TimerContainer()
+		{
+			__status = false;
+			__taskManager.join();
+		}
+		void add(const DataTask& task)
+		{
+			__tasks.push(task);
+		}
+		void generate()
+		{
+			__tasks.push(DataTask(DataTask(DataTask::Type::Generate)));
+		}
+		void reset()
+		{
+			__tasks.push(DataTask(DataTask(DataTask::Type::Reset)));
+		}
 	};
+	namespace MEPTools
+	{
+		static __TimerContainer TCPtimer;
+	}
 }
 
 #endif

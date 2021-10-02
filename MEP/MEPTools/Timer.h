@@ -32,8 +32,8 @@
 #define __NAME_DEC(name, id) __NAME_FINAL(name, id)
 #define TIMER(method) __TIMER(__NAME_DEC(timer, __LINE__), method)
 #define __TIMER(name, method) MEP::__Timer name(method, __LINE__, __FILE__); 
-#define GENERATE MEP::__TimerContainer::generate();
-#define RESET MEP::__TimerContainer::reset();
+#define GENERATE MEP::MEPTools::TCPtimer.generate();
+#define RESET MEP::MEPTools::TCPtimer.reset();
 
 namespace MEP
 {
@@ -58,7 +58,7 @@ namespace MEP
 			auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(__STOP).time_since_epoch().count();
 			auto duration = stop - start;
 #if defined(MEP_ALLOW_LIVE_VIEW)
-			MEP::__TimerContainer::add(DataBase(__NAME, __FILE, __LINE, static_cast<double>(duration) * 0.001));
+			MEP::MEPTools::TCPtimer.add(DataTask(DataTask::Type::Add, __NAME, __FILE, __LINE, static_cast<double>(duration) * 0.001));
 #else
 			Log(Info) << "Name:" <<__NAME << ", Time:"<< static_cast<double>(duration) * 0.001 <<"ms, File:" << __FILE;
 #endif
