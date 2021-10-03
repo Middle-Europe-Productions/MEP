@@ -1,52 +1,66 @@
 #ifndef MEP_TSQUEUE_H
 #define MEP_TSQUEUE_H
-#include<queue>
 #include<mutex>
-#include<optional>
+#include<atomic>
+#include<memory>
 
 namespace MEP
 {
+    //Lock Free Queue
     template<typename T>
-    class TSQueue {
-        std::queue<T> queue_;
-        mutable std::mutex mutex_;
-
-        // Moved out of public interface to prevent races between this
-        // and pop().
-        bool empty() const {
-            return queue_.empty();
-        }
-
-    public:
-        TSQueue() = default;
-        TSQueue(const TSQueue<T>&) = delete;
-        TSQueue& operator=(const TSQueue<T>&) = delete;
-
-        TSQueue(TSQueue<T>&& other) {
-            std::lock_guard<std::mutex> lock(mutex_);
-            queue_ = std::move(other.queue_);
-        }
-
-        virtual ~TSQueue() { }
-
-        unsigned long size() const {
-            std::lock_guard<std::mutex> lock(mutex_);
-            return queue_.size();
-        }
-
-        std::optional<T> pop() {
-            std::lock_guard<std::mutex> lock(mutex_);
-            if (queue_.empty()) {
-                return {};
+    class LFQueuev2
+    {
+        struct node
+        {
+            std::shared_ptr<T> data;
+            node* next;
+            node():
+                next(nullptr)
+            {}
+        };
+        std::atomic<node*> head;
+        std::atomic<node*> tail;
+        node* pop_head()
+        {
+            node* const old_head = head.load();
+            if (old_head == tail.load())
+            {
+                return nullptr;
             }
-            T tmp = queue_.front();
-            queue_.pop();
-            return tmp;
+            head.store(old_head->next);
+            return old_head;
         }
-
-        void push(const T& item) {
-            std::lock_guard<std::mutex> lock(mutex_);
-            queue_.push(item);
+    public:
+        LFQueuev2() :
+            head(new node), tail(head.load())
+        {}
+        ~LFQueuev2()
+        {
+            while (node* const old_head = head.load())
+            {
+                head.store(old_head->next);
+                delete old_head;
+            }
+        }
+        std::shared_ptr<T> pop()
+        {
+            node* old_head = pop_head();
+            if (!old_head)
+            {
+                return std::shared_ptr<T>();
+            }
+            std::shared_ptr<T> const res(old_head->data);
+            delete old_head;
+            return res;
+        }
+        void push(T new_value)
+        {
+            std::shared_ptr<T> new_data(std::make_shared<T>(new_value));
+            node* p = new node;
+            node* const old_tail = tail.load();
+            old_tail->data.swap(new_data);
+            old_tail->next = p;
+            tail.store(p);
         }
     };
 }

@@ -4,12 +4,14 @@
 #include<iostream>
 #include<filesystem>
 #include<list>
+#include<MEPTools/Log.h>
 #include<MEPTools/TSQueue.h>
 #include<thread>
 #include<SFML/Network.hpp>
-
+#include<Windows.h>
 namespace MEP
 {
+
 	struct DataBase
 	{
 		std::string __name;
@@ -84,18 +86,24 @@ namespace MEP
 	class __TimerContainer
 	{
 		std::thread __taskManager;
-		MEP::TSQueue<DataTask> __tasks;
+		MEP::LFQueuev2<DataTask> __tasks;
 		bool __status;
 		bool __forceStop;
 		void process()
 		{
-			while (__status or (!__forceStop and __tasks.size() != 0))
+			while (__status)
 			{
+				Log(Error) << "Process";
 				auto task = __tasks.pop();
-				if (task.has_value())
+				if (task != nullptr)
 				{
-					std::cout << task.value().jsonify() << "\n";
+					std::cout << task->jsonify() << "\n";
 				}
+			}
+			while (auto task = __tasks.pop())
+			{
+				if(task)
+					std::cout << task->jsonify() << "\n";
 			}
 		}
 	public:
