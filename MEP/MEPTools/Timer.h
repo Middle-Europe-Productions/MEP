@@ -31,22 +31,24 @@
 #define __NAME_FINAL(name, id) name##id
 #define __NAME_DEC(name, id) __NAME_FINAL(name, id)
 #define TIMER(method) __TIMER(__NAME_DEC(timer, __LINE__), method)
-#define __TIMER(name, method) MEP::__Timer name(method, __LINE__, __FILE__); 
-#define GENERATE MEP::MEPTools::TCPtimer.generate();
-#define RESET MEP::MEPTools::TCPtimer.reset();
+#define __TIMER(name, method) MEP::__Timer name(method, __LINE__, __FILE__, __FUNCTION__); 
+#define GENERATE MEP::__TimerContainer::generate();
+#define RESET MEP::__TimerContainer::reset();
 
 namespace MEP
 {
 	class __Timer
 	{
-		std::string __FILE;
-		std::string __NAME;
+		const char* __FILE;
+		const char* __NAME;
+		const char* __FUNCTION;
 		unsigned int __LINE;
 		std::chrono::time_point<std::chrono::high_resolution_clock> __START;
 	public:
-		explicit __Timer(const std::string& NAME, unsigned int LINE, const std::string& FILE) :
+		explicit __Timer(const char* NAME, unsigned int LINE, const char* FILE, const char* FUNCTION) :
 			__FILE(FILE),
 			__NAME(NAME),
+			__FUNCTION(FUNCTION),
 			__LINE(LINE)
 		{
 			__START = std::chrono::high_resolution_clock::now();
@@ -58,9 +60,9 @@ namespace MEP
 			auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(__STOP).time_since_epoch().count();
 			auto duration = stop - start;
 #if defined(MEP_ALLOW_LIVE_VIEW)
-			MEP::MEPTools::TCPtimer.add(DataTask(DataTask::Type::Add, __NAME, __FILE, __LINE, static_cast<double>(duration) * 0.001));
+			MEP::__TimerContainer::add(DataTask(DataTask::Type::Add, __NAME, __FILE, __LINE, static_cast<double>(duration) * 0.001));
 #else
-			Log(Info) << "Name:" <<__NAME << ", Time:"<< static_cast<double>(duration) * 0.001 <<"ms, File:" << __FILE;
+			Log(Info) << "Name:" <<__NAME << ", Time:"<< static_cast<double>(duration) * 0.001 <<"ms, Function:" << __FUNCTION << ", File:" << __FILE;
 #endif
 		}
 		~__Timer()

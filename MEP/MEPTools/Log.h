@@ -27,6 +27,9 @@
 
 #define MAX_VERBOSE_LVL 10
 #define Log(...) __Log(__FILE__, __LINE__, __VA_ARGS__)
+#if defined(_DEBUG) || defined(MEP_ALLOW_LOGS)
+#define __LOG_ENABLED
+#endif
 
 #include <sstream>
 #include <list>
@@ -122,7 +125,7 @@ namespace MEP
 	template<typename T>
 	__Log& __Log::operator<<(const T const& out)
 	{
-#ifdef _DEBUG
+#if  defined(__LOG_ENABLED)
 		_buffer << out;
 #endif
 		return *this;

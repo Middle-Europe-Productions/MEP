@@ -3,64 +3,62 @@
 #include<mutex>
 #include<atomic>
 #include<memory>
-
+#include<queue>
+#include<MEPTools/Log.h>
 namespace MEP
 {
-    //Lock Free Queue
     template<typename T>
-    class LFQueuev2
+    class TSQueue
     {
-        struct node
-        {
-            std::shared_ptr<T> data;
-            node* next;
-            node():
-                next(nullptr)
-            {}
-        };
-        std::atomic<node*> head;
-        std::atomic<node*> tail;
-        node* pop_head()
-        {
-            node* const old_head = head.load();
-            if (old_head == tail.load())
-            {
-                return nullptr;
-            }
-            head.store(old_head->next);
-            return old_head;
-        }
+        mutable std::mutex mut;
+        std::queue<T> data_queue;
+        std::condition_variable data_cond;
     public:
-        LFQueuev2() :
-            head(new node), tail(head.load())
-        {}
-        ~LFQueuev2()
-        {
-            while (node* const old_head = head.load())
-            {
-                head.store(old_head->next);
-                delete old_head;
-            }
-        }
-        std::shared_ptr<T> pop()
-        {
-            node* old_head = pop_head();
-            if (!old_head)
-            {
-                return std::shared_ptr<T>();
-            }
-            std::shared_ptr<T> const res(old_head->data);
-            delete old_head;
-            return res;
-        }
+        TSQueue() {}
         void push(T new_value)
         {
-            std::shared_ptr<T> new_data(std::make_shared<T>(new_value));
-            node* p = new node;
-            node* const old_tail = tail.load();
-            old_tail->data.swap(new_data);
-            old_tail->next = p;
-            tail.store(p);
+            std::lock_guard<std::mutex> lk(mut);
+            data_queue.push(std::move(new_value));
+            data_cond.notify_one();
+        }
+        void wait_and_pop(T& value)
+        {
+            std::unique_lock<std::mutex> lk(mut);
+            data_cond.wait(lk,[this]{return !data_queue.empty(); });
+            value = std::move(data_queue.front());
+            data_queue.pop();
+        }
+        std::shared_ptr<T> wait_and_pop()
+        {
+            std::unique_lock<std::mutex> lk(mut);
+            data_cond.wait(lk,[this]{return !data_queue.empty(); });
+            std::shared_ptr<T> res(
+                std::make_shared<T>(std::move(data_queue.front())));
+            data_queue.pop();
+            return res;
+        }
+        bool try_pop(T& value)
+        {
+            std::lock_guard<std::mutex> lk(mut);
+            if (data_queue.empty())
+                return false;
+            value = std::move(data_queue.front());
+            data_queue.pop();
+            return true;
+        }
+        std::shared_ptr<T> try_pop()
+        {
+            std::lock_guard<std::mutex> lk(mut);
+            if (data_queue.empty())
+                return std::shared_ptr<T>();
+            std::shared_ptr<T> res(std::make_shared<T>(std::move(data_queue.front())));
+            data_queue.pop();
+            return res;
+        }
+        bool empty() const
+        {
+            std::lock_guard<std::mutex> lt(mut);
+            return data_queue.empty();
         }
     };
 }

@@ -100,7 +100,7 @@ namespace MEP
 		__Log(FILE, LINE, Info)
 	{
 	}
-#ifdef _DEBUG
+#if defined(__LOG_ENABLED)
 	__Log::__Log(const char* FILE, unsigned int LINE, LogLevel __lvl)
 	{
 		_buffer << "[" << getName(FILE) << ":" << LINE << "][";

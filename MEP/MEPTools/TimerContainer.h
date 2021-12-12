@@ -1,5 +1,10 @@
 #ifndef MEP_TIMER_CONTAINER_H
 #define MEP_TIMER_CONTAINER_H
+
+#ifndef MEP_LIVE_VIEW_PORT
+#define MEP_LIVE_VIEW_PORT 54000
+#endif
+
 #include<string>
 #include<iostream>
 #include<filesystem>
@@ -7,7 +12,7 @@
 #include<MEPTools/Log.h>
 #include<MEPTools/TSQueue.h>
 #include<thread>
-#include<SFML/Network.hpp>
+#include<MEPTools/LightTCPClient.h>
 #include<Windows.h>
 namespace MEP
 {
@@ -63,6 +68,10 @@ namespace MEP
 			DataBase(name, path, line, lastTime),
 			__type(taskType)
 		{}
+		Type type() const
+		{
+			return __type;
+		}
 		std::string jsonify()
 		{
 			std::string local;
@@ -85,56 +94,100 @@ namespace MEP
 	};
 	class __TimerContainer
 	{
-		std::thread __taskManager;
-		MEP::LFQueuev2<DataTask> __tasks;
+		MEP::TSQueue<DataTask> __tasks;
+		TCP_Client __client;
+		int __port;
 		bool __status;
 		bool __forceStop;
+		std::thread __taskManager;
 		void process()
 		{
-			while (__status)
+			Log(Debug) << __LINE__;
+			bool tryReconnect = true;
+			bool tryPop = true;
+			while (__status == true)
 			{
-				Log(Error) << "Process";
-				auto task = __tasks.pop();
-				if (task != nullptr)
+				Log(Debug) << __LINE__;
+				if (!__client.IsConnected())
 				{
-					std::cout << task->jsonify() << "\n";
+					__client.MEPconnect();
+				}
+				while (auto task = __tasks.wait_and_pop())
+				{
+					Log(Debug) << task->jsonify();
+					if (!__status)
+					{
+						tryReconnect = false; // when we shutdown the server it is not going to force sending a messages
+					}
+					if (task->type() == DataTask::Type::Shutdown)
+					{
+						tryReconnect = false; // Do not try to reconnect when we want to shut down the system.
+						tryPop = false; //we do not want to try to pop any other message
+						__status = false;
+						__client.shutdown();
+					}
+					std::string message = task->jsonify();
+					if (__client.MEPsend(message) == false)
+					{
+						if(!__client.IsConnected() and tryReconnect)
+							__client.MEPconnect();
+					}
+					Log(10) << "Messaage send! Content: " << message;
+					if (!tryPop)
+					{
+						return;
+					}
 				}
 			}
-			while (auto task = __tasks.pop())
-			{
-				if(task)
-					std::cout << task->jsonify() << "\n";
-			}
+			Log(Info) << "process done";
+		}
+		__TimerContainer() :
+			__port(MEP_LIVE_VIEW_PORT),
+			__status(true),
+			__forceStop(false),
+			__taskManager(&__TimerContainer::process, this)
+		{
+			Log(Info) << "Enabling MEP live debugging tool";
+		}
+		static __TimerContainer& get()
+		{
+			static __TimerContainer master;
+			return master;
 		}
 	public:
-		__TimerContainer() :
-			__taskManager(&__TimerContainer::process, this),
-			__status(true),
-			__forceStop(false)
-		{
-		}
 		~__TimerContainer()
 		{
-			__status = false;
+			Log(Error) << "Closing server";
+			__client.stopReconnecting();
+			add(DataTask(DataTask::Type::Shutdown));
 			__taskManager.join();
+			Log(Error) << "done";
 		}
-		void add(const DataTask& task)
+		static void add(const DataTask& task)
 		{
-			__tasks.push(task);
+#if defined(MEP_ALLOW_LIVE_VIEW)
+			get().__tasks.push(task);
+#else
+			Log(Warning) << "You are trying to enable MEP Live Tools without MEP_ALLOW_LIVE_VIEW tag.";
+#endif
 		}
-		void generate()
+		static void generate()
 		{
-			__tasks.push(DataTask(DataTask(DataTask::Type::Generate)));
+#if defined(MEP_ALLOW_LIVE_VIEW)
+			get().__tasks.push(DataTask(DataTask(DataTask::Type::Generate)));
+#else
+			Log(Warning) << "You are trying to enable MEP Live Tools without MEP_ALLOW_LIVE_VIEW tag.";
+#endif	
 		}
-		void reset()
+		static void reset()
 		{
-			__tasks.push(DataTask(DataTask(DataTask::Type::Reset)));
+#if defined(MEP_ALLOW_LIVE_VIEW)
+			get().__tasks.push(DataTask(DataTask(DataTask::Type::Reset)));
+#else
+			Log(Warning) << "You are trying to enable MEP Live Tools without MEP_ALLOW_LIVE_VIEW tag.";
+#endif	
 		}
 	};
-	namespace MEPTools
-	{
-		static __TimerContainer TCPtimer;
-	}
 }
 
 #endif
